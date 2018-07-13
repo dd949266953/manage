@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
 
     /**
-     * 跳转首页123
+     * 跳转首页456
      * @return
      */
     @RequestMapping("doIndex")
