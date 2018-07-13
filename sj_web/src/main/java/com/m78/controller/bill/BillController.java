@@ -32,8 +32,7 @@ public class BillController {
     @RequestMapping("getAllNoBill.json")
     @ResponseBody
     public Object getAllNoBill(@RequestParam("page") int page,@RequestParam("limit") int limit){
-        int pageSize=(page-1)*limit;
-        return DataTable.bindTableUtil(0,billService.getAllNoBillCount(),billService.getAllNoBill(page,pageSize));
+        return DataTable.bindTableUtil(0,billService.getAllNoBillCount(),billService.getAllNoBill(page,limit));
     }
 
 }

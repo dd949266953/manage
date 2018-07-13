@@ -11,3 +11,6 @@ spring:
   thymeleaf:
       suffix: .html
       request-context-attribute: request
+  jackson:
+      date-format: yyyy-MM-dd
+      time-zone: GMT+8

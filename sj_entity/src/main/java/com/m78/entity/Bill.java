@@ -1,5 +1,7 @@
 package com.m78.entity;
 
+
+import com.alibaba.fastjson.annotation.JSONField;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -11,20 +13,41 @@ public class Bill implements Serializable {
     private String remark;
 
     private Long chargeuser;
+    private Admin admin;
 
     private Date time;
 
     private Long informs;
 
+    @JSONField(format="yyyy-MM-dd")
     private Date starttime;
-
+    @JSONField(format="yyyy-MM-dd")
     private Date overtime;
 
     private Double consume;
 
     private Double moneys;
-    //小区名字
-    private  String communityName;
+
+    private Long communityid;
+    private  Community community;
+
+    public Community getCommunity() {
+        return community;
+    }
+
+    public void setCommunity(Community community) {
+        this.community = community;
+    }
+
+    public Admin getAdmin() {
+
+        return admin;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
+
     //收费项目
     private  String charName;
     //住户
@@ -35,28 +58,8 @@ public class Bill implements Serializable {
     private  double price;
     //房号或者车位号
     private  Long signId;
-
-    @Override
-    public String toString() {
-        return "Bill{" +
-                "id=" + id +
-                ", state=" + state +
-                ", remark='" + remark + '\'' +
-                ", chargeuser=" + chargeuser +
-                ", time=" + time +
-                ", informs=" + informs +
-                ", starttime=" + starttime +
-                ", overtime=" + overtime +
-                ", consume=" + consume +
-                ", moneys=" + moneys +
-                ", communityName='" + communityName + '\'' +
-                ", charName='" + charName + '\'' +
-                ", tentmentName='" + tentmentName + '\'' +
-                ", phone='" + phone + '\'' +
-                ", price=" + price +
-                ", signId=" + signId +
-                '}';
-    }
+    //收费类型（车位或者房屋）
+    private  Long type;
 
     public String getCharName() {
         return charName;
@@ -66,12 +69,69 @@ public class Bill implements Serializable {
         this.charName = charName;
     }
 
-    public String getCommunityName() {
-        return communityName;
+    public String getTentmentName() {
+        return tentmentName;
     }
 
-    public void setCommunityName(String communityName) {
-        this.communityName = communityName;
+    public void setTentmentName(String tentmentName) {
+        this.tentmentName = tentmentName;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public Long getSignId() {
+        return signId;
+    }
+
+    public void setSignId(Long signId) {
+        this.signId = signId;
+    }
+
+    public Long getType() {
+        return type;
+    }
+
+    public void setType(Long type) {
+        this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "Bill{" +
+                "id=" + id +
+                ", state=" + state +
+                ", remark='" + remark + '\'' +
+                ", chargeuser=" + chargeuser +
+                ", admin=" + admin +
+                ", time=" + time +
+                ", informs=" + informs +
+                ", starttime=" + starttime +
+                ", overtime=" + overtime +
+                ", consume=" + consume +
+                ", moneys=" + moneys +
+                ", communityid=" + communityid +
+                ", community=" + community +
+                ", charName='" + charName + '\'' +
+                ", tentmentName='" + tentmentName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", price=" + price +
+                ", signId=" + signId +
+                ", type=" + type +
+                '}';
     }
 
     public Long getId() {
@@ -152,5 +212,13 @@ public class Bill implements Serializable {
 
     public void setMoneys(Double moneys) {
         this.moneys = moneys;
+    }
+
+    public Long getCommunityid() {
+        return communityid;
+    }
+
+    public void setCommunityid(Long communityid) {
+        this.communityid = communityid;
     }
 }

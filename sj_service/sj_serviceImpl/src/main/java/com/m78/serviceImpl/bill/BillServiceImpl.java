@@ -19,8 +19,8 @@ public class BillServiceImpl  implements BillService {
 
     @Override
     public List<Bill> getAllNoBill(int page,int pageSize) {
-
-        return billMapper.getAllNoBill(page,pageSize);
+        int start=(page-1)*pageSize;
+        return billMapper.getAllNoBill(start,pageSize);
     }
 
     @Override
