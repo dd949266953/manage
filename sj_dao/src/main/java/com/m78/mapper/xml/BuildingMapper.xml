@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.m78.mapper.BuildingMapper" >
+  <resultMap id="BaseResultMap" type="com.m78.entity.Building" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="unitTotal" property="unittotal" jdbcType="BIGINT" />
+    <result column="pliesTotal" property="pliestotal" jdbcType="BIGINT" />
+    <result column="buildingType" property="buildingtype" jdbcType="BIGINT" />
+    <result column="buildingStructure" property="buildingstructure" jdbcType="VARCHAR" />
+    <result column="orientation" property="orientation" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, unitTotal, pliesTotal, buildingType, buildingStructure, orientation
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from building
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from building
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.m78.entity.Building" >
+    insert into building (id, name, unitTotal, 
+      pliesTotal, buildingType, buildingStructure, 
+      orientation)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{unittotal,jdbcType=BIGINT}, 
+      #{pliestotal,jdbcType=BIGINT}, #{buildingtype,jdbcType=BIGINT}, #{buildingstructure,jdbcType=VARCHAR}, 
+      #{orientation,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.m78.entity.Building" >
+    insert into building
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="unittotal != null" >
+        unitTotal,
+      </if>
+      <if test="pliestotal != null" >
+        pliesTotal,
+      </if>
+      <if test="buildingtype != null" >
+        buildingType,
+      </if>
+      <if test="buildingstructure != null" >
+        buildingStructure,
+      </if>
+      <if test="orientation != null" >
+        orientation,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="unittotal != null" >
+        #{unittotal,jdbcType=BIGINT},
+      </if>
+      <if test="pliestotal != null" >
+        #{pliestotal,jdbcType=BIGINT},
+      </if>
+      <if test="buildingtype != null" >
+        #{buildingtype,jdbcType=BIGINT},
+      </if>
+      <if test="buildingstructure != null" >
+        #{buildingstructure,jdbcType=VARCHAR},
+      </if>
+      <if test="orientation != null" >
+        #{orientation,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.Building" >
+    update building
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="unittotal != null" >
+        unitTotal = #{unittotal,jdbcType=BIGINT},
+      </if>
+      <if test="pliestotal != null" >
+        pliesTotal = #{pliestotal,jdbcType=BIGINT},
+      </if>
+      <if test="buildingtype != null" >
+        buildingType = #{buildingtype,jdbcType=BIGINT},
+      </if>
+      <if test="buildingstructure != null" >
+        buildingStructure = #{buildingstructure,jdbcType=VARCHAR},
+      </if>
+      <if test="orientation != null" >
+        orientation = #{orientation,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.m78.entity.Building" >
+    update building
+    set name = #{name,jdbcType=VARCHAR},
+      unitTotal = #{unittotal,jdbcType=BIGINT},
+      pliesTotal = #{pliestotal,jdbcType=BIGINT},
+      buildingType = #{buildingtype,jdbcType=BIGINT},
+      buildingStructure = #{buildingstructure,jdbcType=VARCHAR},
+      orientation = #{orientation,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

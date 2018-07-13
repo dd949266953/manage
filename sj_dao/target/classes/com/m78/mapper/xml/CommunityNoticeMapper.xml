@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.m78.mapper.CommunityNoticeMapper" >
+  <resultMap id="BaseResultMap" type="com.m78.entity.CommunityNotice" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="communityId" property="communityid" jdbcType="BIGINT" />
+    <result column="noticeId" property="noticeid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, communityId, noticeId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from community_notice
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from community_notice
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.m78.entity.CommunityNotice" >
+    insert into community_notice (id, communityId, noticeId
+      )
+    values (#{id,jdbcType=BIGINT}, #{communityid,jdbcType=BIGINT}, #{noticeid,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.m78.entity.CommunityNotice" >
+    insert into community_notice
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="communityid != null" >
+        communityId,
+      </if>
+      <if test="noticeid != null" >
+        noticeId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="communityid != null" >
+        #{communityid,jdbcType=BIGINT},
+      </if>
+      <if test="noticeid != null" >
+        #{noticeid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.CommunityNotice" >
+    update community_notice
+    <set >
+      <if test="communityid != null" >
+        communityId = #{communityid,jdbcType=BIGINT},
+      </if>
+      <if test="noticeid != null" >
+        noticeId = #{noticeid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.m78.entity.CommunityNotice" >
+    update community_notice
+    set communityId = #{communityid,jdbcType=BIGINT},
+      noticeId = #{noticeid,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

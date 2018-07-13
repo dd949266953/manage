@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.m78.mapper.CarMapper" >
+  <resultMap id="BaseResultMap" type="com.m78.entity.Car" >
+    <id column="carId" property="carid" jdbcType="BIGINT" />
+    <result column="ownerName" property="ownername" jdbcType="VARCHAR" />
+    <result column="ownerPhone" property="ownerphone" jdbcType="VARCHAR" />
+    <result column="carNumber" property="carnumber" jdbcType="VARCHAR" />
+    <result column="carDisplacement" property="cardisplacement" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    carId, ownerName, ownerPhone, carNumber, carDisplacement
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from car
+    where carId = #{carid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from car
+    where carId = #{carid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.m78.entity.Car" >
+    insert into car (carId, ownerName, ownerPhone, 
+      carNumber, carDisplacement)
+    values (#{carid,jdbcType=BIGINT}, #{ownername,jdbcType=VARCHAR}, #{ownerphone,jdbcType=VARCHAR}, 
+      #{carnumber,jdbcType=VARCHAR}, #{cardisplacement,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.m78.entity.Car" >
+    insert into car
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="carid != null" >
+        carId,
+      </if>
+      <if test="ownername != null" >
+        ownerName,
+      </if>
+      <if test="ownerphone != null" >
+        ownerPhone,
+      </if>
+      <if test="carnumber != null" >
+        carNumber,
+      </if>
+      <if test="cardisplacement != null" >
+        carDisplacement,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="carid != null" >
+        #{carid,jdbcType=BIGINT},
+      </if>
+      <if test="ownername != null" >
+        #{ownername,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerphone != null" >
+        #{ownerphone,jdbcType=VARCHAR},
+      </if>
+      <if test="carnumber != null" >
+        #{carnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="cardisplacement != null" >
+        #{cardisplacement,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.Car" >
+    update car
+    <set >
+      <if test="ownername != null" >
+        ownerName = #{ownername,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerphone != null" >
+        ownerPhone = #{ownerphone,jdbcType=VARCHAR},
+      </if>
+      <if test="carnumber != null" >
+        carNumber = #{carnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="cardisplacement != null" >
+        carDisplacement = #{cardisplacement,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where carId = #{carid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.m78.entity.Car" >
+    update car
+    set ownerName = #{ownername,jdbcType=VARCHAR},
+      ownerPhone = #{ownerphone,jdbcType=VARCHAR},
+      carNumber = #{carnumber,jdbcType=VARCHAR},
+      carDisplacement = #{cardisplacement,jdbcType=DOUBLE}
+    where carId = #{carid,jdbcType=BIGINT}
+  </update>
+</mapper>

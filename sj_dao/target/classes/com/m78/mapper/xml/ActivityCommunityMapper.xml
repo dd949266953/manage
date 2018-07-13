@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.m78.mapper.ActivityCommunityMapper" >
+  <resultMap id="BaseResultMap" type="com.m78.entity.ActivityCommunity" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="activityId" property="activityid" jdbcType="BIGINT" />
+    <result column="communityId" property="communityid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, activityId, communityId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from activity_community
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from activity_community
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.m78.entity.ActivityCommunity" >
+    insert into activity_community (id, activityId, communityId
+      )
+    values (#{id,jdbcType=BIGINT}, #{activityid,jdbcType=BIGINT}, #{communityid,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.m78.entity.ActivityCommunity" >
+    insert into activity_community
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="activityid != null" >
+        activityId,
+      </if>
+      <if test="communityid != null" >
+        communityId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="activityid != null" >
+        #{activityid,jdbcType=BIGINT},
+      </if>
+      <if test="communityid != null" >
+        #{communityid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.ActivityCommunity" >
+    update activity_community
+    <set >
+      <if test="activityid != null" >
+        activityId = #{activityid,jdbcType=BIGINT},
+      </if>
+      <if test="communityid != null" >
+        communityId = #{communityid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.m78.entity.ActivityCommunity" >
+    update activity_community
+    set activityId = #{activityid,jdbcType=BIGINT},
+      communityId = #{communityid,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

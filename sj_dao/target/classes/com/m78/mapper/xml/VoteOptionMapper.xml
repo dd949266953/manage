@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.m78.mapper.VoteOptionMapper">
+  <resultMap id="BaseResultMap" type="com.m78.entity.VoteOption">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="optionName" jdbcType="VARCHAR" property="optionname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, optionName
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from voteoption
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from voteoption
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.m78.entity.VoteOption">
+    insert into voteoption (id, optionName)
+    values (#{id,jdbcType=BIGINT}, #{optionname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.m78.entity.VoteOption">
+    insert into voteoption
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="optionname != null">
+        optionName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="optionname != null">
+        #{optionname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.VoteOption">
+    update voteoption
+    <set>
+      <if test="optionname != null">
+        optionName = #{optionname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.m78.entity.VoteOption">
+    update voteoption
+    set optionName = #{optionname,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

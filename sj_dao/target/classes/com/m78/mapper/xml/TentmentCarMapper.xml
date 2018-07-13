@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.m78.mapper.TentmentCarMapper" >
+  <resultMap id="BaseResultMap" type="com.m78.entity.TentmentCar" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="tentmentId" property="tentmentid" jdbcType="BIGINT" />
+    <result column="carId" property="carid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, tentmentId, carId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tentment_car
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tentment_car
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.m78.entity.TentmentCar" >
+    insert into tentment_car (id, tentmentId, carId
+      )
+    values (#{id,jdbcType=BIGINT}, #{tentmentid,jdbcType=BIGINT}, #{carid,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.m78.entity.TentmentCar" >
+    insert into tentment_car
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="tentmentid != null" >
+        tentmentId,
+      </if>
+      <if test="carid != null" >
+        carId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="tentmentid != null" >
+        #{tentmentid,jdbcType=BIGINT},
+      </if>
+      <if test="carid != null" >
+        #{carid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.TentmentCar" >
+    update tentment_car
+    <set >
+      <if test="tentmentid != null" >
+        tentmentId = #{tentmentid,jdbcType=BIGINT},
+      </if>
+      <if test="carid != null" >
+        carId = #{carid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.m78.entity.TentmentCar" >
+    update tentment_car
+    set tentmentId = #{tentmentid,jdbcType=BIGINT},
+      carId = #{carid,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

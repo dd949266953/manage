@@ -1,0 +1,24 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/manage?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    username: root
+    password: root
+  dubbo:
+      application:
+        name: admin_provider
+        registries:
+          timeout: 1200000
+      registry:
+        address: zookeeper://47.105.105.208:2181
+      protocol:
+        name: dubbo
+        port: 20880
+      scan: com.m78.serviceImpl
+mybatis:
+  mapper-locations: classpath:/com/m78/mapper/xml/*.xml
+  type-aliases-package: com.m78.entity
+
+

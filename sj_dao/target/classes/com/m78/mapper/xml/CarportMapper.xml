@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.m78.mapper.CarportMapper" >
+  <resultMap id="BaseResultMap" type="com.m78.entity.Carport" >
+    <id column="carportNo" property="carportno" jdbcType="BIGINT" />
+    <result column="area" property="area" jdbcType="DOUBLE" />
+    <result column="carportType" property="carporttype" jdbcType="BIGINT" />
+    <result column="state" property="state" jdbcType="BIGINT" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    carportNo, area, carportType, state, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from carport
+    where carportNo = #{carportno,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from carport
+    where carportNo = #{carportno,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.m78.entity.Carport" >
+    insert into carport (carportNo, area, carportType, 
+      state, remark)
+    values (#{carportno,jdbcType=BIGINT}, #{area,jdbcType=DOUBLE}, #{carporttype,jdbcType=BIGINT}, 
+      #{state,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.m78.entity.Carport" >
+    insert into carport
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="carportno != null" >
+        carportNo,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="carporttype != null" >
+        carportType,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="carportno != null" >
+        #{carportno,jdbcType=BIGINT},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=DOUBLE},
+      </if>
+      <if test="carporttype != null" >
+        #{carporttype,jdbcType=BIGINT},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.Carport" >
+    update carport
+    <set >
+      <if test="area != null" >
+        area = #{area,jdbcType=DOUBLE},
+      </if>
+      <if test="carporttype != null" >
+        carportType = #{carporttype,jdbcType=BIGINT},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where carportNo = #{carportno,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.m78.entity.Carport" >
+    update carport
+    set area = #{area,jdbcType=DOUBLE},
+      carportType = #{carporttype,jdbcType=BIGINT},
+      state = #{state,jdbcType=BIGINT},
+      remark = #{remark,jdbcType=VARCHAR}
+    where carportNo = #{carportno,jdbcType=BIGINT}
+  </update>
+</mapper>

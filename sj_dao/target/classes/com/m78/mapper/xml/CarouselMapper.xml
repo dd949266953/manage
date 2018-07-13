@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.m78.mapper.CarouselMapper" >
+  <resultMap id="BaseResultMap" type="com.m78.entity.Carousel" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="width" property="width" jdbcType="BIGINT" />
+    <result column="height" property="height" jdbcType="BIGINT" />
+    <result column="animation" property="animation" jdbcType="BIGINT" />
+    <result column="arrows" property="arrows" jdbcType="BIGINT" />
+    <result column="indicator" property="indicator" jdbcType="BIGINT" />
+    <result column="switchover" property="switchover" jdbcType="BIGINT" />
+    <result column="time" property="time" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, width, height, animation, arrows, indicator, switchover, time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from carousel
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from carousel
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.m78.entity.Carousel" >
+    insert into carousel (id, width, height, 
+      animation, arrows, indicator, 
+      switchover, time)
+    values (#{id,jdbcType=BIGINT}, #{width,jdbcType=BIGINT}, #{height,jdbcType=BIGINT}, 
+      #{animation,jdbcType=BIGINT}, #{arrows,jdbcType=BIGINT}, #{indicator,jdbcType=BIGINT}, 
+      #{switchover,jdbcType=BIGINT}, #{time,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.m78.entity.Carousel" >
+    insert into carousel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="width != null" >
+        width,
+      </if>
+      <if test="height != null" >
+        height,
+      </if>
+      <if test="animation != null" >
+        animation,
+      </if>
+      <if test="arrows != null" >
+        arrows,
+      </if>
+      <if test="indicator != null" >
+        indicator,
+      </if>
+      <if test="switchover != null" >
+        switchover,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="width != null" >
+        #{width,jdbcType=BIGINT},
+      </if>
+      <if test="height != null" >
+        #{height,jdbcType=BIGINT},
+      </if>
+      <if test="animation != null" >
+        #{animation,jdbcType=BIGINT},
+      </if>
+      <if test="arrows != null" >
+        #{arrows,jdbcType=BIGINT},
+      </if>
+      <if test="indicator != null" >
+        #{indicator,jdbcType=BIGINT},
+      </if>
+      <if test="switchover != null" >
+        #{switchover,jdbcType=BIGINT},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.Carousel" >
+    update carousel
+    <set >
+      <if test="width != null" >
+        width = #{width,jdbcType=BIGINT},
+      </if>
+      <if test="height != null" >
+        height = #{height,jdbcType=BIGINT},
+      </if>
+      <if test="animation != null" >
+        animation = #{animation,jdbcType=BIGINT},
+      </if>
+      <if test="arrows != null" >
+        arrows = #{arrows,jdbcType=BIGINT},
+      </if>
+      <if test="indicator != null" >
+        indicator = #{indicator,jdbcType=BIGINT},
+      </if>
+      <if test="switchover != null" >
+        switchover = #{switchover,jdbcType=BIGINT},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.m78.entity.Carousel" >
+    update carousel
+    set width = #{width,jdbcType=BIGINT},
+      height = #{height,jdbcType=BIGINT},
+      animation = #{animation,jdbcType=BIGINT},
+      arrows = #{arrows,jdbcType=BIGINT},
+      indicator = #{indicator,jdbcType=BIGINT},
+      switchover = #{switchover,jdbcType=BIGINT},
+      time = #{time,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.m78.mapper.VoteTentmentMapper" >
+  <resultMap id="BaseResultMap" type="com.m78.entity.VoteTentment" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="voteId" property="voteid" jdbcType="BIGINT" />
+    <result column="tentmentId" property="tentmentid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, voteId, tentmentId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from vote_tentment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from vote_tentment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.m78.entity.VoteTentment" >
+    insert into vote_tentment (id, voteId, tentmentId
+      )
+    values (#{id,jdbcType=BIGINT}, #{voteid,jdbcType=BIGINT}, #{tentmentid,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.m78.entity.VoteTentment" >
+    insert into vote_tentment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="voteid != null" >
+        voteId,
+      </if>
+      <if test="tentmentid != null" >
+        tentmentId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="voteid != null" >
+        #{voteid,jdbcType=BIGINT},
+      </if>
+      <if test="tentmentid != null" >
+        #{tentmentid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.VoteTentment" >
+    update vote_tentment
+    <set >
+      <if test="voteid != null" >
+        voteId = #{voteid,jdbcType=BIGINT},
+      </if>
+      <if test="tentmentid != null" >
+        tentmentId = #{tentmentid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.m78.entity.VoteTentment" >
+    update vote_tentment
+    set voteId = #{voteid,jdbcType=BIGINT},
+      tentmentId = #{tentmentid,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

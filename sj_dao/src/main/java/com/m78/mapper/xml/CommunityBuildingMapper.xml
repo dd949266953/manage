@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.m78.mapper.CommunityBuildingMapper" >
+  <resultMap id="BaseResultMap" type="com.m78.entity.CommunityBuilding" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="communitId" property="communitid" jdbcType="BIGINT" />
+    <result column="buildingId" property="buildingid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, communitId, buildingId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from community_building
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from community_building
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.m78.entity.CommunityBuilding" >
+    insert into community_building (id, communitId, buildingId
+      )
+    values (#{id,jdbcType=BIGINT}, #{communitid,jdbcType=BIGINT}, #{buildingid,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.m78.entity.CommunityBuilding" >
+    insert into community_building
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="communitid != null" >
+        communitId,
+      </if>
+      <if test="buildingid != null" >
+        buildingId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="communitid != null" >
+        #{communitid,jdbcType=BIGINT},
+      </if>
+      <if test="buildingid != null" >
+        #{buildingid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.CommunityBuilding" >
+    update community_building
+    <set >
+      <if test="communitid != null" >
+        communitId = #{communitid,jdbcType=BIGINT},
+      </if>
+      <if test="buildingid != null" >
+        buildingId = #{buildingid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.m78.entity.CommunityBuilding" >
+    update community_building
+    set communitId = #{communitid,jdbcType=BIGINT},
+      buildingId = #{buildingid,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

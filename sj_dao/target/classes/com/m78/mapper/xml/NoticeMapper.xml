@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.m78.mapper.NoticeMapper" >
+  <resultMap id="BaseResultMap" type="com.m78.entity.Notice" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="noticeName" property="noticename" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="BIGINT" />
+    <result column="establish" property="establish" jdbcType="BIGINT" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="level" property="level" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, noticeName, type, establish, time, level
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from notice
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from notice
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.m78.entity.Notice" >
+    insert into notice (id, noticeName, type, 
+      establish, time, level
+      )
+    values (#{id,jdbcType=BIGINT}, #{noticename,jdbcType=VARCHAR}, #{type,jdbcType=BIGINT}, 
+      #{establish,jdbcType=BIGINT}, #{time,jdbcType=TIMESTAMP}, #{level,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.m78.entity.Notice" >
+    insert into notice
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="noticename != null" >
+        noticeName,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="establish != null" >
+        establish,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="noticename != null" >
+        #{noticename,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=BIGINT},
+      </if>
+      <if test="establish != null" >
+        #{establish,jdbcType=BIGINT},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.Notice" >
+    update notice
+    <set >
+      <if test="noticename != null" >
+        noticeName = #{noticename,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=BIGINT},
+      </if>
+      <if test="establish != null" >
+        establish = #{establish,jdbcType=BIGINT},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.m78.entity.Notice" >
+    update notice
+    set noticeName = #{noticename,jdbcType=VARCHAR},
+      type = #{type,jdbcType=BIGINT},
+      establish = #{establish,jdbcType=BIGINT},
+      time = #{time,jdbcType=TIMESTAMP},
+      level = #{level,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

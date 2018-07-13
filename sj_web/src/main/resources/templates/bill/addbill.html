@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link href="layui/css/layui.css" rel="stylesheet">
+		<meta http-equiv="description" content="" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="jquery/jMenu.jquery.css" type="text/css" />
+		<style>
+			form {
+				margin: 20px 38px 20px 0px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<form id="form1" class="layui-form" action="" onsubmit="return false">
+		<div class="layui-form-item">
+            <label class="layui-form-label">筛选信息</label>
+            <div class="layui-input-block">
+              <input type="text" id="address" name="address" lay-verify="required" lay-verify="title" autocomplete="off" placeholder="请输入房号/姓名" class="layui-input">
+            
+            </div>
+            
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">选择主体</label>
+            <div class="layui-input-block">
+              <table id="demo" lay-filter="test" class="layui-table"></table>
+              <div id="test"></div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">📅起始时间</label>
+                        <div class="layui-input-inline">
+                       <input class="layui-input" style="color:rgb(61,216,251);font-weight: bold;" id="test6" placeholder="~" type="text">
+              </div>
+            
+        </div>
+        	<div class="layui-form-item" style="z-index: 1000;position: absolute;">
+            <label class="layui-form-label">收费标准</label>
+            <ul id="jMenu" >
+			<li>
+				<a class="fNiv" style="width: 200px;"> 请选择收费标准 </a>
+				<ul>
+					<li>
+
+						<a>物业费</a>
+						<ul>
+							<li class="last">
+								<a>标准收费</a>
+							</li>
+						</ul>
+						
+						
+					</li>
+					
+					
+					<li>
+
+						<a>水费</a>
+						<ul>
+							<li class="last">
+								<a>标准收费</a>
+							</li>
+						</ul>
+						
+						
+					</li>
+				</ul>
+			</li>
+		</ul>
+            
+        </div>
+        	<div class="layui-form-item" style="position: relative;top: 50px;">
+            <label class="layui-form-label">用量</label>
+            <div class="layui-input-block">
+              <input type="text" id="address" name="address" lay-verify="required" lay-verify="title" autocomplete="off"  class="layui-input">
+            
+            </div>
+            
+        </div>
+        	<div class="layui-form-item" style="position: relative;top: 50px;">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-block">
+              <input type="text" id="address" name="address" lay-verify="required" lay-verify="title" autocomplete="off"  class="layui-input">
+            
+            </div>
+            
+        </div>
+          <div class="layui-form-item" id="sure" style="position: relative;top: 50px;">
+            <div class="layui-input-block">
+              <button class="layui-btn"  lay-submit="" lay-filter="demo1">立即提交</button>
+              <button id="reset"  class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+		</form>
+		<script src="js/jquery-3.2.1.js"></script>
+		<script src="layui/layui.all.js"></script>
+		<script type="text/javascript" src="jquery/jquery.js"></script>
+		<script type="text/javascript" src="jquery/jquery-ui.js"></script>
+		<script type="text/javascript" src="jquery/jMenu.jquery.js"></script>
+		<script>
+			$("#reset").click(function(){
+	window.location.reload();
+})
+			$(".last a").click(function(){
+				var con=$(this).text();
+				$(".fNiv").text(con);
+				$("#jMenu ul").hide();
+			})
+			$(document).ready(function() {
+				$("#jMenu").jMenu();
+			})
+layui.use('table', function(){
+	var table = layui.table;
+	 table.render({
+          elem: '#demo'
+          ,url: '../companyinfo/getCompanyInfoByStreet.json' //数据接口
+          ,where:{
+          	street:$("#address").val()
+          }
+          ,cols: [[ //表头
+            {checkbox: true}
+            ,{field: 'name', title: '小区'}
+            ,{field: 'linkman', title: '几栋'}
+            ,{field: 'address', title: '单元'}
+            ,{field: 'scope', title: '业主'}
+          ]]
+          ,page: true
+        })
+      })
+		layui.use('laydate', function(){
+           var laydate = layui.laydate;
+            //日期时间选择器
+  laydate.render({
+    elem: '#test6'
+    ,range: true,
+    theme: '#34A5C7'
+  })
+  })
+		</script>
+	</body>
+
+</html>

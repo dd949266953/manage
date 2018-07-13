@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.m78.mapper.TenementMapper" >
+  <resultMap id="BaseResultMap" type="com.m78.entity.Tenement" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="integrals" property="integrals" jdbcType="BIGINT" />
+    <result column="registrationDate" property="registrationdate" jdbcType="TIMESTAMP" />
+    <result column="state" property="state" jdbcType="BIGINT" />
+    <result column="qqNumber" property="qqnumber" jdbcType="BIGINT" />
+    <result column="WxNumber" property="wxnumber" jdbcType="VARCHAR" />
+    <result column="urgencyMan" property="urgencyman" jdbcType="VARCHAR" />
+    <result column="urgencyManPhone" property="urgencymanphone" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="nation" property="nation" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, phone, integrals, registrationDate, state, qqNumber, WxNumber, urgencyMan, 
+    urgencyManPhone, sex, nation, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tenement
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tenement
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.m78.entity.Tenement" >
+    insert into tenement (id, name, phone, 
+      integrals, registrationDate, state, 
+      qqNumber, WxNumber, urgencyMan, 
+      urgencyManPhone, sex, nation, 
+      remark)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{integrals,jdbcType=BIGINT}, #{registrationdate,jdbcType=TIMESTAMP}, #{state,jdbcType=BIGINT}, 
+      #{qqnumber,jdbcType=BIGINT}, #{wxnumber,jdbcType=VARCHAR}, #{urgencyman,jdbcType=VARCHAR}, 
+      #{urgencymanphone,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.m78.entity.Tenement" >
+    insert into tenement
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="integrals != null" >
+        integrals,
+      </if>
+      <if test="registrationdate != null" >
+        registrationDate,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="qqnumber != null" >
+        qqNumber,
+      </if>
+      <if test="wxnumber != null" >
+        WxNumber,
+      </if>
+      <if test="urgencyman != null" >
+        urgencyMan,
+      </if>
+      <if test="urgencymanphone != null" >
+        urgencyManPhone,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="nation != null" >
+        nation,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="integrals != null" >
+        #{integrals,jdbcType=BIGINT},
+      </if>
+      <if test="registrationdate != null" >
+        #{registrationdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=BIGINT},
+      </if>
+      <if test="qqnumber != null" >
+        #{qqnumber,jdbcType=BIGINT},
+      </if>
+      <if test="wxnumber != null" >
+        #{wxnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="urgencyman != null" >
+        #{urgencyman,jdbcType=VARCHAR},
+      </if>
+      <if test="urgencymanphone != null" >
+        #{urgencymanphone,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null" >
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.Tenement" >
+    update tenement
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="integrals != null" >
+        integrals = #{integrals,jdbcType=BIGINT},
+      </if>
+      <if test="registrationdate != null" >
+        registrationDate = #{registrationdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=BIGINT},
+      </if>
+      <if test="qqnumber != null" >
+        qqNumber = #{qqnumber,jdbcType=BIGINT},
+      </if>
+      <if test="wxnumber != null" >
+        WxNumber = #{wxnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="urgencyman != null" >
+        urgencyMan = #{urgencyman,jdbcType=VARCHAR},
+      </if>
+      <if test="urgencymanphone != null" >
+        urgencyManPhone = #{urgencymanphone,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null" >
+        nation = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.m78.entity.Tenement" >
+    update tenement
+    set name = #{name,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      integrals = #{integrals,jdbcType=BIGINT},
+      registrationDate = #{registrationdate,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=BIGINT},
+      qqNumber = #{qqnumber,jdbcType=BIGINT},
+      WxNumber = #{wxnumber,jdbcType=VARCHAR},
+      urgencyMan = #{urgencyman,jdbcType=VARCHAR},
+      urgencyManPhone = #{urgencymanphone,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      nation = #{nation,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

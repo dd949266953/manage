@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.m78.mapper.CommunityMapper" >
+  <resultMap id="BaseResultMap" type="com.m78.entity.Community" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="detailAddress" property="detailaddress" jdbcType="VARCHAR" />
+    <result column="serviceTel" property="servicetel" jdbcType="VARCHAR" />
+    <result column="leader" property="leader" jdbcType="VARCHAR" />
+    <result column="leaderPhone" property="leaderphone" jdbcType="VARCHAR" />
+    <result column="logo" property="logo" jdbcType="VARCHAR" />
+    <result column="backgroundImage" property="backgroundimage" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <!-- 查找全部 -->
+  <select id="findAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from community
+  </select>
+  <!-- 查询小区数量 -->
+  <select id="getCommunityNum" resultType="java.lang.Integer" >
+    select count (*) from community
+  </select>
+
+  <sql id="Base_Column_List">
+    id, name, address, detailAddress, serviceTel, leader, leaderPhone, logo, backgroundImage
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from community
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from community
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.m78.entity.Community" >
+    insert into community ( name, address,
+      detailAddress, serviceTel, leader, 
+      leaderPhone, logo, backgroundImage
+      )
+    values (#{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
+      #{detailaddress,jdbcType=VARCHAR}, #{servicetel,jdbcType=VARCHAR}, #{leader,jdbcType=VARCHAR}, 
+      #{leaderphone,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, #{backgroundimage,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.m78.entity.Community" >
+    insert into community
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="detailaddress != null" >
+        detailAddress,
+      </if>
+      <if test="servicetel != null" >
+        serviceTel,
+      </if>
+      <if test="leader != null" >
+        leader,
+      </if>
+      <if test="leaderphone != null" >
+        leaderPhone,
+      </if>
+      <if test="logo != null" >
+        logo,
+      </if>
+      <if test="backgroundimage != null" >
+        backgroundImage,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="detailaddress != null" >
+        #{detailaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="servicetel != null" >
+        #{servicetel,jdbcType=VARCHAR},
+      </if>
+      <if test="leader != null" >
+        #{leader,jdbcType=VARCHAR},
+      </if>
+      <if test="leaderphone != null" >
+        #{leaderphone,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null" >
+        #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundimage != null" >
+        #{backgroundimage,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.Community" >
+    update community
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="detailaddress != null" >
+        detailAddress = #{detailaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="servicetel != null" >
+        serviceTel = #{servicetel,jdbcType=VARCHAR},
+      </if>
+      <if test="leader != null" >
+        leader = #{leader,jdbcType=VARCHAR},
+      </if>
+      <if test="leaderphone != null" >
+        leaderPhone = #{leaderphone,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null" >
+        logo = #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundimage != null" >
+        backgroundImage = #{backgroundimage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.m78.entity.Community" >
+    update community
+    set name = #{name,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      detailAddress = #{detailaddress,jdbcType=VARCHAR},
+      serviceTel = #{servicetel,jdbcType=VARCHAR},
+      leader = #{leader,jdbcType=VARCHAR},
+      leaderPhone = #{leaderphone,jdbcType=VARCHAR},
+      logo = #{logo,jdbcType=VARCHAR},
+      backgroundImage = #{backgroundimage,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

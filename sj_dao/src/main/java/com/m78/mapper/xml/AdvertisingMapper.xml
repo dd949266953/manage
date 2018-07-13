@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.m78.mapper.AdvertisingMapper" >
+  <resultMap id="BaseResultMap" type="com.m78.entity.Advertising" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="startTime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="stopTime" property="stoptime" jdbcType="TIMESTAMP" />
+    <result column="type" property="type" jdbcType="BIGINT" />
+    <result column="imgs" property="imgs" jdbcType="VARCHAR" />
+    <result column="href" property="href" jdbcType="VARCHAR" />
+    <result column="describe" property="describe" jdbcType="VARCHAR" />
+    <result column="recommendTitle" property="recommendtitle" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, title, startTime, stopTime, type, imgs, href, describe, recommendTitle
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from advertising
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from advertising
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.m78.entity.Advertising" >
+    insert into advertising (id, title, startTime, 
+      stopTime, type, imgs, 
+      href, describe, recommendTitle
+      )
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{starttime,jdbcType=TIMESTAMP}, 
+      #{stoptime,jdbcType=TIMESTAMP}, #{type,jdbcType=BIGINT}, #{imgs,jdbcType=VARCHAR}, 
+      #{href,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}, #{recommendtitle,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.m78.entity.Advertising" >
+    insert into advertising
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="starttime != null" >
+        startTime,
+      </if>
+      <if test="stoptime != null" >
+        stopTime,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="imgs != null" >
+        imgs,
+      </if>
+      <if test="href != null" >
+        href,
+      </if>
+      <if test="describe != null" >
+        describe,
+      </if>
+      <if test="recommendtitle != null" >
+        recommendTitle,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stoptime != null" >
+        #{stoptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=BIGINT},
+      </if>
+      <if test="imgs != null" >
+        #{imgs,jdbcType=VARCHAR},
+      </if>
+      <if test="href != null" >
+        #{href,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null" >
+        #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="recommendtitle != null" >
+        #{recommendtitle,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.Advertising" >
+    update advertising
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        startTime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stoptime != null" >
+        stopTime = #{stoptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=BIGINT},
+      </if>
+      <if test="imgs != null" >
+        imgs = #{imgs,jdbcType=VARCHAR},
+      </if>
+      <if test="href != null" >
+        href = #{href,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null" >
+        describe = #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="recommendtitle != null" >
+        recommendTitle = #{recommendtitle,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.m78.entity.Advertising" >
+    update advertising
+    set title = #{title,jdbcType=VARCHAR},
+      startTime = #{starttime,jdbcType=TIMESTAMP},
+      stopTime = #{stoptime,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=BIGINT},
+      imgs = #{imgs,jdbcType=VARCHAR},
+      href = #{href,jdbcType=VARCHAR},
+      describe = #{describe,jdbcType=VARCHAR},
+      recommendTitle = #{recommendtitle,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.m78.mapper.CommunityTalkMapper" >
+  <resultMap id="BaseResultMap" type="com.m78.entity.CommunityTalk" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="communityId" property="communityid" jdbcType="BIGINT" />
+    <result column="talkId" property="talkid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, communityId, talkId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from community_talk
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from community_talk
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.m78.entity.CommunityTalk" >
+    insert into community_talk (id, communityId, talkId
+      )
+    values (#{id,jdbcType=BIGINT}, #{communityid,jdbcType=BIGINT}, #{talkid,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.m78.entity.CommunityTalk" >
+    insert into community_talk
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="communityid != null" >
+        communityId,
+      </if>
+      <if test="talkid != null" >
+        talkId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="communityid != null" >
+        #{communityid,jdbcType=BIGINT},
+      </if>
+      <if test="talkid != null" >
+        #{talkid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.CommunityTalk" >
+    update community_talk
+    <set >
+      <if test="communityid != null" >
+        communityId = #{communityid,jdbcType=BIGINT},
+      </if>
+      <if test="talkid != null" >
+        talkId = #{talkid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.m78.entity.CommunityTalk" >
+    update community_talk
+    set communityId = #{communityid,jdbcType=BIGINT},
+      talkId = #{talkid,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

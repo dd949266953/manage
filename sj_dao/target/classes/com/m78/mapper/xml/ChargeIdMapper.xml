@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.m78.mapper.ChargeIdMapper" >
+  <resultMap id="BaseResultMap" type="com.m78.entity.ChargeId" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="chargeitemId" property="chargeitemid" jdbcType="BIGINT" />
+    <result column="billId" property="billid" jdbcType="BIGINT" />
+    <result column="signId" property="signid" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, chargeitemId, billId, signId, type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from charge_id
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from charge_id
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.m78.entity.ChargeId" >
+    insert into charge_id (id, chargeitemId, billId, 
+      signId, type)
+    values (#{id,jdbcType=BIGINT}, #{chargeitemid,jdbcType=BIGINT}, #{billid,jdbcType=BIGINT}, 
+      #{signid,jdbcType=BIGINT}, #{type,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.m78.entity.ChargeId" >
+    insert into charge_id
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="chargeitemid != null" >
+        chargeitemId,
+      </if>
+      <if test="billid != null" >
+        billId,
+      </if>
+      <if test="signid != null" >
+        signId,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="chargeitemid != null" >
+        #{chargeitemid,jdbcType=BIGINT},
+      </if>
+      <if test="billid != null" >
+        #{billid,jdbcType=BIGINT},
+      </if>
+      <if test="signid != null" >
+        #{signid,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.ChargeId" >
+    update charge_id
+    <set >
+      <if test="chargeitemid != null" >
+        chargeitemId = #{chargeitemid,jdbcType=BIGINT},
+      </if>
+      <if test="billid != null" >
+        billId = #{billid,jdbcType=BIGINT},
+      </if>
+      <if test="signid != null" >
+        signId = #{signid,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.m78.entity.ChargeId" >
+    update charge_id
+    set chargeitemId = #{chargeitemid,jdbcType=BIGINT},
+      billId = #{billid,jdbcType=BIGINT},
+      signId = #{signid,jdbcType=BIGINT},
+      type = #{type,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

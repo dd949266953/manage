@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.m78.mapper.ActivityTentmentMapper" >
+  <resultMap id="BaseResultMap" type="com.m78.entity.ActivityTentment" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="activityId" property="activityid" jdbcType="BIGINT" />
+    <result column="tentmentId" property="tentmentid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, activityId, tentmentId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from activity_tentment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from activity_tentment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.m78.entity.ActivityTentment" >
+    insert into activity_tentment (id, activityId, tentmentId
+      )
+    values (#{id,jdbcType=BIGINT}, #{activityid,jdbcType=BIGINT}, #{tentmentid,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.m78.entity.ActivityTentment" >
+    insert into activity_tentment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="activityid != null" >
+        activityId,
+      </if>
+      <if test="tentmentid != null" >
+        tentmentId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="activityid != null" >
+        #{activityid,jdbcType=BIGINT},
+      </if>
+      <if test="tentmentid != null" >
+        #{tentmentid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.ActivityTentment" >
+    update activity_tentment
+    <set >
+      <if test="activityid != null" >
+        activityId = #{activityid,jdbcType=BIGINT},
+      </if>
+      <if test="tentmentid != null" >
+        tentmentId = #{tentmentid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.m78.entity.ActivityTentment" >
+    update activity_tentment
+    set activityId = #{activityid,jdbcType=BIGINT},
+      tentmentId = #{tentmentid,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

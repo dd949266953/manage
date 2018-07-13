@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.m78.mapper.CommunitCarportMapper" >
+  <resultMap id="BaseResultMap" type="com.m78.entity.CommunitCarport" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="communitId" property="communitid" jdbcType="BIGINT" />
+    <result column="carportId" property="carportid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, communitId, carportId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from communit_carport
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from communit_carport
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.m78.entity.CommunitCarport" >
+    insert into communit_carport (id, communitId, carportId
+      )
+    values (#{id,jdbcType=BIGINT}, #{communitid,jdbcType=BIGINT}, #{carportid,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.m78.entity.CommunitCarport" >
+    insert into communit_carport
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="communitid != null" >
+        communitId,
+      </if>
+      <if test="carportid != null" >
+        carportId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="communitid != null" >
+        #{communitid,jdbcType=BIGINT},
+      </if>
+      <if test="carportid != null" >
+        #{carportid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.CommunitCarport" >
+    update communit_carport
+    <set >
+      <if test="communitid != null" >
+        communitId = #{communitid,jdbcType=BIGINT},
+      </if>
+      <if test="carportid != null" >
+        carportId = #{carportid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.m78.entity.CommunitCarport" >
+    update communit_carport
+    set communitId = #{communitid,jdbcType=BIGINT},
+      carportId = #{carportid,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

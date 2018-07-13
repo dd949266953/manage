@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.m78.mapper.StaffMapper" >
+  <resultMap id="BaseResultMap" type="com.m78.entity.Staff" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="wxnumber" property="wxnumber" jdbcType="VARCHAR" />
+    <result column="nametwo" property="nametwo" jdbcType="VARCHAR" />
+    <result column="position" property="position" jdbcType="BIGINT" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="departmentId" property="departmentid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, phone, wxnumber, nametwo, position, remark, departmentId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from staff
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from staff
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.m78.entity.Staff" >
+    insert into staff (id, name, phone, 
+      wxnumber, nametwo, position, 
+      remark, departmentId)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{wxnumber,jdbcType=VARCHAR}, #{nametwo,jdbcType=VARCHAR}, #{position,jdbcType=BIGINT}, 
+      #{remark,jdbcType=VARCHAR}, #{departmentid,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.m78.entity.Staff" >
+    insert into staff
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="wxnumber != null" >
+        wxnumber,
+      </if>
+      <if test="nametwo != null" >
+        nametwo,
+      </if>
+      <if test="position != null" >
+        position,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="departmentid != null" >
+        departmentId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="wxnumber != null" >
+        #{wxnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="nametwo != null" >
+        #{nametwo,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentid != null" >
+        #{departmentid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.Staff" >
+    update staff
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="wxnumber != null" >
+        wxnumber = #{wxnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="nametwo != null" >
+        nametwo = #{nametwo,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        position = #{position,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentid != null" >
+        departmentId = #{departmentid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.m78.entity.Staff" >
+    update staff
+    set name = #{name,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      wxnumber = #{wxnumber,jdbcType=VARCHAR},
+      nametwo = #{nametwo,jdbcType=VARCHAR},
+      position = #{position,jdbcType=BIGINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      departmentId = #{departmentid,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

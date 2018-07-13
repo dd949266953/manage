@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.m78.mapper.TalkMapper" >
+  <resultMap id="BaseResultMap" type="com.m78.entity.Talk" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="tentmentId" property="tentmentid" jdbcType="BIGINT" />
+    <result column="state" property="state" jdbcType="BIGINT" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="type" property="type" jdbcType="BIGINT" />
+    <result column="pictures" property="pictures" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, title, tentmentId, state, time, type, pictures
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from talk
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from talk
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.m78.entity.Talk" >
+    insert into talk (id, title, tentmentId, 
+      state, time, type, 
+      pictures)
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{tentmentid,jdbcType=BIGINT}, 
+      #{state,jdbcType=BIGINT}, #{time,jdbcType=TIMESTAMP}, #{type,jdbcType=BIGINT}, 
+      #{pictures,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.m78.entity.Talk" >
+    insert into talk
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="tentmentid != null" >
+        tentmentId,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="pictures != null" >
+        pictures,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="tentmentid != null" >
+        #{tentmentid,jdbcType=BIGINT},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=BIGINT},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=BIGINT},
+      </if>
+      <if test="pictures != null" >
+        #{pictures,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.Talk" >
+    update talk
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="tentmentid != null" >
+        tentmentId = #{tentmentid,jdbcType=BIGINT},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=BIGINT},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=BIGINT},
+      </if>
+      <if test="pictures != null" >
+        pictures = #{pictures,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.m78.entity.Talk" >
+    update talk
+    set title = #{title,jdbcType=VARCHAR},
+      tentmentId = #{tentmentid,jdbcType=BIGINT},
+      state = #{state,jdbcType=BIGINT},
+      time = #{time,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=BIGINT},
+      pictures = #{pictures,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
