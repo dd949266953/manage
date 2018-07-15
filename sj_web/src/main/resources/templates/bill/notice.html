@@ -55,6 +55,13 @@
 </section>
 <script th:src="@{/layui/layui.js}"></script>
 <script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
+<script type="text/html" id="type">
+    {{#  if(d.moneys == 8){ }}
+     d.carPortName
+    {{#  } else { }}
+    车位
+    {{#  } }}
+</script>
 <script>
     //JavaScript代码区域
     layui.use('element', function() {
@@ -84,7 +91,6 @@
                         field: 'type',
                         align: 'center',
                         title: '类型',
-                        unresize: 'true',
                         toolbar: '#type'
                     }, {
                         field: 'community',
@@ -148,11 +154,6 @@
                         field: 'moneys',
                         unresize: 'true',
                         title: '总金额',
-                        align: 'center'
-
-                    }, {
-                        title: '操作',
-                        toolbar: '#barDemo',
                         align: 'center'
 
                     }]
