@@ -5,11 +5,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * Created by Cay on 2017/9/27.
+ * 异常例子
  */
 @Controller
 public class HelloController {
 
+	/**
+	 * 网页跳转异常
+	 * @return
+	 * @throws Exception
+	 */
 	@ResponseBody
 	@RequestMapping("/hello")
 	public String hello() throws Exception {
@@ -17,6 +22,11 @@ public class HelloController {
 		return "error";
 	}
 
+	/**
+	 * ajax 请求异常
+	 * @return
+	 * @throws Exception
+	 */
 	@ResponseBody
 	@RequestMapping("/json")
 	public String json() throws Exception {
