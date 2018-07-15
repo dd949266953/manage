@@ -250,4 +250,33 @@
             limit #{page},#{pageSize}
         </if>
     </select>
+    <resultMap id="sendList" type="com.m78.entity.ChargeId">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="houseName"/>
+        <result column="name1" jdbcType="VARCHAR" property="carPortName"/>
+        <result column="phone" jdbcType="VARCHAR" property="HousePhone"/>
+        <result column="phone1" jdbcType="VARCHAR" property="carPortPhone"/>
+        <result column="name2" jdbcType="VARCHAR" property="communityName"/>
+        <result column="moneys" jdbcType="DOUBLE" property="moneys" />
+    </resultMap>
+    <select id="getAllSend" resultMap="sendList">
+        SELECT ca.id,te.name ,te.phone,ten.`name` ,ten.phone,comm.`name`, SUM(bi.moneys) AS moneys FROM charge_id ca
+        INNER JOIN bill bi ON bi.id=ca.billId
+        INNER JOIN community comm ON comm.id=bi.communityId
+        left JOIN house_tentment ht ON ht.houseId=ca.signId
+        left JOIN tentment_carport tca ON tca.carportId=ca.type
+        left JOIN tenement te ON te.id=ht.tentmentId
+        left JOIN tenement  ten ON ten.id=tca.tentmentId
+        WHERE bi.state=27
+        GROUP BY signId,type
+        <if test="name!=''">
+          and   te.`name` LIKE  CONCAT ('%',#{name},'%') or ten.`name` LIKECONCAT ('%',#{name},'%')
+        </if>
+        <if test="pageSize!=-1">
+            limit #{page},#{pageSize}
+        </if>
+    </select>
+    <select id="getAllSendCount" resultType="java.lang.Long">
+        select  count(1) from  send
+    </select>
 </mapper>

@@ -23,7 +23,10 @@
   <select id="getCommunityNum" resultType="java.lang.Integer" >
     select count (*) from community
   </select>
-
+<!--查询小区名称和id-->
+  <select id="getCommunityIdAndName" resultMap="BaseResultMap">
+    select id,name from community
+  </select>
   <sql id="Base_Column_List">
     id, name, address, detailAddress, serviceTel, leader, leaderPhone, logo, backgroundImage
   </sql>

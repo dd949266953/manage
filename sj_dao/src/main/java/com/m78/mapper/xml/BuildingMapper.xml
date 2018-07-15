@@ -13,6 +13,12 @@
   <sql id="Base_Column_List" >
     id, name, unitTotal, pliesTotal, buildingType, buildingStructure, orientation
   </sql>
+  <!--查询全部-->
+  <select id="getBuildingList" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from building
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />

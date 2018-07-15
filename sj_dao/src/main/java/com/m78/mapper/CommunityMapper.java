@@ -29,4 +29,9 @@ public interface CommunityMapper {
      * @return
      */
     List<Community> findAll();
+
+    /**
+     * 查询小区id和名称
+     */
+    List<Community> getCommunityIdAndName();
 }

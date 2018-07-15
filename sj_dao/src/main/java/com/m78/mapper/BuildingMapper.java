@@ -2,6 +2,8 @@ package com.m78.mapper;
 
 import com.m78.entity.Building;
 
+import java.util.List;
+
 public interface BuildingMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +16,6 @@ public interface BuildingMapper {
     int updateByPrimaryKeySelective(Building record);
 
     int updateByPrimaryKey(Building record);
+
+    List<Building> getBuildingList();
 }
