@@ -13,8 +13,6 @@ import java.util.List;
 public class CommunityServiceImpl implements CommunityService {
     @Autowired
     private CommunityMapper communityMapper;
-
-
     /**
      * 查询小区
      */
@@ -32,6 +30,14 @@ public class CommunityServiceImpl implements CommunityService {
     }
 
     /**
+     * 查询名称及id
+     * @return
+     */
+    @Override
+    public List<Community> getCommunityIdAndName() {
+        return communityMapper.getCommunityIdAndName();
+    }
+    /**
      * 删除小区
      * @param id
      * @return id
@@ -40,7 +46,5 @@ public class CommunityServiceImpl implements CommunityService {
     public int deleteByPrimaryKey(Long id) {
         return communityMapper.deleteByPrimaryKey(id);
     }
-
-
 
 }

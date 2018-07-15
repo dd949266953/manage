@@ -1,6 +1,8 @@
 package com.m78.entity;
 
-public class Building {
+import java.io.Serializable;
+
+public class Building implements Serializable {
     private Long id;
 
     private String name;

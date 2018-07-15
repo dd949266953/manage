@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>添加小区</title>
+	<link rel="stylesheet" th:href="@{/css/dataCenter/community/addcommunity.css}" />
+	<link rel="stylesheet" th:href="@{/layui/css/layui.css}" />
+</head>
+<body>
+
+<div class="body">
+	<h1>添加小区</h1>
+</div>
+<div class="heads">
+	<form  id="form">
+	<table>
+		<tr>
+			<td><span class="symbol">*</span> <span class="size">小区名称：</span><input class="name tm" type="text" name="name" placeholder="请输入小区名称"/></td>
+		</tr>
+		<tr>
+			<td><span class="symbol ">*</span> <span class="size">所在地区：</span><input class="name address tm" name="address" type="text" placeholder="请输入所在位置"/></td>
+		</tr>
+		<tr>
+			<td><span class="symbol ">*</span> <span class="size">详细地址：</span><input class="tm  detailAddress name" name="detailaddress" type="text" placeholder="详细地址"/></td>
+		</tr>
+		<tr>
+			<td><span class="symbol ">*</span> <span class="size">客服电话：</span><input class="tm serviceTel name" name="servicetel" type="text" placeholder="客服电话"/></td>
+		</tr>
+		<tr>
+			<td><span class="symbol behind">*</span> <span class="size">负责人：</span><input class="name leader tm" name="leader" type="text" placeholder="负责人" /></td>
+		</tr>
+		<tr>
+			<td><span class="symbol behinds">*</span> <span class="size">负责人电话：</span><input class="name leaderPhone tm" name="leaderphone" type="text" placeholder="负责人电话"/></td>
+		</tr>
+
+		<tr>
+			<td><span class="symbol logo">*</span> <span class="size">小区logo：</span><input class="name logo tm" name="logo" type="text" placeholder="小区logo"/></td>
+		</tr>
+		<tr>
+			<td><span class="symbol behinds">*</span> <span class="size">小区背景图：</span><input class="name backgroundImage tm" name="backgroundimage" type="text" placeholder="小区背景图"/></td>
+		</tr>
+		<tr>
+			<td><a class="layui-btn  save">添加</a>
+				<a class="layui-btn ">返回</a>
+			</td>
+		</tr>
+	</table>
+	</form>
+</div>
+<script th:src="@{/js/jquery-3.2.1.js}"></script>d
+<script th:src="@{/layui/layui.js}"  type="text/javascript"></script>
+<script th:src="@{/layui/layui.all.js}" type="text/javascript" ></script>
+<script th:src="@{/js/jquery-3.2.1.js}" type="text/javascript"></script>
+<script>
+	$(".save").click(function () {
+	  // alert( $("#form").serialize());
+		// var name=$(".name").val();
+		// var address=$(".address").val();
+		// var detailAddress=$(".detailAddress").val();
+		// var serviceTel=$(".serviceTel").val();
+		// var leader=$(".leader").val();
+		// var leaderPhone=$(".leaderPhone").val();
+		// var logos=$(".logos").val();
+		// var backgroundImage=$(".backgroundImage").val();
+
+        // {"name":name,"address":address,"detailaddress":detailAddress,"servicetel":serviceTel,"leader":leader,"leaderphone":leaderPhone,"logo":logos,"backgroundimage":backgroundImage}
+        $.get("addCommunitydata",$("#form").serialize(),function (data) {
+				console.log(data)
+				if (data==1){
+				    alert("添加完成");
+					$("input").val(" ");
+				}
+        },'json')
+    })
+</script>
+</body>
+</html>

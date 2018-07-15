@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 
 @RequestMapping("Community")
 @Controller
@@ -16,14 +18,27 @@ public class CommunityController {
     @Reference(version="1.0.0")
     private CommunityService communityService;
 
+
     /**
-     * 查询界面111111111ewqe
+     * 查询界面
      * @return
      */
-    @RequestMapping("Communitylist")
+    @RequestMapping("CommunityList.html")
     public String CommunityList(){
-        return "datacenter/community/community";
+        return "dataCenter/community/CommunityList/community";
     }
+
+    /**
+     * 添加界面
+     * @return
+     */
+    @RequestMapping(value = "addCommunity.html", method = RequestMethod.GET)
+    public String addCommunity(){
+        return "dataCenter/community/CommunityList/addCommunity";
+    }
+
+
+
 
     /**
      * 查询界面数据
@@ -35,38 +50,33 @@ public class CommunityController {
         return  DataTable.bindTableUtil(0,100,communityService.findAll());
     }
 
-
-    /**
-     * 添加界面123234132
-     * @return
-     */
-    @RequestMapping(value = "addCommunity", method = RequestMethod.GET)
-    public String addCommunity(){
-        return "datacenter/addCommunity";
-    }
-
     /**
      * 添加小区
      */
     @RequestMapping("addCommunitydata")
+    @ResponseBody
     public int insertCommunity(Community record){
+        System.out.println(record.getAddress());
         return  communityService.insert(record);
     }
     /**
      * 删除小区
      */
-    @RequestMapping(value = "daleteCommunity",method = RequestMethod.GET)
+    @RequestMapping(value = "deleteCommunity",method = RequestMethod.GET)
     @ResponseBody
     public int delCommunity(long id){
-        return  communityService.deleteByPrimaryKey((long) id);
+        return  communityService.deleteByPrimaryKey((long)id);
     }
 
     /**
-     * 房屋列表11213
-     * @return
+     * 查询小区 id 名称
      */
-    @RequestMapping("houstList")
-    public String houstList(){
-        return "datacenter/community/houseList";
+    @RequestMapping("getCommunityIdAndName")
+    @ResponseBody
+    public List<Community> getCommunityIdAndName(){
+
+        return communityService.getCommunityIdAndName();
     }
+
+
 }

@@ -1,5 +1,6 @@
 package com.m78.service;
 
+import com.m78.entity.Building;
 import com.m78.entity.Community;
 
 import java.util.List;
@@ -16,10 +17,15 @@ public interface CommunityService {
      */
     int insert(Community record);
 
-
+    /**
+     * 查询小区名称 及id
+     */
+    List<Community> getCommunityIdAndName();
 
     /**
      * 删除小区
      */
     int deleteByPrimaryKey(Long id);
+
+
 }
