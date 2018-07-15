@@ -1,6 +1,8 @@
 package com.m78.entity;
 
-public class Staff {
+import java.io.Serializable;
+
+public class Staff implements Serializable {
     private Long id;
 
     private String name;
