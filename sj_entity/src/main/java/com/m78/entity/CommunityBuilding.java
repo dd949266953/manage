@@ -1,8 +1,8 @@
 package com.m78.entity;
 
-import com.sun.xml.internal.bind.v2.runtime.RuntimeUtil;
 
 public class CommunityBuilding {
+
     private Long id;
 
     private Long communitid;
