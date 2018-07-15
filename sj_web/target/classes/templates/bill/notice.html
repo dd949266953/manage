@@ -55,13 +55,6 @@
 </section>
 <script th:src="@{/layui/layui.js}"></script>
 <script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
-<script type="text/html" id="type">
-    {{#  if(d.moneys == 8){ }}
-     d.carPortName
-    {{#  } else { }}
-    车位
-    {{#  } }}
-</script>
 <script>
     //JavaScript代码区域
     layui.use('element', function() {
@@ -88,75 +81,26 @@
                 cols: [
                     [
                         {checkbox: true}, {
-                        field: 'type',
+                        field: 'name',
                         align: 'center',
-                        title: '类型',
-                        toolbar: '#type'
-                    }, {
-                        field: 'community',
-                        align: 'center',
-                        title: '小区',
-                        unresize: 'true',
-                        templet: function (d) {
-                            return d.community.name
-                        }
-                    }, {
-                        field: 'signId',
-                        align: 'center',
-                        unresize: 'true',
-                        title: '房号/车位号',
-                    },
-                        {
-                            field: 'charName',
-                            unresize: 'true',
-                            title: '费用名称',
-                            align: 'center',
-
-                        }, {
-                        field: 'starttime',
-                        unresize: 'true',
-                        align: 'center',
-                        title: '开始时间',
-
-                    }, {
-                        field: 'overtime',
-                        align: 'center',
-                        unresize: 'true',
-                        title: '结束时间',
-
-                    }, {
-                        field: 'tentmentName',
-                        unresize: 'true',
-                        title: '住户',
-                        align: 'center',
-
+                        title: '姓名'
                     }, {
                         field: 'phone',
-                        title: '手机号',
-                        unresize: 'true',
                         align: 'center',
-
+                        title: '电话',
+                        unresize: 'true'
                     }, {
-                        field: 'name',
-                        unresize: 'true',
-                        title: '操作人员',
+                        field: 'communityName',
                         align: 'center',
-                        templet: function (d) {
-                            return d.admin.name
-                        }
-                    }, {
-                        field: 'time',
                         unresize: 'true',
-                        title: '操作时间',
-                        align: 'center',
-
-                    }, {
-                        field: 'moneys',
-                        unresize: 'true',
-                        title: '总金额',
-                        align: 'center'
-
-                    }]
+                        title: '小区'
+                    },
+                        {
+                            field: 'moneys',
+                            unresize: 'true',
+                            align: 'center',
+                            title: '总金额'
+                        }]
                 ],
                 page: true
             })
