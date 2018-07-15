@@ -5,14 +5,14 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.m78.entity.Building;
 import com.m78.entity.Community;
 import com.m78.entity.DictionaryItem;
-import com.m78.service.CommunityService;
-import com.m78.service.building.BuildingService;
+import com.m78.service.dataCenter.CommunityService;
+import com.m78.service.dataCenter.BuildingService;
 import com.m78.util.DataTable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import  com.m78.service.dictionItem.dictionaryItemSevice;
+import com.m78.service.dataCenter.dictionaryItemSevice;
 import java.util.List;
 
 /**

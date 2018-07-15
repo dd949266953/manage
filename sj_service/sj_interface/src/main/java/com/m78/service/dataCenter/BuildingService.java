@@ -1,4 +1,4 @@
-package com.m78.service.building;
+package com.m78.service.dataCenter;
 
 import com.m78.entity.Building;
 

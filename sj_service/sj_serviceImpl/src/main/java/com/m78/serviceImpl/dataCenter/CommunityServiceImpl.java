@@ -1,10 +1,10 @@
-package com.m78.serviceImpl;
+package com.m78.serviceImpl.dataCenter;
 
 import com.alibaba.dubbo.config.annotation.Service;
 
 import com.m78.entity.Community;
 import com.m78.mapper.CommunityMapper;
-import com.m78.service.CommunityService;
+import com.m78.service.dataCenter.CommunityService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
