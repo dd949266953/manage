@@ -13,25 +13,17 @@ public class ChargeId implements Serializable {
 
     private Long type;
 
-    private Long hId;
+    private Long tentmentId;
 
-    private  Long cpId;
+    private  String name;
 
-    private String houseName;
-
-    private  String carPortName;
-
-    private  String HousePhone;
-
-    private  String carPortPhone;
-
-    private  double moneys;
+    private  String phone;
 
     private  String communityName;
 
-    private  int houseInformk;
+    private  double moneys;
 
-    private  int carportInformk;
+    private Long informk;
 
     public Long getId() {
         return id;
@@ -73,44 +65,28 @@ public class ChargeId implements Serializable {
         this.type = type;
     }
 
-    public String getHouseName() {
-        return houseName;
+    public Long getTentmentId() {
+        return tentmentId;
     }
 
-    public void setHouseName(String houseName) {
-        this.houseName = houseName;
+    public void setTentmentId(Long tentmentId) {
+        this.tentmentId = tentmentId;
     }
 
-    public String getCarPortName() {
-        return carPortName;
+    public String getName() {
+        return name;
     }
 
-    public void setCarPortName(String carPortName) {
-        this.carPortName = carPortName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getHousePhone() {
-        return HousePhone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setHousePhone(String housePhone) {
-        HousePhone = housePhone;
-    }
-
-    public String getCarPortPhone() {
-        return carPortPhone;
-    }
-
-    public void setCarPortPhone(String carPortPhone) {
-        this.carPortPhone = carPortPhone;
-    }
-
-    public double getMoneys() {
-        return moneys;
-    }
-
-    public void setMoneys(double moneys) {
-        this.moneys = moneys;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getCommunityName() {
@@ -121,36 +97,20 @@ public class ChargeId implements Serializable {
         this.communityName = communityName;
     }
 
-    public int getHouseInformk() {
-        return houseInformk;
+    public double getMoneys() {
+        return moneys;
     }
 
-    public void setHouseInformk(int houseInformk) {
-        this.houseInformk = houseInformk;
+    public void setMoneys(double moneys) {
+        this.moneys = moneys;
     }
 
-    public int getCarportInformk() {
-        return carportInformk;
+    public Long getInformk() {
+        return informk;
     }
 
-    public void setCarportInformk(int carportInformk) {
-        this.carportInformk = carportInformk;
-    }
-
-    public Long gethId() {
-        return hId;
-    }
-
-    public void sethId(Long hId) {
-        this.hId = hId;
-    }
-
-    public Long getCpId() {
-        return cpId;
-    }
-
-    public void setCpId(Long cpId) {
-        this.cpId = cpId;
+    public void setInformk(Long informk) {
+        this.informk = informk;
     }
 
     @Override
@@ -161,16 +121,12 @@ public class ChargeId implements Serializable {
                 ", billid=" + billid +
                 ", signid=" + signid +
                 ", type=" + type +
-                ", hId=" + hId +
-                ", cpId=" + cpId +
-                ", houseName='" + houseName + '\'' +
-                ", carPortName='" + carPortName + '\'' +
-                ", HousePhone='" + HousePhone + '\'' +
-                ", carPortPhone='" + carPortPhone + '\'' +
-                ", moneys=" + moneys +
+                ", tentmentId=" + tentmentId +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
                 ", communityName='" + communityName + '\'' +
-                ", houseInformk=" + houseInformk +
-                ", carportInformk=" + carportInformk +
+                ", moneys=" + moneys +
+                ", informk=" + informk +
                 '}';
     }
 }

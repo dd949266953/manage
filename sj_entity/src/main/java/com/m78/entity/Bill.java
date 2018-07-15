@@ -14,7 +14,7 @@ public class Bill implements Serializable {
 
     private Long chargeuser;
     private Admin admin;
-
+    @JSONField(format="yyyy-MM-dd")
     private Date time;
 
     private Long informs;
