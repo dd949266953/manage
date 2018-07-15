@@ -37,14 +37,6 @@ public class CommunityController {
         return "dataCenter/community/CommunityList/addCommunity";
     }
 
-    /**
-     * 房屋列表11213
-     * @return
-     */
-    @RequestMapping("houstList.html")
-    public String houstList(){
-        return "dataCenter/community/houstManagement/houseList";
-    }
 
 
 

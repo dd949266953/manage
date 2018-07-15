@@ -5,6 +5,11 @@ import com.m78.entity.Building;
 import java.util.List;
 
 public interface BuildingMapper {
+    /**
+     * 根据id删除楼宇信息
+     * @param id
+     * @return
+     */
     int deleteByPrimaryKey(Long id);
 
     int insert(Building record);
@@ -17,5 +22,9 @@ public interface BuildingMapper {
 
     int updateByPrimaryKey(Building record);
 
+    /**
+     * 查询楼宇数据
+     * @return
+     */
     List<Building> getBuildingList();
 }

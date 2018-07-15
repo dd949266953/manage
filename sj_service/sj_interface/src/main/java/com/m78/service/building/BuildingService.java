@@ -12,7 +12,7 @@ public interface BuildingService {
     List<Building> getBuildingList();
 
     /**
-     * 删除住户
+     * 删除楼宇
      */
     int deleteByPrimaryKey(Long id);
 }

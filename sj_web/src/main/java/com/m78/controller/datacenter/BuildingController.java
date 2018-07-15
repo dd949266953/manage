@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * 楼宇
  */
-@Controller
 @RequestMapping("/Building")
+@Controller
 public class BuildingController {
 
     @Reference(version="1.0.0")
@@ -36,7 +36,6 @@ public class BuildingController {
     @RequestMapping("getBuilldingList")
     @ResponseBody
     public Object getBuildingList(){
-
         return DataTable.bindTableUtil(0,100,buildingService.getBuildingList());
     }
     /**
