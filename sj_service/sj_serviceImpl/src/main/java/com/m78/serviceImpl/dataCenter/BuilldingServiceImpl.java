@@ -1,9 +1,9 @@
-package com.m78.serviceImpl.Buillding;
+package com.m78.serviceImpl.dataCenter;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.m78.entity.Building;
 import com.m78.mapper.BuildingMapper;
-import com.m78.service.building.BuildingService;
+import com.m78.service.dataCenter.BuildingService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

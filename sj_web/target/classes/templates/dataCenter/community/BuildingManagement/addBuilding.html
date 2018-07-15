@@ -71,7 +71,6 @@
                 var  buildingtype =$("select[name=buildingtype]").val();
                 var  buildingstructure =$("input[name=buildingstructure]").val();
                 var  orientation =$("input[name=orientation]").val();
-
                 console.log(name);
                 console.log(unittotal);
                 console.log(pliestotal);
@@ -81,7 +80,6 @@
                 $.post('buildingInsert',{"name":name,"unittotal":unittotal,"pliestotal":pliestotal,"buildingtype":buildingtype,"buildingstructure":buildingstructure,"orientation":orientation},function (data) {
               		  console.log(data);
                 })
-
             })
 		</script>
 	</body>

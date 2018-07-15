@@ -1,6 +1,5 @@
-package com.m78.service;
+package com.m78.service.dataCenter;
 
-import com.m78.entity.Building;
 import com.m78.entity.Community;
 
 import java.util.List;
