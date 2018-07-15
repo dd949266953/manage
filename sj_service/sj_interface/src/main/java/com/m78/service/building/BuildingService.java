@@ -15,4 +15,9 @@ public interface BuildingService {
      * 删除楼宇
      */
     int deleteByPrimaryKey(Long id);
+
+    /**
+     * 添加楼宇
+     */
+    int insert(Building record);
 }

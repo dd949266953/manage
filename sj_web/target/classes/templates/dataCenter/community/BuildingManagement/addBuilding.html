@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>添加楼宇</title>
+		<link rel="stylesheet" th:href="@{/css/dataCenter/community/addBuilding.css}" />
+		<link rel="stylesheet" th:href="@{/layui/css/layui.css}" />
+	</head>
+	<body>
+		<div class="body">
+			<h1>添加楼宇</h1>
+	</div>
+	<div class="heads">
+			<table>
+			<tr>
+				<td><span class="symbol">*</span> <span class="size">所属小区：</span><select id="housing" class="housing" >
+					<option>请选择所属小区</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td><span class="symbol">*</span> <span class="size">楼宇名称：</span><input class="name tm" name="name" type="text" placeholder="请输入楼宇名称"/></td>
+			</tr>
+			<tr>
+				<td><span class="symbol">*</span> <span class="size">单元数量：</span><input class="tm number" name="unittotal" type="text" placeholder="单元数"/></td>
+			</tr>
+			<tr>
+				<td><span class="symbol">*</span> <span class="size">楼宇层数：</span><input class="tm number" name="pliestotal" type="text" placeholder="楼层数"/></td>
+			</tr>
+				<tr>
+					<td><span class="symbol">*</span> <span class="size">楼宇类型：</span><select id="type" name="buildingtype" class="housing" >
+						<option>请选择类型</option>
+					</select></td>
+				<tr>
+			<tr>
+				<td><span class="symbol">*</span> <span class="size">楼宇结构：</span><input class="name tm" name="buildingstructure" type="text" placeholder="请输入楼宇结构，例如：几室几厅"/></td>
+			</tr>
+
+				<td><span class="symbol">*</span> <span class="size">楼宇朝向：</span><input class="name tm" name="orientation" type="text" placeholder="请输入楼宇朝向"/></td>
+			</tr>
+			<tr>
+						<td><a class="layui-btn  save">添加</a>
+					<a class="layui-btn ">返回</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+		<script th:src="@{/js/jquery-3.2.1.js}" type="text/javascript"></script>
+		<script>
+			$(function () {
+				$.post('getCommunityIdAndName',function (data) {
+					console.log(data);
+					$.each(data,function (i,val) {
+						var tr='<option value="'+val.id+'">'+val.name+'</option>';
+						$("#housing").append(tr)
+                    })
+                })
+				$.post("typeID",function (data) {
+					console.log(data);
+					$.each(data,function (i,val) {
+                        var th='<option value="'+val.id+'">'+val.content+'</option>';
+                        $("select[name=buildingtype]").append(th);
+                    })
+                })
+            })
+
+            $(".save").click(function () {
+                var  name =$("input[name=name]").val();
+                var  unittotal =$("input[name=unittotal]").val();
+                var  pliestotal =$("input[name=pliestotal]").val();
+                var  buildingtype =$("select[name=buildingtype]").val();
+                var  buildingstructure =$("input[name=buildingstructure]").val();
+                var  orientation =$("input[name=orientation]").val();
+
+                console.log(name);
+                console.log(unittotal);
+                console.log(pliestotal);
+                console.log(buildingtype);
+                console.log(buildingstructure);
+                console.log(orientation);
+                $.post('buildingInsert',{"name":name,"unittotal":unittotal,"pliestotal":pliestotal,"buildingtype":buildingtype,"buildingstructure":buildingstructure,"orientation":orientation},function (data) {
+              		  console.log(data);
+                })
+
+            })
+		</script>
+	</body>
+</html>
