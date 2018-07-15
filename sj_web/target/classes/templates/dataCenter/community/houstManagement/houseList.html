@@ -31,10 +31,10 @@
     <script>
         layui.use('table', function() {
             var table = layui.table;
-            //第一个实例
+            //第一个实例1+
             table.render({
                 elem: "#demo",
-                url: '',
+                url: 'getHouse',
                 page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
                     layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
                     //,curr: 5 //设定初始在第 5 页
@@ -47,41 +47,45 @@
                 },
                 cols: [
                     [{
-                        field: "id",
+                        field: "houseid",
                         title: 'id'
                     },
                         {
-                            field: "name",
-                            title: '小区名称'
+                            field: "unitnumber",
+                            title: '单元号'
                         },
                         {
-                            field: "address",
-                            title: '所在地区'
+                            field: "fool",
+                            title: '房号'
                         },
                         {
-                            field: "detailaddress",
-                            title: '详细地址'
+                            field: "area",
+                            title: '建筑面积'
                         },
                         {
-                            field: "servicetel",
-                            title: '服务热线'
+                            field: "housetype",
+                            title: '房屋户型'
                         },
                         {
-                            field: "leader",
-                            title: '负责人'
+                            field: "inarea",
+                            title: '套内面积'
                         },
                         {
-                            field: "leaderphone",
-                            title: '负责电话'
+                            field: "publicarea",
+                            title: '公摊面积'
                         },
                         {
-                            field: "logo",
-                            title: '小区Logo'
+                            field: "returntime",
+                            title: '交房时间'
                         },
 
                         {
-                            field: "backgroundimage",
-                            title: '背景图片'
+                            field: "state",
+                            title: '状态'
+                        },
+                        {
+                            field: "equity",
+                            title: '产权'
                         },
                         {
                             field: "right",

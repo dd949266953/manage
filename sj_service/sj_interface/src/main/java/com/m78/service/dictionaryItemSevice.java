@@ -1,4 +1,4 @@
-package com.m78.service.dataCenter;
+package com.m78.service;
 
 import com.m78.entity.DictionaryItem;
 

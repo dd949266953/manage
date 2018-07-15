@@ -4,6 +4,9 @@ import com.m78.entity.Building;
 
 import java.util.List;
 
+/**
+ * 楼宇接口
+ */
 public interface BuildingService {
 
     /**

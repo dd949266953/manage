@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 
+/**
+ * 小区
+ */
 @RequestMapping("Community")
 @Controller
 public class CommunityController {

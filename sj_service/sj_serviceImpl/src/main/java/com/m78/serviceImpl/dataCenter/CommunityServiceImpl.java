@@ -8,6 +8,10 @@ import com.m78.service.dataCenter.CommunityService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+
+/**
+ * 小区接口实现类
+ */
 //注册为Bubbo服务
 @Service(version="1.0.0")
 public class CommunityServiceImpl implements CommunityService {

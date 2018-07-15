@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
+/**
+ * 楼宇接口实现类
+ */
 @Service(version="1.0.0")
 public class BuilldingServiceImpl implements BuildingService {
     @Autowired

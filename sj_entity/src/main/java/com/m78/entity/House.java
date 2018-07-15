@@ -1,8 +1,9 @@
 package com.m78.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class House {
+public class House implements Serializable {
     private Long houseid;
 
     private Long unitnumber;

@@ -4,6 +4,9 @@ import com.m78.entity.Community;
 
 import java.util.List;
 
+/**
+ * 小区接口
+ */
 public interface CommunityService {
     /**
      * 查询所有小区

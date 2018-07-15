@@ -2,6 +2,8 @@ package com.m78.mapper;
 
 import com.m78.entity.House;
 
+import java.util.List;
+
 public interface HouseMapper {
     int deleteByPrimaryKey(Long houseid);
 
@@ -14,4 +16,10 @@ public interface HouseMapper {
     int updateByPrimaryKeySelective(House record);
 
     int updateByPrimaryKey(House record);
+
+    /**
+     * 查询房屋信息
+     */
+    List<House> getHoust();
+
 }

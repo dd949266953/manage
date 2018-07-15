@@ -110,9 +110,11 @@
                 console.log(obj.type); //如果触发的是全选，则为：all，如果触发的是单选，则为：one
                 var checkStatus = table.checkStatus('table');
                 if (checkStatus.data.length==0){
-                    $('#btn').addClass('layui-btn-disabled').attr('disabled',"true");
+                    $('#sms').addClass('layui-btn-disabled').attr('disabled',"true");
+                    $('#WeChat').addClass('layui-btn-disabled').attr('disabled',"true");
                 }else {
-                    $('#btn').removeClass('layui-btn-disabled').removeAttr('disabled',"true");
+                    $('#sms').removeClass('layui-btn-disabled').removeAttr('disabled',"true");
+                    $('#WeChat').removeClass('layui-btn-disabled').removeAttr('disabled',"true");
                 }
 
             });
@@ -121,6 +123,7 @@
 
         })
     }
+    //发短信
     function sendsms() {
         var checkStatus = table.checkStatus('table');
         var billID=new Array();
