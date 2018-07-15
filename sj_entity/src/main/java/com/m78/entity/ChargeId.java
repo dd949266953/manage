@@ -1,6 +1,8 @@
 package com.m78.entity;
 
-public class ChargeId {
+import java.io.Serializable;
+
+public class ChargeId implements Serializable {
     private Long id;
 
     private Long chargeitemid;
@@ -11,6 +13,17 @@ public class ChargeId {
 
     private Long type;
 
+    private String houseName;
+
+    private  String carPortName;
+
+    private  String HousePhone;
+
+    private  String carPortPhone;
+
+    private  double moneys;
+
+    private  String communityName;
     public Long getId() {
         return id;
     }
@@ -51,6 +64,54 @@ public class ChargeId {
         this.type = type;
     }
 
+    public String getHouseName() {
+        return houseName;
+    }
+
+    public void setHouseName(String houseName) {
+        this.houseName = houseName;
+    }
+
+    public String getCarPortName() {
+        return carPortName;
+    }
+
+    public void setCarPortName(String carPortName) {
+        this.carPortName = carPortName;
+    }
+
+    public String getHousePhone() {
+        return HousePhone;
+    }
+
+    public void setHousePhone(String housePhone) {
+        HousePhone = housePhone;
+    }
+
+    public String getCarPortPhone() {
+        return carPortPhone;
+    }
+
+    public void setCarPortPhone(String carPortPhone) {
+        this.carPortPhone = carPortPhone;
+    }
+
+    public double getMoneys() {
+        return moneys;
+    }
+
+    public void setMoneys(double moneys) {
+        this.moneys = moneys;
+    }
+
+    public String getCommunityName() {
+        return communityName;
+    }
+
+    public void setCommunityName(String communityName) {
+        this.communityName = communityName;
+    }
+
     @Override
     public String toString() {
         return "ChargeId{" +
@@ -59,6 +120,12 @@ public class ChargeId {
                 ", billid=" + billid +
                 ", signid=" + signid +
                 ", type=" + type +
+                ", houseName='" + houseName + '\'' +
+                ", carPortName='" + carPortName + '\'' +
+                ", HousePhone='" + HousePhone + '\'' +
+                ", carPortPhone='" + carPortPhone + '\'' +
+                ", moneys=" + moneys +
+                ", communityName='" + communityName + '\'' +
                 '}';
     }
 }

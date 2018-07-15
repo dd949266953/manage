@@ -29,6 +29,8 @@ public class Tenement {
 
     private String remark;
 
+    private Long informk;
+
     public Long getId() {
         return id;
     }
@@ -42,7 +44,7 @@ public class Tenement {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public String getPhone() {
@@ -50,7 +52,7 @@ public class Tenement {
     }
 
     public void setPhone(String phone) {
-        this.phone = phone == null ? null : phone.trim();
+        this.phone = phone;
     }
 
     public Long getIntegrals() {
@@ -90,7 +92,7 @@ public class Tenement {
     }
 
     public void setWxnumber(String wxnumber) {
-        this.wxnumber = wxnumber == null ? null : wxnumber.trim();
+        this.wxnumber = wxnumber;
     }
 
     public String getUrgencyman() {
@@ -98,7 +100,7 @@ public class Tenement {
     }
 
     public void setUrgencyman(String urgencyman) {
-        this.urgencyman = urgencyman == null ? null : urgencyman.trim();
+        this.urgencyman = urgencyman;
     }
 
     public String getUrgencymanphone() {
@@ -106,7 +108,7 @@ public class Tenement {
     }
 
     public void setUrgencymanphone(String urgencymanphone) {
-        this.urgencymanphone = urgencymanphone == null ? null : urgencymanphone.trim();
+        this.urgencymanphone = urgencymanphone;
     }
 
     public String getSex() {
@@ -114,7 +116,7 @@ public class Tenement {
     }
 
     public void setSex(String sex) {
-        this.sex = sex == null ? null : sex.trim();
+        this.sex = sex;
     }
 
     public String getNation() {
@@ -122,7 +124,7 @@ public class Tenement {
     }
 
     public void setNation(String nation) {
-        this.nation = nation == null ? null : nation.trim();
+        this.nation = nation;
     }
 
     public String getRemark() {
@@ -130,25 +132,14 @@ public class Tenement {
     }
 
     public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
+        this.remark = remark;
     }
 
-    @Override
-    public String toString() {
-        return "Tenement{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", phone='" + phone + '\'' +
-                ", integrals=" + integrals +
-                ", registrationdate=" + registrationdate +
-                ", state=" + state +
-                ", qqnumber=" + qqnumber +
-                ", wxnumber='" + wxnumber + '\'' +
-                ", urgencyman='" + urgencyman + '\'' +
-                ", urgencymanphone='" + urgencymanphone + '\'' +
-                ", sex='" + sex + '\'' +
-                ", nation='" + nation + '\'' +
-                ", remark='" + remark + '\'' +
-                '}';
+    public Long getInformk() {
+        return informk;
+    }
+
+    public void setInformk(Long informk) {
+        this.informk = informk;
     }
 }

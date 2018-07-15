@@ -18,6 +18,9 @@
 				padding-right: 7px;
 				vertical-align: top;
 			}
+            .layui-table th {
+                border-style: none;
+            }
 		</style>
 	</head>
 <body>
@@ -25,7 +28,7 @@
 			<!--
               	作者：ADD
               	时间：2018-04-13
-              	描述：添加小区
+              	描述：未缴账单
               -->
 			<header>
 				<h2 class="h2">未缴账单</h2>
@@ -36,7 +39,7 @@
 				<button class="button noborder" id="load"><i class="iconfont">&#xe60f;</i>导入</button>		
 				<button class="button noborder" id="daochu"><i  class="iconfont">&#xe647;</i>导出</button>		
 				<div style="float: right;">
-					<input id="billId" type="text" placeholder="请输入住户/房号/小区/楼宇" class="search-keyword" />
+					<input id="checkName" type="text" placeholder="请输入住户/房号/小区/楼宇" class="search-keyword" />
 					<button onclick="page()" class="noborder">
 								<i class="layui-icon search">&#xe615;</i>
 							</button>
@@ -54,60 +57,70 @@
 		<script th:src="@{/layui/layui.js}"></script>
 		<script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
 		<script type="text/html" id="barDemo">
-		  <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="edit">确认收款</a>        
+		  <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="ok">确认收款</a>
 		  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 		</script>
+        <script type="text/html" id="type">
+            {{#  if(d.type == ''){ }}
+            房屋
+            {{#  } else { }}
+            车位
+            {{#  } }}
+        </script>
 		<script>
-		
-		/*批量导入*/
-    /*#load:为按钮,点击后生成一个隐藏的input file标签*/
-    $('#load').after('<input type="file" id="load_xls" name="file" style="display:none" onchange ="uploadFile()">');
-    $('#load').click(function(){
-        layer.confirm('导入前请确认单元格是否对应', {icon: 3, title:'提示',shade:'0',offset:['250px','700px']},
-            function(index){
-                document.getElementById("load_xls").click();
-                layer.close(index);
-        });
 
-    });
-    function uploadFile() {
-        var uri=$("#load_xls").val();
-        $.ajax({
-            url: "",
-            type: "POST",
-            data: uri,
-            contentType: false,
-            processData: false,
-            success: function (data) {
-                console.log(data);
-            },
-            error:function(data){
-                console.log(data)
+            /*批量导入*/
+            /*#load:为按钮,点击后生成一个隐藏的input file标签*/
+            $('#load').after('<input type="file" id="load_xls" name="file" style="display:none" onchange ="uploadFile()">');
+            $('#load').click(function(){
+                layer.confirm('导入前请确认单元格是否对应', {icon: 3, title:'提示',shade:'0',offset:['250px','700px']},
+                    function(index){
+                        layer.open({
+                            type: 2,
+                            title:'选择导入信息',
+                            area: ['400px', '260px'],
+                            content: 'doImportBill' //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+                        });
+                        layer.close(index);
+                    });
+            });
+            function uploadFile() {
+                var uri=$("#load_xls").val();
+                $.ajax({
+                    url: "",
+                    type: "POST",
+                    data: uri,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error:function(data){
+                        console.log(data)
+                    }
+                });
             }
-        });
-    }
     
     $("#daochu").click(function(){
-    	
+
       	 layer.confirm('确定要导出列表中的数据吗?', {icon: 3, title:'提示',shade:'0',offset:['250px','700px']},function(index){
                         		 $.ajax({
-                        			 url:'../Community/deleteCommunity.json',
+                        			 url:'export.json',
                         			 type:'POST',
-                        			 dataType:'json',                       	
+                        			 dataType:'json',
                         			 data:{
-                        				 communityId:data.communityId
+                                         name : $("#checkName").val()
                         			 },
                         			 success:function(data){
                         				 if(data===1){
-                        					 layer.msg('导入成功，默认路径桌面',{icon:1});
-                        					 obj.del();
+                        					 layer.msg('导入成功，默认路径桌面',{icon:1,offset:['250px','700px']});
                                    		     layer.close(index);
                         				 }else{
-                        					 layer.msg('导入失败',{icon:2});
+                        					 layer.msg('导入失败，请检查桌面是否有相同文件',{icon:2,offset:['250px','700px']});
                         				 }
                         			 }
                         		 })
-                        		 
+
                  });
     })
     
@@ -124,7 +137,7 @@
 				  type: 2, 
 				  title:'添加账单',
 				  area: ['600px', '70%'],		 
-				  content: 'addbill.html'
+				  content: 'addbill'
 				  })
 			})
 			//JavaScript代码区域
@@ -142,65 +155,84 @@
 						elem: '#table',
 						loading:true,
 						url: 'getAllNoBill.json',
-
-						cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
-							,
+                        where : {
+                            name : $("#checkName").val()
+                        },
 						cols: [
 							[{
                                 field:'type',
                                 align: 'center',
-                                width: 120,
                                 title: '类型',
+                                unresize:'true',
+                                toolbar : '#type'
                             },{
-								field:'id',
+								field:'community',
 								align: 'center',
-								width: 120,
 								title: '小区',
+                                unresize:'true',
+                                templet: function(d){
+                                    return d.community.name
+                                }
 							},{
 								field: 'signId',
-								align: 'center',							
-								title: '房号/车位号/车牌号/住户',
+								align: 'center',
+                                unresize:'true',
+								title: '房号/车位号',
 							},							
 							{
-								field: 'starttime',
+								field: 'charName',
+                                unresize:'true',
 								title: '费用名称',
 								align: 'center',
 							
 							}, {
-								field: 'communityAdminPhone',
+								field: 'starttime',
+                                unresize:'true',
 								align: 'center',
-								title: '开始/结束时间',
+								title: '开始时间',
 							
 							}, {
-								field: 'communityServicePhone',
+                                field: 'overtime',
+                                align: 'center',
+                                unresize:'true',
+                                title: '结束时间',
+
+                            }, {
+								field: 'tentmentName',
+                                unresize:'true',
 								title: '住户',
 								align: 'center',
 					
 							}, {
-								field: 'communityAddress',
+								field: 'phone',
 								title: '手机号',
+                                unresize:'true',
 								align: 'center',
 								
 							}, {
-								field: 'communityAddress',
+								field: 'price',
+                                unresize:'true',
 								title: '单价',
 								align: 'center',
 								
 							},{
-								field: 'communityAddress',
+								field: 'consume',
+                                unresize:'true',
 								title: '数量',
 								align: 'center',
 								
 							},{
-								title: '金额',
-								width:160,
-								toolbar:'#barDemo'								
+                                field: 'moneys',
+                                unresize:'true',
+								title: '总金额',
+                                align: 'center'
+
 							},{
-								field: 'communityAddress',
-								title: '备注',
-								align: 'center',
-								
-							}]
+								title: '操作',
+                                toolbar:'#barDemo',
+                                align: 'center'
+
+                            }]
 						],			
 						page: true
 					})
@@ -209,13 +241,13 @@
 						 var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
 						 var tr = obj.tr; //获得当前行 tr 的DOM对象
                          if(layEvent==='del'){
-                        	 layer.confirm('确定要删除吗?', {icon: 3, title:'提示',shade:'0'}, function(index){
+                        	 layer.confirm('确定要删除吗?', {icon: 7, title:'提示',shade:'0',offset:['250px','700px']}, function(index){
                         		 $.ajax({
-                        			 url:'../Community/deleteCommunity.json',
+                        			 url:'deleteBillById.json',
                         			 type:'POST',
                         			 dataType:'json',
                         			 data:{
-                        				 communityId:data.communityId
+                        				 billId:data.id
                         			 },
                         			 success:function(data){
                         				 if(data===1){
@@ -231,9 +263,34 @@
                         		});
                         		  
                          }
+                        if(layEvent==='ok'){
+                            layer.confirm('确定要进行此操作吗?', {icon: 7, title:'提示',shade:'0',offset:['250px','700px']}, function(index){
+                                $.ajax({
+                                    url:'updateBillById.json',
+                                    type:'POST',
+                                    dataType:'json',
+                                    data:{
+                                        billId:data.id
+                                    },
+                                    success:function(data){
+                                        if(data===1){
+                                            layer.msg('操作成功',{icon:1});
+                                            obj.del();
+                                            layer.close(index);
+                                        }else{
+                                            layer.msg('操作失败',{icon:2});
+                                        }
+                                    }
+                                })
+
+                            });
+
+                        }
+
 					
 
 					});
+
 					
 				})
 			}
