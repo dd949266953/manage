@@ -252,15 +252,19 @@
     </select>
     <resultMap id="sendList" type="com.m78.entity.ChargeId">
         <id column="id" jdbcType="BIGINT" property="id" />
-        <result column="name" jdbcType="VARCHAR" property="houseName"/>
-        <result column="name1" jdbcType="VARCHAR" property="carPortName"/>
-        <result column="phone" jdbcType="VARCHAR" property="HousePhone"/>
-        <result column="phone1" jdbcType="VARCHAR" property="carPortPhone"/>
-        <result column="name2" jdbcType="VARCHAR" property="communityName"/>
+        <result column="hId" property="hId"/>
+        <result column="cpId" property="cpId"/>
+        <result column="houseName" jdbcType="VARCHAR" property="houseName"/>
+        <result column="carPortName" jdbcType="VARCHAR" property="carPortName"/>
+        <result column="HousePhone" jdbcType="VARCHAR" property="HousePhone"/>
+        <result column="carPortPhone" jdbcType="VARCHAR" property="carPortPhone"/>
+        <result column="name" jdbcType="VARCHAR" property="communityName"/>
         <result column="moneys" jdbcType="DOUBLE" property="moneys" />
+        <result column="houseInformk" property="houseInformk"/>
+        <result column="carportInformk" property="carportInformk"/>
     </resultMap>
     <select id="getAllSend" resultMap="sendList">
-        SELECT ca.id,te.name ,te.phone,ten.`name` ,ten.phone,comm.`name`, SUM(bi.moneys) AS moneys FROM charge_id ca
+        SELECT te.id AS hId,ten.id AS cpId,te.name as houseName ,te.phone as HousePhone,ten.`name` carPortName ,ten.phone as carPortPhone,comm.`name`, SUM(bi.moneys) AS moneys,te.informk AS houseInformk,ten.informk AS carportInformk FROM charge_id ca
         INNER JOIN bill bi ON bi.id=ca.billId
         INNER JOIN community comm ON comm.id=bi.communityId
         left JOIN house_tentment ht ON ht.houseId=ca.signId
@@ -268,10 +272,10 @@
         left JOIN tenement te ON te.id=ht.tentmentId
         left JOIN tenement  ten ON ten.id=tca.tentmentId
         WHERE bi.state=27
-        GROUP BY signId,type
         <if test="name!=''">
-          and   te.`name` LIKE  CONCAT ('%',#{name},'%') or ten.`name` LIKECONCAT ('%',#{name},'%')
+            and   te.`name` LIKE  CONCAT ('%',#{name},'%') or ten.`name` LIKECONCAT ('%',#{name},'%')
         </if>
+        GROUP BY signId,type
         <if test="pageSize!=-1">
             limit #{page},#{pageSize}
         </if>

@@ -57,6 +57,15 @@ public class BillController {
     }
 
     /**
+     * 跳转到通知页面
+     * @return
+     */
+    @RequestMapping("doNotice")
+    public  Object doNotice(){
+        return  "bill/notice";
+    }
+
+    /**
      * 获取全部未缴账单
      * @param page
      * @param limit
