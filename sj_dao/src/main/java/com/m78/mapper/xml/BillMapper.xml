@@ -198,26 +198,22 @@
             <result property="id" column="id1"/>
             <result property="name" column="communityName"/>
         </association>
-
     </resultMap>
     <select id="getAllNoBill" resultMap="noBillList">
-   SELECT bi.*,cid.type,comm.id as id1,comm.`name` as communityName,cid.signId,cna.`name` as charName,te.`name` as  tentmentName,te.phone,cit.price FROM bill bi
-     INNER JOIN charge_id cid ON bi.id=cid.billId
-     INNER JOIN community comm ON comm.id=bi.communityId
-     INNER JOIN house_buliding hb ON cid.signId=hb.houseId
-     INNER JOIN building bu on bu.id=hb.buildingId
-     INNER JOIN chargeitem cit ON cit.id=cid.chargeitemId
-     INNER JOIN chargename cna ON cna.id=cit.type
-     INNER JOIN house_tentment ht ON ht.houseId=cid.signId
-     INNER JOIN house ON house.houseId=ht.houseId
-     INNER JOIN tenement te on te.id=ht.tentmentId
-     INNER JOIN carport cp ON cp.carportNo=cid.type
-     WHERE bi.state=27
+        SELECT bi.*,cid.type,comm.id as id1,comm.`name` as communityName,cid.signId,cna.`name`,cit.price,te.`name` AS tentmentName,te.phone AS phone FROM bill bi
+        left JOIN charge_id cid ON bi.id=cid.billId
+        INNER JOIN community comm ON comm.id=bi.communityId
+        left JOIN chargeitem cit ON cit.id=cid.chargeitemId
+        left JOIN chargename cna ON cna.id=cit.type
+        left JOIN house_tentment ht ON ht.houseId=cid.signId
+        left JOIN tentment_carport tca ON tca.carportId=cid.signId
+        left JOIN tenement te ON te.id=ht.tentmentId OR te.id=tca.tentmentId
+        WHERE bi.state=27
         <if test="name!=''">
-        AND comm.`name` LIKE CONCAT ('%',#{name},'%') OR  bu.name LIKE CONCAT ('%',#{name},'%') OR  cp.carportNo LIKE CONCAT ('%',#{name},'%') OR  house.houseId LIKE CONCAT ('%',#{name},'%')
+        AND comm.`name` LIKE CONCAT ('%',#{name},'%')  OR  cpo.carportNo LIKE CONCAT ('%',#{name},'%') OR  hou.houseId LIKE CONCAT ('%',#{name},'%')
         </if>
         <if test="pageSize!=-1">
-     limit #{page},#{pageSize}
+        limit #{page},#{pageSize}
         </if>
      </select>
      <select id="getAllNoBillCount" resultType="java.lang.Long">
@@ -231,20 +227,19 @@
     </update>
     <select id="getAllYseBills" resultMap="yesBillList">
         SELECT bi.*,cid.type,comm.id as id1,comm.`name` as communityName,cid.signId,cna.`name` as charName,te.`name` as  tentmentName,te.phone,cit.price,ad.id AS adminid,ad.name as adminName FROM bill bi
-        INNER JOIN charge_id cid ON bi.id=cid.billId
+        left JOIN charge_id cid ON bi.id=cid.billId
+        INNER JOIN admin ad ON ad.id=bi.chargeUser
         INNER JOIN community comm ON comm.id=bi.communityId
-        INNER JOIN house_buliding hb ON cid.signId=hb.houseId
-        INNER JOIN building bu on bu.id=hb.buildingId
-        INNER JOIN chargeitem cit ON cit.id=cid.chargeitemId
-        INNER JOIN chargename cna ON cna.id=cit.type
-        INNER JOIN house_tentment ht ON ht.houseId=cid.signId
-        INNER JOIN house ON house.houseId=ht.houseId
-        INNER JOIN tenement te on te.id=ht.tentmentId
-        INNER JOIN admin ad on ad.id=bi.chargeUser
-        INNER JOIN carport cp ON cp.carportNo=cid.type
+        left JOIN chargeitem cit ON cit.id=cid.chargeitemId
+        left JOIN chargename cna ON cna.id=cit.type
+        left JOIN house_tentment ht ON ht.houseId=cid.signId
+        LEFT JOIN house hou on hou.houseId=ht.houseId AND cid.type=1
+        left JOIN tentment_carport tca ON tca.carportId=cid.signId
+        LEFT JOIN carport cpo on cpo.carportNo=tca.carportId AND cid.type=2
+        left JOIN tenement te ON te.id=ht.tentmentId OR te.id=tca.tentmentId
         WHERE bi.state=28
         <if test="name!=''">
-            AND comm.`name` LIKE CONCAT ('%',#{name},'%') OR  bu.name LIKE CONCAT ('%',#{name},'%') OR  cp.carportNo LIKE CONCAT ('%',#{name},'%') OR  house.houseId LIKE CONCAT ('%',#{name},'%')
+            AND comm.`name` LIKE CONCAT ('%',#{name},'%')  OR  cpo.carportNo LIKE CONCAT ('%',#{name},'%') OR  hou.houseId LIKE CONCAT ('%',#{name},'%')
         </if>
         <if test="pageSize!=-1">
             limit #{page},#{pageSize}
@@ -252,26 +247,25 @@
     </select>
     <resultMap id="sendList" type="com.m78.entity.ChargeId">
         <id column="id" jdbcType="BIGINT" property="id" />
-        <result column="name" jdbcType="VARCHAR" property="houseName"/>
-        <result column="name1" jdbcType="VARCHAR" property="carPortName"/>
-        <result column="phone" jdbcType="VARCHAR" property="HousePhone"/>
-        <result column="phone1" jdbcType="VARCHAR" property="carPortPhone"/>
-        <result column="name2" jdbcType="VARCHAR" property="communityName"/>
+        <result column="tentmentId" property="tentmentId"/>
+        <result column="communityName" property="communityName"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="name1" jdbcType="VARCHAR" property="communityName"/>
         <result column="moneys" jdbcType="DOUBLE" property="moneys" />
     </resultMap>
     <select id="getAllSend" resultMap="sendList">
-        SELECT ca.id,te.name ,te.phone,ten.`name` ,ten.phone,comm.`name`, SUM(bi.moneys) AS moneys FROM charge_id ca
+        SELECT ca.id,te.name ,te.phone,comm.`name` as communityName, SUM(bi.moneys) AS moneys FROM charge_id ca
         INNER JOIN bill bi ON bi.id=ca.billId
         INNER JOIN community comm ON comm.id=bi.communityId
-        left JOIN house_tentment ht ON ht.houseId=ca.signId
-        left JOIN tentment_carport tca ON tca.carportId=ca.type
-        left JOIN tenement te ON te.id=ht.tentmentId
-        left JOIN tenement  ten ON ten.id=tca.tentmentId
+        left JOIN house_tentment ht ON ht.houseId=ca.signId AND ca.type=1
+        left JOIN tentment_carport tca ON tca.carportId=ca.type AND ca.type=2
+        left JOIN tenement te ON te.id=ht.tentmentId OR te.id=tca.tentmentId
         WHERE bi.state=27
-        GROUP BY signId,type
         <if test="name!=''">
-          and   te.`name` LIKE  CONCAT ('%',#{name},'%') or ten.`name` LIKECONCAT ('%',#{name},'%')
+            and   te.`name` LIKE  CONCAT ('%',#{name},'%')
         </if>
+        GROUP BY signId,type
         <if test="pageSize!=-1">
             limit #{page},#{pageSize}
         </if>

@@ -31,4 +31,14 @@ public class BuilldingServiceImpl implements BuildingService {
     public int deleteByPrimaryKey(Long id) {
         return buildingMapper.deleteByPrimaryKey(id);
     }
+
+    /**
+     * 添加楼宇
+     * @param record
+     * @return
+     */
+    @Override
+    public int insert(Building record) {
+        return buildingMapper.insert(record);
+    }
 }

@@ -30,10 +30,10 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.m78.entity.Building" >
-    insert into building (id, name, unitTotal, 
+    insert into building (name, unitTotal,
       pliesTotal, buildingType, buildingStructure, 
       orientation)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{unittotal,jdbcType=BIGINT}, 
+    values ( #{name,jdbcType=VARCHAR}, #{unittotal,jdbcType=BIGINT},
       #{pliestotal,jdbcType=BIGINT}, #{buildingtype,jdbcType=BIGINT}, #{buildingstructure,jdbcType=VARCHAR}, 
       #{orientation,jdbcType=VARCHAR})
   </insert>

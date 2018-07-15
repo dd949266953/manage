@@ -16,7 +16,7 @@ spring:
       protocol:
         name: dubbo
         port: 20880
-      scan: com.m78.serviceImpl
+      scan: com.m78.serviceImpl,com.m78.serviceImpl.dictionaryItem
 mybatis:
   mapper-locations: classpath:/com/m78/mapper/xml/*.xml
   type-aliases-package: com.m78.entity

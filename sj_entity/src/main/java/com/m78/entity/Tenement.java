@@ -29,7 +29,7 @@ public class Tenement {
 
     private String remark;
 
-    private Long informk;
+
 
     public Long getId() {
         return id;
@@ -135,11 +135,5 @@ public class Tenement {
         this.remark = remark;
     }
 
-    public Long getInformk() {
-        return informk;
-    }
 
-    public void setInformk(Long informk) {
-        this.informk = informk;
-    }
 }

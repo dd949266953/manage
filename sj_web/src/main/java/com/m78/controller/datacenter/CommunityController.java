@@ -74,7 +74,6 @@ public class CommunityController {
     @RequestMapping("getCommunityIdAndName")
     @ResponseBody
     public List<Community> getCommunityIdAndName(){
-
         return communityService.getCommunityIdAndName();
     }
 
