@@ -65,6 +65,8 @@ public class BillController {
         return  "bill/notice";
     }
 
+
+
     /**
      * 获取全部未缴账单
      * @param page

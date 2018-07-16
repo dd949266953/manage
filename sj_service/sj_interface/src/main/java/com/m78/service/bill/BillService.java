@@ -72,4 +72,6 @@ public interface BillService {
      * @return
      */
     Long getAllSendCount();
+
+
 }
