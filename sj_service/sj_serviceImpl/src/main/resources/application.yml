@@ -3,9 +3,9 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/manage?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    url: jdbc:mysql://47.105.105.208:3306/manage?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&autoReconnect=true&failOverReadOnly=false
     username: root
-    password: root
+    password: mysql123
   dubbo:
       application:
         name: admin_provider
