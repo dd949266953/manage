@@ -103,4 +103,15 @@
       cashPrice = #{cashprice,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+    <select id="getAllById" parameterType="java.lang.Integer" resultMap="BaseResultMap" >
+        SELECT ci.id,ci.`name`,ci.periodTime,ci.price FROM chargeitem ci
+        INNER JOIN chargename cn ON cn.id=ci.type
+        WHERE cn.id=#{id}
+        limit #{page},#{pageSize}
+    </select>
+    <select id="getAllCount" parameterType="java.lang.Integer" resultType="java.lang.Long">
+         SELECT count(1) as sums FROM chargeitem ci
+        INNER JOIN chargename cn ON cn.id=ci.type
+        WHERE cn.id=#{id}
+    </select>
 </mapper>

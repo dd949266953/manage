@@ -50,7 +50,7 @@
 <script th:src="@{/layui/layui.js}"></script>
 <script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="del">查看公式</a>
+    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="check">查看公式</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 <script>
@@ -117,6 +117,16 @@
                         })
 
                     });
+
+                }
+                if(layEvent==='check'){
+                    layer.open({
+                        type : 2,
+                        title : '公式列表',
+                        offset:['50px','80px'],
+                        area : [ '80%', '80%' ],
+                        content : 'doCharItem/' + data.id
+                    })
 
                 }
             });
