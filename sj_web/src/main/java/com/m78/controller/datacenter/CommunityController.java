@@ -18,17 +18,18 @@ import java.util.List;
 @RequestMapping("Community")
 @Controller
 public class CommunityController {
+
     @Reference(version="1.0.0")
     private CommunityService communityService;
-
 
     /**
      * 查询界面
      * @return
      */
+
     @RequestMapping("CommunityList.html")
     public String CommunityList(){
-        return "dataCenter/community/CommunityList/community";
+        return "dataCenter/community/community";
     }
 
     /**
@@ -37,11 +38,8 @@ public class CommunityController {
      */
     @RequestMapping(value = "addCommunity.html", method = RequestMethod.GET)
     public String addCommunity(){
-        return "dataCenter/community/CommunityList/addCommunity";
+        return "dataCenter/community/addCommunity";
     }
-
-
-
 
     /**
      * 查询界面数据
@@ -59,9 +57,9 @@ public class CommunityController {
     @RequestMapping("addCommunitydata")
     @ResponseBody
     public int insertCommunity(Community record){
-        System.out.println(record.getAddress());
         return  communityService.insert(record);
     }
+
     /**
      * 删除小区
      */

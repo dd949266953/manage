@@ -21,9 +21,9 @@ public class HouseConntroller {
      * 房屋列表11213
      * @return
      */
-    @RequestMapping("houstList.html")
+    @RequestMapping("houseList.html")
     public String houstList(){
-        return "dataCenter/community/houstManagement/houseList";
+        return "dataCenter/house/houseList";
     }
 
 
