@@ -27,7 +27,7 @@ public class CommunityController {
      * @return
      */
 
-    @RequestMapping("CommunityList.html")
+    @RequestMapping("communityList.html")
     public String CommunityList(){
         return "dataCenter/community/community";
     }
