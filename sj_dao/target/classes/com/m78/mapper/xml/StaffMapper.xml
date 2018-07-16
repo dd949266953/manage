@@ -14,6 +14,12 @@
   <sql id="Base_Column_List" >
     id, name, phone, wxnumber, nametwo, position, remark, departmentId
   </sql>
+  <!--查询人员列表-->
+  <select id="getStaff" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from staff
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
