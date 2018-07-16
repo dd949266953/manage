@@ -39,7 +39,10 @@ public class addressList {
      */
     @RequestMapping(value = "delStaff", method = RequestMethod.GET)
     @ResponseBody
-    public int deleteByPrimaryKey(long Id){
-        return staffService.deleteByPrimaryKey(Id);
+    public int deleteByPrimaryKey(long id){
+        return staffService.deleteByPrimaryKey(id);
     }
+    /**
+     * 查询类型
+     */
 }

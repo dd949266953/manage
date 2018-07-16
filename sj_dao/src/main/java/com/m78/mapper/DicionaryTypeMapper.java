@@ -2,6 +2,8 @@ package com.m78.mapper;
 
 import com.m78.entity.DicionaryType;
 
+import java.util.List;
+
 public interface DicionaryTypeMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +16,8 @@ public interface DicionaryTypeMapper {
     int updateByPrimaryKeySelective(DicionaryType record);
 
     int updateByPrimaryKey(DicionaryType record);
+    /**
+     * 字典表查询
+     */
+    List<DicionaryType> getdicionaryType();
 }
