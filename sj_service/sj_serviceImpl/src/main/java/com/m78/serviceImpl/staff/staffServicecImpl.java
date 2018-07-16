@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.m78.entity.Staff;
 import com.m78.mapper.StaffMapper;
 import com.m78.service.staff.staffService;
+import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -31,5 +32,15 @@ public class staffServicecImpl implements staffService {
     @Override
     public int deleteByPrimaryKey(Long id) {
         return staffMapper.deleteByPrimaryKey(id);
+    }
+
+    /**
+     * 添加员工信息
+     * @param record
+     * @return
+     */
+    @Override
+    public int insert(Staff record) {
+     return staffMapper.insert(record);
     }
 }
