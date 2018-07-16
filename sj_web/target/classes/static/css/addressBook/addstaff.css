@@ -72,3 +72,9 @@ table td{
 .btn{
 margin-left: 520px;
 }
+input{
+	padding-left: 10px;
+}
+select{
+	padding-left: 10px;
+}
