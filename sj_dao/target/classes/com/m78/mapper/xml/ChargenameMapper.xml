@@ -55,4 +55,28 @@
     set name = #{name,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+    <resultMap id="alllist" type="com.m78.entity.Chargename" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="itemsum" property="itemsum"/>
+    </resultMap>
+    <select id="getChargename" resultMap="alllist">
+
+    SELECT chargename.id,chargename.`name`,sum(chargeitem.type) AS itemsum FROM chargename
+    left JOIN chargeitem ON chargename.id=chargeitem.type
+    <if test="name!=''">
+    where  chargename.`name` like  CONCAT ('%',#{name},'%')
+    </if>
+    GROUP BY chargeitem.type
+    limit #{page},#{pageSize}
+    </select>
+    <select id="getAllcount" resultType="java.lang.Long">
+        select  count(1) from chargename
+        <if test="name!=''">
+            where  chargename.`name` like  CONCAT ('%',#{name},'%')
+        </if>
+    </select>
+    <insert id="addChargenName">
+        INSERT INTO chargename VALUES(DEFAULT,#{name})
+    </insert>
 </mapper>
