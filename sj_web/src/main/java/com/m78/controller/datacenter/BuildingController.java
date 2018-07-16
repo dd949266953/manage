@@ -35,7 +35,7 @@ public class BuildingController {
      */
     @RequestMapping("buildingList.html")
     public  String buildingList(){
-        return "dataCenter/community/BuildingManagement/buildingList";
+        return "dataCenter/Building/buildingList";
     }
 
     /**
@@ -43,7 +43,7 @@ public class BuildingController {
      */
     @RequestMapping("addBuildingList.html")
     public String addBuildingList(){
-        return "dataCenter/community/BuildingManagement/addBuilding";
+        return "dataCenter/Building/addBuilding";
     }
 
     /**
