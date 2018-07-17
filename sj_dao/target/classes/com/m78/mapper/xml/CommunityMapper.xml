@@ -18,6 +18,10 @@
     select
     <include refid="Base_Column_List" />
     from community
+    <if test="communityName!=''">
+     where `name` LIKE CONCAT ('%',#{communityName },'%')
+    </if>
+    limit #{start},#{limit}
   </select>
   <!-- 查询小区数量 -->
   <select id="getCommunityNum" resultType="java.lang.Integer" >

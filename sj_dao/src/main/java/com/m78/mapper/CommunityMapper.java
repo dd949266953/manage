@@ -28,7 +28,7 @@ public interface CommunityMapper {
      * 查询全部小区
      * @return
      */
-    List<Community> findAll();
+    List<Community> findAll(@Param("start") int start,@Param("limit") int limit,@Param("communityName")String communityName);
 
     /**
      * 查询小区id和名称

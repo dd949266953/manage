@@ -12,7 +12,7 @@ public interface CommunityService {
      * 查询所有小区
      * @return 小区列表
      */
-    List<Community> findAll();
+    List<Community> findAll(int page,int limit,String name);
 
     /**
      * 添加小区

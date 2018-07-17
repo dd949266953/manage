@@ -21,8 +21,10 @@ public class CommunityServiceImpl implements CommunityService {
      * 查询小区
      */
     @Override
-    public List<Community> findAll() {
-        return communityMapper.findAll();
+    public List<Community> findAll(int page,int limit,String communityName) {
+        int start=(page-1)*limit;
+        System.out.println(communityName+"communityName");
+        return communityMapper.findAll(start,limit,communityName);
     }
 
     /**
