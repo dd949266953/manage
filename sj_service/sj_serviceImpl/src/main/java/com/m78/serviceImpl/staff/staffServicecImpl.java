@@ -20,8 +20,18 @@ public class staffServicecImpl implements staffService {
      * @return
      */
     @Override
-    public List<Staff> getStaff() {
-        return staffMapper.getStaff();
+    public List<Staff> getStaff(int page, int pageSize, String name) {
+        int start=(page-1)*pageSize;
+        return staffMapper.getStaff(start,pageSize,name);
+    }
+
+    /**
+     * 查询员工数量
+     * @return
+     */
+    @Override
+    public Long getStaffNumber() {
+        return staffMapper.getStaffNumber();
     }
 
     /**

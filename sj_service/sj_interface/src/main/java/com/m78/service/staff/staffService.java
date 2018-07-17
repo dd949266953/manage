@@ -12,7 +12,13 @@ public interface staffService {
      * 查询员工
      * @return
      */
-    List<Staff> getStaff();
+    List<Staff> getStaff(int page,int pageSize,String name);
+
+    /**
+     * 查询员工数量
+     */
+    Long getStaffNumber();
+
     /**
      * 删除
      */

@@ -74,12 +74,11 @@ public class BillController {
      * @param name 条件
      * @return
      */
-    @RequestMapping("getAllNoBill.json")
+        @RequestMapping("getAllNoBill.json")
     @ResponseBody
     public Object getAllNoBill(@RequestParam("page") int page,@RequestParam("limit") int limit,@RequestParam("name") String name){
         return DataTable.bindTableUtil(0,billService.getAllNoBillCount(),billService.getAllNoBill(page,limit,name));
     }
-
     /**
      * 导出账单
      * @return
