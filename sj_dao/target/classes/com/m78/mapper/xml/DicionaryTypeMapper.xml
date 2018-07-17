@@ -14,12 +14,6 @@
     from dicionary_type
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <!--字典表查询全部-->
-  <select id="getdicionaryType" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select
-    <include refid="Base_Column_List" />
-    from dicionary_type
-  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from dicionary_type
     where id = #{id,jdbcType=BIGINT}

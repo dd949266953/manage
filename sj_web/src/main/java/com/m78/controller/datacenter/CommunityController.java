@@ -5,10 +5,7 @@ import com.m78.entity.Community;
 import com.m78.service.dataCenter.CommunityService;
 import com.m78.util.DataTable;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,7 +34,7 @@ public class CommunityController {
      * 添加界面
      * @return
      */
-    @RequestMapping(value = "addCommunity.html", method = RequestMethod.GET)
+    @PostMapping(value = "addCommunity.html")
     public String addCommunity(){
         return "dataCenter/community/addCommunity";
     }
