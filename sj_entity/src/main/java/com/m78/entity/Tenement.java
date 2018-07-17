@@ -29,7 +29,7 @@ public class Tenement {
 
     private String remark;
 
-    private  Long communityId;
+    private Long communityid;
 
     public Long getId() {
         return id;
@@ -135,11 +135,11 @@ public class Tenement {
         this.remark = remark;
     }
 
-    public Long getCommunityId() {
-        return communityId;
+    public Long getCommunityid() {
+        return communityid;
     }
 
-    public void setCommunityId(Long communityId) {
-        this.communityId = communityId;
+    public void setCommunityid(Long communityid) {
+        this.communityid = communityid;
     }
 }
