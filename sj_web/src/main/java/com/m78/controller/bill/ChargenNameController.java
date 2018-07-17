@@ -1,6 +1,8 @@
 package com.m78.controller.bill;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.m78.entity.Chargeitem;
+import com.m78.entity.Chargename;
 import com.m78.service.bill.ChargenNameService;
 import com.m78.util.DataTable;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * 收费项
@@ -40,6 +44,26 @@ public class ChargenNameController {
     @ResponseBody
     public  Object getAllCharName(@RequestParam("page") int page, @RequestParam("limit") int limit,@RequestParam("name")String name){
         return DataTable.bindTableUtil(0,chargenNameService.getAllCount(name),chargenNameService.getAllCharName(page,limit,name));
+    }
+
+    /**
+     * 下拉框显示
+     * @return
+     */
+    @RequestMapping("getCharName.json")
+    @ResponseBody
+    public List<Chargename> getCharName(){
+        return  chargenNameService.getCharName();
+    }
+
+    /**
+     * 添加公式
+     * @return
+     */
+    @RequestMapping("addCharItem")
+    @ResponseBody
+    public  int addCharItem(Chargeitem chargeitem){
+        return  chargenNameService.addCharTtem(chargeitem);
     }
 
     /**
@@ -97,11 +121,20 @@ public class ChargenNameController {
     public  Object deleteCharItem(@RequestParam("id") Long id){
         int num=0;
         try {
-            num=  chargenNameService.deleteChargenName(id);
+            num=  chargenNameService.deleteCharItem(id);
             return  num;
         } catch (Exception e) {
             return  num;
         }
+    }
+
+    /**
+     * 跳转添加公式
+     * @return
+     */
+    @RequestMapping("doAddItem")
+    public  Object doAddItem(){
+        return "bill/addItem";
     }
 
 

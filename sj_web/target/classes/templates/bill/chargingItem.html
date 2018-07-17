@@ -31,6 +31,7 @@
     <!--主体 -->
     <div id="subject" style="margin: 20px  30px">
         <button  id="btn" class="button noborder">添加收费项</button>
+        <button  id="addItem" class="button noborder">添加公式</button>
         <div style="float: right;">
             <input id="checkName" type="text" placeholder="请输入收费项名称" class="search-keyword" />
             <button onclick="page()" class="noborder">
@@ -160,7 +161,15 @@
             }
         })
     })
+    $("#addItem").click(function () {
+        layer.open({
+            type:2,
+            title: '添加公式',
+            area: ['500px', '50%'],
+            content: 'doAddItem'
 
+        })
+    })
 
 
 </script>

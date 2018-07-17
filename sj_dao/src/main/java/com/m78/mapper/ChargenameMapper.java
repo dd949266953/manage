@@ -23,4 +23,6 @@ public interface ChargenameMapper {
     Long getAllcount(@Param("name") String name);
     //添加收费项
     int addChargenName(@Param("name") String name);
+    //获取收费项目 下拉框
+    List<Chargename> getCharName();
 }
