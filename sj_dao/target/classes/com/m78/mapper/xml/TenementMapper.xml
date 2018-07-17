@@ -6,7 +6,7 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="integrals" jdbcType="BIGINT" property="integrals" />
-    <result column="registrationDate" jdbcType="TIMESTAMP" property="registrationdate" />
+    <result column="registrationDate" jdbcType="DATE" property="registrationdate" />
     <result column="state" jdbcType="BIGINT" property="state" />
     <result column="qqNumber" jdbcType="BIGINT" property="qqnumber" />
     <result column="WxNumber" jdbcType="VARCHAR" property="wxnumber" />
@@ -15,12 +15,54 @@
     <result column="sex" jdbcType="VARCHAR" property="sex" />
     <result column="nation" jdbcType="VARCHAR" property="nation" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="informk" jdbcType="BIGINT" property="informk" />
+    <result column="communityId" jdbcType="BIGINT" property="communityid" />
   </resultMap>
+  <resultMap id="TenementDeatil" type="com.m78.entity.Tenement">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="integrals" jdbcType="BIGINT" property="integrals" />
+    <result column="registrationDate" jdbcType="DATE" property="registrationdate" />
+    <result column="state" jdbcType="BIGINT" property="state" />
+    <result column="qqNumber" jdbcType="BIGINT" property="qqnumber" />
+    <result column="WxNumber" jdbcType="VARCHAR" property="wxnumber" />
+    <result column="urgencyMan" jdbcType="VARCHAR" property="urgencyman" />
+    <result column="urgencyManPhone" jdbcType="VARCHAR" property="urgencymanphone" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="nation" jdbcType="VARCHAR" property="nation" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="communityId" jdbcType="BIGINT" property="communityid" />
+    <association property="houseTentment" javaType="com.m78.entity.HouseTentment">
+    </association>
+    <association property="house" javaType="com.m78.entity.House">
+      <result column="unitNumber" jdbcType="BIGINT" property="unitnumber"></result>
+      <result column="fool" jdbcType="BIGINT" property="fool"></result>
+    </association>
+    <association property="houseBuliding" javaType="com.m78.entity.HouseBuliding">
+
+    </association>
+    <association property="building" javaType="com.m78.entity.Building">
+      <result column="name" jdbcType="VARCHAR" property="name"></result>
+    </association>
+    <association property="community" javaType="com.m78.entity.Community">
+      <result column="name" jdbcType="VARCHAR" property="name"></result>
+    </association>
+  </resultMap>
+
   <sql id="Base_Column_List">
     id, name, phone, integrals, registrationDate, state, qqNumber, WxNumber, urgencyMan, 
-    urgencyManPhone, sex, nation, remark, informk
+    urgencyManPhone, sex, nation, remark, communityId
   </sql>
+  <!--根据住户姓名获取住户详细住址-->
+  <select id="getDetailAddressByName" resultMap="TenementDeatil">
+      SELECT c.`name`,b.`name`,h.`unitNumber`,h.`fool`,t.`id`,t.`name` FROM tenement t
+      INNER JOIN house_tentment ht ON ht.`tentmentId`=t.`id`
+      INNER JOIN house h ON h.`houseId`=ht.`houseId`
+      INNER JOIN house_buliding hb ON h.`houseId`=hb.`houseId`
+      INNER JOIN building b ON b.`id`=hb.`buildingId`
+      INNER JOIN community c ON c.`id`=t.`communityId`
+      WHERE t.`name` LIKE '%四%'
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -36,12 +78,12 @@
       integrals, registrationDate, state, 
       qqNumber, WxNumber, urgencyMan, 
       urgencyManPhone, sex, nation, 
-      remark, informk)
+      remark, communityId)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{integrals,jdbcType=BIGINT}, #{registrationdate,jdbcType=TIMESTAMP}, #{state,jdbcType=BIGINT}, 
+      #{integrals,jdbcType=BIGINT}, #{registrationdate,jdbcType=DATE}, #{state,jdbcType=BIGINT}, 
       #{qqnumber,jdbcType=BIGINT}, #{wxnumber,jdbcType=VARCHAR}, #{urgencyman,jdbcType=VARCHAR}, 
       #{urgencymanphone,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, 
-      #{remark,jdbcType=VARCHAR}, #{informk,jdbcType=BIGINT})
+      #{remark,jdbcType=VARCHAR}, #{communityid,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.m78.entity.Tenement">
     insert into tenement
@@ -85,8 +127,8 @@
       <if test="remark != null">
         remark,
       </if>
-      <if test="informk != null">
-        informk,
+      <if test="communityid != null">
+        communityId,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -103,7 +145,7 @@
         #{integrals,jdbcType=BIGINT},
       </if>
       <if test="registrationdate != null">
-        #{registrationdate,jdbcType=TIMESTAMP},
+        #{registrationdate,jdbcType=DATE},
       </if>
       <if test="state != null">
         #{state,jdbcType=BIGINT},
@@ -129,8 +171,8 @@
       <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="informk != null">
-        #{informk,jdbcType=BIGINT},
+      <if test="communityid != null">
+        #{communityid,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -147,7 +189,7 @@
         integrals = #{integrals,jdbcType=BIGINT},
       </if>
       <if test="registrationdate != null">
-        registrationDate = #{registrationdate,jdbcType=TIMESTAMP},
+        registrationDate = #{registrationdate,jdbcType=DATE},
       </if>
       <if test="state != null">
         state = #{state,jdbcType=BIGINT},
@@ -173,8 +215,8 @@
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="informk != null">
-        informk = #{informk,jdbcType=BIGINT},
+      <if test="communityid != null">
+        communityId = #{communityid,jdbcType=BIGINT},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -184,7 +226,7 @@
     set name = #{name,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       integrals = #{integrals,jdbcType=BIGINT},
-      registrationDate = #{registrationdate,jdbcType=TIMESTAMP},
+      registrationDate = #{registrationdate,jdbcType=DATE},
       state = #{state,jdbcType=BIGINT},
       qqNumber = #{qqnumber,jdbcType=BIGINT},
       WxNumber = #{wxnumber,jdbcType=VARCHAR},
@@ -193,7 +235,7 @@
       sex = #{sex,jdbcType=VARCHAR},
       nation = #{nation,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
-      informk = #{informk,jdbcType=BIGINT}
+      communityId = #{communityid,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

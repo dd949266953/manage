@@ -34,6 +34,7 @@
   <sql id="Base_Column_List">
     id, name, address, detailAddress, serviceTel, leader, leaderPhone, logo, backgroundImage
   </sql>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
