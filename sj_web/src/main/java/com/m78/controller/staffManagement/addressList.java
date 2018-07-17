@@ -9,6 +9,7 @@ import com.m78.util.DataTable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.m78.service.staff.staffService;
@@ -27,6 +28,17 @@ public class addressList {
     private staffService staffService;
     @Reference(version = "1.0.0")
     private dictionaryItemSevice dictionaryItemSevice;
+
+
+    /**
+     * 查询人员数量
+     */
+    @RequestMapping("getStaffNumber")
+    @ResponseBody
+    public Long getStaffNumber(){
+      return  staffService.getStaffNumber();
+    }
+
     /**
      * 员工列表
      */
@@ -38,10 +50,10 @@ public class addressList {
     /**
      * 员工信息
      */
-    @RequestMapping("getstaff")
+    @RequestMapping("getstaff.json")
     @ResponseBody
-    public Object getStaff(){
-        return DataTable.bindTableUtil(0,100,staffService.getStaff());
+    public Object getStaff(@RequestParam("page") int page, @RequestParam("limit") int limit, @RequestParam("name") String name){
+        return DataTable.bindTableUtil(0,staffService.getStaffNumber(),staffService.getStaff(page, limit, name));
     }
     /**
      * 删除员工
@@ -51,7 +63,6 @@ public class addressList {
     public int deleteByPrimaryKey(long id){
         return staffService.deleteByPrimaryKey(id);
     }
-
     /**
      * 添加人员
      */

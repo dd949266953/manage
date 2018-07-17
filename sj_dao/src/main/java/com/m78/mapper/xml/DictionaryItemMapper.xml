@@ -25,7 +25,7 @@
   <select id="getDictionaryItem" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select
     <include refid="Base_Column_List" />
-    from dictionary_item WHERE type_id= 11
+    from dictionary_item WHERE type_id= 12
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >

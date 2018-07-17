@@ -31,7 +31,7 @@
 				<div class="layui-inline">
 					<input class="layui-input" name="id" id="demoReload" autocomplete="off">
 				</div>
-				<button class="layui-btn" data-type="reload">搜索</button>
+				<button  id="checkName" class="layui-btn" data-type="reload">搜索</button>
 			</div>
 		</div>
 			<div class="layui-tab-content" style="height: 100px;">
@@ -53,7 +53,7 @@
                 //第一个实例
                 table.render({
                     elem: "#demo",
-                    url: 'getstaff',
+                    url: 'asd',
                     page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
                         layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
                         //,curr: 5 //设定初始在第 5 页
@@ -63,6 +63,12 @@
                         first: false //不显示首页
                         ,
                         last: false //不显示尾页
+                    },
+					where : {
+                        name : $("#checkName").click(function () {
+								$("input[name=id]").val();
+								console.log($("input[name=id]").val());
+                        })
                     },
                     cols: [
                         [{
