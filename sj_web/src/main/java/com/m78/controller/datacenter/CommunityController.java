@@ -7,6 +7,7 @@ import com.m78.util.DataTable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -45,10 +46,11 @@ public class CommunityController {
      * 查询界面数据
      * @return
      */
-    @RequestMapping(value = "communityData")
+    @RequestMapping(value = "/communityData")
     @ResponseBody
-    public  Object  FindCommunity(){
-        return  DataTable.bindTableUtil(0,100,communityService.findAll());
+    public  Object  findAllCommunity(@RequestParam("page") int page, @RequestParam("limit") int limit,@RequestParam("communityName") String communityName){
+        System.out.println(communityName);
+        return  DataTable.bindTableUtil(0,100,communityService.findAll(page,limit,communityName));
     }
 
     /**
