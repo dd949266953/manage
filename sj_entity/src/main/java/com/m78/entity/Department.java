@@ -1,6 +1,8 @@
 package com.m78.entity;
 
-public class Department {
+import java.io.Serializable;
+
+public class Department implements Serializable {
     private Long id;
 
     private String name;

@@ -3,8 +3,11 @@ package com.m78.controller.bill;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.m78.service.bill.ChargenNameService;
 import com.m78.util.DataTable;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -63,6 +66,42 @@ public class ChargenNameController {
                  num=0;
             }
             return  num;
+    }
+
+    /**
+     * 跳转到公式列表
+     * @return
+     */
+    @RequestMapping("doCharItem/{id}")
+    public  Object doCharItem(@PathVariable("id")int id, HttpServletRequest request){
+        request.setAttribute("id",id);
+        return  "bill/charitem";
+    }
+
+    /**
+     * 获取所有公式
+     * @return
+     */
+    @RequestMapping("getAllCharitem.json")
+    @ResponseBody
+    public  Object getAllCharItem(@RequestParam("page")int page,@RequestParam("limit") int pageSize,@RequestParam("id")int id){
+       return  DataTable.bindTableUtil(0,chargenNameService.getAllCount(id),chargenNameService.getAllById(page,pageSize,id));
+    }
+
+    /**
+     * 删除公式byid
+     * @return
+     */
+    @RequestMapping("deleteCharItemById.json")
+    @ResponseBody
+    public  Object deleteCharItem(@RequestParam("id") Long id){
+        int num=0;
+        try {
+            num=  chargenNameService.deleteChargenName(id);
+            return  num;
+        } catch (Exception e) {
+            return  num;
+        }
     }
 
 

@@ -17,4 +17,9 @@ public interface staffService {
      * 删除
      */
     int deleteByPrimaryKey(Long id);
+
+    /**
+     * 添加员工
+     */
+    int insert(Staff record);
 }

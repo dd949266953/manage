@@ -20,4 +20,9 @@ public interface DictionaryItemMapper {
      * 查询楼宇类型为高层底层，别墅的
      */
     List<DictionaryItem> getDictionary();
+
+    /**
+     * 查询职业类型
+     */
+    List<DictionaryItem> getDictionaryItem();
 }

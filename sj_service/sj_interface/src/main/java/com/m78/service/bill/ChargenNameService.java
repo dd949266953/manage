@@ -1,5 +1,6 @@
 package com.m78.service.bill;
 
+import com.m78.entity.Chargeitem;
 import com.m78.entity.Chargename;
 
 import java.util.List;
@@ -34,4 +35,23 @@ public interface ChargenNameService {
      * @return
      */
     int deleteChargenName(Long id) throws  Exception;
+
+    /**
+     * 根据id获取所有公式
+     * @return
+     */
+    List<Chargeitem> getAllById(int page,int pageSize,int id);
+
+    /**
+     * 获取所有公式数量
+     * @return
+     */
+    Long getAllCount(int id);
+
+    /**
+     * 删除公式
+     * @param id
+     * @return
+     */
+    int deleteCharItem(Long id)throws  Exception;
 }

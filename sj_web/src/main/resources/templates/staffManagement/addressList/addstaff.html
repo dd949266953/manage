@@ -17,31 +17,31 @@
 				<form id="form">
 				<table>
 					<tr>
-						<td><span class="symbol behind">*</span> <span class="size">姓名：</span><input class="name tm" type="text" placeholder="请输入姓名" /></td>
+						<td><span class="symbol behind">*</span> <span class="size">姓名：</span><input class="name tm" name="name" type="text" placeholder="请输入姓名" /></td>
 					</tr>
 					<tr>
-						<td><span class="symbol behind">*</span> <span class="size">昵称：</span><input class="tm name" type="text" placeholder="请输入房号" /></td>
+						<td><span class="symbol behind">*</span> <span class="size">昵称：</span><input class="tm name" name="nametwo" type="text" placeholder="请输入昵称" /></td>
 					</tr>
 					<tr>
-						<td><span class="symbol behinds">*</span> <span class="size">手机号：</span><input class="tm name" type="text" placeholder="请输入手机号" /></td>
+						<td><span class="symbol behinds">*</span> <span class="size">手机号：</span><input class="tm name" name="phone" type="text" placeholder="请输入手机号" /></td>
 					</tr>
 					<tr>
-						<td><span class="symbol behinds">*</span> <span class="size">微信号：</span><input class="name tm" type="text" placeholder="请输入微信号" /></td>
+						<td><span class="symbol behinds">*</span> <span class="size">微信号：</span><input class="name tm" name="wxnumber" type="text" placeholder="请输入微信号" /></td>
 					</tr>
 					<tr>
-						<td><span class="symbol behind">*</span> <span class="size">部门：</span><select class="housing">
+						<td><span class="symbol behind">*</span> <span class="size">部门：</span><select name="department" class="housing">
 							<option>请选择部门</option>
 							</select>
 						</td>
 					</tr>
 					<tr>
-						<td><span class="symbol behind">*</span> <span class="size">职位：</span><select class="housing">
+						<td><span class="symbol behind">*</span> <span class="size">职位：</span><select name="dictionaryItem" class="housing">
 							<option>请选择职位</option>
 						</select>
 						</td>
 					</tr>
 					<tr>
-						<td><span class="symbol behind">*</span> <span class="size">备注：</span><input class="name tm" type="text" placeholder="请输入备注" /></td>
+						<td><span class="symbol behind">*</span> <span class="size">备注：</span><input class="name tm" name="remark" type="text" placeholder="请输入备注" /></td>
 					</tr>
 				</table>
 				</form>
@@ -54,10 +54,43 @@
 	<script th:src="@{/js/jquery-3.2.1.js}"></script>
 	<script>
 		$(".btn").click(function () {
-			alert("张三");
+			var name=$("input[name=name]").val();
+			var nametwo=$("input[name=nametwo]").val();
+			var phone=$("input[name=phone]").val();
+			var wxnumber=$("input[name=wxnumber]").val();
+			var department=$("select[name=department]").val();
+			var dictionaryItem=$("select[name=dictionaryItem]").val();
+			var remark=$("input[name=remark]").val();
+			console.log(name);
+			console.log(nametwo);
+			console.log(phone);
+			console.log(wxnumber);
+			console.log(department);
+			console.log(dictionaryItem);
+			console.log(remark);
+            // $.post("addStaffMessage",$("#form").serialize(),function (data) {
+				// console.log(data);
+            // })
+			$.post('addStaffMessage',{"name":name,"nametwo":nametwo,"phone":phone,"wxnumber":wxnumber,"position":dictionaryItem,"departmentid":department,"remark":remark},function (data) {
+				console.log(data);
+            })
         })
-		$(function () {
 
+		$(function () {
+			$.post("getDepartment",function (data) {
+				console.log(data);
+				$.each(data,function (i,val) {
+					var tr='<option value="'+val.id+'">'+val.name+'</option>';
+					$("select[name=department]").append(tr);
+                })
+            })
+            $.post("getDictionaryItem",function (data) {
+                console.log(data);
+                $.each(data,function (i,val) {
+                    var tr='<option value="'+val.id+'">'+val.content+'</option>';
+                    $("select[name=dictionaryItem]").append(tr);
+                })
+            })
         })
 	</script>
 	</body>

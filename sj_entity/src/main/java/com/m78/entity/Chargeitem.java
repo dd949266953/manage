@@ -1,6 +1,8 @@
 package com.m78.entity;
 
-public class Chargeitem {
+import java.io.Serializable;
+
+public class Chargeitem implements Serializable {
     private Long id;
 
     private String name;

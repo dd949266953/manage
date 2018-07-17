@@ -2,6 +2,9 @@ package com.m78.controller.staffManagement;
 
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.m78.entity.Department;
+import com.m78.entity.DictionaryItem;
+import com.m78.entity.Staff;
 import com.m78.util.DataTable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.m78.service.staff.staffService;
+import com.m78.service.dictionaryItemSevice;
+
+import java.util.List;
+
 /**
  * 通讯录
  */
@@ -18,6 +25,8 @@ public class addressList {
 
     @Reference(version = "1.0.0")
     private staffService staffService;
+    @Reference(version = "1.0.0")
+    private dictionaryItemSevice dictionaryItemSevice;
     /**
      * 员工列表
      */
@@ -42,7 +51,36 @@ public class addressList {
     public int deleteByPrimaryKey(long id){
         return staffService.deleteByPrimaryKey(id);
     }
+
     /**
-     * 查询类型
+     * 添加人员
      */
+    @RequestMapping("addstaff.html")
+    public String addstaff(){
+        return "staffManagement/addressList/addstaff";
+    }
+    /**
+     * 查询部门信息
+     */
+    @RequestMapping("getDepartment")
+    @ResponseBody
+    public List<Department> getDepartment(){
+       return dictionaryItemSevice.getDepartment();
+    }
+    /**
+     * 查询职业类型
+     */
+    @RequestMapping("getDictionaryItem")
+    @ResponseBody
+    public List<DictionaryItem> getDictionaryItem(){
+        return dictionaryItemSevice.getDictionaryItem();
+    }
+    /**
+     * 添加员工
+     */
+    @RequestMapping(value = "addStaffMessage",method = RequestMethod.POST)
+    @ResponseBody
+    public int insert(Staff record) {
+        return staffService.insert(record);
+    }
 }

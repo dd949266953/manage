@@ -31,10 +31,10 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.m78.entity.Staff" >
-    insert into staff (id, name, phone, 
+    insert into staff (name, phone,
       wxnumber, nametwo, position, 
       remark, departmentId)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+    values ( #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
       #{wxnumber,jdbcType=VARCHAR}, #{nametwo,jdbcType=VARCHAR}, #{position,jdbcType=BIGINT}, 
       #{remark,jdbcType=VARCHAR}, #{departmentid,jdbcType=BIGINT})
   </insert>
