@@ -54,4 +54,14 @@ public class ChargenName implements ChargenNameService {
     public int deleteCharItem(Long id) {
         return chargeitemMapper.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public List<Chargename> getCharName() {
+        return chargenameMapper.getCharName();
+    }
+
+    @Override
+    public int addCharTtem(Chargeitem chargeitem) {
+        return chargeitemMapper.insert(chargeitem);
+    }
 }

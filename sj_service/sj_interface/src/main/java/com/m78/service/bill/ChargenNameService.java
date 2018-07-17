@@ -54,4 +54,17 @@ public interface ChargenNameService {
      * @return
      */
     int deleteCharItem(Long id)throws  Exception;
+
+    /**
+     * 获取收费项目 下拉框
+     * @return
+     */
+    List<Chargename> getCharName();
+
+    /**
+     * 添加公式
+     * @param chargeitem
+     * @return
+     */
+    int addCharTtem(Chargeitem chargeitem);
 }

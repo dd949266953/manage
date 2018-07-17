@@ -62,12 +62,12 @@
     </resultMap>
     <select id="getChargename" resultMap="alllist">
 
-    SELECT chargename.id,chargename.`name`,sum(chargeitem.type) AS itemsum FROM chargename
-    left JOIN chargeitem ON chargename.id=chargeitem.type
+        SELECT chargename.id,chargename.`name`, count(chargeitem.type) AS itemsum FROM chargename
+        left JOIN chargeitem ON chargename.id=chargeitem.type
     <if test="name!=''">
     where  chargename.`name` like  CONCAT ('%',#{name},'%')
     </if>
-    GROUP BY chargeitem.type
+    GROUP BY  chargename.id
     limit #{page},#{pageSize}
     </select>
     <select id="getAllcount" resultType="java.lang.Long">
@@ -79,4 +79,7 @@
     <insert id="addChargenName">
         INSERT INTO chargename VALUES(DEFAULT,#{name})
     </insert>
+    <select id="getCharName" resultMap="BaseResultMap">
+       select id,`name` from chargename
+    </select>
 </mapper>

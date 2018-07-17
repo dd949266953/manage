@@ -60,7 +60,7 @@
             if(layEvent==='del'){
                 layer.confirm('确定要删除吗?', {icon: 7, title:'提示',shade:'0',offset:['200px','550px']}, function(index){
                     $.ajax({
-                        url:'deleteCharItemById.json',
+                        url:'../deleteCharItemById.json',
                         type:'POST',
                         dataType:'json',
                         data:{

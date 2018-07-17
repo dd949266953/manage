@@ -246,7 +246,6 @@
         </if>
     </select>
     <resultMap id="sendList" type="com.m78.entity.ChargeId">
-        <id column="id" jdbcType="BIGINT" property="id" />
         <result column="tentmentId" property="tentmentId"/>
         <result column="communityName" property="communityName"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
@@ -255,17 +254,17 @@
         <result column="moneys" jdbcType="DOUBLE" property="moneys" />
     </resultMap>
     <select id="getAllSend" resultMap="sendList">
-        SELECT ca.id,te.name ,te.phone,comm.`name` as communityName, SUM(bi.moneys) AS moneys FROM charge_id ca
+        SELECT te.name ,te.phone,comm.`name` as communityName, SUM(bi.moneys) AS moneys FROM charge_id ca
         INNER JOIN bill bi ON bi.id=ca.billId
-        INNER JOIN community comm ON comm.id=bi.communityId
         left JOIN house_tentment ht ON ht.houseId=ca.signId AND ca.type=1
         left JOIN tentment_carport tca ON tca.carportId=ca.type AND ca.type=2
         left JOIN tenement te ON te.id=ht.tentmentId OR te.id=tca.tentmentId
+        INNER JOIN community comm ON comm.id=te.communityId
         WHERE bi.state=27
         <if test="name!=''">
             and   te.`name` LIKE  CONCAT ('%',#{name},'%')
         </if>
-        GROUP BY signId,type
+        GROUP BY te.id
         <if test="pageSize!=-1">
             limit #{page},#{pageSize}
         </if>
