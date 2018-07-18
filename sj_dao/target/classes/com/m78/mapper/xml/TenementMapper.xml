@@ -49,7 +49,7 @@
       INNER JOIN community c ON c.`id`=t.`communityId`
       WHERE 1=1
       <if test="name!=''">
-        and  t.`name` LIKE CONCAT ('%',#{name },'%')
+        and  t.name LIKE CONCAT ('%',#{name},'%')
       </if>
       limit #{page},#{limit}
   </select>
@@ -57,7 +57,7 @@
     <select id="getAllCount" resultType="java.lang.Integer">
 		SELECT count(1) FROM tenement
         <if test="name!=''">
-            where  t.`name` LIKE CONCAT ('%',#{name },'%')
+            where tenement.name   LIKE CONCAT ('%',#{name },'%')
         </if>
     </select>
 

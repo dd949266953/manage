@@ -9,6 +9,9 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" th:href="@{/jquery/jMenu.jquery.css}" type="text/css" />
 		<style>
+            iframe{
+                height: 650px;
+            }
 			form {
 				margin: 20px 38px 20px 0px;
 			}
@@ -28,7 +31,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">选择主体</label>
             <div class="layui-input-block">
-              <table id="table" lay-filter="test" class="layui-table"></table>
+              <table id="table" lay-filter="table" class="layui-table"></table>
               <div id="test"></div>
             </div>
         </div>
@@ -85,7 +88,7 @@
         	<div class="layui-form-item" style="position: relative;top: 50px;">
             <label class="layui-form-label">备注</label>
             <div class="layui-input-block">
-              <input type="text" id="remork" name="address" lay-verify="required"  autocomplete="off"  class="layui-input">
+              <input type="text" id="remork" name="address"   autocomplete="off"  class="layui-input">
             
             </div>
             
@@ -114,35 +117,98 @@
 			$(document).ready(function() {
 				$("#jMenu").jMenu();
 			})
-            layui.use(['layer', 'table'], function() {
-                table = layui.table;
-                var layer = layui.layer;
-                table.render({
-                    elem: '#table',
-                    loading: true,
-                    url: '../getDetailAddressByName.json',
-                    where: {
-                        name: $("#tentmentName").val()
-                    },
-                    cols: [
-                        [
-                            {checkbox: true}, {
-                            field: 'id',
-                            align: 'center',
-                            title: '类型',
-                            unresize: 'true',
-                        }]
-                    ],
-                    page: true
-                })
-      })
+            var checkStatus=0;
+			$("#tentmentName").change(function() {
+                page();
+            })
+			$(function () {
+                page();
+            })
+           function page(){
+               layui.use(['layer', 'table'], function() {
+                   table = layui.table;
+                   var layer = layui.layer;
+                   table.render({
+                       elem: '#table',
+                       loading: true,
+                       limit:4,
+                       url: '../getDetailAddressByName.json',
+                       where: {
+                           name: $("#tentmentName").val()
+                       },
+                       cols: [
+                           [
+                               {checkbox: true}, {
+                               align: 'center',
+                               title: '小区',
+                               unresize: 'true',
+                               templet: function (d) {
+                                   return d.community.name
+                               }
+                           },{
+                               align: 'center',
+                               title: '楼宇',
+                               unresize: 'true',
+                               templet: function(d){
+                                   return d.building.name
+                               }
+                           },{
+                               align: 'center',
+                               title: '单元',
+                               unresize: 'true',
+                               templet: function(d){
+                                   return d.house.unitnumber
+                               }
+                           },{
+                               align: 'center',
+                               title: '房号',
+                               unresize: 'true',
+                               templet: function(d){
+                                   return d.house.fool
+                               }
+                           },{
+                               field:'name',
+                               align: 'center',
+                               title: '住户',
+                               unresize: 'true'
+                           }
+
+                           ]
+                       ],
+                       page: true
+                   })
+                   table.on('checkbox(table)', function(obj){
+                       checkStatus = table.checkStatus('table');
+                   });
+               })
+           }
+
+            layui.use('form', function(){
+                var form = layui.form;
+                form.on('submit(demo1)', function(data){
+                    console.log();
+                    if(checkStatus.data.length==1){
+                        alert(1)
+                    }else {
+                        layer.msg('只能选择一个住户',{icon: 2})
+                    }
+
+
+                });
+
+            });
+
+
+
 		layui.use('laydate', function(){
            var laydate = layui.laydate;
             //日期时间选择器
   laydate.render({
     elem: '#test6'
     ,range: true,
-    theme: '#34A5C7'
+    theme: '#34A5C7', done: function(value, date, endDate){
+        alert(value)
+      }
   })
   })
 		</script>
