@@ -1,6 +1,9 @@
 package com.m78.mapper;
 
 import com.m78.entity.Tenement;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface TenementMapper {
     int deleteByPrimaryKey(Long id);
@@ -14,4 +17,18 @@ public interface TenementMapper {
     int updateByPrimaryKeySelective(Tenement record);
 
     int updateByPrimaryKey(Tenement record);
+
+    /**
+     * 根据住户姓名获取住户详细住址-
+     * @param name
+     * @return
+     */
+    List<Tenement> getDetailAddressByName(@Param("name")String name,@Param("page") int page,@Param("limit") int limit);
+
+    /**
+     * 查询用户总数
+     * @param name
+     * @return
+     */
+    int getAllCount(@Param("name") String name);
 }

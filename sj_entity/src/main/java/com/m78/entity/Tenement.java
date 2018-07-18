@@ -1,8 +1,9 @@
 package com.m78.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Tenement {
+public class Tenement implements Serializable {
     private Long id;
 
     private String name;
@@ -29,7 +30,17 @@ public class Tenement {
 
     private String remark;
 
+    private Long communityid;
 
+    private HouseTentment houseTentment;
+
+    private House house;
+
+    private HouseBuliding houseBuliding;
+
+    private Building building;
+
+    private Community community;
 
     public Long getId() {
         return id;
@@ -135,5 +146,76 @@ public class Tenement {
         this.remark = remark;
     }
 
+    public Long getCommunityid() {
+        return communityid;
+    }
 
+    public void setCommunityid(Long communityid) {
+        this.communityid = communityid;
+    }
+
+    public HouseTentment getHouseTentment() {
+        return houseTentment;
+    }
+
+    public void setHouseTentment(HouseTentment houseTentment) {
+        this.houseTentment = houseTentment;
+    }
+
+    public House getHouse() {
+        return house;
+    }
+
+    public void setHouse(House house) {
+        this.house = house;
+    }
+
+    public HouseBuliding getHouseBuliding() {
+        return houseBuliding;
+    }
+
+    public void setHouseBuliding(HouseBuliding houseBuliding) {
+        this.houseBuliding = houseBuliding;
+    }
+
+    public Building getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(Building building) {
+        this.building = building;
+    }
+
+    public Community getCommunity() {
+        return community;
+    }
+
+    public void setCommunity(Community community) {
+        this.community = community;
+    }
+
+    @Override
+    public String toString() {
+        return "Tenement{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", integrals=" + integrals +
+                ", registrationdate=" + registrationdate +
+                ", state=" + state +
+                ", qqnumber=" + qqnumber +
+                ", wxnumber='" + wxnumber + '\'' +
+                ", urgencyman='" + urgencyman + '\'' +
+                ", urgencymanphone='" + urgencymanphone + '\'' +
+                ", sex='" + sex + '\'' +
+                ", nation='" + nation + '\'' +
+                ", remark='" + remark + '\'' +
+                ", communityid=" + communityid +
+                ", houseTentment=" + houseTentment +
+                ", house=" + house +
+                ", houseBuliding=" + houseBuliding +
+                ", building=" + building +
+                ", community=" + community +
+                '}';
+    }
 }

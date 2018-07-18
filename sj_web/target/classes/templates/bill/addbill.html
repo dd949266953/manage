@@ -20,7 +20,7 @@
 		<div class="layui-form-item">
             <label class="layui-form-label">筛选信息</label>
             <div class="layui-input-block">
-              <input type="text" id="address" name="address"  lay-verify="title" autocomplete="off" placeholder="请输入房号/姓名" class="layui-input">
+              <input type="text" id="tentmentName" name="tentmentName"  lay-verify="title" autocomplete="off" placeholder="请输入姓名" class="layui-input" />
             
             </div>
             
@@ -28,7 +28,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">选择主体</label>
             <div class="layui-input-block">
-              <table id="demo" lay-filter="test" class="layui-table"></table>
+              <table id="table" lay-filter="test" class="layui-table"></table>
               <div id="test"></div>
             </div>
         </div>
@@ -77,7 +77,7 @@
         	<div class="layui-form-item" style="position: relative;top: 50px;">
             <label class="layui-form-label">用量</label>
             <div class="layui-input-block">
-              <input type="text" id="address" name="address" lay-verify="required"  autocomplete="off"  class="layui-input">
+              <input type="text" id="conmos" name="address" lay-verify="required"  autocomplete="off"  class="layui-input">
             
             </div>
             
@@ -85,7 +85,7 @@
         	<div class="layui-form-item" style="position: relative;top: 50px;">
             <label class="layui-form-label">备注</label>
             <div class="layui-input-block">
-              <input type="text" id="address" name="address" lay-verify="required"  autocomplete="off"  class="layui-input">
+              <input type="text" id="remork" name="address" lay-verify="required"  autocomplete="off"  class="layui-input">
             
             </div>
             
@@ -114,24 +114,27 @@
 			$(document).ready(function() {
 				$("#jMenu").jMenu();
 			})
-layui.use('table', function(){
-	var table = layui.table;
-	 table.render({
-          elem: '#demo'
-          ,url: '../companyinfo/getCompanyInfoByStreet.json' //数据接口
-          ,where:{
-          	street:$("#address").val()
-          }
-          ,cols: [[ //表头
-            {checkbox: true}
-            ,{field: 'name', title: '小区'}
-            ,{field: 'linkman', title: '几栋'}
-            ,{field: 'address', title: '单元'}
-            ,{field: 'address', title: '房号'}
-            ,{field: 'scope', title: '业主'}
-          ]]
-          ,page: true
-        })
+            layui.use(['layer', 'table'], function() {
+                table = layui.table;
+                var layer = layui.layer;
+                table.render({
+                    elem: '#table',
+                    loading: true,
+                    url: '../getDetailAddressByName.json',
+                    where: {
+                        name: $("#tentmentName").val()
+                    },
+                    cols: [
+                        [
+                            {checkbox: true}, {
+                            field: 'id',
+                            align: 'center',
+                            title: '类型',
+                            unresize: 'true',
+                        }]
+                    ],
+                    page: true
+                })
       })
 		layui.use('laydate', function(){
            var laydate = layui.laydate;

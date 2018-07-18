@@ -68,38 +68,18 @@
             {{#  } }}
         </script>
 		<script>
-
-            /*批量导入*/
-            /*#load:为按钮,点击后生成一个隐藏的input file标签*/
-            $('#load').after('<input type="file" id="load_xls" name="file" style="display:none" onchange ="uploadFile()">');
             $('#load').click(function(){
                 layer.confirm('导入前请确认单元格是否对应', {icon: 3, title:'提示',shade:'0',offset:['250px','700px']},
                     function(index){
                         layer.open({
                             type: 2,
-                            title:'选择导入信息',
+                            title:'提示信息',
                             area: ['400px', '260px'],
                             content: 'doImportBill' //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
                         });
                         layer.close(index);
                     });
             });
-            function uploadFile() {
-                var uri=$("#load_xls").val();
-                $.ajax({
-                    url: "",
-                    type: "POST",
-                    data: uri,
-                    contentType: false,
-                    processData: false,
-                    success: function (data) {
-                        console.log(data);
-                    },
-                    error:function(data){
-                        console.log(data)
-                    }
-                });
-            }
     
     $("#daochu").click(function(){
 
@@ -137,7 +117,7 @@
 				  type: 2, 
 				  title:'添加账单',
 				  area: ['600px', '70%'],		 
-				  content: 'addbill'
+				  content: 'doAddBill'
 				  })
 			})
 			//JavaScript代码区域

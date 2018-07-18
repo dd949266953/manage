@@ -39,6 +39,15 @@ public class BillController {
     }
 
     /**
+     * 跳到导入
+     * @return
+     */
+    @RequestMapping("doImportBill")
+    public  Object doImportBill(){
+        return "bill/importBill";
+    }
+
+    /**
      * 首页跳转已缴账单页面
      * @return
      */

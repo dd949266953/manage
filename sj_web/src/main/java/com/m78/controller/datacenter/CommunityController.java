@@ -34,7 +34,7 @@ public class CommunityController {
      * 添加界面
      * @return
      */
-    @PostMapping(value = "addCommunity.html")
+    @RequestMapping(value = "addCommunity.html")
     public String addCommunity(){
         return "dataCenter/community/addCommunity";
     }
@@ -46,7 +46,6 @@ public class CommunityController {
     @RequestMapping(value = "/communityData")
     @ResponseBody
     public  Object  findAllCommunity(@RequestParam("page") int page, @RequestParam("limit") int limit,@RequestParam("communityName") String communityName){
-        System.out.println(communityName);
         return  DataTable.bindTableUtil(0,100,communityService.findAll(page,limit,communityName));
     }
 
