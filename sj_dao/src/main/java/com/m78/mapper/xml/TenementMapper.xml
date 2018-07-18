@@ -55,13 +55,13 @@
   </sql>
   <!--根据住户姓名获取住户详细住址-->
   <select id="getDetailAddressByName" resultMap="TenementDeatil">
-      SELECT c.`name`,b.`name`,h.`unitNumber`,h.`fool`,t.`id`,t.`name` FROM tenement t
+      SELECT c.`name` as  communityname,b.`name` as  buildingname,h.`unitNumber`,h.`fool`,t.`id`,t.`name` as tenementname FROM tenement t
       INNER JOIN house_tentment ht ON ht.`tentmentId`=t.`id`
       INNER JOIN house h ON h.`houseId`=ht.`houseId`
       INNER JOIN house_buliding hb ON h.`houseId`=hb.`houseId`
       INNER JOIN building b ON b.`id`=hb.`buildingId`
       INNER JOIN community c ON c.`id`=t.`communityId`
-      WHERE t.`name` LIKE '%四%'
+      WHERE t.`name` LIKE CONCAT ('%',#{name },'%')
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 

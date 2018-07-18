@@ -42,7 +42,7 @@
 		</tr>
 		<tr>
 			<td><a class="layui-btn  save">添加</a>
-				<a class="layui-btn ">返回</a>
+				<a class="layui-btn " href="javascript:history.go(-1)">返回</a>
 			</td>
 		</tr>
 	</table>
@@ -55,12 +55,14 @@
     layui.use(['layer', 'table'], function(){
         <!--添加-->
         $(".save").click(function () {
-            $.get("addCommunitydata",$("#form").serialize(),function (data) {
-
+            $.post("addCommunitydata",$("#form").serialize(),function (data) {
                 if (data==1){
-                    alert("添加完成");
-                    $("input").val(" ");
-                }
+                    layer.msg("添加成功",{icon:1});
+                    //添加成功后跳转小区管理页面y
+                    window.location="communityList.html";
+                }else{
+                    layer.msg("添加失败",{icon:2});
+				}
             },'json')
         })
 	});
