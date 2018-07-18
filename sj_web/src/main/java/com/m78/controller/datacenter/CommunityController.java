@@ -34,7 +34,7 @@ public class CommunityController {
      * 添加界面
      * @return
      */
-    @PostMapping(value = "addCommunity.html")
+    @RequestMapping(value = "addCommunity.html")
     public String addCommunity(){
         return "dataCenter/community/addCommunity";
     }
