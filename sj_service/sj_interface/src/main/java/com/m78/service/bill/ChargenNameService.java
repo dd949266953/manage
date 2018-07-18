@@ -67,4 +67,11 @@ public interface ChargenNameService {
      * @return
      */
     int addCharTtem(Chargeitem chargeitem);
+
+    /**
+     *
+     * 根据收费项id查询所有
+     * @return
+     */
+    List<Chargeitem> getCharNameById();
 }

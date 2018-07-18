@@ -2,13 +2,17 @@ package com.m78.controller.bill;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.m78.entity.Bill;
+import com.m78.entity.Chargeitem;
+import com.m78.entity.Chargename;
 import com.m78.service.bill.BillService;
+import com.m78.service.bill.ChargenNameService;
 import com.m78.util.DataTable;
 import jxl.Workbook;
 import jxl.write.Label;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,6 +32,8 @@ public class BillController {
 
     @Reference(version = "1.0.0")
     private BillService billService;
+    @Reference(version = "1.0.0")
+    private ChargenNameService chargenNameService;
 
     /**
      * 首页跳转未缴账单页面
@@ -61,7 +67,11 @@ public class BillController {
      * @return
      */
     @RequestMapping("doAddBill")
-    public Object doAddBill(){
+    public Object doAddBill(Model model){
+        List<Chargename> nameList=chargenNameService.getAllCharName(1,10000,"");
+        model.addAttribute("charName",nameList);
+        List<Chargeitem> itemList=chargenNameService.getCharNameById();
+        model.addAttribute("itmeName",itemList);
         return  "bill/addbill";
     }
 
@@ -105,7 +115,7 @@ public class BillController {
             book = Workbook.createWorkbook(new File(path));
             WritableSheet sheet = book.createSheet("微小区账单", 0);
             //表头输出
-            String header = "收费项,类型,小区,房号/车位号,开始时间,结束时间,住户,单价,耗损,总金额";
+            String header = "收费项,类型,小区,房号,开始时间,结束时间,住户,单价,耗损,总金额";
             String[] headerArr = header.split(",");
             int headerLen = headerArr.length;
             //循环写入表头内容
@@ -124,7 +134,7 @@ public class BillController {
                 Label label1 = new Label(0, i+2, bill.getCharName());
                 Label label2 = new Label(1, i+2, types);
                 Label label3 = new Label(2, i+2, bill.getCommunity().getName());
-                Label label4 = new Label(3, i+2, String.valueOf(bill.getSignId()));
+                Label label4 = new Label(3, i+2, String.valueOf(bill.getFool()));
                 Label label5 = new Label(4, i+2, String.valueOf(bill.getStarttime()));
                 Label label6 = new Label(5, i+2, String.valueOf(bill.getOvertime()));
                 Label label7 = new Label(6, i+2, bill.getTentmentName());

@@ -48,7 +48,6 @@
 		<script th:src="@{/layui/layui.all.js}"></script>
 		<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 		<script>
-<<<<<<< HEAD
             $(function () {
                 page();
             })
@@ -64,34 +63,6 @@
                         url: 'getstaff.json',
                         where: {
                             name: $("#checkName").val()
-=======
-            layui.use('table', function() {
-                var table = layui.table;
-                //第一个实例
-                table.render({
-                    elem: "#demo",
-                    url: '',
-                    page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
-                        layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
-                        //,curr: 5 //设定初始在第 5 页
-                        ,
-                        groups: 1 //只显示 1 个连续页码
-                        ,
-                        first: false //不显示首页
-                        ,
-                        last: false //不显示尾页
-                    },
-					where : {
-                        name : $("#checkName").click(function () {
-								$("input[name=id]").val();
-								console.log($("input[name=id]").val());
-                        })
-                    },
-                    cols: [
-                        [{
-                            field: "id",
-                            title: 'id'
->>>>>>> b5c2a628bf8219296adcc9f6e33f0c1f1f480c83
                         },
                         page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
                             layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局

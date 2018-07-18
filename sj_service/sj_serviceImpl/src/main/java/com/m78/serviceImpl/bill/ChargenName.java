@@ -64,4 +64,9 @@ public class ChargenName implements ChargenNameService {
     public int addCharTtem(Chargeitem chargeitem) {
         return chargeitemMapper.insert(chargeitem);
     }
+
+    @Override
+    public List<Chargeitem> getCharNameById() {
+        return chargeitemMapper.getCharNameById();
+    }
 }
