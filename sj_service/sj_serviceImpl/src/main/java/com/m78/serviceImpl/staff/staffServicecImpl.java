@@ -53,4 +53,14 @@ public class staffServicecImpl implements staffService {
     public int insert(Staff record) {
      return staffMapper.insert(record);
     }
+
+    /**
+     * 根据id进行查询
+     * @param id
+     * @return
+     */
+    @Override
+    public Staff getStaffId(int id) {
+        return staffMapper.getStaffId(id);
+    }
 }

@@ -30,7 +30,7 @@ public interface CommunityMapper {
      */
     List<Community> findAll(@Param("start") int start,@Param("limit") int limit,@Param("communityName")String communityName);
 
-    /**
+     /**
      * 查询小区id和名称
      */
     List<Community> getCommunityIdAndName();

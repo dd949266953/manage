@@ -25,4 +25,9 @@ public interface StaffMapper {
      * 查询人员数量
      */
     Long getStaffNumber();
+
+    /**
+     * 根据id进行查询
+     */
+    Staff getStaffId(@Param("id") int id);
 }

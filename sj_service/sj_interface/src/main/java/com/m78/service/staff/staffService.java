@@ -12,7 +12,7 @@ public interface staffService {
      * 查询员工
      * @return
      */
-    List<Staff> getStaff(int page,int pageSize,String name);
+        List<Staff> getStaff(int page,int pageSize,String name);
 
     /**
      * 查询员工数量
@@ -28,4 +28,9 @@ public interface staffService {
      * 添加员工
      */
     int insert(Staff record);
+
+    /**
+     * 根据id进行查询
+     */
+    Staff getStaffId(int id);
 }
