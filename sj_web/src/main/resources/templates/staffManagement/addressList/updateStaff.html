@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>通讯录</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/css/addressBook/addstaff.css}" />
+</head>
+
+<body>
+<div class="body">
+    <div class="add">
+        <h1>修改员工信息</h1>
+    </div>
+    <div class="particulars">
+        <form id="form">
+            <table>
+                <tr>
+                    <td><span class="symbol behind">*</span> <span class="size">姓名：</span><input class="name tm" name="name"  type="text" th:value="${staff.name}" /></td>
+                </tr>
+                <tr>
+                    <td><span class="symbol behind">*</span> <span class="size">昵称：</span><input class="tm name" name="nametwo" type="text" th:value="${staff.nametwo}" /></td>
+                </tr>
+                <tr>
+                    <td><span class="symbol behinds">*</span> <span class="size">手机号：</span><input class="tm name" name="phone" type="text" th:value="${staff.phone}" /></td>
+                </tr>
+                <tr>
+                    <td><span class="symbol behinds">*</span> <span class="size">微信号：</span><input class="name tm" name="wxnumber" type="text" th:value="${staff.wxnumber}" /></td>
+                </tr>
+                <tr>
+                    <td><span class="symbol behind">*</span> <span class="size">部门：</span><select name="department" class="housing">
+                        <option>请选择部门</option>
+                    </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="symbol behind">*</span> <span class="size">职位：</span><select name="dictionaryItem" class="housing">
+                        <option>请选择职位</option>
+                    </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="symbol behind">*</span> <span class="size">备注：</span><input class="name tm" name="remark" type="text" placeholder="请输入备注" /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div class="end">
+        <button class="layui-btn  btn layui-btn-radius">确定</button>
+        <button class="layui-btn  del layui-btn-primary layui-btn-radius">取消</button>
+    </div>
+</div>
+<script th:src="@{/js/jquery-3.2.1.js}"></script>
+<script>
+    $(function () {
+        $.post("getDepartment",function (data) {
+            console.log(data);
+            $.each(data,function (i,val) {
+                var tr='<option value="'+val.id+'">'+val.name+'</option>';
+                $("select[name=department]").append(tr);
+            })
+        })
+        $.post("getDictionaryItem",function (data) {
+            console.log(data);
+            $.each(data,function (i,val) {
+                var tr='<option value="'+val.id+'">'+val.content+'</option>';
+                $("select[name=dictionaryItem]").append(tr);
+            })
+        })
+    })
+</script>
+</body>
+</html>

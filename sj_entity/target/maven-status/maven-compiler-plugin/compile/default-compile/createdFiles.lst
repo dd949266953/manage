@@ -37,6 +37,7 @@ com\m78\entity\CommunityVote.class
 com\m78\entity\Building.class
 com\m78\entity\Staff.class
 com\m78\entity\Notice.class
+com\m78\entity\ErrorInfo.class
 com\m78\entity\Chargename.class
 com\m78\entity\ChargeitemCarport.class
 com\m78\entity\ChargeId.class
@@ -45,7 +46,6 @@ com\m78\entity\CommunitCarport.class
 com\m78\entity\Admin.class
 com\m78\entity\TalkStaff.class
 com\m78\entity\CommunityTalk.class
-org\com\cay\springboot\exception\ErrorInfo.class
 com\m78\entity\Activity.class
 com\m78\entity\Advertising.class
 com\m78\entity\HouseTentment.class

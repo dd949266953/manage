@@ -18,13 +18,18 @@
   <select id="getStaff" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
-    from staff where name like ('%',#{name},'%') limit #{page},#{pageSize}
+    from staff where name like CONCAT('%',#{name},'%') limit #{page},#{pageSize}
   </select>
   <!--人员数量-->
   <select id="getStaffNumber" resultType="java.lang.Long">
       SELECT COUNT(1) FROM staff
   </select>
-
+  <!--根据id查询-->
+  <select id="getStaffId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from staff where id = #{id}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
