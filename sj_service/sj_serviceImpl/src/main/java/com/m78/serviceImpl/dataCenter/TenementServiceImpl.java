@@ -12,8 +12,15 @@ import java.util.List;
 public class TenementServiceImpl implements TenementService {
     @Autowired
     private TenementMapper tenementMapper;
+
     @Override
-    public List<Tenement> getDetailAddressByName(String name) {
-        return tenementMapper.getDetailAddressByName(name);
+    public List<Tenement> getDetailAddressByName(String name, int page, int limit) {
+        int start=(page-1)*limit;
+        return tenementMapper.getDetailAddressByName(name,start,limit);
+    }
+
+    @Override
+    public int getAllCount(String name) {
+        return tenementMapper.getAllCount(name);
     }
 }

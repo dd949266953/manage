@@ -193,4 +193,29 @@ public class Tenement implements Serializable {
     public void setCommunity(Community community) {
         this.community = community;
     }
+
+    @Override
+    public String toString() {
+        return "Tenement{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", integrals=" + integrals +
+                ", registrationdate=" + registrationdate +
+                ", state=" + state +
+                ", qqnumber=" + qqnumber +
+                ", wxnumber='" + wxnumber + '\'' +
+                ", urgencyman='" + urgencyman + '\'' +
+                ", urgencymanphone='" + urgencymanphone + '\'' +
+                ", sex='" + sex + '\'' +
+                ", nation='" + nation + '\'' +
+                ", remark='" + remark + '\'' +
+                ", communityid=" + communityid +
+                ", houseTentment=" + houseTentment +
+                ", house=" + house +
+                ", houseBuliding=" + houseBuliding +
+                ", building=" + building +
+                ", community=" + community +
+                '}';
+    }
 }

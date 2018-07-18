@@ -10,5 +10,11 @@ public interface TenementService {
      * @param name
      * @return
      */
-    List<Tenement> getDetailAddressByName(String name);
+    List<Tenement> getDetailAddressByName(String name,int page,int limit);
+
+    /**
+     * 获取用户总数
+     * @return
+     */
+    int getAllCount(String name);
 }

@@ -20,7 +20,7 @@ public class TenementController {
      */
     @RequestMapping("getDetailAddressByName.json")
     @ResponseBody
-    public Object getDetailAddressByName(@RequestParam("name") String name){
-        return DataTable.bindTableUtil(0,100,tenementService.getDetailAddressByName(name));
+    public Object getDetailAddressByName(@RequestParam("name") String name,@RequestParam("page") int page){
+        return DataTable.bindTableUtil(0,tenementService.getAllCount(name),tenementService.getDetailAddressByName(name,page,4));
     }
 }

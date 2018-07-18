@@ -23,5 +23,12 @@ public interface TenementMapper {
      * @param name
      * @return
      */
-    List<Tenement> getDetailAddressByName(@Param("name")String name);
+    List<Tenement> getDetailAddressByName(@Param("name")String name,@Param("page") int page,@Param("limit") int limit);
+
+    /**
+     * 查询用户总数
+     * @param name
+     * @return
+     */
+    int getAllCount(@Param("name") String name);
 }

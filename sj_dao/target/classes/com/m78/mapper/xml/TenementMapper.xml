@@ -19,33 +19,19 @@
   </resultMap>
   <resultMap id="TenementDeatil" type="com.m78.entity.Tenement">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="integrals" jdbcType="BIGINT" property="integrals" />
-    <result column="registrationDate" jdbcType="DATE" property="registrationdate" />
-    <result column="state" jdbcType="BIGINT" property="state" />
-    <result column="qqNumber" jdbcType="BIGINT" property="qqnumber" />
-    <result column="WxNumber" jdbcType="VARCHAR" property="wxnumber" />
-    <result column="urgencyMan" jdbcType="VARCHAR" property="urgencyman" />
-    <result column="urgencyManPhone" jdbcType="VARCHAR" property="urgencymanphone" />
-    <result column="sex" jdbcType="VARCHAR" property="sex" />
-    <result column="nation" jdbcType="VARCHAR" property="nation" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="communityId" jdbcType="BIGINT" property="communityid" />
-    <association property="houseTentment" javaType="com.m78.entity.HouseTentment">
-    </association>
+    <result column="tenementname" jdbcType="VARCHAR" property="name" />
     <association property="house" javaType="com.m78.entity.House">
+        <result column="houseId"  property="houseid"/>
       <result column="unitNumber" jdbcType="BIGINT" property="unitnumber"></result>
       <result column="fool" jdbcType="BIGINT" property="fool"></result>
     </association>
-    <association property="houseBuliding" javaType="com.m78.entity.HouseBuliding">
-
-    </association>
     <association property="building" javaType="com.m78.entity.Building">
-      <result column="name" jdbcType="VARCHAR" property="name"></result>
+        <result column="buildingid" property="id" />
+      <result column="buildingname" jdbcType="VARCHAR" property="name"></result>
     </association>
     <association property="community" javaType="com.m78.entity.Community">
-      <result column="name" jdbcType="VARCHAR" property="name"></result>
+        <result column="communityid" property="id"/>
+      <result column="communityname" jdbcType="VARCHAR" property="name"></result>
     </association>
   </resultMap>
 
@@ -55,14 +41,26 @@
   </sql>
   <!--根据住户姓名获取住户详细住址-->
   <select id="getDetailAddressByName" resultMap="TenementDeatil">
-      SELECT c.`name` as  communityname,b.`name` as  buildingname,h.`unitNumber`,h.`fool`,t.`id`,t.`name` as tenementname FROM tenement t
+      SELECT c.`name` as  communityname,c.id as communityid ,b.`name` as  buildingname,b.id as buildingid ,h.houseId ,h.`unitNumber`,h.`fool`,t.`id`,t.`name` as tenementname FROM tenement t
       INNER JOIN house_tentment ht ON ht.`tentmentId`=t.`id`
       INNER JOIN house h ON h.`houseId`=ht.`houseId`
       INNER JOIN house_buliding hb ON h.`houseId`=hb.`houseId`
       INNER JOIN building b ON b.`id`=hb.`buildingId`
       INNER JOIN community c ON c.`id`=t.`communityId`
-      WHERE t.`name` LIKE CONCAT ('%',#{name },'%')
+      WHERE 1=1
+      <if test="name!=''">
+        and  t.`name` LIKE CONCAT ('%',#{name },'%')
+      </if>
+      limit #{page},#{limit}
   </select>
+
+    <select id="getAllCount" resultType="java.lang.Integer">
+		SELECT count(1) FROM tenement
+        <if test="name!=''">
+            where  t.`name` LIKE CONCAT ('%',#{name },'%')
+        </if>
+    </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
