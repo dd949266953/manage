@@ -26,8 +26,8 @@
     insert into chargeitem (id, name, type, 
       periodTime, price, cashPrice
       )
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=BIGINT}, 
-      #{periodtime,jdbcType=BIGINT}, #{price,jdbcType=DOUBLE}, #{cashprice,jdbcType=BIGINT}
+    values (DEFAULT, #{name,jdbcType=VARCHAR}, #{type,jdbcType=BIGINT},
+      #{periodtime,jdbcType=BIGINT}, #{price,jdbcType=DOUBLE}, DEFAULT
       )
   </insert>
   <insert id="insertSelective" parameterType="com.m78.entity.Chargeitem" >
