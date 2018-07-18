@@ -42,6 +42,12 @@ public class Tenement implements Serializable {
 
     private Community community;
 
+    private String idcard;
+
+    private Date birthday;
+
+    private Long ownernumber;
+
     public Long getId() {
         return id;
     }
@@ -194,6 +200,30 @@ public class Tenement implements Serializable {
         this.community = community;
     }
 
+    public String getIdcard() {
+        return idcard;
+    }
+
+    public void setIdcard(String idcard) {
+        this.idcard = idcard;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public Long getOwnernumber() {
+        return ownernumber;
+    }
+
+    public void setOwnernumber(Long ownernumber) {
+        this.ownernumber = ownernumber;
+    }
+
     @Override
     public String toString() {
         return "Tenement{" +
@@ -216,6 +246,9 @@ public class Tenement implements Serializable {
                 ", houseBuliding=" + houseBuliding +
                 ", building=" + building +
                 ", community=" + community +
+                ", idcard='" + idcard + '\'' +
+                ", birthday=" + birthday +
+                ", ownernumber=" + ownernumber +
                 '}';
     }
 }
