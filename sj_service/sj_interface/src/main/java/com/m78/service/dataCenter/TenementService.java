@@ -10,7 +10,7 @@ public interface TenementService {
      * @param name
      * @return
      */
-<<<<<<< HEAD
+
     List<Tenement> getDetailAddressByName(String name);
 
     /**
@@ -26,7 +26,7 @@ public interface TenementService {
      * @return
      */
     Long getCarportIdByTenementPhone(String phone);
-=======
+
     List<Tenement> getDetailAddressByName(String name,int page,int limit);
 
     /**
@@ -34,5 +34,5 @@ public interface TenementService {
      * @return
      */
     int getAllCount(String name);
->>>>>>> dc462ce7f8642a819c73fa82acf1abefcbba1600
+
 }

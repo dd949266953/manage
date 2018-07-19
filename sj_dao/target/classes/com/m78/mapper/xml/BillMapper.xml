@@ -208,7 +208,7 @@
         left JOIN chargename cna ON cna.id=cit.type
         left JOIN house_tentment ht ON ht.houseId=cid.signId
         LEFT JOIN house hou on hou.houseId=cid.signId
-        left JOIN tentment_carport tca ON tca.carportId=cid.signId
+        left JOIN tenement_carport tca ON tca.carportId=cid.signId
         left JOIN tenement te ON te.id=ht.tentmentId OR te.id=tca.tentmentId
         WHERE bi.state=27
         <if test="name!=''">
@@ -237,7 +237,7 @@
         left JOIN chargename cna ON cna.id=cit.type
         left JOIN house_tentment ht ON ht.houseId=cid.signId
         LEFT JOIN house hou on hou.houseId=ht.houseId
-        left JOIN tentment_carport tca ON tca.carportId=cid.signId
+        left JOIN tenement_carport tca ON tca.carportId=cid.signId
         LEFT JOIN carport cpo on cpo.carportNo=tca.carportId
         left JOIN tenement te ON te.id=ht.tentmentId OR te.id=tca.tentmentId
         WHERE bi.state=28
@@ -260,7 +260,7 @@
         SELECT te.name ,te.phone,comm.`name` as communityName, SUM(bi.moneys) AS moneys FROM charge_id ca
         INNER JOIN bill bi ON bi.id=ca.billId
         left JOIN house_tentment ht ON ht.houseId=ca.signId AND ca.type=1
-        left JOIN tentment_carport tca ON tca.carportId=ca.type AND ca.type=2
+        left JOIN tenement_carport tca ON tca.carportId=ca.type AND ca.type=2
         left JOIN tenement te ON te.id=ht.tentmentId OR te.id=tca.tentmentId
         INNER JOIN community comm ON comm.id=te.communityId
         WHERE bi.state=27

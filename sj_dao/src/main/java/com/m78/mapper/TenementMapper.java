@@ -23,7 +23,7 @@ public interface TenementMapper {
      * @param name
      * @return
      */
-<<<<<<< HEAD
+
     List<Tenement> getDetailAddressByName(@Param("name")String name);
 
     /**
@@ -39,7 +39,7 @@ public interface TenementMapper {
      * @return
      */
     Long getCarportIdByTenementPhone(@Param("phone")String phone);
-=======
+
     List<Tenement> getDetailAddressByName(@Param("name")String name,@Param("page") int page,@Param("limit") int limit);
 
     /**
@@ -48,5 +48,5 @@ public interface TenementMapper {
      * @return
      */
     int getAllCount(@Param("name") String name);
->>>>>>> dc462ce7f8642a819c73fa82acf1abefcbba1600
+
 }
