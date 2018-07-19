@@ -23,4 +23,6 @@ public interface ChargeitemMapper {
     Long getAllCount(@Param("id") int id);
     //根据收费项id查询
     List<Chargeitem> getCharNameById();
+    //根据名称查id
+    Long getCharItemIdByName(@Param("name") String name);
 }

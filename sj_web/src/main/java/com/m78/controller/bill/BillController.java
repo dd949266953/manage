@@ -301,9 +301,12 @@ public class BillController {
                 String charItemName=sheet.getCell(1,i).getContents();
                 String type=sheet.getCell(2,i).getContents();
                 String communityName=sheet.getCell(3,i).getContents();
-                String singid=sheet.getCell(4,i).getContents();
                 String phone=sheet.getCell(8,i).getContents();
-                Long singId= Long.parseLong(singid);
+                num=billService.addImportBill(bill,charItemName,type,communityName,phone);
+                System.out.print(num);
+                if (num==0){
+                    break;
+                }
             }
             return  num;
         } catch (Exception e) {

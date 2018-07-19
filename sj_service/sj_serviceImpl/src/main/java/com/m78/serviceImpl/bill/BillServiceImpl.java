@@ -3,9 +3,8 @@ package com.m78.serviceImpl.bill;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.m78.entity.Bill;
 import com.m78.entity.ChargeId;
-import com.m78.mapper.BillMapper;
-import com.m78.mapper.ChargeIdMapper;
-import com.m78.mapper.CommunityMapper;
+import com.m78.entity.Chargeitem;
+import com.m78.mapper.*;
 import com.m78.service.bill.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,6 +23,10 @@ public class BillServiceImpl  implements BillService {
     private ChargeIdMapper chargeIdMapper;
     @Autowired
     private CommunityMapper communityMapper;
+    @Autowired
+    private TenementMapper tenementMapper;
+    @Autowired
+    private ChargeitemMapper chargeitemMapper;
 
     @Override
     public List<Bill> getAllNoBill(int page,int pageSize,String name) {
@@ -94,8 +97,29 @@ public class BillServiceImpl  implements BillService {
     @Override
     public int addImportBill(Bill bill, String charItemName,
                              String type, String communityName,
-                             Long singId, String phone) {
-        Long communityId=communityMapper
-        return 0;
+                              String phone) {
+        //小区id
+        Long communityId=communityMapper.getCommunityIdByName(communityName);
+        //车位id 房屋id
+        Long singId;
+        //收费标准id
+        Long charItemId=chargeitemMapper.getCharItemIdByName(charItemName);
+        billMapper.insertSelective(bill);
+        ChargeId  chargeId=new ChargeId();
+        chargeId.setBillid(bill.getId());
+
+        //根据手机号操作
+        if(type.equals("房屋")){
+            chargeId.setType(new Long(1));
+            singId=tenementMapper.getHouseIdByTenementPhone(phone);
+        }else {
+            chargeId.setType(new Long(2));
+            singId=tenementMapper.getCarportIdByTenementPhone(phone);
+        }
+        chargeId.setSignid(singId);
+        int num= chargeIdMapper.insertSelective(chargeId);
+
+
+        return num;
     }
 }

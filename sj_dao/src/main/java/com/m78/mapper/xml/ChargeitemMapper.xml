@@ -122,4 +122,7 @@
     <select id="getCharNameById" resultMap="ResultMap">
         SELECT ch.id,ch.`name`,ch.type FROM chargeitem ch
     </select>
+    <select id="getCharItemIdByName" resultType="java.lang.Long">
+        SELECT   id FROM chargeitem WHERE name=#{name}
+    </select>
 </mapper>
