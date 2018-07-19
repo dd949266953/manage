@@ -82,6 +82,14 @@
             </div>
             
         </div>
+            <div class="layui-form-item" style="position: relative;top: 50px;">
+                <label class="layui-form-label">总金额</label>
+                <div class="layui-input-block">
+                    <input type="text" id="moneys" name="address" lay-verify="required"  autocomplete="off"  class="layui-input">
+
+                </div>
+
+            </div>
         	<div class="layui-form-item" style="position: relative;top: 50px;">
             <label class="layui-form-label">备注</label>
             <div class="layui-input-block">
@@ -177,12 +185,14 @@
                    })
                    table.on('checkbox(table)', function(obj){
                        checkStatus = table.checkStatus('table');
-                       data=obj.data;
-                       console.log(data);
+                       communityId=obj.data.community.id;
+                       houseId=obj.data.house.houseid;
+
                    });
                })
            }
-          var data;
+            var communityId=0;
+			var houseId=0;
             layui.use('form', function(){
                 var form = layui.form;
                 form.on('submit(demo1)', function(data){
@@ -196,7 +206,7 @@
                         if(startTime!=''){
                             if($(".fNiv").attr("data_id")!=0){
                                 $.ajax({
-                                    url:'addCharItem',
+                                    url:'addBill.json',
                                     type:'get',
                                     dataType:'json',
                                     data:{
@@ -204,9 +214,10 @@
                                         start:startTime,
                                         end:endTime,
                                         consume:$("#conmos").val(),
-                                        communityId:data.community.id,
+                                        communityId:communityId,
                                         charItemId:$(".fNiv").attr("data_id"),
-                                        singId:data.house.houseid
+                                        houseId:houseId,
+                                        moneys:$("#moneys").val()
                                     },
                                     success:function(data){
                                         if(data=='1'){
