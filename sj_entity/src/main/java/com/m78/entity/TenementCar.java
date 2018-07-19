@@ -1,6 +1,6 @@
 package com.m78.entity;
 
-public class TentmentCar {
+public class TenementCar {
     private Long id;
 
     private Long tentmentid;
@@ -33,7 +33,7 @@ public class TentmentCar {
 
     @Override
     public String toString() {
-        return "TentmentCar{" +
+        return "TenementCar{" +
                 "id=" + id +
                 ", tentmentid=" + tentmentid +
                 ", carid=" + carid +

@@ -29,5 +29,10 @@ public interface CommunityService {
      */
     int deleteByPrimaryKey(Long id);
 
+    /**
+     * 根据小区名称查询小区id
+     */
+    Long getCommunityIdByName(String communityName);
+
 
 }

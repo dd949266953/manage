@@ -24,4 +24,18 @@ public interface TenementMapper {
      * @return
      */
     List<Tenement> getDetailAddressByName(@Param("name")String name);
+
+    /**
+     * 根据住户手机号查询房屋主键
+     * @param phone
+     * @return
+     */
+    Long getHouseIdByTenementPhone(@Param("phone")String phone);
+
+    /**
+     * 根据住户手机号查询车位主键
+     * @param phone
+     * @return
+     */
+    Long getCarportIdByTenementPhone(@Param("phone")String phone);
 }

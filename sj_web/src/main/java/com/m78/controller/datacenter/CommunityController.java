@@ -76,5 +76,13 @@ public class CommunityController {
         return communityService.getCommunityIdAndName();
     }
 
-
+    /**
+     * 根据小区名称查询小区id
+     * @return
+     */
+    @RequestMapping("getCommunityIdByName")
+    @ResponseBody
+    public Long getCommunityIdByName(@RequestParam("communityName")String communityName){
+        return communityService.getCommunityIdByName(communityName);
+    }
 }

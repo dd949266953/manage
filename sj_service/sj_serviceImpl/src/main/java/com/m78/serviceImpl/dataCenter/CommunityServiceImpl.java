@@ -52,4 +52,14 @@ public class CommunityServiceImpl implements CommunityService {
         return communityMapper.deleteByPrimaryKey(id);
     }
 
+    /**
+     * 根据小区名称查询小区id
+     * @param communityName
+     * @return
+     */
+    @Override
+    public Long getCommunityIdByName(String communityName) {
+        return communityMapper.getCommunityIdByName(communityName);
+    }
+
 }

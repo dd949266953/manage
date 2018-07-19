@@ -34,4 +34,9 @@ public interface CommunityMapper {
      * 查询小区id和名称
      */
     List<Community> getCommunityIdAndName();
+
+    /**
+     * 根据小区名称查询小区id
+     */
+    Long getCommunityIdByName(@Param("communityName")String communityName);
 }

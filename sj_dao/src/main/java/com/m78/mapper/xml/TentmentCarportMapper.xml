@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.m78.mapper.TentmentCarportMapper" >
-  <resultMap id="BaseResultMap" type="com.m78.entity.TentmentCarport" >
+<mapper namespace="com.m78.mapper.TenementCarportMapper" >
+  <resultMap id="BaseResultMap" type="com.m78.entity.TenementCarport" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="tentmentId" property="tentmentid" jdbcType="BIGINT" />
     <result column="carportId" property="carportid" jdbcType="BIGINT" />
@@ -19,13 +19,13 @@
     delete from tentment_carport
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.m78.entity.TentmentCarport" >
+  <insert id="insert" parameterType="com.m78.entity.TenementCarport" >
     insert into tentment_carport (id, tentmentId, carportId
       )
     values (#{id,jdbcType=BIGINT}, #{tentmentid,jdbcType=BIGINT}, #{carportid,jdbcType=BIGINT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.m78.entity.TentmentCarport" >
+  <insert id="insertSelective" parameterType="com.m78.entity.TenementCarport" >
     insert into tentment_carport
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -50,7 +50,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.TentmentCarport" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.TenementCarport" >
     update tentment_carport
     <set >
       <if test="tentmentid != null" >
@@ -62,7 +62,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.m78.entity.TentmentCarport" >
+  <update id="updateByPrimaryKey" parameterType="com.m78.entity.TenementCarport" >
     update tentment_carport
     set tentmentId = #{tentmentid,jdbcType=BIGINT},
       carportId = #{carportid,jdbcType=BIGINT}

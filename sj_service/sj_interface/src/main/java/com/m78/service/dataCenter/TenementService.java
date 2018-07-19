@@ -11,4 +11,18 @@ public interface TenementService {
      * @return
      */
     List<Tenement> getDetailAddressByName(String name);
+
+    /**
+     * 根据住户手机号查询房屋主键
+     * @param phone
+     * @return
+     */
+    Long getHouseIdByTenementPhone(String phone);
+
+    /**
+     * 根据住户手机号查询车位主键
+     * @param phone
+     * @return
+     */
+    Long getCarportIdByTenementPhone(String phone);
 }

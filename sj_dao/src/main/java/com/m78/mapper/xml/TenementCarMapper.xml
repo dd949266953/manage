@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.m78.mapper.TentmentCarMapper" >
-  <resultMap id="BaseResultMap" type="com.m78.entity.TentmentCar" >
+<mapper namespace="com.m78.mapper.TenementCarMapper" >
+  <resultMap id="BaseResultMap" type="com.m78.entity.TenementCar" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="tentmentId" property="tentmentid" jdbcType="BIGINT" />
     <result column="carId" property="carid" jdbcType="BIGINT" />
@@ -19,13 +19,13 @@
     delete from tentment_car
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.m78.entity.TentmentCar" >
+  <insert id="insert" parameterType="com.m78.entity.TenementCar" >
     insert into tentment_car (id, tentmentId, carId
       )
     values (#{id,jdbcType=BIGINT}, #{tentmentid,jdbcType=BIGINT}, #{carid,jdbcType=BIGINT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.m78.entity.TentmentCar" >
+  <insert id="insertSelective" parameterType="com.m78.entity.TenementCar" >
     insert into tentment_car
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -50,7 +50,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.TentmentCar" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.TenementCar" >
     update tentment_car
     <set >
       <if test="tentmentid != null" >
@@ -62,7 +62,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.m78.entity.TentmentCar" >
+  <update id="updateByPrimaryKey" parameterType="com.m78.entity.TenementCar" >
     update tentment_car
     set tentmentId = #{tentmentid,jdbcType=BIGINT},
       carId = #{carid,jdbcType=BIGINT}

@@ -31,6 +31,10 @@
   <select id="getCommunityIdAndName" resultMap="BaseResultMap">
     select id,name from community
   </select>
+  <!--根据小区名称查询小区id-->
+  <select id="getCommunityIdByName" resultType="java.lang.Long">
+   SELECT c.id FROM community c WHERE c.name=#{communityName}
+  </select>
   <sql id="Base_Column_List">
     id, name, address, detailAddress, serviceTel, leader, leaderPhone, logo, backgroundImage
   </sql>

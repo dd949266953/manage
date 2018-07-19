@@ -1,6 +1,6 @@
 package com.m78.entity;
 
-public class TentmentCarport {
+public class TenementCarport {
     private Long id;
 
     private Long tentmentid;
