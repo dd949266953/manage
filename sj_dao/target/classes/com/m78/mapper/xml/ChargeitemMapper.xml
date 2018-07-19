@@ -26,8 +26,8 @@
     insert into chargeitem (id, name, type, 
       periodTime, price, cashPrice
       )
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=BIGINT}, 
-      #{periodtime,jdbcType=BIGINT}, #{price,jdbcType=DOUBLE}, #{cashprice,jdbcType=BIGINT}
+    values (DEFAULT, #{name,jdbcType=VARCHAR}, #{type,jdbcType=BIGINT},
+      #{periodtime,jdbcType=BIGINT}, #{price,jdbcType=DOUBLE}, DEFAULT
       )
   </insert>
   <insert id="insertSelective" parameterType="com.m78.entity.Chargeitem" >
@@ -113,5 +113,13 @@
          SELECT count(1) as sums FROM chargeitem ci
         INNER JOIN chargename cn ON cn.id=ci.type
         WHERE cn.id=#{id}
+    </select>
+    <resultMap id="ResultMap" type="com.m78.entity.Chargeitem" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="VARCHAR" />
+    </resultMap>
+    <select id="getCharNameById" resultMap="ResultMap">
+        SELECT ch.id,ch.`name`,ch.type FROM chargeitem ch
     </select>
 </mapper>

@@ -2,7 +2,10 @@ package com.m78.serviceImpl.bill;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.m78.entity.Bill;
+import com.m78.entity.ChargeId;
 import com.m78.mapper.BillMapper;
+import com.m78.mapper.ChargeIdMapper;
+import com.m78.mapper.CommunityMapper;
 import com.m78.service.bill.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,6 +20,10 @@ public class BillServiceImpl  implements BillService {
 
     @Autowired
     private BillMapper billMapper;
+    @Autowired
+    private ChargeIdMapper chargeIdMapper;
+    @Autowired
+    private CommunityMapper communityMapper;
 
     @Override
     public List<Bill> getAllNoBill(int page,int pageSize,String name) {
@@ -72,5 +79,23 @@ public class BillServiceImpl  implements BillService {
     @Override
     public Long getAllSendCount() {
         return billMapper.getAllSendCount();
+    }
+
+    @Override
+    public int addBill(Bill bill, ChargeId chargeId) {
+        int num= billMapper.insertSelective(bill);
+        if(num==1){
+            chargeId.setBillid(bill.getId());
+           num= chargeIdMapper.insertSelective(chargeId);
+        }
+        return  num;
+    }
+
+    @Override
+    public int addImportBill(Bill bill, String charItemName,
+                             String type, String communityName,
+                             Long singId, String phone) {
+        Long communityId=communityMapper
+        return 0;
     }
 }

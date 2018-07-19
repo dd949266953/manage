@@ -6,15 +6,16 @@ import com.m78.entity.Department;
 import com.m78.entity.DictionaryItem;
 import com.m78.entity.Staff;
 import com.m78.util.DataTable;
+import org.apache.zookeeper.data.Id;
+import org.jboss.logging.Param;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import com.m78.service.staff.staffService;
 import com.m78.service.dictionaryItemSevice;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -50,7 +51,7 @@ public class addressList {
     /**
      * 员工信息
      */
-    @RequestMapping("getstaff.json")
+    @GetMapping("getstaff.json")
     @ResponseBody
     public Object getStaff(@RequestParam("page") int page, @RequestParam("limit") int limit, @RequestParam("name") String name){
         return DataTable.bindTableUtil(0,staffService.getStaffNumber(),staffService.getStaff(page, limit, name));
@@ -93,5 +94,15 @@ public class addressList {
     @ResponseBody
     public int insert(Staff record) {
         return staffService.insert(record);
+    }
+
+    /**
+     * 修改人员信息页面
+     */
+    @RequestMapping(value = "updateStaff.html")
+    public String updateSatff(@RequestParam("id") int id, Model model){
+        Staff staff=staffService.getStaffId(id);
+        model.addAttribute("staff",staff);
+         return "staffManagement/addressList/updateStaff";
     }
 }

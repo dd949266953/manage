@@ -57,7 +57,7 @@
 		<script th:src="@{/layui/layui.js}"></script>
 		<script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
 		<script type="text/html" id="barDemo">
-		  <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="ok">确认收款</a>
+		  <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="ok">收款</a>
 		  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 		</script>
         <script type="text/html" id="type">
@@ -116,8 +116,8 @@
 				 layer.open({
 				  type: 2, 
 				  title:'添加账单',
-				  area: ['600px', '70%'],		 
-				  content: 'addbill'
+				  area: ['650px', '85%'],
+				  content: 'doAddBill'
 				  })
 			})
 			//JavaScript代码区域
@@ -154,10 +154,10 @@
                                     return d.community.name
                                 }
 							},{
-								field: 'signId',
+								field: 'fool',
 								align: 'center',
                                 unresize:'true',
-								title: '房号/车位号',
+								title: '房号',
 							},							
 							{
 								field: 'charName',

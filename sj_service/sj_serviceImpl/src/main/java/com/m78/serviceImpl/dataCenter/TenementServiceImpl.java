@@ -16,15 +16,24 @@ public class TenementServiceImpl implements TenementService {
     @Autowired
     private TenementMapper tenementMapper;
 
+<<<<<<< HEAD
     /**
      * 根据姓名查询住户详细住址
      * @param name
      * @return
      */
     @Transactional
+=======
     @Override
-    public List<Tenement> getDetailAddressByName(String name) {
-        return tenementMapper.getDetailAddressByName(name);
+    public List<Tenement> getDetailAddressByName(String name, int page, int limit) {
+        int start=(page-1)*limit;
+        return tenementMapper.getDetailAddressByName(name,start,limit);
+    }
+
+>>>>>>> dc462ce7f8642a819c73fa82acf1abefcbba1600
+    @Override
+    public int getAllCount(String name) {
+        return tenementMapper.getAllCount(name);
     }
 
     /**

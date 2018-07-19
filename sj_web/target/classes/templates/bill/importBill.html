@@ -73,12 +73,15 @@
 	 parent.layer.close(index); //再执行关闭
        var uri=$("#load_xls").val();
         $.ajax({
-            url: "",
+            url: "importBill.json",
             type: "POST",
-            data: uri,
+            data: {
+                url:uri
+            },
             contentType: false,
             processData: false,
             success: function (data) {
+
             },
             error:function(data){
                 console.log(data)

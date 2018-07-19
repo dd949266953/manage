@@ -56,8 +56,10 @@ public class Bill implements Serializable {
     private  String phone;
     //单价
     private  double price;
-    //房号或者车位号
-    private  Long signId;
+
+    //房号
+    private Long fool;
+
     //收费类型（车位或者房屋）
     private  Long type;
 
@@ -93,13 +95,7 @@ public class Bill implements Serializable {
         this.price = price;
     }
 
-    public Long getSignId() {
-        return signId;
-    }
 
-    public void setSignId(Long signId) {
-        this.signId = signId;
-    }
 
     public Long getType() {
         return type;
@@ -109,30 +105,6 @@ public class Bill implements Serializable {
         this.type = type;
     }
 
-    @Override
-    public String toString() {
-        return "Bill{" +
-                "id=" + id +
-                ", state=" + state +
-                ", remark='" + remark + '\'' +
-                ", chargeuser=" + chargeuser +
-                ", admin=" + admin +
-                ", time=" + time +
-                ", informs=" + informs +
-                ", starttime=" + starttime +
-                ", overtime=" + overtime +
-                ", consume=" + consume +
-                ", moneys=" + moneys +
-                ", communityid=" + communityid +
-                ", community=" + community +
-                ", charName='" + charName + '\'' +
-                ", tentmentName='" + tentmentName + '\'' +
-                ", phone='" + phone + '\'' +
-                ", price=" + price +
-                ", signId=" + signId +
-                ", type=" + type +
-                '}';
-    }
 
     public Long getId() {
         return id;
@@ -220,5 +192,38 @@ public class Bill implements Serializable {
 
     public void setCommunityid(Long communityid) {
         this.communityid = communityid;
+    }
+
+    public Long getFool() {
+        return fool;
+    }
+
+    public void setFool(Long fool) {
+        this.fool = fool;
+    }
+
+    @Override
+    public String toString() {
+        return "Bill{" +
+                "id=" + id +
+                ", state=" + state +
+                ", remark='" + remark + '\'' +
+                ", chargeuser=" + chargeuser +
+                ", admin=" + admin +
+                ", time=" + time +
+                ", informs=" + informs +
+                ", starttime=" + starttime +
+                ", overtime=" + overtime +
+                ", consume=" + consume +
+                ", moneys=" + moneys +
+                ", communityid=" + communityid +
+                ", community=" + community +
+                ", charName='" + charName + '\'' +
+                ", tentmentName='" + tentmentName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", price=" + price +
+                ", fool=" + fool +
+                ", type=" + type +
+                '}';
     }
 }

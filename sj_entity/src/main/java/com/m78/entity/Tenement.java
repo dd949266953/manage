@@ -42,6 +42,12 @@ public class Tenement implements Serializable {
 
     private Community community;
 
+    private String idcard;
+
+    private Date birthday;
+
+    private Long ownernumber;
+
     public Long getId() {
         return id;
     }
@@ -192,5 +198,57 @@ public class Tenement implements Serializable {
 
     public void setCommunity(Community community) {
         this.community = community;
+    }
+
+    public String getIdcard() {
+        return idcard;
+    }
+
+    public void setIdcard(String idcard) {
+        this.idcard = idcard;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public Long getOwnernumber() {
+        return ownernumber;
+    }
+
+    public void setOwnernumber(Long ownernumber) {
+        this.ownernumber = ownernumber;
+    }
+
+    @Override
+    public String toString() {
+        return "Tenement{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", integrals=" + integrals +
+                ", registrationdate=" + registrationdate +
+                ", state=" + state +
+                ", qqnumber=" + qqnumber +
+                ", wxnumber='" + wxnumber + '\'' +
+                ", urgencyman='" + urgencyman + '\'' +
+                ", urgencymanphone='" + urgencymanphone + '\'' +
+                ", sex='" + sex + '\'' +
+                ", nation='" + nation + '\'' +
+                ", remark='" + remark + '\'' +
+                ", communityid=" + communityid +
+                ", houseTentment=" + houseTentment +
+                ", house=" + house +
+                ", houseBuliding=" + houseBuliding +
+                ", building=" + building +
+                ", community=" + community +
+                ", idcard='" + idcard + '\'' +
+                ", birthday=" + birthday +
+                ", ownernumber=" + ownernumber +
+                '}';
     }
 }

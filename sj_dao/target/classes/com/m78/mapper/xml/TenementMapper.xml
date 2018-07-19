@@ -16,7 +16,11 @@
     <result column="nation" jdbcType="VARCHAR" property="nation" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="communityId" jdbcType="BIGINT" property="communityid" />
+    <result column="idCard" jdbcType="VARCHAR" property="idcard" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="ownerNumber" jdbcType="BIGINT" property="ownernumber" />
   </resultMap>
+<<<<<<< HEAD
   <resultMap id="TenementDeatil" type="com.m78.entity.Tenement">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
@@ -44,10 +48,13 @@
     </association>
   </resultMap>
 
+=======
+>>>>>>> dc462ce7f8642a819c73fa82acf1abefcbba1600
   <sql id="Base_Column_List">
     id, name, phone, integrals, registrationDate, state, qqNumber, WxNumber, urgencyMan, 
-    urgencyManPhone, sex, nation, remark, communityId
+    urgencyManPhone, sex, nation, remark, communityId, idCard, birthday, ownerNumber
   </sql>
+<<<<<<< HEAD
   <!--根据住户姓名获取住户详细住址-->
   <select id="getDetailAddressByName" resultMap="TenementDeatil">
       SELECT c.`name` as  communityname,b.`name` as  buildingname,h.`unitNumber`,h.`fool`,t.`id`,t.`name` as tenementname FROM tenement t
@@ -70,6 +77,8 @@
     INNER JOIN tenement_carport tc ON tc.`tentmentId`=t.`id`
     WHERE phone=#{phone}
   </select>
+=======
+>>>>>>> dc462ce7f8642a819c73fa82acf1abefcbba1600
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -85,12 +94,14 @@
       integrals, registrationDate, state, 
       qqNumber, WxNumber, urgencyMan, 
       urgencyManPhone, sex, nation, 
-      remark, communityId)
+      remark, communityId, idCard, 
+      birthday, ownerNumber)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{integrals,jdbcType=BIGINT}, #{registrationdate,jdbcType=DATE}, #{state,jdbcType=BIGINT}, 
       #{qqnumber,jdbcType=BIGINT}, #{wxnumber,jdbcType=VARCHAR}, #{urgencyman,jdbcType=VARCHAR}, 
       #{urgencymanphone,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, 
-      #{remark,jdbcType=VARCHAR}, #{communityid,jdbcType=BIGINT})
+      #{remark,jdbcType=VARCHAR}, #{communityid,jdbcType=BIGINT}, #{idcard,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=DATE}, #{ownernumber,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.m78.entity.Tenement">
     insert into tenement
@@ -137,6 +148,15 @@
       <if test="communityid != null">
         communityId,
       </if>
+      <if test="idcard != null">
+        idCard,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="ownernumber != null">
+        ownerNumber,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -180,6 +200,15 @@
       </if>
       <if test="communityid != null">
         #{communityid,jdbcType=BIGINT},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="ownernumber != null">
+        #{ownernumber,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -225,6 +254,15 @@
       <if test="communityid != null">
         communityId = #{communityid,jdbcType=BIGINT},
       </if>
+      <if test="idcard != null">
+        idCard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="ownernumber != null">
+        ownerNumber = #{ownernumber,jdbcType=BIGINT},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -242,7 +280,50 @@
       sex = #{sex,jdbcType=VARCHAR},
       nation = #{nation,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
-      communityId = #{communityid,jdbcType=BIGINT}
+      communityId = #{communityid,jdbcType=BIGINT},
+      idCard = #{idcard,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      ownerNumber = #{ownernumber,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+    <resultMap id="TenementDeatil" type="com.m78.entity.Tenement">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="tenementname" jdbcType="VARCHAR" property="name" />
+        <association property="house" javaType="com.m78.entity.House">
+            <result column="houseId"  property="houseid"/>
+            <result column="unitNumber" jdbcType="BIGINT" property="unitnumber"></result>
+            <result column="fool" jdbcType="BIGINT" property="fool"></result>
+        </association>
+        <association property="building" javaType="com.m78.entity.Building">
+            <result column="buildingid" property="id" />
+            <result column="buildingname" jdbcType="VARCHAR" property="name"></result>
+        </association>
+        <association property="community" javaType="com.m78.entity.Community">
+            <result column="communityid" property="id"/>
+            <result column="communityname" jdbcType="VARCHAR" property="name"></result>
+        </association>
+    </resultMap>
+
+
+    <!--根据住户姓名获取住户详细住址-->
+    <select id="getDetailAddressByName" resultMap="TenementDeatil">
+        SELECT c.`name` as  communityname,c.id as communityid ,b.`name` as  buildingname,b.id as buildingid ,h.houseId ,h.`unitNumber`,h.`fool`,t.`id`,t.`name` as tenementname FROM tenement t
+        INNER JOIN house_tentment ht ON ht.`tentmentId`=t.`id`
+        INNER JOIN house h ON h.`houseId`=ht.`houseId`
+        INNER JOIN house_buliding hb ON h.`houseId`=hb.`houseId`
+        INNER JOIN building b ON b.`id`=hb.`buildingId`
+        INNER JOIN community c ON c.`id`=t.`communityId`
+        WHERE 1=1
+        <if test="name!=''">
+            and  t.name LIKE CONCAT ('%',#{name},'%')
+        </if>
+        limit #{page},#{limit}
+    </select>
+
+    <select id="getAllCount" resultType="java.lang.Integer">
+        SELECT count(1) FROM tenement
+        <if test="name!=''">
+            where tenement.name   LIKE CONCAT ('%',#{name },'%')
+        </if>
+    </select>
 </mapper>

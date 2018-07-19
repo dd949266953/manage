@@ -9,6 +9,9 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" th:href="@{/jquery/jMenu.jquery.css}" type="text/css" />
 		<style>
+            iframe{
+                height: 650px;
+            }
 			form {
 				margin: 20px 38px 20px 0px;
 			}
@@ -20,7 +23,7 @@
 		<div class="layui-form-item">
             <label class="layui-form-label">筛选信息</label>
             <div class="layui-input-block">
-              <input type="text" id="address" name="address"  lay-verify="title" autocomplete="off" placeholder="请输入房号/姓名" class="layui-input">
+              <input type="text" id="tentmentName" name="tentmentName"  lay-verify="title" autocomplete="off" placeholder="请输入姓名" class="layui-input" />
             
             </div>
             
@@ -28,7 +31,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">选择主体</label>
             <div class="layui-input-block">
-              <table id="demo" lay-filter="test" class="layui-table"></table>
+              <table id="table" lay-filter="table" class="layui-table"></table>
               <div id="test"></div>
             </div>
         </div>
@@ -43,33 +46,30 @@
             <label class="layui-form-label">收费标准</label>
             <ul id="jMenu" >
 			<li>
-				<a class="fNiv" style="width: 200px;"> 请选择收费标准 </a>
-				<ul>
-					<li>
 
-						<a>物业费</a>
-						<ul>
-							<li class="last">
-								<a>标准收费</a>
-							</li>
-						</ul>
-						
-						
-					</li>
-					
-					
-					<li>
 
-						<a>水费</a>
-						<ul>
-							<li class="last">
-								<a>标准收费</a>
-							</li>
-						</ul>
-						
-						
-					</li>
+				<a class="fNiv" data_id="0" style="width: 200px;"> 请选择收费标准 </a>
+
+
+
+
+				<ul id="uls">
+                    <li th:each="charName:${charName}"    id="lis" >
+
+                        <a th:text="${charName.name}"></a>
+                        <ul >
+                            <li th:each="itmeName:${itmeName}"   th:if="${charName.id} eq ${itmeName.type} " class="last">
+                                <a th:text="${itmeName.name}" th:data_id="${itmeName.id}"></a>
+                            </li>
+                        </ul>
+
+
+                    </li>
+					
+
 				</ul>
+
+
 			</li>
 		</ul>
             
@@ -77,15 +77,23 @@
         	<div class="layui-form-item" style="position: relative;top: 50px;">
             <label class="layui-form-label">用量</label>
             <div class="layui-input-block">
-              <input type="text" id="address" name="address" lay-verify="required"  autocomplete="off"  class="layui-input">
+              <input type="text" id="conmos" name="address" lay-verify="required"  autocomplete="off"  class="layui-input">
             
             </div>
             
         </div>
+            <div class="layui-form-item" style="position: relative;top: 50px;">
+                <label class="layui-form-label">总金额</label>
+                <div class="layui-input-block">
+                    <input type="text" id="moneys" name="address" lay-verify="required"  autocomplete="off"  class="layui-input">
+
+                </div>
+
+            </div>
         	<div class="layui-form-item" style="position: relative;top: 50px;">
             <label class="layui-form-label">备注</label>
             <div class="layui-input-block">
-              <input type="text" id="address" name="address" lay-verify="required"  autocomplete="off"  class="layui-input">
+              <input type="text" id="remork" name="address"   autocomplete="off"  class="layui-input">
             
             </div>
             
@@ -109,39 +117,152 @@
 			$(".last a").click(function(){
 				var con=$(this).text();
 				$(".fNiv").text(con);
+				$(".fNiv").attr("data_id",$(this).attr("data_id"));
 				$("#jMenu ul").hide();
 			})
 			$(document).ready(function() {
 				$("#jMenu").jMenu();
 			})
-layui.use('table', function(){
-	var table = layui.table;
-	 table.render({
-          elem: '#demo'
-          ,url: '../companyinfo/getCompanyInfoByStreet.json' //数据接口
-          ,where:{
-          	street:$("#address").val()
-          }
-          ,cols: [[ //表头
-            {checkbox: true}
-            ,{field: 'name', title: '小区'}
-            ,{field: 'linkman', title: '几栋'}
-            ,{field: 'address', title: '单元'}
-            ,{field: 'address', title: '房号'}
-            ,{field: 'scope', title: '业主'}
-          ]]
-          ,page: true
-        })
-      })
+            var checkStatus=null;
+			$("#tentmentName").change(function() {
+                page();
+            })
+			$(function () {
+                page();
+            })
+           function page(){
+               layui.use(['layer', 'table'], function() {
+                   table = layui.table;
+                   var layer = layui.layer;
+                   table.render({
+                       elem: '#table',
+                       loading: true,
+                       limit:4,
+                       url: '../getDetailAddressByName.json',
+                       where: {
+                           name: $("#tentmentName").val()
+                       },
+                       cols: [
+                           [
+                               {checkbox: true}, {
+                               align: 'center',
+                               title: '小区',
+                               unresize: 'true',
+                               templet: function (d) {
+                                   return d.community.name
+                               }
+                           },{
+                               align: 'center',
+                               title: '楼宇',
+                               unresize: 'true',
+                               templet: function(d){
+                                   return d.building.name
+                               }
+                           },{
+                               align: 'center',
+                               title: '单元',
+                               unresize: 'true',
+                               templet: function(d){
+                                   return d.house.unitnumber
+                               }
+                           },{
+                               align: 'center',
+                               title: '房号',
+                               unresize: 'true',
+                               templet: function(d){
+                                   return d.house.fool
+                               }
+                           },{
+                               field:'name',
+                               align: 'center',
+                               title: '住户',
+                               unresize: 'true'
+                           }
+
+                           ]
+                       ],
+                       page: true
+                   })
+                   table.on('checkbox(table)', function(obj){
+                       checkStatus = table.checkStatus('table');
+                       communityId=obj.data.community.id;
+                       houseId=obj.data.house.houseid;
+
+                   });
+               })
+           }
+            var communityId=0;
+			var houseId=0;
+            layui.use('form', function(){
+                var form = layui.form;
+                form.on('submit(demo1)', function(data){
+                    if(checkStatus==null){
+                        layer.msg('请选择一个住户',{icon: 2})
+                        return false;
+                    }else if(checkStatus.data.length!=1){
+                        layer.msg('请选择一个住户',{icon: 2})
+                        return false;
+                    }else {
+                        if(startTime!=''){
+                            if($(".fNiv").attr("data_id")!=0){
+                                $.ajax({
+                                    url:'addBill.json',
+                                    type:'get',
+                                    dataType:'json',
+                                    data:{
+                                        remork:$("#remork").val(),
+                                        start:startTime,
+                                        end:endTime,
+                                        consume:$("#conmos").val(),
+                                        communityId:communityId,
+                                        charItemId:$(".fNiv").attr("data_id"),
+                                        houseId:houseId,
+                                        moneys:$("#moneys").val()
+                                    },
+                                    success:function(data){
+                                        if(data=='1'){
+                                            parent.location.reload();
+                                        }else{
+                                            layer.msg("错误");
+                                        }
+
+                                    }
+                                })
+                            }else{
+                                layer.msg('请选择收费标准',{icon: 2})
+                                return false;
+                            }
+
+
+                        }else {
+                            layer.msg('请选择时间',{icon: 2})
+                            return false;
+                        }
+                    }
+
+
+                });
+
+            });
+
+
+            var startTime='';
+            var endTime='';
 		layui.use('laydate', function(){
            var laydate = layui.laydate;
             //日期时间选择器
   laydate.render({
     elem: '#test6'
     ,range: true,
-    theme: '#34A5C7'
+    theme: '#34A5C7', done: function(value, date, endDate){
+          var times= value.split("-");
+           startTime=times[0]+"-"+times[1]+"-"+times[2];
+           endTime=times[3]+"-"+times[4]+"-"+times[5];
+      }
   })
   })
+
+
 		</script>
 	</body>
 

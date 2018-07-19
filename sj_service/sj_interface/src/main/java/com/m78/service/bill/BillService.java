@@ -4,6 +4,7 @@ package com.m78.service.bill;
  */
 
 import com.m78.entity.Bill;
+import com.m78.entity.ChargeId;
 
 import java.util.Arrays;
 import java.util.List;
@@ -73,5 +74,11 @@ public interface BillService {
      */
     Long getAllSendCount();
 
+    /**
+     * 添加账单
+     * @return
+     */
+    int addBill(Bill bill, ChargeId chargeId);
 
+    int addImportBill(Bill bill,String charItemName,String type,String communityName,Long singId,String phone);
 }

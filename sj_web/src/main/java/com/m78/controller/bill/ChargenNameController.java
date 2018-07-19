@@ -9,6 +9,7 @@ import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,6 +46,8 @@ public class ChargenNameController {
     public  Object getAllCharName(@RequestParam("page") int page, @RequestParam("limit") int limit,@RequestParam("name")String name){
         return DataTable.bindTableUtil(0,chargenNameService.getAllCount(name),chargenNameService.getAllCharName(page,limit,name));
     }
+
+
 
     /**
      * 下拉框显示
