@@ -5,13 +5,6 @@ import com.m78.entity.Tenement;
 import java.util.List;
 
 public interface TenementService {
-    /**
-     * 根据住户姓名获取住户详细住址-
-     * @param name
-     * @return
-     */
-
-    List<Tenement> getDetailAddressByName(String name);
 
     /**
      * 根据住户手机号查询房屋主键
@@ -27,6 +20,11 @@ public interface TenementService {
      */
     Long getCarportIdByTenementPhone(String phone);
 
+    /**
+     * 根据住户姓名获取住户详细住址-
+     * @param name
+     * @return
+     */
     List<Tenement> getDetailAddressByName(String name,int page,int limit);
 
     /**
@@ -34,5 +32,4 @@ public interface TenementService {
      * @return
      */
     int getAllCount(String name);
-
 }

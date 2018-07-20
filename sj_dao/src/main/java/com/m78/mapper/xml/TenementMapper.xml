@@ -20,14 +20,10 @@
     <result column="birthday" jdbcType="DATE" property="birthday" />
     <result column="ownerNumber" jdbcType="BIGINT" property="ownernumber" />
   </resultMap>
-
-
   <sql id="Base_Column_List">
     id, name, phone, integrals, registrationDate, state, qqNumber, WxNumber, urgencyMan, 
     urgencyManPhone, sex, nation, remark, communityId, idCard, birthday, ownerNumber
   </sql>
-
-
   <!--根据住户手机号查询房屋主键-->
   <select id="getHouseIdByTenementPhone" resultType="java.lang.Long">
     SELECT ht.`houseId` FROM tenement t
@@ -40,7 +36,27 @@
     INNER JOIN tenement_carport tc ON tc.`tentmentId`=t.`id`
     WHERE phone=#{phone}
   </select>
-
+  <!--根据住户姓名获取住户详细住址-->
+  <select id="getDetailAddressByName" resultMap="TenementDeatil">
+    SELECT c.`name` as  communityname,c.id as communityid ,b.`name` as  buildingname,b.id as buildingid ,h.houseId ,h.`unitNumber`,h.`fool`,t.`id`,t.`name` as tenementname FROM tenement t
+    INNER JOIN house_tentment ht ON ht.`tentmentId`=t.`id`
+    INNER JOIN house h ON h.`houseId`=ht.`houseId`
+    INNER JOIN house_buliding hb ON h.`houseId`=hb.`houseId`
+    INNER JOIN building b ON b.`id`=hb.`buildingId`
+    INNER JOIN community c ON c.`id`=t.`communityId`
+    WHERE 1=1
+    <if test="name!=''">
+      and  t.name LIKE CONCAT ('%',#{name},'%')
+    </if>
+    limit #{page},#{limit}
+  </select>
+  <!--获取住户总数-->
+  <select id="getAllCount" resultType="java.lang.Integer">
+    SELECT count(1) FROM tenement
+    <if test="name!=''">
+      where tenement.name   LIKE CONCAT ('%',#{name },'%')
+    </if>
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -265,27 +281,4 @@
             <result column="communityname" jdbcType="VARCHAR" property="name"></result>
         </association>
     </resultMap>
-
-
-    <!--根据住户姓名获取住户详细住址-->
-    <select id="getDetailAddressByName" resultMap="TenementDeatil">
-        SELECT c.`name` as  communityname,c.id as communityid ,b.`name` as  buildingname,b.id as buildingid ,h.houseId ,h.`unitNumber`,h.`fool`,t.`id`,t.`name` as tenementname FROM tenement t
-        INNER JOIN house_tentment ht ON ht.`tentmentId`=t.`id`
-        INNER JOIN house h ON h.`houseId`=ht.`houseId`
-        INNER JOIN house_buliding hb ON h.`houseId`=hb.`houseId`
-        INNER JOIN building b ON b.`id`=hb.`buildingId`
-        INNER JOIN community c ON c.`id`=t.`communityId`
-        WHERE 1=1
-        <if test="name!=''">
-            and  t.name LIKE CONCAT ('%',#{name},'%')
-        </if>
-        limit #{page},#{limit}
-    </select>
-
-    <select id="getAllCount" resultType="java.lang.Integer">
-        SELECT count(1) FROM tenement
-        <if test="name!=''">
-            where tenement.name   LIKE CONCAT ('%',#{name },'%')
-        </if>
-    </select>
 </mapper>

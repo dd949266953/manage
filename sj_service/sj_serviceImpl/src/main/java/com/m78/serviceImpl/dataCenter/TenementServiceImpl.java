@@ -55,9 +55,4 @@ public class TenementServiceImpl implements TenementService {
     public Long getCarportIdByTenementPhone(String phone) {
         return tenementMapper.getCarportIdByTenementPhone(phone);
     }
-
-    @Override
-    public List<Tenement> getDetailAddressByName(String name) {
-        return tenementMapper.getDetailAddressByName(name);
-    }
 }
