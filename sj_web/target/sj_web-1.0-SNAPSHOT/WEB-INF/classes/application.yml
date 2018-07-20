@@ -1,0 +1,18 @@
+
+server:
+  port: 8081
+spring:
+  dubbo:
+    application:
+      name: admin_provider
+    registry:
+      address: zookeeper://47.105.105.208:2181
+    scan: com.m78.controller
+  thymeleaf:
+      suffix: .html
+      request-context-attribute: request
+      cache: false
+      mode: LEGACYHTML5
+  jackson:
+      date-format: yyyy-MM-dd
+      time-zone: GMT+8

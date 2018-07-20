@@ -10,7 +10,7 @@ spring:
       application:
         name: admin_provider
         registries:
-          timeout: 1200000
+          timeout: 12000000
       registry:
         address: zookeeper://47.105.105.208:2181
       protocol:

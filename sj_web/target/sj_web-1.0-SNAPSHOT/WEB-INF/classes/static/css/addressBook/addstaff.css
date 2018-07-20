@@ -1,0 +1,81 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "microsoft yahei", 'Open Sans', sans-serif;
+	color: #8391a5;
+	font-size: 14px;
+}
+
+.body{
+	height: 700px;
+	width: 704px;
+}
+.add{
+	width: 704px;
+	height: 65px;
+	border-bottom: 1px solid red;
+	margin-top: 3%;
+}
+.add h1{
+	padding-left: 6%;
+	margin-top: 3%;
+	font-size: 20px;
+	font-weight: 100;
+	color: #000000;
+	
+}
+.particulars{
+	width: 704px;
+	height: 540px;
+}
+table td{
+	padding-left: 150px;
+	padding-top:35px ;
+}
+.symbol{
+	color: #f5222d;
+	font-family: SimSun;
+}
+.size{
+	color: rgba(0,0,0,.85);
+	font-family: SimSun;
+}
+.housing{
+	width: 315px;
+	height: 35px;
+	border: 1px solid #D9D9D9;
+	border-radius: 5px;
+}
+.name{
+	width: 300px;
+	height: 35px;
+	border: 1px solid #D9D9D9;
+	border-radius: 5px;
+}
+
+.behind{
+	padding-left: 45px;
+}
+.behinds{
+	padding-left: 30px;
+}
+
+
+.end{
+	width: 704px;
+	height: 65px;
+	border-top: 1px solid red;
+}
+.btn{
+margin-left: 520px;
+	margin-top: 10px;
+}
+.del{
+	margin-top: 10px;
+}
+input{
+	padding-left: 10px;
+}
+select{
+	padding-left: 10px;
+}

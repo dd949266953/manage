@@ -4,6 +4,7 @@ E:\manage\sj_entity\src\main\java\com\m78\entity\Role.java
 E:\manage\sj_entity\src\main\java\com\m78\entity\House.java
 E:\manage\sj_entity\src\main\java\com\m78\entity\Activity.java
 E:\manage\sj_entity\src\main\java\com\m78\entity\Permission.java
+E:\manage\sj_entity\src\main\java\com\m78\entity\TenementCar.java
 E:\manage\sj_entity\src\main\java\com\m78\entity\HouseTentment.java
 E:\manage\sj_entity\src\main\java\com\m78\entity\Withoutuser.java
 E:\manage\sj_entity\src\main\java\com\m78\entity\Carport.java
@@ -23,14 +24,13 @@ E:\manage\sj_entity\src\main\java\com\m78\entity\Childnotice.java
 E:\manage\sj_entity\src\main\java\com\m78\entity\UserRole.java
 E:\manage\sj_entity\src\main\java\com\m78\entity\CommunityTalk.java
 E:\manage\sj_entity\src\main\java\com\m78\entity\Tenement.java
-E:\manage\sj_entity\src\main\java\com\m78\entity\TentmentCarport.java
+E:\manage\sj_entity\src\main\java\com\m78\entity\TenementCarport.java
 E:\manage\sj_entity\src\main\java\com\m78\entity\VoteCommunity.java
 E:\manage\sj_entity\src\main\java\com\m78\entity\TalkStaff.java
 E:\manage\sj_entity\src\main\java\com\m78\entity\CommunityNotice.java
 E:\manage\sj_entity\src\main\java\com\m78\entity\Result.java
 E:\manage\sj_entity\src\main\java\com\m78\entity\Community.java
 E:\manage\sj_entity\src\main\java\com\m78\entity\Building.java
-E:\manage\sj_entity\src\main\java\com\m78\entity\TentmentCar.java
 E:\manage\sj_entity\src\main\java\com\m78\entity\Car.java
 E:\manage\sj_entity\src\main\java\com\m78\entity\VoteOption.java
 E:\manage\sj_entity\src\main\java\com\m78\entity\Staff.java

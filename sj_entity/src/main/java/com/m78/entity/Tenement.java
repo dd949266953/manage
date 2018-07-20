@@ -32,21 +32,41 @@ public class Tenement implements Serializable {
 
     private Long communityid;
 
-    private HouseTentment houseTentment;
-
-    private House house;
-
-    private HouseBuliding houseBuliding;
-
-    private Building building;
-
-    private Community community;
-
     private String idcard;
 
     private Date birthday;
 
     private Long ownernumber;
+
+    private House house;
+
+    private Building building;
+
+    private Community community;
+
+    public House getHouse() {
+        return house;
+    }
+
+    public void setHouse(House house) {
+        this.house = house;
+    }
+
+    public Building getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(Building building) {
+        this.building = building;
+    }
+
+    public Community getCommunity() {
+        return community;
+    }
+
+    public void setCommunity(Community community) {
+        this.community = community;
+    }
 
     public Long getId() {
         return id;
@@ -160,46 +180,6 @@ public class Tenement implements Serializable {
         this.communityid = communityid;
     }
 
-    public HouseTentment getHouseTentment() {
-        return houseTentment;
-    }
-
-    public void setHouseTentment(HouseTentment houseTentment) {
-        this.houseTentment = houseTentment;
-    }
-
-    public House getHouse() {
-        return house;
-    }
-
-    public void setHouse(House house) {
-        this.house = house;
-    }
-
-    public HouseBuliding getHouseBuliding() {
-        return houseBuliding;
-    }
-
-    public void setHouseBuliding(HouseBuliding houseBuliding) {
-        this.houseBuliding = houseBuliding;
-    }
-
-    public Building getBuilding() {
-        return building;
-    }
-
-    public void setBuilding(Building building) {
-        this.building = building;
-    }
-
-    public Community getCommunity() {
-        return community;
-    }
-
-    public void setCommunity(Community community) {
-        this.community = community;
-    }
-
     public String getIdcard() {
         return idcard;
     }
@@ -241,11 +221,6 @@ public class Tenement implements Serializable {
                 ", nation='" + nation + '\'' +
                 ", remark='" + remark + '\'' +
                 ", communityid=" + communityid +
-                ", houseTentment=" + houseTentment +
-                ", house=" + house +
-                ", houseBuliding=" + houseBuliding +
-                ", building=" + building +
-                ", community=" + community +
                 ", idcard='" + idcard + '\'' +
                 ", birthday=" + birthday +
                 ", ownernumber=" + ownernumber +

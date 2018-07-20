@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @MapperScan(basePackages = "com.m78.mapper")
 @ComponentScan(basePackages = "com.m78.*")
-public class Start {
+public class    Start {
     public static void main(String[] args) {
         SpringApplication.run(Start.class,args);
     }

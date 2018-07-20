@@ -17,47 +17,8 @@ public class TenementServiceImpl implements TenementService {
     private TenementMapper tenementMapper;
 
 
-    /**
-     * 根据姓名查询住户详细住址
-     * @param name
-     * @return
-     */
     @Override
-    public List<Tenement> getDetailAddressByName(String name, int page, int limit) {
-        int start=(page-1)*limit;
-        return tenementMapper.getDetailAddressByName(name,start,limit);
-    }
-
-
-    @Override
-    public int getAllCount(String name) {
-        return tenementMapper.getAllCount(name);
-    }
-
-    /**
-     * 根据电话查询房屋id
-     * @param phone
-     * @return
-     */
-    @Transactional
-    @Override
-    public Long getHouseIdByTenementPhone(String phone) {
-        return tenementMapper.getHouseIdByTenementPhone(phone);
-    }
-
-    /**
-     * 根据电话查询车位id
-     * @param phone
-     * @return
-     */
-    @Transactional
-    @Override
-    public Long getCarportIdByTenementPhone(String phone) {
-        return tenementMapper.getCarportIdByTenementPhone(phone);
-    }
-
-    @Override
-    public List<Tenement> getDetailAddressByName(String name) {
-        return tenementMapper.getDetailAddressByName(name);
+    public List<Tenement> getAllTenement() {
+        return tenementMapper.getAllTenement();
     }
 }
