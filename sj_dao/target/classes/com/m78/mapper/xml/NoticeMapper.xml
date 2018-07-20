@@ -1,106 +1,139 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.m78.mapper.NoticeMapper" >
-  <resultMap id="BaseResultMap" type="com.m78.entity.Notice" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="noticeName" property="noticename" jdbcType="VARCHAR" />
-    <result column="type" property="type" jdbcType="BIGINT" />
-    <result column="establish" property="establish" jdbcType="BIGINT" />
-    <result column="time" property="time" jdbcType="TIMESTAMP" />
-    <result column="level" property="level" jdbcType="BIGINT" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.m78.mapper.NoticeMapper">
+  <resultMap id="BaseResultMap" type="com.m78.entity.Notice">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="noticeName" jdbcType="VARCHAR" property="noticename" />
+    <result column="type" jdbcType="BIGINT" property="type" />
+    <result column="time" jdbcType="DATE" property="time" />
+    <result column="level" jdbcType="BIGINT" property="level" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="contentType" jdbcType="INTEGER" property="contenttype" />
+    <result column="parentNotice" jdbcType="BIGINT" property="parentnotice" />
   </resultMap>
-  <sql id="Base_Column_List" >
-    id, noticeName, type, establish, time, level
+  <sql id="Base_Column_List">
+    id, noticeName, type, time, level, content, image, contentType, parentNotice
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from notice
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from notice
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.m78.entity.Notice" >
+  <insert id="insert" parameterType="com.m78.entity.Notice">
     insert into notice (id, noticeName, type, 
-      establish, time, level
-      )
+      time, level, content, image, 
+      contentType, parentNotice)
     values (#{id,jdbcType=BIGINT}, #{noticename,jdbcType=VARCHAR}, #{type,jdbcType=BIGINT}, 
-      #{establish,jdbcType=BIGINT}, #{time,jdbcType=TIMESTAMP}, #{level,jdbcType=BIGINT}
-      )
+      #{time,jdbcType=DATE}, #{level,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
+      #{contenttype,jdbcType=INTEGER}, #{parentnotice,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.m78.entity.Notice" >
+  <insert id="insertSelective" parameterType="com.m78.entity.Notice">
     insert into notice
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="noticename != null" >
+      <if test="noticename != null">
         noticeName,
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         type,
       </if>
-      <if test="establish != null" >
-        establish,
-      </if>
-      <if test="time != null" >
+      <if test="time != null">
         time,
       </if>
-      <if test="level != null" >
+      <if test="level != null">
         level,
       </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="contenttype != null">
+        contentType,
+      </if>
+      <if test="parentnotice != null">
+        parentNotice,
+      </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="noticename != null" >
+      <if test="noticename != null">
         #{noticename,jdbcType=VARCHAR},
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         #{type,jdbcType=BIGINT},
       </if>
-      <if test="establish != null" >
-        #{establish,jdbcType=BIGINT},
+      <if test="time != null">
+        #{time,jdbcType=DATE},
       </if>
-      <if test="time != null" >
-        #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="level != null" >
+      <if test="level != null">
         #{level,jdbcType=BIGINT},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="contenttype != null">
+        #{contenttype,jdbcType=INTEGER},
+      </if>
+      <if test="parentnotice != null">
+        #{parentnotice,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.Notice" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.Notice">
     update notice
-    <set >
-      <if test="noticename != null" >
+    <set>
+      <if test="noticename != null">
         noticeName = #{noticename,jdbcType=VARCHAR},
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         type = #{type,jdbcType=BIGINT},
       </if>
-      <if test="establish != null" >
-        establish = #{establish,jdbcType=BIGINT},
+      <if test="time != null">
+        time = #{time,jdbcType=DATE},
       </if>
-      <if test="time != null" >
-        time = #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="level != null" >
+      <if test="level != null">
         level = #{level,jdbcType=BIGINT},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="contenttype != null">
+        contentType = #{contenttype,jdbcType=INTEGER},
+      </if>
+      <if test="parentnotice != null">
+        parentNotice = #{parentnotice,jdbcType=BIGINT},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.m78.entity.Notice" >
+  <update id="updateByPrimaryKey" parameterType="com.m78.entity.Notice">
     update notice
     set noticeName = #{noticename,jdbcType=VARCHAR},
       type = #{type,jdbcType=BIGINT},
-      establish = #{establish,jdbcType=BIGINT},
-      time = #{time,jdbcType=TIMESTAMP},
-      level = #{level,jdbcType=BIGINT}
+      time = #{time,jdbcType=DATE},
+      level = #{level,jdbcType=BIGINT},
+      content = #{content,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      contentType = #{contenttype,jdbcType=INTEGER},
+      parentNotice = #{parentnotice,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
