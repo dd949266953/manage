@@ -1,70 +1,70 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.m78.mapper.TenementCarMapper" >
-  <resultMap id="BaseResultMap" type="com.m78.entity.TenementCar" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="tentmentId" property="tentmentid" jdbcType="BIGINT" />
-    <result column="carId" property="carid" jdbcType="BIGINT" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.m78.mapper.TenementCarMapper">
+  <resultMap id="BaseResultMap" type="com.m78.entity.TenementCar">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="tenementId" jdbcType="BIGINT" property="tenementid" />
+    <result column="carId" jdbcType="BIGINT" property="carid" />
   </resultMap>
-  <sql id="Base_Column_List" >
-    id, tentmentId, carId
+  <sql id="Base_Column_List">
+    id, tenementId, carId
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from tentment_car
+    from tenement_car
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from tentment_car
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tenement_car
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.m78.entity.TenementCar" >
-    insert into tentment_car (id, tentmentId, carId
+  <insert id="insert" parameterType="com.m78.entity.TenementCar">
+    insert into tenement_car (id, tenementId, carId
       )
-    values (#{id,jdbcType=BIGINT}, #{tentmentid,jdbcType=BIGINT}, #{carid,jdbcType=BIGINT}
+    values (#{id,jdbcType=BIGINT}, #{tenementid,jdbcType=BIGINT}, #{carid,jdbcType=BIGINT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.m78.entity.TenementCar" >
-    insert into tentment_car
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+  <insert id="insertSelective" parameterType="com.m78.entity.TenementCar">
+    insert into tenement_car
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="tentmentid != null" >
-        tentmentId,
+      <if test="tenementid != null">
+        tenementId,
       </if>
-      <if test="carid != null" >
+      <if test="carid != null">
         carId,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="tentmentid != null" >
-        #{tentmentid,jdbcType=BIGINT},
+      <if test="tenementid != null">
+        #{tenementid,jdbcType=BIGINT},
       </if>
-      <if test="carid != null" >
+      <if test="carid != null">
         #{carid,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.TenementCar" >
-    update tentment_car
-    <set >
-      <if test="tentmentid != null" >
-        tentmentId = #{tentmentid,jdbcType=BIGINT},
+  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.TenementCar">
+    update tenement_car
+    <set>
+      <if test="tenementid != null">
+        tenementId = #{tenementid,jdbcType=BIGINT},
       </if>
-      <if test="carid != null" >
+      <if test="carid != null">
         carId = #{carid,jdbcType=BIGINT},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.m78.entity.TenementCar" >
-    update tentment_car
-    set tentmentId = #{tentmentid,jdbcType=BIGINT},
+  <update id="updateByPrimaryKey" parameterType="com.m78.entity.TenementCar">
+    update tenement_car
+    set tenementId = #{tenementid,jdbcType=BIGINT},
       carId = #{carid,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>

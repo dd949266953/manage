@@ -11,6 +11,12 @@
   <sql id="Base_Column_List" >
     carId, ownerName, ownerPhone, carNumber, carDisplacement
   </sql>
+  <!--查询全部车辆-->
+  <select id="getAllCar" resultMap="BaseResultMap">
+      select
+    <include refid="Base_Column_List" />
+      from car
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />

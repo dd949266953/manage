@@ -108,18 +108,18 @@ public class BillServiceImpl  implements BillService {
         ChargeId  chargeId=new ChargeId();
         chargeId.setBillid(bill.getId());
 
-        //根据手机号操作
-        if(type.equals("房屋")){
-            chargeId.setType(new Long(1));
-            singId=tenementMapper.getHouseIdByTenementPhone(phone);
-        }else {
-            chargeId.setType(new Long(2));
-            singId=tenementMapper.getCarportIdByTenementPhone(phone);
-        }
-        chargeId.setSignid(singId);
-        int num= chargeIdMapper.insertSelective(chargeId);
+//        //根据手机号操作
+//        if(type.equals("房屋")){
+//            chargeId.setType(new Long(1));
+//            singId=tenementMapper.getHouseIdByTenementPhone(phone);
+//        }else {
+//            chargeId.setType(new Long(2));
+//            singId=tenementMapper.getCarportIdByTenementPhone(phone);
+//        }
+//        chargeId.setSignid(singId);
+//        int num= chargeIdMapper.insertSelective(chargeId);
 
 
-        return num;
+        return 0;
     }
 }

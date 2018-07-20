@@ -1,6 +1,8 @@
 package com.m78.entity;
 
-public class TenementCarport {
+import java.io.Serializable;
+
+public class TenementCarport implements Serializable {
     private Long id;
 
     private Long tentmentid;
@@ -33,7 +35,7 @@ public class TenementCarport {
 
     @Override
     public String toString() {
-        return "TentmentCarport{" +
+        return "TenementCarport{" +
                 "id=" + id +
                 ", tentmentid=" + tentmentid +
                 ", carportid=" + carportid +

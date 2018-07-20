@@ -18,8 +18,6 @@ com\m78\entity\Result.class
 com\m78\entity\Childnotice.class
 com\m78\entity\Talk.class
 com\m78\entity\CommunityBuilding.class
-com\m78\entity\TentmentCarport.class
-com\m78\entity\TentmentCar.class
 com\m78\entity\Community.class
 com\m78\entity\Permission.class
 com\m78\entity\Chargeitem.class
@@ -43,6 +41,7 @@ com\m78\entity\ChargeitemCarport.class
 com\m78\entity\ChargeId.class
 com\m78\entity\VoteTentment.class
 com\m78\entity\CommunitCarport.class
+com\m78\entity\TenementCarport.class
 com\m78\entity\Admin.class
 com\m78\entity\TalkStaff.class
 com\m78\entity\CommunityTalk.class
@@ -51,4 +50,5 @@ com\m78\entity\Advertising.class
 com\m78\entity\HouseTentment.class
 com\m78\entity\ChargeitemHouse.class
 com\m78\entity\BillTentment.class
+com\m78\entity\TenementCar.class
 com\m78\entity\Car.class

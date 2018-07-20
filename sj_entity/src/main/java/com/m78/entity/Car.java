@@ -1,6 +1,8 @@
 package com.m78.entity;
 
-public class Car {
+import java.io.Serializable;
+
+public class Car implements Serializable {
     private Long carid;
 
     private String ownername;

@@ -1,9 +1,11 @@
 package com.m78.entity;
 
-public class TenementCar {
+import java.io.Serializable;
+
+public class TenementCar implements Serializable {
     private Long id;
 
-    private Long tentmentid;
+    private Long tenementid;
 
     private Long carid;
 
@@ -15,12 +17,12 @@ public class TenementCar {
         this.id = id;
     }
 
-    public Long getTentmentid() {
-        return tentmentid;
+    public Long getTenementid() {
+        return tenementid;
     }
 
-    public void setTentmentid(Long tentmentid) {
-        this.tentmentid = tentmentid;
+    public void setTenementid(Long tenementid) {
+        this.tenementid = tenementid;
     }
 
     public Long getCarid() {
@@ -35,7 +37,7 @@ public class TenementCar {
     public String toString() {
         return "TenementCar{" +
                 "id=" + id +
-                ", tentmentid=" + tentmentid +
+                ", tenementid=" + tenementid +
                 ", carid=" + carid +
                 '}';
     }
