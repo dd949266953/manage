@@ -80,5 +80,5 @@ public interface BillService {
      */
     int addBill(Bill bill, ChargeId chargeId);
 
-    int addImportBill(Bill bill,String charItemName,String type,String communityName,String phone);
+    int addImportBill(Bill bill,String charItemName,String type,String phone);
 }

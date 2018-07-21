@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.annotation.Resource;
 import javax.swing.filechooser.FileSystemView;
@@ -269,22 +270,23 @@ public class BillController {
      */
     @RequestMapping("importBill.json")
     @ResponseBody
-    public  Object importBill(@RequestParam("url") String url){
+    public  Object importBill(MultipartHttpServletRequest request, @RequestParam("communityId") Long communityId){
         Workbook workbook = null;
         int num=0;
         try {
             // 获取Ecle对象
-            workbook = Workbook.getWorkbook(new File(url));
+            workbook = Workbook.getWorkbook(new File(""));
             // 获取选项卡对象 第0个选项卡
             Sheet sheet = workbook.getSheet(0);
 
             // 循环选项卡中的值
-            for (int i = 0; i < sheet.getRows(); i++) {
+            for (int i = 2; i < sheet.getRows(); i++) {
                 Bill bill=new Bill();
-                String start=sheet.getCell(5,i).getContents();
-                String end=sheet.getCell(6,i).getContents();
-                Double consume=Double.parseDouble(sheet.getCell(9,i).getContents());
-                Double moneys=Double.parseDouble(sheet.getCell(10,i).getContents());
+                String start=sheet.getCell(3,i).getContents();
+                String end=sheet.getCell(4,i).getContents();
+                System.out.print(start);
+                Double consume=Double.parseDouble(sheet.getCell(7,i).getContents());
+                Double moneys=Double.parseDouble(sheet.getCell(8,i).getContents());
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 Date startTime= null;
                 Date overTime=null;
@@ -298,11 +300,12 @@ public class BillController {
                 bill.setOvertime(overTime);
                 bill.setConsume(consume);
                 bill.setMoneys(moneys);
-                String charItemName=sheet.getCell(1,i).getContents();
-                String type=sheet.getCell(2,i).getContents();
-                String communityName=sheet.getCell(3,i).getContents();
-                String phone=sheet.getCell(8,i).getContents();
-                num=billService.addImportBill(bill,charItemName,type,communityName,phone);
+                bill.setState(new  Long(27));
+                bill.setCommunityid(communityId);
+                String charItemName=sheet.getCell(0,i).getContents();
+                String type=sheet.getCell(1,i).getContents();
+                String phone=sheet.getCell(6,i).getContents();
+                num=billService.addImportBill(bill,charItemName,type,phone);
                 System.out.print(num);
                 if (num==0){
                     break;

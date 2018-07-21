@@ -9,11 +9,17 @@ public class Notice {
 
     private Long type;
 
-    private Long establish;
-
     private Date time;
 
     private Long level;
+
+    private String content;
+
+    private String image;
+
+    private Integer contenttype;
+
+    private Long parentnotice;
 
     public Long getId() {
         return id;
@@ -28,7 +34,7 @@ public class Notice {
     }
 
     public void setNoticename(String noticename) {
-        this.noticename = noticename == null ? null : noticename.trim();
+        this.noticename = noticename;
     }
 
     public Long getType() {
@@ -37,14 +43,6 @@ public class Notice {
 
     public void setType(Long type) {
         this.type = type;
-    }
-
-    public Long getEstablish() {
-        return establish;
-    }
-
-    public void setEstablish(Long establish) {
-        this.establish = establish;
     }
 
     public Date getTime() {
@@ -63,15 +61,35 @@ public class Notice {
         this.level = level;
     }
 
-    @Override
-    public String toString() {
-        return "Notice{" +
-                "id=" + id +
-                ", noticename='" + noticename + '\'' +
-                ", type=" + type +
-                ", establish=" + establish +
-                ", time=" + time +
-                ", level=" + level +
-                '}';
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Integer getContenttype() {
+        return contenttype;
+    }
+
+    public void setContenttype(Integer contenttype) {
+        this.contenttype = contenttype;
+    }
+
+    public Long getParentnotice() {
+        return parentnotice;
+    }
+
+    public void setParentnotice(Long parentnotice) {
+        this.parentnotice = parentnotice;
     }
 }
