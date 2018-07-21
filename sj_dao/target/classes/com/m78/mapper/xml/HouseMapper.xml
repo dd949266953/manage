@@ -17,11 +17,7 @@
     houseId, unitNumber, fool, area, houseType, inArea, publicArea, returnTime, state, 
     equity
   </sql>
-  <select id="getHoust" resultMap="BaseResultMap">
-      select
-      <include refid="Base_Column_List"/>
-      from house
-  </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />

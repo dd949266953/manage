@@ -1,7 +1,7 @@
 package com.m78.controller.datacenter;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import  com.m78.service.dataCenter.houseService;
+import com.m78.service.dataCenter.HouseService;
 import com.m78.util.DataTable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class HouseConntroller {
 
     @Reference(version="1.0.0")
-    private houseService houseService;
+    private HouseService houseService;
 
     /**
      * 房屋列表11213
@@ -24,13 +24,6 @@ public class HouseConntroller {
     @RequestMapping("houseList.html")
     public String houstList(){
         return "dataCenter/house/houseList";
-    }
-
-
-    @RequestMapping("getHouse")
-    @ResponseBody
-    public Object getHouse(){
-        return DataTable.bindTableUtil(0,100,houseService.getHoust());
     }
 
 }
