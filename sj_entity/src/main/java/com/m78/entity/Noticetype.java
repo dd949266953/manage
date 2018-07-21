@@ -1,9 +1,14 @@
 package com.m78.entity;
 
-public class Noticetype {
+import java.io.Serializable;
+import java.util.Date;
+
+public class Noticetype implements Serializable {
     private Long id;
 
-    private Long typename;
+    private String typename;
+
+    private Date createtime;
 
     public Long getId() {
         return id;
@@ -13,19 +18,28 @@ public class Noticetype {
         this.id = id;
     }
 
-    public Long getTypename() {
+    public String getTypename() {
         return typename;
     }
 
-    public void setTypename(Long typename) {
+    public void setTypename(String typename) {
         this.typename = typename;
+    }
+
+    public Date getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(Date createtime) {
+        this.createtime = createtime;
     }
 
     @Override
     public String toString() {
         return "Noticetype{" +
                 "id=" + id +
-                ", typename=" + typename +
+                ", typename='" + typename + '\'' +
+                ", createtime=" + createtime +
                 '}';
     }
 }

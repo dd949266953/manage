@@ -5,13 +5,43 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="noticeName" jdbcType="VARCHAR" property="noticename" />
     <result column="type" jdbcType="BIGINT" property="type" />
-    <result column="time" jdbcType="DATE" property="time" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
     <result column="level" jdbcType="BIGINT" property="level" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="image" jdbcType="VARCHAR" property="image" />
     <result column="contentType" jdbcType="INTEGER" property="contenttype" />
     <result column="parentNotice" jdbcType="BIGINT" property="parentnotice" />
   </resultMap>
+    <resultMap id="noticeList" type="com.m78.entity.Notice">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="noticeName" jdbcType="VARCHAR" property="noticename" />
+        <result column="time" jdbcType="TIMESTAMP" property="time" />
+        <result column="level" jdbcType="BIGINT" property="level" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="typeName" jdbcType="VARCHAR" property="typename" />
+        <result column="contentType" jdbcType="INTEGER" property="contenttype" />
+    </resultMap>
+
+
+
+    <select id="getAllNotice" resultMap="noticeList">
+        SELECT  no.id,no.noticeName,no.`level`,no.time,no.contentType,nt.typeName FROM notice no
+        INNER JOIN noticetype nt on no.type=nt.id
+        WHERE no.parentNotice is NULL
+        <if test="noticeName!=''">
+            AND no.noticeName LIKE CONCAT ('%',#{noticeName},'%')
+        </if>
+    </select>
+
+    <select id="getAllNoticeCount" resultType="java.lang.Long">
+        SELECT  count(1) FROM notice
+        where 1=1
+        <if test="noticeName!=''">
+            AND no.noticeName LIKE CONCAT ('%',#{noticeName},'%')
+        </if>
+    </select>
+
+
   <sql id="Base_Column_List">
     id, noticeName, type, time, level, content, image, contentType, parentNotice
   </sql>
@@ -27,11 +57,13 @@
   </delete>
   <insert id="insert" parameterType="com.m78.entity.Notice">
     insert into notice (id, noticeName, type, 
-      time, level, content, image, 
-      contentType, parentNotice)
+      time, level, content, 
+      image, contentType, parentNotice
+      )
     values (#{id,jdbcType=BIGINT}, #{noticename,jdbcType=VARCHAR}, #{type,jdbcType=BIGINT}, 
-      #{time,jdbcType=DATE}, #{level,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
-      #{contenttype,jdbcType=INTEGER}, #{parentnotice,jdbcType=BIGINT})
+      #{time,jdbcType=TIMESTAMP}, #{level,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, 
+      #{image,jdbcType=VARCHAR}, #{contenttype,jdbcType=INTEGER}, #{parentnotice,jdbcType=BIGINT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.m78.entity.Notice">
     insert into notice
@@ -75,7 +107,7 @@
         #{type,jdbcType=BIGINT},
       </if>
       <if test="time != null">
-        #{time,jdbcType=DATE},
+        #{time,jdbcType=TIMESTAMP},
       </if>
       <if test="level != null">
         #{level,jdbcType=BIGINT},
@@ -104,7 +136,7 @@
         type = #{type,jdbcType=BIGINT},
       </if>
       <if test="time != null">
-        time = #{time,jdbcType=DATE},
+        time = #{time,jdbcType=TIMESTAMP},
       </if>
       <if test="level != null">
         level = #{level,jdbcType=BIGINT},
@@ -128,7 +160,7 @@
     update notice
     set noticeName = #{noticename,jdbcType=VARCHAR},
       type = #{type,jdbcType=BIGINT},
-      time = #{time,jdbcType=DATE},
+      time = #{time,jdbcType=TIMESTAMP},
       level = #{level,jdbcType=BIGINT},
       content = #{content,jdbcType=VARCHAR},
       image = #{image,jdbcType=VARCHAR},

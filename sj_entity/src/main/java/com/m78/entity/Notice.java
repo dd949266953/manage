@@ -1,14 +1,18 @@
 package com.m78.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class Notice {
+public class Notice implements Serializable {
     private Long id;
 
     private String noticename;
 
     private Long type;
 
+    @JSONField(format="yyyy-MM-dd hh:mm:ss")
     private Date time;
 
     private Long level;
@@ -20,6 +24,8 @@ public class Notice {
     private Integer contenttype;
 
     private Long parentnotice;
+    //公告名称
+    private  String typename;
 
     public Long getId() {
         return id;
@@ -91,5 +97,29 @@ public class Notice {
 
     public void setParentnotice(Long parentnotice) {
         this.parentnotice = parentnotice;
+    }
+
+    public String getTypename() {
+        return typename;
+    }
+
+    public void setTypename(String typename) {
+        this.typename = typename;
+    }
+
+    @Override
+    public String toString() {
+        return "Notice{" +
+                "id=" + id +
+                ", noticename='" + noticename + '\'' +
+                ", type=" + type +
+                ", time=" + time +
+                ", level=" + level +
+                ", content='" + content + '\'' +
+                ", image='" + image + '\'' +
+                ", contenttype=" + contenttype +
+                ", parentnotice=" + parentnotice +
+                ", typename='" + typename + '\'' +
+                '}';
     }
 }
