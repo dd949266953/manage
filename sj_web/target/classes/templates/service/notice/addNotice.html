@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!--
+	作者：offline
+	时间：2018-07-07
+	描述:添加公告
+-->
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>添加公告</title>
+    <link th:href="@{/layui/css/layui.css}" rel="stylesheet">
+    <link th:href="@{/css/fiont.css}" rel="stylesheet">
+    <link th:href="@{/css/service/addnotice.css}" rel="stylesheet">
+    <style>
+
+        form{
+            width: 600px;
+            margin: 50px auto;
+        }
+        .layui-form-item{
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+<form id="form1" class="layui-form" action="" onsubmit="return false">
+    <div class="layui-form-item">
+        <label class="layui-form-label">公告标题</label>
+        <div class="layui-input-block">
+            <input type="text"  lay-verify="required" autocomplete="off" placeholder="请输入标题" class="layui-input" />
+        </div>
+
+    </div>
+    <div class="layui-form-item">
+    <label class="layui-form-label">公告分类</label>
+    <div class="layui-input-block">
+        <select  class="input" id="noticetype">
+            <option value="0">请选择分类</option>
+        </select>
+        <a onclick="addType()" style="color:rgb(46,204,113);margin-top:20px;display: block" href="javascript:(0)">添加公告分类</a>
+    </div>
+    </div>
+
+    <div class="layui-form-item" style="height: 200px">
+        <label class="layui-form-label">回复类型</label>
+        <div lay-filter="demo" style="width: 487px;float: right" class="layui-tab layui-tab-card">
+            <ul class="layui-tab-title">
+                <li class="layui-this">文字</li>
+                <li>图片</li>
+                <li>图文</li>
+            </ul>
+            <div class="layui-tab-content" style="height: 200px;">
+                <div class="layui-tab-item layui-show" >
+                 <div style="height: 50px;width: 100%" contenteditable="true">
+
+                 </div>
+
+                </div>
+                <div class="layui-tab-item">
+
+                    <section class="upload-area">
+                        <div class="upload" onmousemove="upLoadShow(this)"
+                             onmouseout="upLoadHide(this)">
+                            <div class="bg" onclick="del(this)">
+                                <div class="absolute background"></div>
+                                <i class="iconfont absolute i_style">&#xe635;</i>
+                            </div>
+                            <img class="absolute" id="portrait" src="" style="display: none;" />
+                            <input name="communityLogo" type="file" class="file"
+                                   onchange="showPreview(this)" style="opacity: 0;" /> +
+                        </div>
+                    </section>
+                </div>
+                <div class="layui-tab-item">
+                    <div style="margin: 25px 0px 0px 25px">
+                    <button class="layui-btn   layui-btn-warm" >选择图文素材</button>
+                    <button class="layui-btn   layui-btn-danger ">新建图文素材</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">是否置顶</label>
+        <div class="layui-input-block">
+            <input  lay-filter="test"  type="checkbox"    lay-skin="switch"  >
+        </div>
+
+    </div>
+    <div class="layui-form-item" id="sure">
+        <div class="layui-input-block">
+            <button class="layui-btn"  lay-submit="" lay-filter="demo1">立即提交</button>
+            <button id="reset"  class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+
+
+<script th:src="@{/js/jquery-3.2.1.js}"></script>
+<script th:src="@{/layui/layui.js}"></script>
+<script th:src="@{/js/uploadPhoto.js}"></script>
+<script>
+    layui.use('form', function() {
+        var form = layui.form;
+        form.on('submit(demo1)', function(data){
+            alert(index);
+
+        });
+        //各种基于事件的操作，下面会有进一步介绍
+    });
+
+
+    function getType(){
+        $("#noticetype option:gt(0)").remove();
+        $.ajax({
+            url:'../noticetype/getAllNoticeType.json',
+            dataType:'json',
+            type:'post',
+            success:function(data){
+                $.each(data, function(i, val) {
+                    $("#noticetype").append(
+                        "<option name='noticetype'  value="+val.typeid+">"
+                        + val.typename + "</option>")
+                })
+            }
+        })
+    }
+
+    $(function(){
+        getType();
+    })
+    function addType(){
+        layer.open({
+            title: '添加公告类型',
+            shade: 0,
+            offset: '150px'
+            ,content: '<input class="layui-input"   id="type"  type="text" placeholder="请输入类型名称" />',
+            yes: function(layero, index){
+                if($("#type").val()==''){
+                    layer.msg('内容不能为空,请重新添加', {icon : 2});
+                    return;
+                }
+                $.ajax({
+                    url:'../noticetype/addNoticetype.json',
+                    dataType:'text',
+                    type:'post',
+                    data:{
+                        typeName:$("#type").val()
+                    },
+                    success:function(data){
+                        if (data === '1') {
+                            layer.msg('添加成功', {icon : 1});
+                            getType();
+                            layer.close(index);
+                        } else {
+                            layer.msg('添加失败，请联系客服', {icon : 2});
+                        }
+                    }
+                })
+            }
+        });
+    }
+
+    var index;
+    layui.use('element', function(){
+        var $ = layui.jquery
+            ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+        //触发事件
+        var active = {
+          tabChange: function(){
+                //切换到指定Tab项
+                element.tabChange('demo', '22'); //切换到：用户管理
+            }
+        };
+
+        $('.site-demo-active').on('click', function(){
+            var othis = $(this), type = othis.data('type');
+            active[type] ? active[type].call(this, othis) : '';
+        });
+
+        element.on('tab(demo)', function(data){
+           index=data.index;
+
+        });
+
+    });
+</script>
+</body>
+
+</html>

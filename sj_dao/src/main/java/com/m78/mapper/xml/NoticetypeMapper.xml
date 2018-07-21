@@ -1,58 +1,71 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.m78.mapper.NoticetypeMapper" >
-  <resultMap id="BaseResultMap" type="com.m78.entity.Noticetype" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="typeName" property="typename" jdbcType="BIGINT" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.m78.mapper.NoticetypeMapper">
+  <resultMap id="BaseResultMap" type="com.m78.entity.Noticetype">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="typeName" jdbcType="VARCHAR" property="typename" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
   </resultMap>
-  <sql id="Base_Column_List" >
-    id, typeName
+  <sql id="Base_Column_List">
+    id, typeName, createTime
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from noticetype
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from noticetype
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.m78.entity.Noticetype" >
-    insert into noticetype (id, typeName)
-    values (#{id,jdbcType=BIGINT}, #{typename,jdbcType=BIGINT})
+  <insert id="insert" parameterType="com.m78.entity.Noticetype">
+    insert into noticetype (id, typeName, createTime
+      )
+    values (#{id,jdbcType=BIGINT}, #{typename,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.m78.entity.Noticetype" >
+  <insert id="insertSelective" parameterType="com.m78.entity.Noticetype">
     insert into noticetype
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="typename != null" >
+      <if test="typename != null">
         typeName,
       </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="typename != null" >
-        #{typename,jdbcType=BIGINT},
+      <if test="typename != null">
+        #{typename,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.Noticetype" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.Noticetype">
     update noticetype
-    <set >
-      <if test="typename != null" >
-        typeName = #{typename,jdbcType=BIGINT},
+    <set>
+      <if test="typename != null">
+        typeName = #{typename,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.m78.entity.Noticetype" >
+  <update id="updateByPrimaryKey" parameterType="com.m78.entity.Noticetype">
     update noticetype
-    set typeName = #{typename,jdbcType=BIGINT}
+    set typeName = #{typename,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
