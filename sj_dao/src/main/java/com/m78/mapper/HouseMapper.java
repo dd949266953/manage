@@ -17,9 +17,6 @@ public interface HouseMapper {
 
     int updateByPrimaryKey(House record);
 
-    /**
-     * 查询房屋信息
-     */
-    List<House> getHoust();
+
 
 }

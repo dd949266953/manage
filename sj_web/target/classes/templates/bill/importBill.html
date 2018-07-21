@@ -67,8 +67,6 @@
     });
        function uploadFile() {
            var uri=$("#load_xls").val();
-           var arr=uri.split('\\');//注split可以用字符或字符串分割
-           var my=arr[arr.length-1];//这就是要取得的图片名称
            var i=uri.lastIndexOf(".");
            var extionname=uri.substring(i+1,uri.length);
            if (extionname!= "xls"){
@@ -78,25 +76,6 @@
            $("#load").after('<span style="color: #0fb478; padding-left: 15px">'+my+'</span>');
       }
 
-
-            function getPath(obj) {
-
-                if (obj) {
-                    if (window.navigator.userAgent.indexOf("MSIE") >= 1) {
-                        obj.select();
-                        return document.selection.createRange().text;
-                    }
-                    else if (window.navigator.userAgent.indexOf("Firefox") >= 1) {
-                        if (obj.files) {
-                            return obj.files.item(0).getAsDataURL();
-                        }
-                        return obj.value;
-                    }
-                    return obj.value;
-                }
-            }
-
-
                 layui.use('form', function() {
                     var form = layui.form;
                     form.on('submit(demo1)', function (data) {
@@ -105,8 +84,6 @@
                             layer.msg("请选择要上传的文件", {icon: 2});
                             return;
                         }
-                       var a= getPath(document.getElementById("load_xls"));
-                        alert(a)
 
                         // $.ajax({
                         //     url:'addCharItem',

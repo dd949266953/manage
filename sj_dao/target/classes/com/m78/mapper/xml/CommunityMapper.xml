@@ -12,7 +12,6 @@
     <result column="logo" property="logo" jdbcType="VARCHAR" />
     <result column="backgroundImage" property="backgroundimage" jdbcType="VARCHAR" />
   </resultMap>
-
   <!-- 查找全部 -->
   <select id="findAll" resultMap="BaseResultMap">
     select
