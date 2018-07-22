@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>
+		添加车辆
+		</title>
+		<link rel="stylesheet" href="../css/back_public.css" />
+		<link href="../layui/css/layui.css" rel="stylesheet" />
+
+	</head>
+
+	<body>
+		<header>
+			添加车辆
+			<!--看见了 一定要改  不改打死  别再让我提醒了-->
+		</header>
+		<section>
+			<div class="main">
+				<form class="layui-form" action="">
+					<div class="layui-form-item form-item">
+						<label class="layui-form-label row lable">
+                		<span>*</span>车主姓名 :</label>
+						<div class="layui-input-block row row-div">
+							<input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入车主姓名" class="layui-input input">
+						</div>
+					</div>
+					<div class="layui-form-item form-item">
+						<label class="layui-form-label row lable">
+                        <span>*</span>车主电话 :</label>
+						<div class="layui-input-block row row-div">
+							<input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入车主电话" class="layui-input input">
+						</div>
+					</div>
+					<div class="layui-form-item form-item">
+						<label class="layui-form-label row lable">
+                		<span>*</span>车牌号 :</label>
+						<div class="layui-input-block row row-div">
+							<input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入车牌号" class="layui-input input">
+						</div>
+					</div>
+					<div class="layui-form-item form-item">
+						<label class="layui-form-label row lable">
+                		<span>*</span>车辆排量 :</label>
+						<div class="layui-input-block row row-div">
+							<input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入汽车排量" class="layui-input input">
+						</div>
+					</div>
+					<div class="buttondiv">
+						<div class="button-item"> </div>
+						<div class="button-item">
+							<button class="layui-btn layui-btn-normal layui-btn-radius  save">保存</button>
+							<button class="layui-btn layui-btn-normal layui-btn-radius ">返回</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</section>
+		<footer>
+			Copyright 2013-2018 weixiaoqu.com 成都云联峰创科技有限公司旗下产品
+		</footer>
+		<script src="../layui/layui.js"></script>
+		<script>
+			layui.use(['form', 'laydate'], function() {
+				var form = layui.form,
+					layer = layui.layer,
+					laydate = layui.laydate;
+
+				laydate.render({
+					elem: '#date1'
+				});
+			})
+		</script>
+	</body>
+
+</html>

@@ -6,8 +6,7 @@ import com.m78.entity.Department;
 import com.m78.entity.DictionaryItem;
 import com.m78.entity.Staff;
 import com.m78.util.DataTable;
-import org.apache.zookeeper.data.Id;
-import org.jboss.logging.Param;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import com.m78.service.staff.staffService;
 import com.m78.service.dictionaryItemSevice;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -37,7 +35,7 @@ public class addressList {
     @RequestMapping("getStaffNumber")
     @ResponseBody
     public Long getStaffNumber(){
-      return  staffService.getStaffNumber();
+        return  staffService.getStaffNumber();
     }
 
     /**
@@ -45,7 +43,7 @@ public class addressList {
      */
     @RequestMapping("addressList.html")
     public String addressList(){
-        return "staffManagement/addressList/addressBook";
+        return "staffManagement/addressList/addressList";
     }
 
     /**
@@ -56,6 +54,17 @@ public class addressList {
     public Object getStaff(@RequestParam("page") int page, @RequestParam("limit") int limit, @RequestParam("name") String name){
         return DataTable.bindTableUtil(0,staffService.getStaffNumber(),staffService.getStaff(page, limit, name));
     }
+
+    /**
+     * 员工信息
+     */
+    @RequestMapping("asd")
+    @ResponseBody
+    public List<Staff> getPersonal() {
+        return staffService.getPersonal();
+    }
+
+
     /**
      * 删除员工
      */
@@ -67,9 +76,9 @@ public class addressList {
     /**
      * 添加人员
      */
-    @RequestMapping("addstaff.html")
+    @RequestMapping("AddNewEmployees.html")
     public String addstaff(){
-        return "staffManagement/addressList/addstaff";
+        return "staffManagement/addressList/AddNewEmployees";
     }
     /**
      * 查询部门信息
@@ -77,14 +86,16 @@ public class addressList {
     @RequestMapping("getDepartment")
     @ResponseBody
     public List<Department> getDepartment(){
-       return dictionaryItemSevice.getDepartment();
+        return dictionaryItemSevice.getDepartment();
     }
     /**
      * 查询职业类型
      */
     @RequestMapping("getDictionaryItem")
     @ResponseBody
-    public List<DictionaryItem> getDictionaryItem(){
+    public List<DictionaryItem> getDictionaryItem(Model model){
+        List<DictionaryItem> list =dictionaryItemSevice.getDictionaryItem();
+        model.addAttribute("dictionary",list);
         return dictionaryItemSevice.getDictionaryItem();
     }
     /**
@@ -99,10 +110,14 @@ public class addressList {
     /**
      * 修改人员信息页面
      */
-    @RequestMapping(value = "updateStaff.html")
+    @RequestMapping(value = "updateNewEmployees.html")
     public String updateSatff(@RequestParam("id") int id, Model model){
         Staff staff=staffService.getStaffId(id);
         model.addAttribute("staff",staff);
-         return "staffManagement/addressList/updateStaff";
+        return "staffManagement/addressList/updateNewEmployees";
+    }
+    @RequestMapping(value = "sss")
+    public String ss(){
+        return "staffManagement/addressList/updateNewEmployees";
     }
 }

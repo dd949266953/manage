@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.m78.entity.Staff;
 import com.m78.mapper.StaffMapper;
 import com.m78.service.staff.staffService;
+import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -24,6 +25,14 @@ public class staffServicecImpl implements staffService {
         return staffMapper.getStaff(start,pageSize,name);
     }
 
+
+    /**
+     * 员工信息
+     */
+    @Override
+    public List<Staff> getPersonal() {
+        return staffMapper.getPersonal();
+    }
     /**
      * 查询员工数量
      * @return
@@ -50,7 +59,7 @@ public class staffServicecImpl implements staffService {
      */
     @Override
     public int insert(Staff record) {
-     return staffMapper.insert(record);
+        return staffMapper.insert(record);
     }
 
     /**

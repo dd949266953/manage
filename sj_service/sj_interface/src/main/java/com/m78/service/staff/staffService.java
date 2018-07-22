@@ -12,8 +12,12 @@ public interface staffService {
      * 查询员工
      * @return
      */
-        List<Staff> getStaff(int page,int pageSize,String name);
+    List<Staff> getStaff(int page,int pageSize,String name);
 
+    /**
+     * 查询员工
+     */
+    List<Staff> getPersonal();
     /**
      * 查询员工数量
      */

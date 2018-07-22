@@ -61,16 +61,6 @@
 			var department=$("select[name=department]").val();
 			var dictionaryItem=$("select[name=dictionaryItem]").val();
 			var remark=$("input[name=remark]").val();
-			console.log(name);
-			console.log(nametwo);
-			console.log(phone);
-			console.log(wxnumber);
-			console.log(department);
-			console.log(dictionaryItem);
-			console.log(remark);
-            // $.post("addStaffMessage",$("#form").serialize(),function (data) {
-				// console.log(data);
-            // })
 			$.post('addStaffMessage',{"name":name,"nametwo":nametwo,"phone":phone,"wxnumber":wxnumber,"position":dictionaryItem,"departmentid":department,"remark":remark},function (data) {
 				console.log(data);
             })

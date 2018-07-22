@@ -30,4 +30,10 @@ public interface StaffMapper {
      * 根据id进行查询
      */
     Staff getStaffId(@Param("id") int id);
+
+
+    /**
+     * 查询人员信息
+     */
+    List<Staff> getPersonal();
 }
