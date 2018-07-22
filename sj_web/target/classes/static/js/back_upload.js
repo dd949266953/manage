@@ -1,4 +1,4 @@
-
+var pass=1;     //验证所有文件上传是否成功 -1失败
 layui.use('upload', function () {
     var $ = layui.jquery,
         upload = layui.upload;
@@ -20,10 +20,14 @@ layui.use('upload', function () {
                 $('.img-div[data="'+touchObj+'"]').find('.upload-before').hide();
             });
         },
+        //上传完毕
         done: function (res) {
-            //上传完毕
-            console.log("上传完毕")
-            console.log(res);
+            //res=1 成功
+            if (res!=1){
+
+            }else{
+                pass=-1;
+            }
         }
     });
     //控制图片遮罩隐藏显示 
