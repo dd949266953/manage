@@ -96,7 +96,7 @@ public class CommunityController {
             //String path=request.getServletContext().getRealPath("files");
             //String basePath= ResourceUtils.getURL("spoons/static/").getPath();
             String fileName = file.getOriginalFilename();//获取file图片名称
-            String filePath ="D:/files1/";
+            String filePath ="D:/files1/";  //地址
             upload.upload(file, filePath, fileName);
         } catch (Exception e) {
             e.printStackTrace();
