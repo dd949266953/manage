@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+   	添加房屋
+    </title>
+    <link rel="stylesheet" href="../css/back_public.css" />
+    <link href="../layui/css/layui.css" rel="stylesheet" />
+
+
+</head>
+
+<body>
+    <header>
+        	添加房屋	
+        <!--看见了 一定要改  不改打死  别再让我提醒了-->
+    </header>
+    <section>	
+        <div class="main">
+            <form class="layui-form" action="">
+                <div class="layui-form-item form-item">
+                	<label class="layui-form-label row lable">
+                		<span>*</span>所属单元 :</label>
+                	<div class="layui-input-block row row-div">
+                		<input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入所属单元" class="layui-input input">
+                	</div>
+                </div>
+                <div class="layui-form-item form-item">
+                    <label class="layui-form-label row lable">
+                        <span>*</span>所在楼层 :</label>
+                    <div class="layui-input-block row row-div">
+                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入所在楼层" class="layui-input input ">
+                    </div>
+                </div>
+                <div class="layui-form-item form-item">
+                	<label class="layui-form-label row lable">
+                		<span>*</span>建筑面积 :</label>
+                	<div class="layui-input-block row row-div">
+                		<input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入建筑面积" class="layui-input input short-div">
+                	</div>
+                </div>
+                <div class="layui-form-item form-item">
+                	<label class="layui-form-label row lable">
+                		<span>*</span>房屋户型 :</label>
+                	<div class="layui-input-block row row-div">
+                		<input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入户型" class="layui-input input short-div">
+                	</div>
+                </div>
+				<div class="layui-form-item form-item">
+                	<label class="layui-form-label row lable">
+                		<span>*</span>套内面积 :</label>
+                	<div class="layui-input-block row row-div">
+                		<input  type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入套内面积" class="layui-input input short-div">
+                	</div>
+                </div>
+                <div class="layui-form-item form-item">
+                	<label class="layui-form-label row lable">
+                		<span>*</span>公摊面积 :</label>
+                	<div class="layui-input-block row row-div">
+                		<input  type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入公摊面积" class="layui-input input ">
+                	</div>
+                </div>
+				<div class="layui-form-item form-item">
+						<label class="layui-form-label row lable">
+	                		<span>*</span>时间 :</label>
+						<div class="layui-input-block row row-div">
+							<input type="text" name="date" id="date1" autocomplete="off" class="layui-input short-div">
+						</div>
+					</div>
+					<div class="layui-form-item form-item">
+						<label class="layui-form-label row lable">
+                		<span>*</span>房屋状态 :</label>
+						<div class="layui-input-block row row-div">
+							<select name="interest" lay-filter="aihao">
+								<option value=""></option>
+								<option value="0">写作</option>
+								<option value="1" selected="">阅读</option>
+								<option value="2">游戏</option>
+								<option value="3">音乐</option>
+								<option value="4">旅行</option>
+							</select>
+						</div>
+					</div>
+                <div class="layui-form-item form-item">
+                	<label class="layui-form-label row lable">
+                		<span>*</span>产权 :</label>
+                	<div class="layui-input-block row row-div">
+                		<input  type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入产权" class="layui-input input ">
+                	</div>
+                </div>
+                <div class="buttondiv">
+                    <div class="button-item"> </div>
+                    <div class="button-item">
+                        <button class="layui-btn layui-btn-normal layui-btn-radius  save">保存</button>
+                        <button class="layui-btn layui-btn-normal layui-btn-radius ">返回</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <footer>
+        Copyright 2013-2018 weixiaoqu.com 成都云联峰创科技有限公司旗下产品
+    </footer>
+    		<script src="layui/layui.js"></script>
+		<script>
+			layui.use(['form', 'laydate'], function() {
+				var form = layui.form,
+					layer = layui.layer,
+					laydate = layui.laydate;
+
+				laydate.render({
+					elem: '#date1'
+				});
+			})
+		</script>
+</body>
+
+</html>

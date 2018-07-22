@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>
-			房屋列表
+			车辆管理
 		</title>
 		<link rel="stylesheet" href="../../css/back_public.css" />
 		<link href="../../layui/css/layui.css" rel="stylesheet" />
@@ -13,13 +13,13 @@
 
 	<body>
 		<header>
-		房屋列表
+			车辆管理
 			<!--看见了 一定要改  不改打死  别再让我提醒了-->
 		</header>
 		<section>
 			<div class="main">
 				
-				<button class="button noborder"><i class="layui-icon btn-icon">&#xe654;</i>添加房屋</button>
+				<button class="button noborder"><i class="layui-icon btn-icon">&#xe654;</i>添加车辆</button>
 					<div style="float: right;" class="grabble" >
 							<input id="communityName" type="text" placeholder="请输入小区名称" class="search-keyword" />
 							<button onclick="page()" class="noborder">
@@ -31,8 +31,8 @@
 					</div>		
 				
 				<table id="demo" lay-filter="test"></table>
-				<script src"../ayui/layui.js"></script>
-				<script src="../layui/layui.all.js" ></script>
+				<script src="../../layui/layui.all.js"></script>
+				<script src="../../layui/layui.js" ></script>
 				<script>
                     layui.use('table', function() {
                         var table = layui.table;
