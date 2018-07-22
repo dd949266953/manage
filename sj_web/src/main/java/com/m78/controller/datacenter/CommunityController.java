@@ -54,9 +54,10 @@ public class CommunityController {
     /**
      * 添加小区
      */
-    @RequestMapping("addCommunitydata")
+    @RequestMapping("addCommunity")
     @ResponseBody
     public int insertCommunity(Community record){
+        System.out.println(record.toString());
         return  communityService.insert(record);
     }
 

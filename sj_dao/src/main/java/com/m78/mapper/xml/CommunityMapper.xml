@@ -54,7 +54,7 @@
       leaderPhone, logo, backgroundImage
       )
     values (#{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
-      #{detailaddress,jdbcType=VARCHAR}, #{servicetel,jdbcType=VARCHAR}, #{leader,jdbcType=VARCHAR}, 
+      #{detailaddress,jdbcType=VARCHAR}, #{servicetel,jdbcType=VARCHAR}, #{leader,jdbcType=VARCHAR},
       #{leaderphone,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, #{backgroundimage,jdbcType=VARCHAR}
       )
   </insert>
