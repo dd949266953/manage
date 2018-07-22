@@ -133,7 +133,7 @@
             var logo = getImgName("logo");					//小区logo
             var backgroundimage = getImgName("background");	//小区背景图
             var data =$.param({'logo':logo,'backgroundimage':backgroundimage})+'&'+$("form").serialize();
-            console.log(data);//哦不知道行不行 em........................小姐姐厉害 xiaojiejie lihai
+            console.log(data);
             $.post('/Community/addCommunity',data,function (json) {
                 console.log(json)
             })
