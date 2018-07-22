@@ -6,7 +6,10 @@ import com.m78.service.dataCenter.CommunityService;
 import com.m78.util.DataTable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -84,5 +87,13 @@ public class CommunityController {
     @ResponseBody
     public Long getCommunityIdByName(@RequestParam("communityName")String communityName){
         return communityService.getCommunityIdByName(communityName);
+    }
+
+    @RequestMapping("upload")
+    @ResponseBody
+    public Object image(@RequestParam("img") MultipartFile img){
+        String fileName = img.getOriginalFilename();
+        System.out.println(fileName);
+        return  null;
     }
 }

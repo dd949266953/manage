@@ -98,6 +98,7 @@ public class BillServiceImpl  implements BillService {
     public int addImportBill(Bill bill, String charItemName,
                              String type, String phone) {
 
+<<<<<<< HEAD
 //        //车位id 房屋id
 //        Long singId;
 //        //收费标准id
@@ -135,6 +136,8 @@ public class BillServiceImpl  implements BillService {
         return 0;
 
 
+=======
+>>>>>>> 8b153e4dc9939f290d5848ceeec55495a28c90c1
         //车位id 房屋id
         Long singId;
         //收费标准id
@@ -154,6 +157,9 @@ public class BillServiceImpl  implements BillService {
         chargeId.setSignid(singId);
         int num= chargeIdMapper.insertSelective(chargeId);
         return num;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8b153e4dc9939f290d5848ceeec55495a28c90c1
     }
 }
