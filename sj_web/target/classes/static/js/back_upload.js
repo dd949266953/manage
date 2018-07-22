@@ -13,7 +13,6 @@ layui.use('upload', function () {
             var touchObj=this.item[0].attributes[1].nodeValue;
             //预读本地文件示例，不支持ie8
             obj.preview(function (index, file, result) {
-                console.log(file.name);
                 $('.img-div[data="'+touchObj+'"]').append('<img src="' + result + '" alt="' + file.name +
                     '" class="layui-upload-img img" height="86px" width="86px">'
                 )
@@ -22,6 +21,8 @@ layui.use('upload', function () {
         },
         done: function (res) {
             //上传完毕
+            console.log("上传完毕")
+            console.log(res);
         }
     });
     //控制图片遮罩隐藏显示 

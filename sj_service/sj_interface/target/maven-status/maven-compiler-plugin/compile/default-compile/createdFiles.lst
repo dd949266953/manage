@@ -1,8 +1,10 @@
-com\m78\service\dataCenter\houseService.class
 com\m78\service\dictionaryItemSevice.class
 com\m78\service\bill\ChargenNameService.class
+com\m78\service\service\NoticeTypeService.class
 com\m78\service\dataCenter\CommunityService.class
 com\m78\service\dataCenter\BuildingService.class
+com\m78\service\dataCenter\CarService.class
 com\m78\service\dataCenter\TenementService.class
 com\m78\service\staff\staffService.class
 com\m78\service\bill\BillService.class
+com\m78\service\service\NoticeService.class

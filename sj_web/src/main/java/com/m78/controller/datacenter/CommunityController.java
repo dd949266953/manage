@@ -4,12 +4,18 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.m78.entity.Community;
 import com.m78.service.dataCenter.CommunityService;
 import com.m78.util.DataTable;
+import com.m78.util.upload;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -91,9 +97,18 @@ public class CommunityController {
 
     @RequestMapping("upload")
     @ResponseBody
-    public Object image(@RequestParam("img") MultipartFile img){
-        String fileName = img.getOriginalFilename();
-        System.out.println(fileName);
-        return  null;
+    public Object uploadimg(@RequestParam("img") MultipartFile file,HttpServletRequest request){
+        try {
+            //获取文件上传的路径
+            //String path=request.getServletContext().getRealPath("files");
+            //String basePath= ResourceUtils.getURL("spoons/static/").getPath();
+            String fileName = file.getOriginalFilename();//获取file图片名称
+            String filePath ="D:/files1/";
+            upload.upload(file, filePath, fileName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+        return 1;
     }
 }

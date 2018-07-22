@@ -3,7 +3,6 @@ package com.m78.serviceImpl.service;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.m78.entity.Noticetype;
 import com.m78.mapper.NoticetypeMapper;
-import com.m78.service.service.NoticeService;
 import com.m78.service.service.NoticeTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 
