@@ -98,7 +98,6 @@ public class BillServiceImpl  implements BillService {
     public int addImportBill(Bill bill, String charItemName,
                              String type, String phone) {
 
-<<<<<<< HEAD
 //        //车位id 房屋id
 //        Long singId;
 //        //收费标准id
@@ -118,48 +117,7 @@ public class BillServiceImpl  implements BillService {
 //        }
 //        chargeId.setSignid(singId);
 //        int num= chargeIdMapper.insertSelective(chargeId);
-//        return num;
-
-
-//        //根据手机号操作
-//        if(type.equals("房屋")){
-//            chargeId.setType(new Long(1));
-//            singId=tenementMapper.getHouseIdByTenementPhone(phone);
-//        }else {
-//            chargeId.setType(new Long(2));
-//            singId=tenementMapper.getCarportIdByTenementPhone(phone);
-//        }
-//        chargeId.setSignid(singId);
-//        int num= chargeIdMapper.insertSelective(chargeId);
-
-
         return 0;
 
-
-=======
->>>>>>> 8b153e4dc9939f290d5848ceeec55495a28c90c1
-        //车位id 房屋id
-        Long singId;
-        //收费标准id
-        Long charItemId=chargeitemMapper.getCharItemIdByName(charItemName);
-        billMapper.insertSelective(bill);
-        ChargeId  chargeId=new ChargeId();
-        chargeId.setBillid(bill.getId());
-         chargeId.setChargeitemid(charItemId);
-        //根据手机号操作
-        if(type.equals("房屋")){
-            chargeId.setType(new Long(1));
-            singId=tenementMapper.getHouseIdByTenementPhone(phone);
-        }else {
-            chargeId.setType(new Long(2));
-            singId=tenementMapper.getCarportIdByTenementPhone(phone);
-        }
-        chargeId.setSignid(singId);
-        int num= chargeIdMapper.insertSelective(chargeId);
-        return num;
-<<<<<<< HEAD
-
-=======
->>>>>>> 8b153e4dc9939f290d5848ceeec55495a28c90c1
     }
 }
