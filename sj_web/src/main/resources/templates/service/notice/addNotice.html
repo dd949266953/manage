@@ -12,7 +12,7 @@
 <title>添加公告</title>
     <link th:href="@{/layui/css/layui.css}" rel="stylesheet">
     <link th:href="@{/css/fiont.css}" rel="stylesheet">
-    <link th:href="@{/css/service/addnotice.css}" rel="stylesheet">
+    <link th:href="@{/css/back_public.css}" rel="stylesheet">
     <style>
 
         form{
@@ -37,7 +37,7 @@
     <label class="layui-form-label">公告分类</label>
     <div class="layui-input-block">
         <select  class="input" id="noticetype">
-            <option value="0">请选择分类</option>
+
         </select>
         <a onclick="addType()" style="color:rgb(46,204,113);margin-top:20px;display: block" href="javascript:(0)">添加公告分类</a>
     </div>
@@ -53,25 +53,24 @@
             </ul>
             <div class="layui-tab-content" style="height: 200px;">
                 <div class="layui-tab-item layui-show" >
-                 <div style="height: 50px;width: 100%" contenteditable="true">
+                 <div id="textContent" style="height: 50px;width: 100%" contenteditable="true">
 
                  </div>
 
                 </div>
                 <div class="layui-tab-item">
-
-                    <section class="upload-area">
-                        <div class="upload" onmousemove="upLoadShow(this)"
-                             onmouseout="upLoadHide(this)">
-                            <div class="bg" onclick="del(this)">
-                                <div class="absolute background"></div>
-                                <i class="iconfont absolute i_style">&#xe635;</i>
+                    <div class="layui-input-block row row-div">
+                        <div class="layui-upload img-div" th:data="logo">
+                            <div class="upload-before">
+                                <i class="iconfont" style="font-size: 36px;">&#xe602;</i>
+                                <p>上传图片</p>
                             </div>
-                            <img class="absolute" id="portrait" src="" style="display: none;" />
-                            <input name="communityLogo" type="file" class="file"
-                                   onchange="showPreview(this)" style="opacity: 0;" /> +
+                            <div class="upload-after" style="display: none;">
+                                <i class="iconfont look layui-btn laybtn" data-method="offset" style="font-size: 24px;">&#xe61e;</i>
+                                <i class="iconfont del" style="font-size: 24px;">&#xe618;</i>
+                            </div>
                         </div>
-                    </section>
+                    </div>
                 </div>
                 <div class="layui-tab-item">
                     <div style="margin: 25px 0px 0px 25px">
@@ -95,35 +94,83 @@
             <button id="reset"  class="layui-btn layui-btn-primary">重置</button>
         </div>
     </div>
+    <div class="photo">
+        <img src="img/questionnaire/questionnaire1.png" height="266px" width="472px" />
+    </div>
 </form>
 
 
 <script th:src="@{/js/jquery-3.2.1.js}"></script>
 <script th:src="@{/layui/layui.js}"></script>
-<script th:src="@{/js/uploadPhoto.js}"></script>
 <script>
+    var conten='';
+    var imgUrl='';
     layui.use('form', function() {
         var form = layui.form;
         form.on('submit(demo1)', function(data){
-            alert(index);
+
+            if(index=='0'){
+              conten=$("#textContent").text();
+            }else if(index=="1"){
+                conten=imgUrl;
+            }
+
+
 
         });
-        //各种基于事件的操作，下面会有进一步介绍
+
     });
 
+    layui.use(['layer', 'form'], function () { //独立版的layer无需执行这一句
+        var $ = layui.jquery,
+            layer = layui.layer; //独立版的layer无需执行这一句
+        var form = layui.form;
 
+        //触发事件
+        var active = {
+            offset: function (othis) {
+                var type = othis.data('type'),
+                    text = othis.text();
+                var obj = $(othis);
+                var data = obj.attr('data');
+                layer.open({
+                    type: 1,
+                    title: false,
+                    scrollbar: false,
+                    shadeClose: true,
+                    closeBtn: 0,
+                    offset: type,
+                    area: ['512px', '306px'],
+                    content: $('.photo'),
+                    btnAlign: 'c' //按钮居中
+                    ,
+                    shade: [0.7, '#080808'],
+                    yes: function () {
+                        layer.closeAll();
+                    }
+                });
+            }
+        };
+
+        $('#layerDemo .layui-btn').on('click', function () {
+            var othis = $(this),
+                method = othis.data('method');
+            active[method] ? active[method].call(this, othis) : '';
+        });
+
+    });
     function getType(){
-        $("#noticetype option:gt(0)").remove();
         $.ajax({
-            url:'../noticetype/getAllNoticeType.json',
+            url:'../noticeType/getAllNoticeType.json',
             dataType:'json',
             type:'post',
             success:function(data){
                 $.each(data, function(i, val) {
                     $("#noticetype").append(
-                        "<option name='noticetype'  value="+val.typeid+">"
+                        "<option name='noticetype'  value="+val.id+">"
                         + val.typename + "</option>")
                 })
+                layui.form.render('select');
             }
         })
     }
@@ -186,6 +233,59 @@
 
         });
 
+    });
+    layui.use('upload', function () {
+        var $ = layui.jquery,
+            upload = layui.upload;
+        //多图片上传
+        upload.render({
+            elem: '.layui-upload',
+            url: '/Community/upload/',
+            multiple: true,
+            field:'img',
+            before: function (obj) {
+                //获取当前触发上传的元素
+                var touchObj=this.item[0].attributes[1].nodeValue;
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    imgUrl=file.name;
+                    $('.img-div[data="'+touchObj+'"]').append('<img src="' + result + '" alt="' + file.name +
+                        '" class="layui-upload-img img" height="86px" width="86px">'
+                    )
+                    $('.img-div[data="'+touchObj+'"]').find('.upload-before').hide();
+                });
+            },
+            done: function (res) {
+                //上传完毕
+                console.log("上传完毕")
+                console.log(res);
+            }
+        });
+        //控制图片遮罩隐藏显示
+        $(".img-div").hover(
+            function () {
+                if($(this).find('img').length!=0){
+                    $(this).find(".upload-after").show();
+                }
+                $(this).css("border", "1px solid #999");
+            },
+            function () {
+                $(this).css("border", "1px dashed #999");
+                $(this).find(".upload-after").hide();
+            }
+        )
+        //查看图片
+        $(".look").click(function (event) {
+            event.stopPropagation();
+        })
+        //删除图片
+        $(".del").click(function (event) {
+            var dom=$(this).parents(".img-div");
+            dom.find("img").remove();
+            dom.find(".upload-before").show();
+            dom.find(".upload-after").hide();
+            event.stopPropagation();
+        })
     });
 </script>
 </body>

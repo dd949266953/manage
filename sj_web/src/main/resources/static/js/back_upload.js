@@ -17,7 +17,9 @@ layui.use('upload', function () {
             var touchObj=this.item[0].attributes[1].nodeValue;
             //预读本地文件示例，不支持ie8
             obj.preview(function (index, file, result) {
+
                 imgresult=result;
+
                 $('.img-div[data="'+touchObj+'"]').append('<img src="' + result + '" alt="' + file.name +
                     '" class="layui-upload-img img" height="86px" width="86px">'
                 )
