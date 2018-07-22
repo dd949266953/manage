@@ -90,7 +90,7 @@ public class CommunityController {
 
     @RequestMapping("upload")
     @ResponseBody
-    public Object uploadimg(@RequestParam("img") MultipartFile file,HttpServletRequest request){
+    public Object uploadimg(@RequestParam("file") MultipartFile file,HttpServletRequest request){
         try {
             //获取文件上传的路径
             //String path=request.getServletContext().getRealPath("files");
