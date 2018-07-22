@@ -33,9 +33,9 @@
          -->
 
         <ul class="layui-nav" lay-filter="">
-            <li id="lione" class="layui-nav-item"><a class="a_color"
+            <li  class="layui-nav-item"><a class="a_color"
                                                      href="doNotice">小区公告</a></li>
-            <li class="layui-nav-item "><a class="a_color"
+            <li id="lione" class="layui-nav-item "><a class="a_color"
                                            href="doNoticeType">公告分类</a></li>
         </ul>
 
@@ -43,10 +43,10 @@
         <div id="subject" style="margin: 20px 30px">
 
             <button onclick="doAdd()" class="button noborder">
-                <i class="layui-icon btn-icon">&#xe654;</i>添加公告
+                <i class="layui-icon btn-icon">&#xe654;</i>添加类型
             </button>
             <div style="float: right;">
-                <input id="noticeTitle" type="text" placeholder="请输入公告关键字"
+                <input id="noticeTitle" type="text" placeholder="请输入类型关键字"
                        class="search-keyword" />
                 <button onclick="page()" class="noborder">
                     <i class="layui-icon search">&#xe615;</i>
@@ -64,42 +64,9 @@
     <script th:src="@{/layui/layui.js}"></script>
     <script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
     <script type="text/html" id="barDemo">
-
-
-        <a class="layui-btn layui-btn-xs" lay-event="glCommunity">关联小区</a>
-
-        <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="edit">修改</a>
-
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
     </script>
-    <script type="text/html" id="getContent">
-        {{#  if(d.contenttype =='1'){ }}
-        <a href="javascript:(0)"  lay-event="check">文字</a>
-        {{#  } else if(d.OrderState =='2') { }}
-        <a href="javascript:(0)"  lay-event="check">图片</a>
-        {{#  } else{ }}
-        <a href="javascript:(0)"  lay-event="check">图文</a>
-        {{#  } }}
-    </script>
-    <script type="text/html" id="zhiding">
-        {{#  if(d.level == 1){ }}
-        <form class="layui-form" action="">
-        <input   lay-filter="test" type="checkbox" value="1"   lay-skin="switch"  checked>
-        </form>
-        {{#  } else { }}
-        <form class="layui-form" action="">
-        <input  lay-filter="test" type="checkbox" value="0"    lay-skin="switch"  >
-        </form>
-        {{#  } }}
-    </script>
     <script>
-        layui.use('form', function(){
-            var form = layui.form;
-            form.on('switch(test)', function(data){
-               alert(data.value);
-            });
-        });
-
         function doAdd() {
             layer.open({
                 type: 2,
@@ -132,27 +99,17 @@
                     cellMinWidth : 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                     ,
                     cols : [ [ {
-                        field : 'noticename',
+                        field : 'typeName',
                         align : 'center',
-                        title : '公告名称'
+                        title : '类型名称'
                     }, {
-                        field : 'typename',
-                        title : '公告分类',
+                        field : 'count',
+                        title : '关联公告',
                         align : 'center'
                     }, {
-                        field : 'contenttype',
-                        align : 'center',
-                        title : '公告内容',
-                        templet : '#getContent'
-                    }, {
-                        field : 'time',
+                        field : 'createTime',
                         title : '添加时间',
                         align : 'center'
-                    }, {
-                        field : 'level',
-                        title : '是否置顶',
-                        align : 'center',
-                        templet : '#zhiding'
                     } , {
                         title : '操作',
                         align : 'center',
@@ -191,12 +148,7 @@
                         });
 
                     }
-                    if (layEvent === 'edit') {
-                        window.location="../building/addBuilding/"+data.buildingid;
-                    }
-                    if (layEvent === 'check') {
 
-                    }
 
                 });
 

@@ -1,4 +1,4 @@
-package com.m78.serviceImpl;
+package com.m78.serviceImpl.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.m78.entity.Notice;

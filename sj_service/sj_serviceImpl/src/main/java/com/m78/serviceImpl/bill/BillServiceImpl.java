@@ -97,7 +97,7 @@ public class BillServiceImpl  implements BillService {
     @Override
     public int addImportBill(Bill bill, String charItemName,
                              String type, String phone) {
-<<<<<<< HEAD
+
 //        //车位id 房屋id
 //        Long singId;
 //        //收费标准id
@@ -134,7 +134,7 @@ public class BillServiceImpl  implements BillService {
 
         return 0;
 
-=======
+
         //车位id 房屋id
         Long singId;
         //收费标准id
@@ -154,6 +154,6 @@ public class BillServiceImpl  implements BillService {
         chargeId.setSignid(singId);
         int num= chargeIdMapper.insertSelective(chargeId);
         return num;
->>>>>>> 6a49e1c7a9ee02415c42af679f60a154cb336e3c
+
     }
 }

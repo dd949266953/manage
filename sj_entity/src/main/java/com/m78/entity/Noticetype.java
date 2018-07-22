@@ -10,6 +10,8 @@ public class Noticetype implements Serializable {
 
     private Date createtime;
 
+    private Long count;
+
     public Long getId() {
         return id;
     }
@@ -34,12 +36,22 @@ public class Noticetype implements Serializable {
         this.createtime = createtime;
     }
 
+
+    public Long getCount() {
+        return count;
+    }
+
+    public void setCount(Long count) {
+        this.count = count;
+    }
+
     @Override
     public String toString() {
         return "Noticetype{" +
                 "id=" + id +
                 ", typename='" + typename + '\'' +
                 ", createtime=" + createtime +
+                ", count=" + count +
                 '}';
     }
 }

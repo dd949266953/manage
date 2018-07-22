@@ -6,6 +6,34 @@
     <result column="typeName" jdbcType="VARCHAR" property="typename" />
     <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
   </resultMap>
+    <resultMap id="noticeTypeList" type="com.m78.entity.Noticetype">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="typeName" jdbcType="VARCHAR" property="typename" />
+        <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+        <result column="count" property="count"/>
+    </resultMap>
+    <select id="getAllNoticeTypeByPage" resultMap="noticeTypeList">
+      SELECT nt.id,nt.typeName,nt.createTime,SUM(1) as count
+      FROM noticetype nt
+      INNER JOIN notice no on no.type=nt.id
+      <if test="noticeTypeName!=''">
+          WHERE nt.typeName LIKE CONCAT ('%',#{noticeTypeName},'%')
+      </if>
+      GROUP BY nt.id
+      limit #{start},#{end}
+    </select>
+
+    <select id="getAllNoticeType" resultMap="BaseResultMap">
+        SELECT nt.id,nt.typeName  FROM noticetype nt
+    </select>
+
+    <select id="getAllNoticeTypeCount" resultType="java.lang.Long">
+        SELECT count(1) FROM noticetype
+        <if test="noticeTypeName!=''">
+            WHERE nt.typeName LIKE CONCAT ('%',#{noticeTypeName},'%')
+        </if>
+    </select>
+
   <sql id="Base_Column_List">
     id, typeName, createTime
   </sql>
