@@ -1,7 +1,5 @@
 package com.m78.controller.datacenter;
 
-import com.alibaba.dubbo.common.json.JSON;
-import com.alibaba.dubbo.common.json.JSONObject;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.m78.entity.Community;
 import com.m78.service.dataCenter.CommunityService;
@@ -42,11 +40,11 @@ public class CommunityController {
      * @return
      */
     @RequestMapping(value = "updateCommunity.html")
-    public Object updateCommunity(Community data){
+    public Object updateCommunityView(Community community){
 
         ModelAndView mv=new ModelAndView();
         mv.setViewName("dataCenter/community/addCommunity");
-        mv.addObject("community",data);
+        mv.addObject("community",community);
         return mv;
     }
 
@@ -55,10 +53,10 @@ public class CommunityController {
      * @return
      */
     @RequestMapping(value = "addCommunity.html")
-    public Object addCommunity(Community data){
+    public Object addCommunity(Community community){
         ModelAndView mv=new ModelAndView();
         mv.setViewName("dataCenter/community/addCommunity");
-        mv.addObject("community",data);
+        mv.addObject("community",community);
         return mv;
     }
 
@@ -83,11 +81,11 @@ public class CommunityController {
     /**
      * 修改小区
      */
-    @RequestMapping("updateCommunity")
+    @RequestMapping("updateCommunity/{id}")
     @ResponseBody
-    public Object updateCommunity( ){
-       // System.out.println(record.toString());
-        return null;
+    public Object updateCommunity(@PathVariable("id")Long id, Community community){
+        community.setId(id);
+        return communityService.updateByPrimaryKeySelective(community);
     }
 
 

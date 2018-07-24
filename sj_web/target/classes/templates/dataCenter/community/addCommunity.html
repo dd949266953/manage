@@ -88,9 +88,10 @@
                             <i class="iconfont del" style="font-size: 24px;">&#xe618;</i>
                         </div>
                         <img th:remove="${community.logo==null||community.logo==''}? all : none "
-                             th:src="@{'http://localhost:8081/img/upload-img/'+ ${community.logo}}" th:height="86px"
-                             th:width="86px">
-
+                             th:src="${#httpServletRequest.getScheme()+'://'+#httpServletRequest.getServerName()+':'+#httpServletRequest.getServerPort()}+'/img/upload-img/'+ ${community.logo}"
+                             th:height="86px"
+                             th:width="86px"
+                             th:alt="${community.logo}">
                     </div>
                 </div>
             </div>
@@ -108,8 +109,9 @@
                             <i class="iconfont del" style="font-size: 24px;">&#xe618;</i>
                         </div>
                         <img th:remove="${community.backgroundimage==null ||community.backgroundimage==''}? all : none "
-                             th:src="@{'http://localhost:8081/img/upload-img/'+ ${community.backgroundimage}}"
-                             th:height="86px" th:width="86px">
+                             th:src="${#httpServletRequest.getScheme()+'://'+#httpServletRequest.getServerName()+':'+#httpServletRequest.getServerPort()}+'/img/upload-img/'+ ${community.backgroundimage}"
+                             th:height="86px" th:width="86px"
+                             th:alt="${community.backgroundimage}">
                     </div>
 
                 </div>
@@ -131,24 +133,24 @@
 </footer>
 
 <script th:inline="javascript">
-
     <!--单机保存-->
     $(".save").click(function () {
         if (pass === 1) {
             var logo = getImgName("logo");					//小区logo
             var backgroundimage = getImgName("background");	//小区背景图
-            var data = $.param({'logo': logo, 'backgroundimage': backgroundimage}) + '&' + $("form").serialize();
+            var community = $.param({'logo': logo, 'backgroundimage': backgroundimage}) + '&' + $("form").serialize();
             //获取小区id
             var communityid = [[${community.id}]];
             //提示
             var hint = communityid == null ? "添加" : "修改";
-            $.post('/Community/addCommunity', data, function (result) {
+            var url = communityid == null ? "addCommunity" : "updateCommunity/" + communityid;
+            $.post('/Community/' + url, community, function (result) {
                 if (result === 1) {
                     layer.msg(hint + "成功", {
                         icon: 1
                     })
                 } else {
-                    layer.msg(hint + '添加失败', {
+                    layer.msg(hint + '失败', {
                         icon: 2
                     });
                 }

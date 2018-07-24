@@ -62,8 +62,24 @@ public class CommunityServiceImpl implements CommunityService {
         return communityMapper.getCommunityIdByName(communityName);
     }
 
+    /**
+     * 根据id查询小区
+     * @param id
+     * @return
+     */
     @Override
     public Community selectByPrimaryKey(Long id) {
         return communityMapper.selectByPrimaryKey(id);
+    }
+
+    /**
+     * 根据小区id修改小区
+     * @param record
+     * @return
+     */
+    @Override
+    public int updateByPrimaryKeySelective(Community record) {
+        System.out.println(2);
+        return communityMapper.updateByPrimaryKeySelective(record);
     }
 }

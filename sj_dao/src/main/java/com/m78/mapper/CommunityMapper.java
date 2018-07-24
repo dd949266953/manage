@@ -15,6 +15,11 @@ public interface CommunityMapper {
 
     Community selectByPrimaryKey(Long id);
 
+    /**
+     * 根据小区id修改小区
+     * @param record
+     * @return
+     */
     int updateByPrimaryKeySelective(Community record);
 
     int updateByPrimaryKey(Community record);
