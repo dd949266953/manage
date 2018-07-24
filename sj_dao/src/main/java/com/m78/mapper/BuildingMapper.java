@@ -6,10 +6,9 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface BuildingMapper {
+
     /**
-     * 根据id删除楼宇信息
-     * @param id
-     * @return
+     * 删除楼宇
      */
     int deleteByPrimaryKey(Long id);
 
@@ -28,4 +27,10 @@ public interface BuildingMapper {
      * @return
      */
     List<Building> getBuildingList(@Param("start") int start,@Param("limit") int limit,@Param("buildingName")String buildingName);
+
+    /**
+     * 查询楼宇总数根据名称
+     * @return
+     */
+    Long getBuildingCountByName(@Param("buildingName")String buildingName);
 }

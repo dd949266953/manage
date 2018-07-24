@@ -9,11 +9,14 @@ import com.m78.service.dataCenter.CommunityService;
 import com.m78.service.dataCenter.BuildingService;
 import com.m78.util.DataTable;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.m78.service.dictionaryItemSevice;
+import com.m78.service.DictionaryItemSevice;
+import org.springframework.web.servlet.ModelAndView;
+
 import java.util.List;
 
 /**
@@ -27,8 +30,7 @@ public class BuildingController {
     private BuildingService buildingService;
     @Reference(version="1.0.0")
     private CommunityService communityService;
-    @Reference(version = "1.0.0")
-    private  dictionaryItemSevice dictionaryItemSevice;
+
 
     /**
      * 楼宇列表页面
@@ -42,24 +44,41 @@ public class BuildingController {
     /**
      * 添加楼宇页面
      */
-    @RequestMapping("addBuildingList.html")
-    public String addBuildingList(){
-        return "dataCenter/building/addBuilding";
+    @RequestMapping("addBuilding.html")
+    public ModelAndView addBuilding(Building building){
+        ModelAndView mv=new ModelAndView();
+        mv.addObject("building",building);
+        mv.addObject("buildingType",buildingService.getBuildingType());
+        mv.setViewName("dataCenter/building/addBuilding");
+        return mv;
     }
 
+    /**
+     * 编辑楼宇页面
+     */
+    @RequestMapping("updateBuilding.html")
+    public ModelAndView updateBuilding(Building building){
+        ModelAndView mv=new ModelAndView();
+        mv.addObject("building",building);
+        mv.addObject("buildingType",buildingService.getBuildingType());
+        mv.setViewName("dataCenter/building/addBuilding");
+        return mv;
+    }
     /**
      * 楼宇列表数据
      * @return
      */
     @RequestMapping("getBuilldingList")
     @ResponseBody
-    public Object getBuildingList(@RequestParam("page") int page, @RequestParam("limit") int limit, @RequestParam("buildingName") String buildingName){
-        return DataTable.bindTableUtil(0,100,buildingService.getBuildingList(page,limit,buildingName));
+    public Object getBuildingList(@RequestParam("page") int page,
+                                  @RequestParam("limit") int limit,
+                                  @RequestParam("buildingName") String buildingName){
+        return DataTable.bindTableUtil(0,buildingService.getBuildingCountByName(buildingName),buildingService.getBuildingList(page,limit,buildingName));
     }
     /**
      * 根据id删除
      */
-    @RequestMapping(value = "deleteByPrimaryKey",method = RequestMethod.GET)
+    @RequestMapping(value = "deleteByPrimaryKey")
     @ResponseBody
     public int deleteByPrimaryKey(long id){
         return buildingService.deleteByPrimaryKey(id);
@@ -70,7 +89,7 @@ public class BuildingController {
      * @param record
      * @return
      */
-    @RequestMapping("buildingInsert")
+    @RequestMapping("addBuilding")
     @ResponseBody
     public int insert(Building record) {
         return buildingService.insert(record);
@@ -85,12 +104,4 @@ public class BuildingController {
         return communityService.getCommunityIdAndName();
     }
 
-    /**
-     * 查询楼宇类型为高层底层，别墅的
-     */
-    @RequestMapping("typeID")
-    @ResponseBody
-   public List<DictionaryItem> getDictionary(){
-        return dictionaryItemSevice.getDictionary();
-    }
 }

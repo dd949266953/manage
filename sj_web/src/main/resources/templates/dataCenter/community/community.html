@@ -111,8 +111,8 @@
                         var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
                         var tr = obj.tr; //获得当前行 tr 的DOM对象
                         if (layEvent === 'edit'){
-                            var data =$.param(data);
-                            window.location="addCommunity.html?"+data;
+                            var community =$.param(data);
+                            window.location="updateCommunity.html?"+community;
                         }
                         if (layEvent === 'del') {
                             layer.confirm('确定要删除吗?', {

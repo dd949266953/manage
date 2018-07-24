@@ -41,7 +41,6 @@ public class CommunityController {
      */
     @RequestMapping(value = "updateCommunity.html")
     public Object updateCommunityView(Community community){
-
         ModelAndView mv=new ModelAndView();
         mv.setViewName("dataCenter/community/addCommunity");
         mv.addObject("community",community);

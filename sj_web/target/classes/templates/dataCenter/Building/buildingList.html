@@ -41,7 +41,7 @@
                     table.render({
                         elem: "#buildingList",
                         loading: true,
-                        url: '/Buillding/getBuilldingList',
+                        url: '/Building/getBuilldingList',
                         where: {
                             buildingName: $("#buildingName").val()
                         },
@@ -102,8 +102,8 @@
                         var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
                         var tr = obj.tr; //获得当前行 tr 的DOM对象
                         if (layEvent === 'edit'){
-                            var data =$.param(data);
-                            window.location="addCommunity.html?"+data;
+                            var building =$.param(data);
+                            window.location="updateBuilding.html?"+building;
                         }
                         if (layEvent === 'del') {
                             layer.confirm('确定要删除吗?', {
@@ -112,8 +112,7 @@
                                 shade: '0'
                             }, function (index) {
                                 $.ajax({
-                                    url: 'deleteCommunity',
-                                    type: 'get',
+                                    url: 'deleteByPrimaryKey',
                                     dataType: 'json',
                                     data: {
                                         id: data.id
@@ -143,7 +142,7 @@
             }
             //添加楼宇
             function add() {
-                window.location = "addCommunity.html";
+                window.location = "addBuilding.html";
             }
 		</script>
 		<script type="text/html" id="bar">

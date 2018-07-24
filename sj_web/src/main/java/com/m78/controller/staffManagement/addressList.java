@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.m78.service.staff.staffService;
-import com.m78.service.dictionaryItemSevice;
+import com.m78.service.DictionaryItemSevice;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class addressList {
     @Reference(version = "1.0.0")
     private staffService staffService;
     @Reference(version = "1.0.0")
-    private dictionaryItemSevice dictionaryItemSevice;
+    private DictionaryItemSevice dictionaryItemSevice;
 
 
     /**

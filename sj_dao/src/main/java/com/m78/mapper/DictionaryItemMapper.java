@@ -17,9 +17,9 @@ public interface DictionaryItemMapper {
 
     int updateByPrimaryKey(DictionaryItem record);
     /**
-     * 查询楼宇类型为高层底层，别墅的
+     * 查询楼宇类型
      */
-    List<DictionaryItem> getDictionary();
+    List<DictionaryItem> getBuildingType();
 
     /**
      * 查询职业类型

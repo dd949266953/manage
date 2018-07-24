@@ -23,7 +23,7 @@
     limit #{start},#{limit}
   </select>
   <!-- 查询小区总数根据名称 -->
-  <select id="getCommunityCountByName" resultType="java.lang.Long" parameterType="java.lang.String">
+  <select id="getCommunityCountByName" resultType="java.lang.Long">
     SELECT COUNT(1) FROM community where 1=1
     <if test="communityName!=''">
       and name LIKE CONCAT ('%',#{communityName},'%')

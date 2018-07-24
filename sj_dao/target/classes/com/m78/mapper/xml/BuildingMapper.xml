@@ -23,6 +23,14 @@
     </if>
     limit #{start},#{limit}
   </select>
+  <!--查询楼宇总数根据名称-->
+  <select id="getBuildingCountByName" resultType="java.lang.Long" >
+    select count(1)  from building where 1=1
+    <if test="buildingName!=''">
+      and `name` LIKE CONCAT ('%',#{buildingName },'%')
+    </if>
+  </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
