@@ -1,13 +1,18 @@
 package com.m78.controller.datacenter;
 
+import com.alibaba.dubbo.common.json.JSON;
+import com.alibaba.dubbo.common.json.JSONObject;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.m78.entity.Community;
 import com.m78.service.dataCenter.CommunityService;
 import com.m78.util.DataTable;
 import com.m78.util.upload;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -33,12 +38,28 @@ public class CommunityController {
     }
 
     /**
+     * 修改界面
+     * @return
+     */
+    @RequestMapping(value = "updateCommunity.html")
+    public Object updateCommunity(Community data){
+
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("dataCenter/community/addCommunity");
+        mv.addObject("community",data);
+        return mv;
+    }
+
+    /**
      * 添加界面
      * @return
      */
     @RequestMapping(value = "addCommunity.html")
-    public String addCommunity(){
-        return "dataCenter/community/addCommunity";
+    public Object addCommunity(Community data){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("dataCenter/community/addCommunity");
+        mv.addObject("community",data);
+        return mv;
     }
 
     /**
@@ -56,10 +77,19 @@ public class CommunityController {
      */
     @RequestMapping("addCommunity")
     @ResponseBody
-    public int insertCommunity(Community record){
-        System.out.println(record.toString());
-        return  communityService.insert(record);
+    public int insertCommunity(Community record){ return  communityService.insert(record);
     }
+
+    /**
+     * 修改小区
+     */
+    @RequestMapping("updateCommunity")
+    @ResponseBody
+    public Object updateCommunity( ){
+       // System.out.println(record.toString());
+        return null;
+    }
+
 
     /**
      * 删除小区
@@ -93,16 +123,24 @@ public class CommunityController {
     @ResponseBody
     public Object uploadimg(@RequestParam("file") MultipartFile file,HttpServletRequest request){
         try {
-            //获取文件上传的路径
-            //String path=request.getServletContext().getRealPath("files");
-            //String basePath= ResourceUtils.getURL("spoons/static/").getPath();
             String fileName = file.getOriginalFilename();//获取file图片名称
-            String filePath ="D:/files1/";  //地址
+            String filePath= ResourceUtils.getURL("sj_web\\src\\main\\resources\\static\\img\\upload-img").getPath();
             upload.upload(file, filePath, fileName);
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
         }
         return 1;
+    }
+
+    /**
+     * 根据小区id查询小区
+     * @param id
+     * @return
+     */
+    @RequestMapping("selectByPrimaryKey")
+    @ResponseBody
+    public Community selectByPrimaryKey(Long id) {
+        return communityService.selectByPrimaryKey(id);
     }
 }

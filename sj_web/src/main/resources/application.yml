@@ -13,6 +13,9 @@ spring:
       request-context-attribute: request
       cache: false
       mode: LEGACYHTML5
+      encoding: utf-8
+      servlet:
+        content-type: text/html
   jackson:
       date-format: yyyy-MM-dd
       time-zone: GMT+8

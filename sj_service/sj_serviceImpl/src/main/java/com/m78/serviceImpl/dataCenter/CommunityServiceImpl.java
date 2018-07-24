@@ -62,4 +62,8 @@ public class CommunityServiceImpl implements CommunityService {
         return communityMapper.getCommunityIdByName(communityName);
     }
 
+    @Override
+    public Community selectByPrimaryKey(Long id) {
+        return communityMapper.selectByPrimaryKey(id);
+    }
 }

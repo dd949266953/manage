@@ -34,5 +34,12 @@ public interface CommunityService {
      */
     Long getCommunityIdByName(String communityName);
 
+    /**
+     * 根据小区id 查询小区
+     * @param id
+     * @return
+     */
+    Community selectByPrimaryKey(Long id);
+
 
 }
