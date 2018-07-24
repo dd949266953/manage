@@ -12,7 +12,7 @@ import java.util.List;
  * 楼宇接口实现类
  */
 @Service(version="1.0.0")
-public class BuilldingServiceImpl implements BuildingService {
+public class BuildingServiceImpl implements BuildingService {
     @Autowired
     private BuildingMapper buildingMapper;
 
@@ -21,8 +21,9 @@ public class BuilldingServiceImpl implements BuildingService {
      * @return
      */
     @Override
-    public List<Building> getBuildingList() {
-        return buildingMapper.getBuildingList();
+    public List<Building> getBuildingList(int page, int limit, String buildingName) {
+        int start=(page-1)*limit;
+        return buildingMapper.getBuildingList(start,limit,buildingName);
     }
 
     /**

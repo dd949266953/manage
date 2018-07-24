@@ -67,7 +67,7 @@ public class CommunityController {
     @RequestMapping(value = "/communityData")
     @ResponseBody
     public  Object  findAllCommunity(@RequestParam("page") int page, @RequestParam("limit") int limit,@RequestParam("communityName") String communityName){
-        return  DataTable.bindTableUtil(0,100,communityService.findAll(page,limit,communityName));
+        return  DataTable.bindTableUtil(0,communityService.getCommunityCountByName("communityName"),communityService.findAll(page,limit,communityName));
     }
 
     /**
@@ -87,7 +87,6 @@ public class CommunityController {
         community.setId(id);
         return communityService.updateByPrimaryKeySelective(community);
     }
-
 
     /**
      * 删除小区

@@ -15,6 +15,11 @@ public interface CommunityService {
     List<Community> findAll(int page,int limit,String name);
 
     /**
+     * 查询小区数量根据名字
+     */
+    long getCommunityCountByName(String communityName);
+
+    /**
      * 添加小区
      */
     int insert(Community record);

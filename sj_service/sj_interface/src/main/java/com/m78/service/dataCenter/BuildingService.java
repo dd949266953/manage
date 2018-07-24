@@ -12,7 +12,7 @@ public interface BuildingService {
     /**
      * 查询楼宇列表
      */
-    List<Building> getBuildingList();
+    List<Building> getBuildingList(int page,int limit,String buildingName);
 
     /**
      * 删除楼宇

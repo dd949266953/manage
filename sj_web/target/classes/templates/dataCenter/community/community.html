@@ -25,7 +25,7 @@
                 <i class="layui-icon search">&#xe607;</i>
             </button>
         </div>
-        <table id="demo" lay-filter="test"></table>
+        <table id="communityList" lay-filter="test"></table>
         <script th:src="@{/layui/layui.js}" type="text/javascript"></script>
         <script th:src="@{/js/jquery-3.2.1.js}" type="text/javascript"></script>
         <script>
@@ -39,7 +39,7 @@
                     var table = layui.table;
                     //第一个实例
                     table.render({
-                        elem: "#demo",
+                        elem: "#communityList",
                         loading: true,
                         url: '/Community/communityData',
                         where: {
@@ -99,7 +99,7 @@
                                     field: "right",
                                     title: '编辑',
                                     align: 'center',
-                                    toolbar: "#barDemo"
+                                    toolbar: "#bar"
                                 }
                             ]
                         ],
@@ -155,7 +155,7 @@
                 window.location = "addCommunity.html";
             }
         </script>
-        <script type="text/html" id="barDemo">
+        <script type="text/html" id="bar">
             <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
             <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
         </script>

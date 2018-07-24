@@ -75,7 +75,7 @@ public class Building implements Serializable {
 
     @Override
     public String toString() {
-        return "Building{" +
+        return "building{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", unittotal=" + unittotal +

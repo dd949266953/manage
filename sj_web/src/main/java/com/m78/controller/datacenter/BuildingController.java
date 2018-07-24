@@ -11,6 +11,7 @@ import com.m78.util.DataTable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.m78.service.dictionaryItemSevice;
 import java.util.List;
@@ -35,7 +36,7 @@ public class BuildingController {
      */
     @RequestMapping("buildingList.html")
     public  String buildingList(){
-        return "dataCenter/Building/buildingList";
+        return "dataCenter/building/buildingList";
     }
 
     /**
@@ -43,7 +44,7 @@ public class BuildingController {
      */
     @RequestMapping("addBuildingList.html")
     public String addBuildingList(){
-        return "dataCenter/Building/addBuilding";
+        return "dataCenter/building/addBuilding";
     }
 
     /**
@@ -52,8 +53,8 @@ public class BuildingController {
      */
     @RequestMapping("getBuilldingList")
     @ResponseBody
-    public Object getBuildingList(){
-        return DataTable.bindTableUtil(0,100,buildingService.getBuildingList());
+    public Object getBuildingList(@RequestParam("page") int page, @RequestParam("limit") int limit, @RequestParam("buildingName") String buildingName){
+        return DataTable.bindTableUtil(0,100,buildingService.getBuildingList(page,limit,buildingName));
     }
     /**
      * 根据id删除

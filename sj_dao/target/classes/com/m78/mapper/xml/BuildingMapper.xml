@@ -14,10 +14,14 @@
     id, name, unitTotal, pliesTotal, buildingType, buildingStructure, orientation
   </sql>
   <!--查询全部-->
-  <select id="getBuildingList" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="getBuildingList" resultMap="BaseResultMap" >
     select
     <include refid="Base_Column_List" />
     from building
+    <if test="buildingName!=''">
+      where `name` LIKE CONCAT ('%',#{buildingName },'%')
+    </if>
+    limit #{start},#{limit}
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
