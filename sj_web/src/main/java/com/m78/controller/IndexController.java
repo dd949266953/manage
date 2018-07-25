@@ -15,4 +15,13 @@ public class IndexController {
         return  "index";
     }
 
+    /**
+     * 跳转首页456
+     * @return
+     */
+    @RequestMapping("demo")
+    public  Object demo(){
+        return  "demo";
+    }
+
 }

@@ -1,5 +1,5 @@
 /* common css ============================================== */
-body{margin:0 auto;	text-align:center; font: 12px/1.5 arial; color:#242424;background:#212222;}
+body{margin:0 auto;	text-align:center; font: 12px/1.5 arial; color:#242424;}
 div{text-align:left;}
 :focus{outline:none;}
 h4,h3,h2,h1{font-size:14px; margin:0;}
@@ -295,6 +295,8 @@ b{font-weight:normal; display:inline-block; margin:0 8px; color:#f27f02;}
 	overflow:hidden;
 	color:#999;
 	font-size:12px;
+	position: relative;
+	top: 10px;
 }
 .Validform_right{
 	color:#71b83d;
