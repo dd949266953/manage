@@ -22,9 +22,12 @@
     </if>
     limit #{start},#{limit}
   </select>
-  <!-- 查询小区数量 -->
-  <select id="getCommunityNum" resultType="java.lang.Integer" >
-    select count (*) from community
+  <!-- 查询小区总数根据名称 -->
+  <select id="getCommunityCountByName" resultType="java.lang.Long">
+    SELECT COUNT(1) FROM community where 1=1
+    <if test="communityName!=''">
+      and name LIKE CONCAT ('%',#{communityName},'%')
+    </if>
   </select>
 <!--查询小区名称和id-->
   <select id="getCommunityIdAndName" resultMap="BaseResultMap">
@@ -37,7 +40,37 @@
   <sql id="Base_Column_List">
     id, name, address, detailAddress, serviceTel, leader, leaderPhone, logo, backgroundImage
   </sql>
-
+  <!--根据小区id修改小区-->
+  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.Community" >
+    update community
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="detailaddress != null" >
+        detailAddress = #{detailaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="servicetel != null" >
+        serviceTel = #{servicetel,jdbcType=VARCHAR},
+      </if>
+      <if test="leader != null" >
+        leader = #{leader,jdbcType=VARCHAR},
+      </if>
+      <if test="leaderphone != null" >
+        leaderPhone = #{leaderphone,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null" >
+        logo = #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundimage != null" >
+        backgroundImage = #{backgroundimage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
@@ -119,36 +152,6 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.Community" >
-    update community
-    <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null" >
-        address = #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="detailaddress != null" >
-        detailAddress = #{detailaddress,jdbcType=VARCHAR},
-      </if>
-      <if test="servicetel != null" >
-        serviceTel = #{servicetel,jdbcType=VARCHAR},
-      </if>
-      <if test="leader != null" >
-        leader = #{leader,jdbcType=VARCHAR},
-      </if>
-      <if test="leaderphone != null" >
-        leaderPhone = #{leaderphone,jdbcType=VARCHAR},
-      </if>
-      <if test="logo != null" >
-        logo = #{logo,jdbcType=VARCHAR},
-      </if>
-      <if test="backgroundimage != null" >
-        backgroundImage = #{backgroundimage,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
   <update id="updateByPrimaryKey" parameterType="com.m78.entity.Community" >
     update community
     set name = #{name,jdbcType=VARCHAR},

@@ -11,8 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+<<<<<<< HEAD:sj_web/src/main/java/com/m78/controller/staffManagement/AddressList.java
 import com.m78.service.staff.StaffService;
 import com.m78.service.dictionaryItemSevice;
+=======
+import com.m78.service.staff.staffService;
+import com.m78.service.DictionaryItemSevice;
+>>>>>>> 604d3f970c6455abc48eb260bf509f03a92f93b6:sj_web/src/main/java/com/m78/controller/staffManagement/addressList.java
 
 import java.util.List;
 
@@ -26,7 +31,13 @@ public class AddressList {
     @Reference(version = "1.0.0")
     private StaffService staffService;
     @Reference(version = "1.0.0")
+<<<<<<< HEAD:sj_web/src/main/java/com/m78/controller/staffManagement/AddressList.java
     private dictionaryItemSevice dictionaryItemSevice;
+=======
+    private DictionaryItemSevice dictionaryItemSevice;
+
+
+>>>>>>> 604d3f970c6455abc48eb260bf509f03a92f93b6:sj_web/src/main/java/com/m78/controller/staffManagement/addressList.java
     /**
      * 查询人员数量
      */

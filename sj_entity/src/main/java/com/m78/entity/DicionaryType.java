@@ -1,6 +1,8 @@
 package com.m78.entity;
 
-public class DicionaryType {
+import java.io.Serializable;
+
+public class DicionaryType implements Serializable {
     private Long id;
 
     private String description;

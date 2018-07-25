@@ -15,14 +15,19 @@ public interface CommunityMapper {
 
     Community selectByPrimaryKey(Long id);
 
+    /**
+     * 根据小区id修改小区
+     * @param record
+     * @return
+     */
     int updateByPrimaryKeySelective(Community record);
 
     int updateByPrimaryKey(Community record);
 
     /**
-     * 查询小区数量
+     * 查询小区数量根据名字
      */
-    Integer getCommunityNum();
+    long getCommunityCountByName(@Param("communityName")String communityName);
 
     /**
      * 查询全部小区

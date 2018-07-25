@@ -9,6 +9,16 @@ public class DictionaryItem implements Serializable {
 
     private Long typeId;
 
+    private DicionaryType dicionaryType;
+
+    public DicionaryType getDicionaryType() {
+        return dicionaryType;
+    }
+
+    public void setDicionaryType(DicionaryType dicionaryType) {
+        this.dicionaryType = dicionaryType;
+    }
+
     public Long getId() {
         return id;
     }

@@ -5,21 +5,25 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="content" property="content" jdbcType="VARCHAR" />
     <result column="type_id" property="typeId" jdbcType="BIGINT" />
+    <association property="dicionaryType" javaType="com.m78.entity.DicionaryType">
+      <id column="id" property="id" jdbcType="BIGINT" />
+      <result column="description" property="description" jdbcType="VARCHAR" />
+    </association>
   </resultMap>
   <sql id="Base_Column_List" >
     id, content, type_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from dictionary_item
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <!--查询楼宇类型高层，底层，别墅的-->
-  <select id="getDictionary" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select
-    <include refid="Base_Column_List" />
-    from dictionary_item WHERE type_id= 1
+  <!--查询楼宇类型-->
+  <select id="getBuildingType" resultMap="BaseResultMap">
+    SELECT di.`id`,di.`content` FROM dictionary_item di
+    INNER JOIN dicionary_type dt ON di.`type_id`=dt.`id`
+    WHERE dt.`id`=1
   </select>
   <!--查询职业类型-->
   <select id="getDictionaryItem" resultMap="BaseResultMap" parameterType="java.lang.Long" >

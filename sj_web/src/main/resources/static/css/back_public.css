@@ -56,7 +56,7 @@ form{
 
 }
 /*红色*号*/
-span{
+.row span{
 	color: #f5222d;
 	font-size: 14px;
 	padding:0 5px;
@@ -64,15 +64,11 @@ span{
 }
 /*按钮容器*/
 .buttondiv{
-
-	display: flex;
+	text-align: center;
 }
 /*按钮子项*/
 .button-item{
 	display: inline-table !important;
-	flex-direction: row;
-	flex: 1;
-	width: 50%;
 }
 .button-item button{
 	width: 100px;
@@ -127,6 +123,9 @@ img{
 	z-index: 10;
 	line-height: 84px;
 }
+.hide{
+	display: none;
+}
 /*上传提示文本*/
 .upload-before>p{
 	padding: 5px 0;
@@ -152,6 +151,56 @@ img{
 }
 .lay-select~div dd{
 	color: red;
+}
+/*表格上方按钮*/
+.button {
+	color: #fff;
+	background-color: #0fb478;
+	cursor: pointer;
+	margin-bottom: 0;
+	font-weight: 400;
+	text-align: center;
+	vertical-align: middle;
+	padding: 8px 15px;
+	border-radius: 2px;
+	min-width: 100px;
+	margin-top: 20px;
+	margin-left: 30px;
+}
+.noborder{
+	border: none;
+}
+.grabble{
+	margin-right: 30px;
+	margin-top: 20px;
+}
+/*搜索框*/
+.search-keyword{
+	width: 200px;
+	height: 30px;
+	border: 1px solid #d1d2d3;
+	float: left;
+	font-size: 12px;
+	line-height: 25px;
+	padding: 0 10px;
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3px;
+}
+/*搜索图标*/
+.search{
+	display: block;
+	float: left;
+	min-width: 40px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	background: #fcfcfc;
+	border: none;
+	border:1px solid #d1d2d3;
+	color: #2277da;
+	border-radius: 3px;
+	font-size: 16px;
+	font-weight: 600;
 }
 /**/
 @font-face {

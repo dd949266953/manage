@@ -15,6 +15,11 @@ public interface CommunityService {
     List<Community> findAll(int page,int limit,String name);
 
     /**
+     * 查询小区数量根据名字
+     */
+    long getCommunityCountByName(String communityName);
+
+    /**
      * 添加小区
      */
     int insert(Community record);
@@ -33,6 +38,20 @@ public interface CommunityService {
      * 根据小区名称查询小区id
      */
     Long getCommunityIdByName(String communityName);
+
+    /**
+     * 根据小区id 查询小区
+     * @param id
+     * @return
+     */
+    Community selectByPrimaryKey(Long id);
+
+    /**
+     * 根据小区id修改小区
+     * @param record
+     * @return
+     */
+    int updateByPrimaryKeySelective(Community record);
 
 
 }

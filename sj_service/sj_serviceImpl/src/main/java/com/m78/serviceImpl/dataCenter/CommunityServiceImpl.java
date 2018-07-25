@@ -25,6 +25,13 @@ public class CommunityServiceImpl implements CommunityService {
         int start=(page-1)*limit;
         return communityMapper.findAll(start,limit,communityName);
     }
+    /**
+     * 查询小区数量根据名字
+     */
+    @Override
+    public long getCommunityCountByName(String communityName) {
+        return communityMapper.getCommunityCountByName(communityName);
+    }
 
     /**
      * 添加小区
@@ -62,4 +69,24 @@ public class CommunityServiceImpl implements CommunityService {
         return communityMapper.getCommunityIdByName(communityName);
     }
 
+    /**
+     * 根据id查询小区
+     * @param id
+     * @return
+     */
+    @Override
+    public Community selectByPrimaryKey(Long id) {
+        return communityMapper.selectByPrimaryKey(id);
+    }
+
+    /**
+     * 根据小区id修改小区
+     * @param record
+     * @return
+     */
+    @Override
+    public int updateByPrimaryKeySelective(Community record) {
+        System.out.println(2);
+        return communityMapper.updateByPrimaryKeySelective(record);
+    }
 }
