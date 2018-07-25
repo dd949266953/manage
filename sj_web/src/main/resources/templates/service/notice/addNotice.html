@@ -14,7 +14,9 @@
     <link th:href="@{/css/fiont.css}" rel="stylesheet">
     <link th:href="@{/css/back_public.css}" rel="stylesheet">
     <style>
-
+        body{
+            background-color: white;
+        }
         form{
             width: 600px;
             margin: 50px auto;
@@ -25,18 +27,18 @@
     </style>
 </head>
 <body>
-<form id="form1" class="layui-form" action="" onsubmit="return false">
+<form id="form1" class="layui-form" action="" onsubmit="return false" enctype="multipart/form-data">
     <div class="layui-form-item">
         <label class="layui-form-label">公告标题</label>
         <div class="layui-input-block">
-            <input type="text" name="noticeName" lay-verify="required" autocomplete="off" placeholder="请输入标题" class="layui-input" />
+            <input type="text" id="noticename" name="noticename" lay-verify="required" autocomplete="off" placeholder="请输入标题" class="layui-input" />
         </div>
 
     </div>
     <div class="layui-form-item">
     <label class="layui-form-label">公告分类</label>
     <div class="layui-input-block">
-        <select  class="input" id="noticetype">
+        <select  class="input" name="type" id="noticetype">
 
         </select>
         <a onclick="addType()" style="color:rgb(46,204,113);margin-top:20px;display: block" href="javascript:(0)">添加公告分类</a>
@@ -60,7 +62,7 @@
                 </div>
                 <div class="layui-tab-item">
                     <div class="layui-input-block row row-div">
-                        <div class="layui-upload img-div" th:data="logo">
+                        <div class="layui-upload img-div" th:data="imgs">
                             <div class="upload-before">
                                 <i class="iconfont" style="font-size: 36px;">&#xe602;</i>
                                 <p>上传图片</p>
@@ -69,13 +71,13 @@
                                 <i class="iconfont look layui-btn laybtn" data-method="offset" style="font-size: 24px;">&#xe61e;</i>
                                 <i class="iconfont del" style="font-size: 24px;">&#xe618;</i>
                             </div>
+
                         </div>
                     </div>
                 </div>
                 <div class="layui-tab-item">
                     <div style="margin: 25px 0px 0px 25px">
-                    <button class="layui-btn   layui-btn-warm" >选择图文素材</button>
-                    <button class="layui-btn   layui-btn-danger ">新建图文素材</button>
+                    <button id="doAdd" class="layui-btn   layui-btn-danger ">添加图文素材</button>
                     </div>
                 </div>
             </div>
@@ -94,26 +96,57 @@
             <button id="reset"  class="layui-btn layui-btn-primary">重置</button>
         </div>
     </div>
-    <div class="photo">
-        <img src="img/questionnaire/questionnaire1.png" height="266px" width="472px" />
-    </div>
+
 </form>
-
-
+<div class="photo"></div>
 <script th:src="@{/js/jquery-3.2.1.js}"></script>
 <script th:src="@{/layui/layui.js}"></script>
 <script>
+    $("#doAdd").click(function () {
+
+    })
     var conten='';
-    var imgUrl='';
+    var img='';
     layui.use('form', function() {
+        var level=0;
         var form = layui.form;
+        form.on('switch(filter)', function(data){
+            if(data.elem.checked){
+                level=1;
+            }else {
+                level=0;
+            }
+        });
+
         form.on('submit(demo1)', function(data){
 
             if(index=='0'){
               conten=$("#textContent").text();
             }else if(index=="1"){
-                conten=imgUrl;
+                img=getImgName("imgs");
+            }else if(index=='2'){
+
             }
+            $.ajax({
+                url:'addNotice.json',
+                type:'get',
+                dataType:'json',
+                data:{
+                    noticeName:$("#noticename").val(),
+                    type: $("#noticetype").val(),
+                    content:conten,
+                    level:level,
+                    img:img
+                 },
+                success:function(data){
+                    if(data=='1'){
+                        parent.location.reload();
+                    }else{
+                        layer.msg("错误");
+                    }
+
+                }
+            })
 
 
 
@@ -160,6 +193,7 @@
 
     });
     function getType(){
+        $("#noticetype option").remove();
         $.ajax({
             url:'../noticeType/getAllNoticeType.json',
             dataType:'json',
@@ -167,7 +201,7 @@
             success:function(data){
                 $.each(data, function(i, val) {
                     $("#noticetype").append(
-                        "<option name='noticetype'  value="+val.id+">"
+                        "<option name='type'  value="+val.id+">"
                         + val.typename + "</option>")
                 })
                 layui.form.render('select');
@@ -190,7 +224,7 @@
                     return;
                 }
                 $.ajax({
-                    url:'../noticetype/addNoticetype.json',
+                    url:'../noticeType/addNoticeType.json',
                     dataType:'text',
                     type:'post',
                     data:{
@@ -207,7 +241,7 @@
                     }
                 })
             }
-        });
+    });
     }
 
     var index=0;
@@ -234,37 +268,42 @@
         });
 
     });
+
+
+
+
+    <!--获取图片名称 data:file的名字-->
+    function getImgName(data) {
+        var name = $(".img-div[data='" + data + "']").find("img").attr("alt");
+        return name;
+    }
+
+    //验证是否上传成功  1成功 -1失败
+    var pass = 1;
     layui.use('upload', function () {
         var $ = layui.jquery,
             upload = layui.upload;
         //多图片上传
         upload.render({
             elem: '.layui-upload',
-            url: '/Community/upload/',
-            multiple: true,
-            field:'img',
-            before: function (obj) {
-                //获取当前触发上传的元素
-                var touchObj=this.item[0].attributes[1].nodeValue;
+            url: '/notice/upload/',
+            field: 'file',
+            choose: function (obj) {
+                var touchObj = this.item[0].attributes[1].nodeValue;
                 //预读本地文件示例，不支持ie8
                 obj.preview(function (index, file, result) {
-                    imgUrl=file.name;
-                    $('.img-div[data="'+touchObj+'"]').append('<img src="' + result + '" alt="' + file.name +
+                    $('.img-div[data="' + touchObj + '"]').append('<img src="' + result + '" alt="' + file.name +
                         '" class="layui-upload-img img" height="86px" width="86px">'
                     )
-                    $('.img-div[data="'+touchObj+'"]').find('.upload-before').hide();
+                    $('.img-div[data="' + touchObj + '"]').find('.upload-before').hide();
                 });
             },
-            done: function (res) {
-                //上传完毕
-                console.log("上传完毕")
-                console.log(res);
-            }
+
         });
         //控制图片遮罩隐藏显示
         $(".img-div").hover(
             function () {
-                if($(this).find('img').length!=0){
+                if ($(this).find('img').length != 0) {
                     $(this).find(".upload-after").show();
                 }
                 $(this).css("border", "1px solid #999");
@@ -280,13 +319,57 @@
         })
         //删除图片
         $(".del").click(function (event) {
-            var dom=$(this).parents(".img-div");
+            var dom = $(this).parents(".img-div");
             dom.find("img").remove();
-            dom.find(".upload-before").show();
+            dom.find(".upload-before").show().removeClass('hide');
             dom.find(".upload-after").hide();
             event.stopPropagation();
         })
     });
+
+    layui.use(['layer', 'form'], function () { //独立版的layer无需执行这一句
+        var $ = layui.jquery,
+            layer = layui.layer; //独立版的layer无需执行这一句
+        var form = layui.form;
+
+        //触发事件
+        var active = {
+            offset: function (othis) {
+                var type = othis.data('type'),
+                    text = othis.text();
+                var obj = $(othis);
+                var data = obj.attr('data');
+                layer.open({
+                    type: 1,
+                    title: false,
+                    scrollbar: false,
+                    shadeClose: true,
+                    closeBtn: 0,
+                    offset: type,
+                    area: ['512px', '306px'],
+                    content: $('.photo'),
+                    btnAlign: 'c' //按钮居中
+                    ,
+                    shade: [0.7, '#080808'],
+                    yes: function () {
+                        layer.closeAll();
+                    }
+                });
+            }
+        };
+
+        $('.laybtn').on('click', function () {
+            //获取当前上传图片的路径
+            var path = $(this).parent().siblings("img").attr("src");
+            var img = $('<img src="' + path + '" height="266px" width="472px" />');
+            $(".photo").append(img);
+            var othis = $(this),
+                method = othis.data('method');
+            active[method] ? active[method].call(this, othis) : '';
+        });
+
+    });
+
 </script>
 </body>
 

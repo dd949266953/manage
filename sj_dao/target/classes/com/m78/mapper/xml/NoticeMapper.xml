@@ -61,7 +61,7 @@
       image, contentType, parentNotice
       )
     values (#{id,jdbcType=BIGINT}, #{noticename,jdbcType=VARCHAR}, #{type,jdbcType=BIGINT}, 
-      #{time,jdbcType=TIMESTAMP}, #{level,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, 
+      now(), #{level,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR},
       #{image,jdbcType=VARCHAR}, #{contenttype,jdbcType=INTEGER}, #{parentnotice,jdbcType=BIGINT}
       )
   </insert>

@@ -32,4 +32,9 @@ public class NoticeTypeServiceImpl implements NoticeTypeService {
     public List<Noticetype> getAllNoticeType() {
         return noticetypeMapper.getAllNoticeType();
     }
+
+    @Override
+    public int addNoticeType(String typeName) {
+        return noticetypeMapper.insert(typeName);
+    }
 }

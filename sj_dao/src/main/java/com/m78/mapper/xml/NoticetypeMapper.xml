@@ -47,10 +47,10 @@
     delete from noticetype
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.m78.entity.Noticetype">
+  <insert id="insert" parameterType="java.lang.String">
     insert into noticetype (id, typeName, createTime
       )
-    values (#{id,jdbcType=BIGINT}, #{typename,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}
+    values  (default , #{typename,jdbcType=VARCHAR},now()
       )
   </insert>
   <insert id="insertSelective" parameterType="com.m78.entity.Noticetype">

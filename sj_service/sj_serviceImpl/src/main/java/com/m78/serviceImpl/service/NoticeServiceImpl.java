@@ -34,8 +34,20 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    public int addNotice(Notice notice) {
-        return noticeMapper.insertSelective(notice);
+    public int addNotice(String noticeName,Long type,String content,String img,Long level) {
+        Notice notice=new Notice();
+        notice.setNoticename(noticeName);
+        notice.setType(type);
+
+        if(content.isEmpty()){
+            notice.setImage(img);
+            notice.setContenttype(2);
+        }else {
+            notice.setContent(content);
+            notice.setContenttype(1);
+        }
+        notice.setLevel(level);
+        return noticeMapper.insert(notice);
     }
 
     @Override

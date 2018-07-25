@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface NoticetypeMapper {
     int deleteByPrimaryKey(Long id);
-
-    int insert(Noticetype record);
+    //添加
+    int insert(@Param("typename") String typeName );
 
     int insertSelective(Noticetype record);
 

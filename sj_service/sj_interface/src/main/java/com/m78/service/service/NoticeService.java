@@ -33,10 +33,10 @@ public interface NoticeService {
 
     /**
      * 添加公告
-     * @param notice
+     * @param
      * @return
      */
-    int addNotice(Notice notice);
+    int addNotice(String noticeName,Long type,String content,String img,Long level);
 
     /**
      * 修改公告
