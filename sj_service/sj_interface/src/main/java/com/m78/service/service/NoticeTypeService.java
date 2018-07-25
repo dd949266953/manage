@@ -29,4 +29,11 @@ public interface NoticeTypeService {
      * @return
      */
     List<Noticetype> getAllNoticeType();
+
+    /**
+     * 添加公告
+     * @param typeName
+     * @return
+     */
+    int addNoticeType(String typeName);
 }

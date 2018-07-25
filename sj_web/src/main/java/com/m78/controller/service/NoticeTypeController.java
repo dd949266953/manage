@@ -5,6 +5,7 @@ import com.m78.entity.Noticetype;
 import com.m78.service.service.NoticeTypeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -36,5 +37,15 @@ public class NoticeTypeController {
     @ResponseBody
     public List<Noticetype> getAllNoticeType(){
      return noticeTypeService.getAllNoticeType();
+    }
+
+    /**
+     * 添加公告类型
+     * @return
+     */
+    @RequestMapping("addNoticeType.json")
+    @ResponseBody
+    public  Object addNoticeType(@RequestParam("typeName") String typeName){
+        return  noticeTypeService.addNoticeType(typeName);
     }
 }
