@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>房屋列表</title>
-	<link rel="stylesheet" th:href="@{/css/back_public.css}" />
-	<link rel="stylesheet" th:href="@{/layui/css/layui.css}"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>房屋列表</title>
+    <link rel="stylesheet" th:href="@{/css/back_public.css}"/>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}"/>
 </head>
 <body>
 <header>
@@ -14,10 +14,9 @@
 </header>
 <section>
     <div class="main">
-
         <button class="button noborder" onclick="add()"><i class="layui-icon btn-icon">&#xe654;</i>添加房屋</button>
-        <div style="float: right;" class="grabble" >
-            <input id="houseName" type="text" placeholder="请输入房屋名称" class="search-keyword" />
+        <div style="float: right;" class="grabble">
+            <input id="houseName" type="text" placeholder="请输入房屋名称" class="search-keyword"/>
             <button onclick="page()" class="noborder">
                 <i class="layui-icon search">&#xe615;</i>
             </button>
@@ -58,7 +57,7 @@
                         cols: [
                             [
                                 {
-                                    field:'houseId',
+                                    field: 'houseId',
                                     align: 'center',
                                     title: '房屋编号',
                                 },
@@ -105,9 +104,9 @@
                         var data = obj.data; //获得当前行数据
                         var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
                         var tr = obj.tr; //获得当前行 tr 的DOM对象
-                        if (layEvent === 'edit'){
-                            var house =$.param(data);
-                            window.location="updatehouse.html?"+house;
+                        if (layEvent === 'edit') {
+                            var house = $.param(data);
+                            window.location = "updatehouse.html?" + house;
                         }
                         if (layEvent === 'del') {
                             layer.confirm('确定要删除吗?', {
@@ -140,10 +139,12 @@
                     });
                 });
             }
+
             //搜索
             function search() {
                 page();
             }
+
             //添加房屋
             function add() {
                 window.location = "addhouse.html";

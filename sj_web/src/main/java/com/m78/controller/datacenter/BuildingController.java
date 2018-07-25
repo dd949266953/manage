@@ -22,64 +22,70 @@ import java.util.List;
 @RequestMapping("/Building")
 @Controller
 public class BuildingController {
-    @Reference(version="1.0.0")
+    @Reference(version = "1.0.0")
     private BuildingService buildingService;
 
 
     /**
      * 楼宇列表页面
+     *
      * @return
      */
     @RequestMapping("buildingList.html")
-    public  String buildingList(){
+    public String buildingList() {
         return "dataCenter/building/buildingList";
     }
 
     /**
      * 添加楼宇页面
      */
-    @RequestMapping(value = {"addBuilding.html","updateBuilding.html"})
-    public ModelAndView addBuilding(Building building){
-        ModelAndView mv=new ModelAndView();
-        mv.addObject("building",building);
-        mv.addObject("buildingType",buildingService.getBuildingType());
+    @RequestMapping(value = {"addBuilding.html", "updateBuilding.html"})
+    public ModelAndView addBuilding(Building building) {
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("building", building);
+        mv.addObject("buildingType", buildingService.getBuildingType());
         mv.setViewName("dataCenter/building/addBuilding");
         return mv;
     }
 
     /**
      * 楼宇列表数据
+     *
      * @return
      */
     @RequestMapping("getBuilldingList")
     @ResponseBody
     public Object getBuildingList(@RequestParam("page") int page,
                                   @RequestParam("limit") int limit,
-                                  @RequestParam("buildingName") String buildingName){
-        return DataTable.bindTableUtil(0,buildingService.getBuildingCountByName(buildingName),buildingService.getBuildingList(page,limit,buildingName));
+                                  @RequestParam("buildingName") String buildingName) {
+        return DataTable.bindTableUtil(0, buildingService.getBuildingCountByName(buildingName), buildingService.getBuildingList(page, limit, buildingName));
     }
+
     /**
      * 根据id修改楼宇
+     *
      * @param record
      * @return
      */
     @RequestMapping("updateBuilding/{id}")
     @ResponseBody
-    public int updateByPrimaryKeySelective(@PathVariable("id")Long id,Building record) {
+    public int updateByPrimaryKeySelective(@PathVariable("id") Long id, Building record) {
         record.setId(id);
         return buildingService.updateByPrimaryKeySelective(record);
     }
+
     /**
      * 根据id删除
      */
     @RequestMapping(value = "deleteByPrimaryKey")
     @ResponseBody
-    public int deleteByPrimaryKey(long id){
+    public int deleteByPrimaryKey(long id) {
         return buildingService.deleteByPrimaryKey(id);
     }
 
     /**
      * 添加楼宇
+     *
      * @param record
      * @return
      */

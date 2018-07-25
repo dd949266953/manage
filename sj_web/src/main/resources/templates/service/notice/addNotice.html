@@ -8,20 +8,22 @@
 -->
 <head>
     <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>添加公告</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>添加公告</title>
     <link th:href="@{/layui/css/layui.css}" rel="stylesheet">
     <link th:href="@{/css/fiont.css}" rel="stylesheet">
     <link th:href="@{/css/back_public.css}" rel="stylesheet">
     <style>
-        body{
+        body {
             background-color: white;
         }
-        form{
+
+        form {
             width: 600px;
             margin: 50px auto;
         }
-        .layui-form-item{
+
+        .layui-form-item {
             margin-bottom: 30px;
         }
     </style>
@@ -31,18 +33,19 @@
     <div class="layui-form-item">
         <label class="layui-form-label">公告标题</label>
         <div class="layui-input-block">
-            <input type="text" id="noticename" name="noticename" lay-verify="required" autocomplete="off" placeholder="请输入标题" class="layui-input" />
+            <input type="text" id="noticename" name="noticename" lay-verify="required" autocomplete="off"
+                   placeholder="请输入标题" class="layui-input"/>
         </div>
 
     </div>
     <div class="layui-form-item">
-    <label class="layui-form-label">公告分类</label>
-    <div class="layui-input-block">
-        <select  class="input" name="type" id="noticetype">
+        <label class="layui-form-label">公告分类</label>
+        <div class="layui-input-block">
+            <select class="input" name="type" id="noticetype">
 
-        </select>
-        <a onclick="addType()" style="color:rgb(46,204,113);margin-top:20px;display: block" href="javascript:(0)">添加公告分类</a>
-    </div>
+            </select>
+            <a onclick="addType()" style="color:rgb(46,204,113);margin-top:20px;display: block" href="javascript:(0)">添加公告分类</a>
+        </div>
     </div>
 
     <div class="layui-form-item" style="height: 200px">
@@ -54,10 +57,10 @@
                 <li>图文</li>
             </ul>
             <div class="layui-tab-content" style="height: 200px;">
-                <div class="layui-tab-item layui-show" >
-                 <div id="textContent" style="height: 50px;width: 100%" contenteditable="true">
+                <div class="layui-tab-item layui-show">
+                    <div id="textContent" style="height: 50px;width: 100%" contenteditable="true">
 
-                 </div>
+                    </div>
 
                 </div>
                 <div class="layui-tab-item">
@@ -77,7 +80,7 @@
                 </div>
                 <div class="layui-tab-item">
                     <div style="margin: 25px 0px 0px 25px">
-                    <button id="doAdd" class="layui-btn   layui-btn-danger ">添加图文素材</button>
+                        <button id="doAdd" class="layui-btn   layui-btn-danger ">添加图文素材</button>
                     </div>
                 </div>
             </div>
@@ -86,14 +89,14 @@
     <div class="layui-form-item">
         <label class="layui-form-label">是否置顶</label>
         <div class="layui-input-block">
-            <input  lay-filter="test"  type="checkbox"    lay-skin="switch"  >
+            <input lay-filter="test" type="checkbox" lay-skin="switch">
         </div>
 
     </div>
     <div class="layui-form-item" id="sure">
         <div class="layui-input-block">
-            <button class="layui-btn"  lay-submit="" lay-filter="demo1">立即提交</button>
-            <button id="reset"  class="layui-btn layui-btn-primary">重置</button>
+            <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+            <button id="reset" class="layui-btn layui-btn-primary">重置</button>
         </div>
     </div>
 
@@ -105,49 +108,48 @@
     $("#doAdd").click(function () {
 
     })
-    var conten='';
-    var img='';
-    layui.use('form', function() {
-        var level=0;
+    var conten = '';
+    var img = '';
+    layui.use('form', function () {
+        var level = 0;
         var form = layui.form;
-        form.on('switch(filter)', function(data){
-            if(data.elem.checked){
-                level=1;
-            }else {
-                level=0;
+        form.on('switch(filter)', function (data) {
+            if (data.elem.checked) {
+                level = 1;
+            } else {
+                level = 0;
             }
         });
 
-        form.on('submit(demo1)', function(data){
+        form.on('submit(demo1)', function (data) {
 
-            if(index=='0'){
-              conten=$("#textContent").text();
-            }else if(index=="1"){
-                img=getImgName("imgs");
-            }else if(index=='2'){
+            if (index == '0') {
+                conten = $("#textContent").text();
+            } else if (index == "1") {
+                img = getImgName("imgs");
+            } else if (index == '2') {
 
             }
             $.ajax({
-                url:'addNotice.json',
-                type:'get',
-                dataType:'json',
-                data:{
-                    noticeName:$("#noticename").val(),
+                url: 'addNotice.json',
+                type: 'get',
+                dataType: 'json',
+                data: {
+                    noticeName: $("#noticename").val(),
                     type: $("#noticetype").val(),
-                    content:conten,
-                    level:level,
-                    img:img
-                 },
-                success:function(data){
-                    if(data=='1'){
+                    content: conten,
+                    level: level,
+                    img: img
+                },
+                success: function (data) {
+                    if (data == '1') {
                         parent.location.reload();
-                    }else{
+                    } else {
                         layer.msg("错误");
                     }
 
                 }
             })
-
 
 
         });
@@ -192,16 +194,17 @@
         });
 
     });
-    function getType(){
+
+    function getType() {
         $("#noticetype option").remove();
         $.ajax({
-            url:'../noticeType/getAllNoticeType.json',
-            dataType:'json',
-            type:'post',
-            success:function(data){
-                $.each(data, function(i, val) {
+            url: '../noticeType/getAllNoticeType.json',
+            dataType: 'json',
+            type: 'post',
+            success: function (data) {
+                $.each(data, function (i, val) {
                     $("#noticetype").append(
-                        "<option name='type'  value="+val.id+">"
+                        "<option name='type'  value=" + val.id + ">"
                         + val.typename + "</option>")
                 })
                 layui.form.render('select');
@@ -209,67 +212,66 @@
         })
     }
 
-    $(function(){
+    $(function () {
         getType();
     })
-    function addType(){
+
+    function addType() {
         layer.open({
             title: '添加公告类型',
             shade: 0,
             offset: '150px'
-            ,content: '<input class="layui-input"   id="type"  type="text" placeholder="请输入类型名称" />',
-            yes: function(layero, index){
-                if($("#type").val()==''){
-                    layer.msg('内容不能为空,请重新添加', {icon : 2});
+            , content: '<input class="layui-input"   id="type"  type="text" placeholder="请输入类型名称" />',
+            yes: function (layero, index) {
+                if ($("#type").val() == '') {
+                    layer.msg('内容不能为空,请重新添加', {icon: 2});
                     return;
                 }
                 $.ajax({
-                    url:'../noticeType/addNoticeType.json',
-                    dataType:'text',
-                    type:'post',
-                    data:{
-                        typeName:$("#type").val()
+                    url: '../noticeType/addNoticeType.json',
+                    dataType: 'text',
+                    type: 'post',
+                    data: {
+                        typeName: $("#type").val()
                     },
-                    success:function(data){
+                    success: function (data) {
                         if (data === '1') {
-                            layer.msg('添加成功', {icon : 1});
+                            layer.msg('添加成功', {icon: 1});
                             getType();
                             layer.close(index);
                         } else {
-                            layer.msg('添加失败，请联系客服', {icon : 2});
+                            layer.msg('添加失败，请联系客服', {icon: 2});
                         }
                     }
                 })
             }
-    });
+        });
     }
 
-    var index=0;
-    layui.use('element', function(){
+    var index = 0;
+    layui.use('element', function () {
         var $ = layui.jquery
-            ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+            , element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
 
         //触发事件
         var active = {
-          tabChange: function(){
+            tabChange: function () {
                 //切换到指定Tab项
                 element.tabChange('demo', '22'); //切换到：用户管理
             }
         };
 
-        $('.site-demo-active').on('click', function(){
+        $('.site-demo-active').on('click', function () {
             var othis = $(this), type = othis.data('type');
             active[type] ? active[type].call(this, othis) : '';
         });
 
-        element.on('tab(demo)', function(data){
-           index=data.index;
+        element.on('tab(demo)', function (data) {
+            index = data.index;
 
         });
 
     });
-
-
 
 
     <!--获取图片名称 data:file的名字-->

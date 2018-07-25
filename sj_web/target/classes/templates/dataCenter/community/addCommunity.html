@@ -177,7 +177,7 @@
                     'backgroundimage': backgroundimage
                 }) + '&' + $("form").serialize();
                 //提示
-                var hint = $(".save").text() == "添加" ? "添加" : "修改";
+                var hint = $(".save").text();
                 var url = hint == "添加" ? "addCommunity" : "updateCommunity/" + [[${community.id}]];
                 $.post('/Community/' + url, community, function (result) {
                     if (result === 1) {
