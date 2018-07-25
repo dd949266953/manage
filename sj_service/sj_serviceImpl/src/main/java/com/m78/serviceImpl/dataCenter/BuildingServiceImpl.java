@@ -34,7 +34,7 @@ public class BuildingServiceImpl implements BuildingService {
     }
 
     /**
-     * 查询小区数量根据名字
+     * 查询楼宇数量根据名字
      */
     @Override
     public Long getBuildingCountByName(String buildingName) {
