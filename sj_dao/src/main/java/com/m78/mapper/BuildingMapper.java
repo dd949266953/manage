@@ -18,6 +18,11 @@ public interface BuildingMapper {
 
     Building selectByPrimaryKey(Long id);
 
+    /**
+     * 根据id修改楼宇
+     * @param record
+     * @return
+     */
     int updateByPrimaryKeySelective(Building record);
 
     int updateByPrimaryKey(Building record);

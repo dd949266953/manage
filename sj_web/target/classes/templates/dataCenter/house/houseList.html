@@ -1,24 +1,19 @@
 <!DOCTYPE html>
-<html>
-
-	<head>
-		<meta charset="UTF-8">
-		<title>
-			房屋列表
-		</title>
-		<link rel="stylesheet" href="../../css/back_public.css" />
-		<link href="../../layui/css/layui.css" rel="stylesheet" />
-		<link rel="stylesheet" href="../../css/public_list.css" />
-	</head>
-
-	<body>
-		<header>
-		房屋列表
-			<!--看见了 一定要改  不改打死  别再让我提醒了-->
-		</header>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>楼宇列表</title>
+	<link rel="stylesheet" th:href="@{/css/back_public.css}" />
+	<link rel="stylesheet" th:href="@{/layui/css/layui.css}"/>
+</head>
+<body>
+<header>
+	楼宇列表
+</header>
 		<section>
 			<div class="main">
-				
 				<button class="button noborder"><i class="layui-icon btn-icon">&#xe654;</i>添加房屋</button>
 					<div style="float: right;" class="grabble" >
 							<input id="communityName" type="text" placeholder="请输入小区名称" class="search-keyword" />

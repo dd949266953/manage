@@ -15,7 +15,6 @@ layui.use('upload', function () {
         url: '/Community/upload/',
         field: 'file',
         choose: function (obj) {
-            //将每次选择的文件追加到文件队列
             var touchObj = this.item[0].attributes[1].nodeValue;
             //预读本地文件示例，不支持ie8
             obj.preview(function (index, file, result) {

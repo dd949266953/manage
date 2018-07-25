@@ -22,6 +22,13 @@ public interface BuildingService {
     Long getBuildingCountByName(String buildingName);
 
     /**
+     * 根据id修改楼宇
+     * @param record
+     * @return
+     */
+    int updateByPrimaryKeySelective(Building record);
+
+    /**
      * 删除楼宇
      */
     int deleteByPrimaryKey(Long id);

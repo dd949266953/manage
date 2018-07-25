@@ -10,8 +10,6 @@ import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -36,29 +34,16 @@ public class CommunityController {
     }
 
     /**
-     * 修改界面
+     * 添加/修改界面
      * @return
      */
-    @RequestMapping(value = "updateCommunity.html")
+    @RequestMapping(value = {"updateCommunity.html","addCommunity.html"})
     public Object updateCommunityView(Community community){
         ModelAndView mv=new ModelAndView();
         mv.setViewName("dataCenter/community/addCommunity");
         mv.addObject("community",community);
         return mv;
     }
-
-    /**
-     * 添加界面
-     * @return
-     */
-    @RequestMapping(value = "addCommunity.html")
-    public Object addCommunity(Community community){
-        ModelAndView mv=new ModelAndView();
-        mv.setViewName("dataCenter/community/addCommunity");
-        mv.addObject("community",community);
-        return mv;
-    }
-
     /**
      * 查询界面数据
      * @return
@@ -117,7 +102,7 @@ public class CommunityController {
 
     @RequestMapping("upload")
     @ResponseBody
-    public Object uploadimg(@RequestParam("file") MultipartFile file,HttpServletRequest request){
+    public Object uploadimg(@RequestParam("file") MultipartFile file){
         try {
             String fileName = file.getOriginalFilename();//获取file图片名称
             String filePath= ResourceUtils.getURL("sj_web\\src\\main\\resources\\static\\img\\upload-img").getPath();
@@ -139,4 +124,5 @@ public class CommunityController {
     public Community selectByPrimaryKey(Long id) {
         return communityService.selectByPrimaryKey(id);
     }
+
 }

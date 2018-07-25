@@ -30,9 +30,33 @@
       and `name` LIKE CONCAT ('%',#{buildingName },'%')
     </if>
   </select>
-
+  <!--根据id修改楼宇-->
+  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.Building" >
+    update building
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="unittotal != null" >
+        unitTotal = #{unittotal,jdbcType=BIGINT},
+      </if>
+      <if test="pliestotal != null" >
+        pliesTotal = #{pliestotal,jdbcType=BIGINT},
+      </if>
+      <if test="buildingtype != null" >
+        buildingType = #{buildingtype,jdbcType=BIGINT},
+      </if>
+      <if test="buildingstructure != null" >
+        buildingStructure = #{buildingstructure,jdbcType=VARCHAR},
+      </if>
+      <if test="orientation != null" >
+        orientation = #{orientation,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from building
     where id = #{id,jdbcType=BIGINT}
@@ -98,30 +122,6 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.Building" >
-    update building
-    <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="unittotal != null" >
-        unitTotal = #{unittotal,jdbcType=BIGINT},
-      </if>
-      <if test="pliestotal != null" >
-        pliesTotal = #{pliestotal,jdbcType=BIGINT},
-      </if>
-      <if test="buildingtype != null" >
-        buildingType = #{buildingtype,jdbcType=BIGINT},
-      </if>
-      <if test="buildingstructure != null" >
-        buildingStructure = #{buildingstructure,jdbcType=VARCHAR},
-      </if>
-      <if test="orientation != null" >
-        orientation = #{orientation,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
   <update id="updateByPrimaryKey" parameterType="com.m78.entity.Building" >
     update building
     set name = #{name,jdbcType=VARCHAR},

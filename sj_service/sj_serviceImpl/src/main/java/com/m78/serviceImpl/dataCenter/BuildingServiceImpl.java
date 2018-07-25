@@ -40,6 +40,15 @@ public class BuildingServiceImpl implements BuildingService {
     public Long getBuildingCountByName(String buildingName) {
         return buildingMapper.getBuildingCountByName(buildingName);
     }
+    /**
+     * 根据id修改楼宇
+     * @param record
+     * @return
+     */
+    @Override
+    public int updateByPrimaryKeySelective(Building record) {
+        return buildingMapper.updateByPrimaryKeySelective(record);
+    }
 
     /**
      * 根据id删除
