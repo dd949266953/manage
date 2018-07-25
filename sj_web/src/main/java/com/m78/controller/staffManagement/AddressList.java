@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import com.m78.service.staff.staffService;
+import com.m78.service.staff.StaffService;
 import com.m78.service.dictionaryItemSevice;
 
 import java.util.List;
@@ -21,14 +21,12 @@ import java.util.List;
  */
 @RequestMapping("addressBook")
 @Controller
-public class addressList {
+public class AddressList {
 
     @Reference(version = "1.0.0")
-    private staffService staffService;
+    private StaffService staffService;
     @Reference(version = "1.0.0")
     private dictionaryItemSevice dictionaryItemSevice;
-
-
     /**
      * 查询人员数量
      */
@@ -37,11 +35,10 @@ public class addressList {
     public Long getStaffNumber(){
         return  staffService.getStaffNumber();
     }
-
     /**
      * 员工列表
      */
-    @RequestMapping("addressList.html")
+        @RequestMapping("addressList.html")
     public String addressList(){
         return "staffManagement/addressList/addressList";
     }
@@ -54,17 +51,6 @@ public class addressList {
     public Object getStaff(@RequestParam("page") int page, @RequestParam("limit") int limit, @RequestParam("name") String name){
         return DataTable.bindTableUtil(0,staffService.getStaffNumber(),staffService.getStaff(page, limit, name));
     }
-
-    /**
-     * 员工信息
-     */
-    @RequestMapping("asd")
-    @ResponseBody
-    public List<Staff> getPersonal() {
-        return staffService.getPersonal();
-    }
-
-
     /**
      * 删除员工
      */
@@ -111,13 +97,18 @@ public class addressList {
      * 修改人员信息页面
      */
     @RequestMapping(value = "updateNewEmployees.html")
-    public String updateSatff(@RequestParam("id") int id, Model model){
+    public String updateSatffList(@RequestParam("id") int id, Model model){
         Staff staff=staffService.getStaffId(id);
         model.addAttribute("staff",staff);
+        System.out.println(staff);
         return "staffManagement/addressList/updateNewEmployees";
     }
-    @RequestMapping(value = "sss")
-    public String ss(){
-        return "staffManagement/addressList/updateNewEmployees";
+    /**
+     * 修改人员信息
+     */
+    @RequestMapping(value = "updateStaff")
+    @ResponseBody
+    public int updateStaff(Staff record){
+        return staffService.updateByPrimaryKey(record);
     }
 }

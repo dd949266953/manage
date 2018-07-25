@@ -18,7 +18,14 @@
 </header>
 <section>
     <div class="main">
-        <form class="layui-form" action="">
+        <form class="layui-form">
+            <div class="layui-form-item form-item" style="display: none">
+                <label class="layui-form-label row lable">
+                    <span>*</span>员工id :</label>
+                <div class="layui-input-block row row-div">
+                    <input type="text" name="id" lay-verify="title" autocomplete="off" th:value="${staff.id}"  class="layui-input input">
+                </div>
+            </div>
             <div class="layui-form-item form-item">
                 <label class="layui-form-label row lable">
                     <span>*</span>员工姓名 :</label>
@@ -52,7 +59,7 @@
                     <span>*</span>部门 :</label>
                 <div class="layui-input-block row row-div">
                     <select name="department" lay-filter="aihao">
-                        <option th:value="${staff.departmentid}" th:text="${dictionary.name}"></option>
+                        <option th:value="${staff.departmentid}" th:text="${staff.department}"></option>
                     </select>
                 </div>
             </div>
@@ -61,7 +68,7 @@
                     <span>*</span>职位 :</label>
                 <div class="layui-input-block row row-div">
                     <select name="position" id="position" lay-filter="aihao">
-                        <option>请选择</option>
+                        <option th:value="${staff.position}" th:text="${staff.content}"></option>
                     </select>
                 </div>
             </div>
@@ -70,7 +77,7 @@
                 <label class="layui-form-label row lable">
                     <span>*</span>备注 :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="remark" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input input ">
+                    <input type="text" name="remark" lay-verify="title" autocomplete="off" th:value="${staff.remark}" class="layui-input input ">
                 </div>
             </div>
 
@@ -114,6 +121,21 @@
             form.render();
         })
     })
+    $(".save").click(function () {
+        var id=$("input[name=id]").val();
+        var name=$("input[name=name]").val();
+        var nametwo=$("input[name=nametwo]").val();
+        var phone=$("input[name=phone]").val();
+        var wxnumber=$("input[name=wxnumber]").val();
+        var remark=$("input[name=remark]").val();
+        var department=$("select[name=department]").val();
+        var position=$("select[name=position]").val();
+        $.post("updateStaff",{"name":name,"phone":phone,"wxnumber":wxnumber,"nametwo":nametwo,"position":position,"departmentid":department,"remark":remark,"id":id},function (data) {
+            console.log(data);
+
+        })
+    })
+    
 </script>
 <footer>
     Copyright 2013-2018 weixiaoqu.com 成都云联峰创科技有限公司旗下产品
