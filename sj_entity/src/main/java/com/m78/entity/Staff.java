@@ -19,6 +19,27 @@ public class Staff implements Serializable {
 
     private Long departmentid;
 
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    private String department;
+
+    private String content;
+
     public Long getId() {
         return id;
     }

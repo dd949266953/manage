@@ -10,15 +10,18 @@
     <result column="position" property="position" jdbcType="BIGINT" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="departmentId" property="departmentid" jdbcType="BIGINT" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="department" property="department" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, name, phone, wxnumber, nametwo, position, remark, departmentId
   </sql>
-  <!--查询人员列表-->
+
+  <!--查询人员信息-->
   <select id="getStaff" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List"/>
-    from staff where name like CONCAT('%',#{name},'%') limit #{page},#{pageSize}
+SELECT s.id,s.`name`,s.`phone`,s.`wxnumber`,s.`nametwo`,s.`position`,s.`remark`,s.`departmentId`,d.`name`as department,p.`content` FROM staff s
+INNER JOIN department d ON d.`id`=s.`departmentid`
+INNER JOIN dictionary_item p ON p.id=s.`position`  where s.name like CONCAT('%',#{name},'%') limit #{page},#{pageSize}
   </select>
   <!--人员数量-->
   <select id="getStaffNumber" resultType="java.lang.Long">
@@ -26,9 +29,9 @@
   </select>
   <!--根据id查询-->
   <select id="getStaffId" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List"/>
-    from staff where id = #{id}
+   SELECT s.id,s.`name`,s.`phone`,s.`wxnumber`,s.`nametwo`,s.`position`,s.`remark`,s.`departmentId`,d.`name`as department,p.`content` FROM staff s
+INNER JOIN department d ON d.`id`=s.`departmentid`
+INNER JOIN dictionary_item p ON p.id=s.`position`  where s.id =#{id}
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select
@@ -142,33 +145,5 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <resultMap id="staffMap" type="com.m78.entity.Staff">
-    <!--人员-->
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="phone" property="phone" jdbcType="VARCHAR" />
-    <result column="wxnumber" property="wxnumber" jdbcType="VARCHAR" />
-    <result column="nametwo" property="nametwo" jdbcType="VARCHAR" />
-    <result column="position" property="position" jdbcType="BIGINT" />
-    <result column="remark" property="remark" jdbcType="VARCHAR" />
-    <result column="departmentId" property="departmentid" jdbcType="BIGINT" />
-    <!--职位-->
-    <association property="dictionaryItem" javaType="com.m78.entity.DictionaryItem">
-      <result column="content" property="content" jdbcType="VARCHAR" />
-      <result column="type_id" property="typeId" jdbcType="BIGINT" />
-    </association>
-    <!--部门-->
-    <association property="department" javaType="com.m78.entity.Department">
-      <result column="department" property="name" jdbcType="VARCHAR" />
-      <result column="parentId" property="parentid" jdbcType="BIGINT" />
-    </association>
-  </resultMap>
-  <!--查询人员信息-->
-  <select id="getPersonal" resultMap="staffMap">
-    SELECT
-    <include refid="Base_Column_List"/>,
-    d.name as department,p.content FROM staff s
-    inner  JOIN department d ON d.id=s.departmentid
-    inner JOIN dictionary_item p ON p.id=s.position
-  </select>
+
 </mapper>

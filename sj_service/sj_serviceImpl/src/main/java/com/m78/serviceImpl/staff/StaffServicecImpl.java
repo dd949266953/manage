@@ -3,13 +3,13 @@ package com.m78.serviceImpl.staff;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.m78.entity.Staff;
 import com.m78.mapper.StaffMapper;
-import com.m78.service.staff.staffService;
+import com.m78.service.staff.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 @Service(version = "1.0.0")
-public class staffServicecImpl implements staffService {
+public class StaffServicecImpl implements StaffService {
 
     @Autowired
     private StaffMapper staffMapper;
@@ -22,15 +22,6 @@ public class staffServicecImpl implements staffService {
     public List<Staff> getStaff(int page, int pageSize, String name) {
         int start=(page-1)*pageSize;
         return staffMapper.getStaff(start,pageSize,name);
-    }
-
-
-    /**
-     * 员工信息
-     */
-    @Override
-    public List<Staff> getPersonal() {
-        return staffMapper.getPersonal();
     }
     /**
      * 查询员工数量
@@ -69,5 +60,15 @@ public class staffServicecImpl implements staffService {
     @Override
     public Staff getStaffId(int id) {
         return staffMapper.getStaffId(id);
+    }
+
+    /**
+     * 修改
+     * @param record
+     * @return
+     */
+    @Override
+    public int updateByPrimaryKey(Staff record) {
+        return staffMapper.updateByPrimaryKey(record);
     }
 }
