@@ -14,10 +14,8 @@
     id, name, unitTotal, pliesTotal, buildingType, buildingStructure, orientation
   </sql>
   <!--查询全部-->
-  <select id="getBuildingList" resultMap="BaseResultMap" >
-    select
-    <include refid="Base_Column_List" />
-    from building
+  <select id="getBuildingList" resultType="com.m78.vo.BuildingVo" >
+    SELECT * FROM buildingView
     <if test="buildingName!=''">
       where `name` LIKE CONCAT ('%',#{buildingName },'%')
     </if>
@@ -25,7 +23,7 @@
   </select>
   <!--查询楼宇总数根据名称-->
   <select id="getBuildingCountByName" resultType="java.lang.Long" >
-    select count(1)  from building where 1=1
+    select count(1)  from buildingView where 1=1
     <if test="buildingName!=''">
       and `name` LIKE CONCAT ('%',#{buildingName },'%')
     </if>

@@ -8,6 +8,7 @@ import com.m78.entity.DictionaryItem;
 import com.m78.service.dataCenter.CommunityService;
 import com.m78.service.dataCenter.BuildingService;
 import com.m78.util.DataTable;
+import com.m78.vo.BuildingVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +41,7 @@ public class BuildingController {
      * 添加楼宇页面
      */
     @RequestMapping(value = {"addBuilding.html", "updateBuilding.html"})
-    public ModelAndView addBuilding(Building building) {
+    public ModelAndView addBuilding(BuildingVo building) {
         ModelAndView mv = new ModelAndView();
         mv.addObject("building", building);
         mv.addObject("buildingType", buildingService.getBuildingType());
@@ -58,6 +59,7 @@ public class BuildingController {
     public Object getBuildingList(@RequestParam("page") int page,
                                   @RequestParam("limit") int limit,
                                   @RequestParam("buildingName") String buildingName) {
+        System.out.println(buildingService.getBuildingList(page, limit, buildingName).toString());
         return DataTable.bindTableUtil(0, buildingService.getBuildingCountByName(buildingName), buildingService.getBuildingList(page, limit, buildingName));
     }
 

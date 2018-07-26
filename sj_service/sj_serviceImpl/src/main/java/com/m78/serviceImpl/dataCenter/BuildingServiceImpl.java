@@ -6,6 +6,8 @@ import com.m78.entity.DictionaryItem;
 import com.m78.mapper.BuildingMapper;
 import com.m78.mapper.DictionaryItemMapper;
 import com.m78.service.dataCenter.BuildingService;
+import com.m78.util.BeanUtil;
+import com.m78.vo.BuildingVo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -28,9 +30,9 @@ public class BuildingServiceImpl implements BuildingService {
      * @return
      */
     @Override
-    public List<Building> getBuildingList(int page, int limit, String buildingName) {
-        int start = (page - 1) * limit;
-        return buildingMapper.getBuildingList(start, limit, buildingName);
+    public List<BuildingVo> getBuildingList(int page, int limit, String buildingName) {
+        int start = (page-1) * limit ;
+        return buildingMapper.getBuildingList(start,limit,buildingName);
     }
 
     /**

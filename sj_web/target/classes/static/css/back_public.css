@@ -55,6 +55,14 @@ form{
 	color: #bfbfbf !important;
 
 }
+.short-div{
+	width: 30% !important;
+	min-width: 200px !important;
+}
+.short-div~.layui-form-select{
+	width: 30% !important;
+	min-width: 200px !important;
+}
 /*红色*号*/
 .row span{
 	color: #f5222d;

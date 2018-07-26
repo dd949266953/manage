@@ -39,6 +39,7 @@
                     var table = layui.table;
                     //第一个实例
                     table.render({
+
                         elem: "#buildingList",
                         loading: true,
                         url: '/Building/getBuilldingList',
@@ -60,35 +61,46 @@
                                 {
                                     field:'id',
                                     align: 'center',
-                                    title: '楼宇编号',
+                                    title: '序号',
+                                    sort : true
+                                },
+                                {
+                                    field:'communityName',
+                                    align: 'center',
+                                    title: '所属小区',
                                 },
                                 {
                                     field: "name",
+                                    align: 'center',
                                     title: '楼宇名称'
                                 },
                                 {
                                     field: "unittotal",
+                                    align: 'center',
                                     title: '单元数'
                                 },
                                 {
                                     field: "pliestotal",
+                                    align: 'center',
                                     title: '楼宇层'
                                 },
                                 {
                                     field: "buildingtype",
+                                    align: 'center',
                                     title: '楼宇类型'
                                 },
                                 {
                                     field: "buildingstructure",
+                                    align: 'center',
                                     title: '楼宇结构'
                                 },
                                 {
                                     field: "orientation",
+                                    align: 'center',
                                     title: '楼宇朝向'
                                 },
                                 {
                                     field: "right",
-                                    title: '编辑',
                                     align: 'center',
                                     toolbar: "#bar"
                                 }
