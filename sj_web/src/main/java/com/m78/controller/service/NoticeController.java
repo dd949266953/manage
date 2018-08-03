@@ -1,16 +1,22 @@
 package com.m78.controller.service;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.m78.entity.Community;
 import com.m78.entity.Notice;
+import com.m78.service.dataCenter.CommunityService;
 import com.m78.service.service.NoticeService;
 import com.m78.util.DataTable;
 import com.m78.util.upload;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.ResourceUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 /**
  * 公告
@@ -22,6 +28,8 @@ public class NoticeController {
 
     @Reference(version = "1.0.0")
     private NoticeService noticeService;
+    @Reference(version = "1.0.0")
+    private CommunityService communityService;
 
     /**
      * 跳转公告列表
@@ -40,6 +48,19 @@ public class NoticeController {
     public  Object doAddNotice(){
         return  "service/notice/addNotice";
     }
+
+    /**
+     * 跳转到选择小区
+     * @return
+     */
+    @RequestMapping("doRightCommunity/{id}")
+    public  Object doRightCommunity(@PathVariable("id") Long id, Model model){
+        List<Community> communityList=communityService.getCommunityIdAndName();
+        model.addAttribute("communityList",communityList);
+        model.addAttribute("noticeId",id);
+           return "RightCommunity";
+    }
+
 
     /**
      * 获取所有公告
@@ -74,6 +95,11 @@ public class NoticeController {
 
     }
 
+    /**
+     * 上传图片
+     * @param file
+     * @return
+     */
     @RequestMapping("upload")
     @ResponseBody
     public Object uploadimg(@RequestParam("file") MultipartFile file){
@@ -86,6 +112,28 @@ public class NoticeController {
             return -1;
         }
         return 1;
+    }
+
+    /**
+     * 根据id删除公告
+     * @return
+     */
+    @RequestMapping("deleteNoticeById.json")
+    @ResponseBody
+    public Object deleteNoticeById(@RequestParam("noticeid") Long niticeId){
+      return noticeService.deleteNoticeById(niticeId);
+    }
+
+    /**
+     * 添加小区公告关联
+     * @return
+     */
+    @RequestMapping("addCommunityNotice.json")
+    @ResponseBody
+    public  Object addCommunityNotice(@RequestParam("noticeId")Long noticeId,
+                                      @RequestParam("communityIds[]") Long [] communityIds){
+        return  noticeService.addNotice_Community(noticeId,communityIds);
+
     }
 
 

@@ -3,6 +3,7 @@ package com.m78.controller.service;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.m78.entity.Noticetype;
 import com.m78.service.service.NoticeTypeService;
+import com.m78.util.DataTable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,5 +48,28 @@ public class NoticeTypeController {
     @ResponseBody
     public  Object addNoticeType(@RequestParam("typeName") String typeName){
         return  noticeTypeService.addNoticeType(typeName);
+    }
+
+    /**
+     * 获取所有公告（分页）
+     * @return
+     */
+    @RequestMapping("getAllNoticeByPage.json")
+    @ResponseBody
+    public  Object getAllNoticeTypeByPage(@RequestParam("typeName")String typeName,@RequestParam("page") int page,
+                                          @RequestParam("limit") int limit){
+        return DataTable.bindTableUtil(0,noticeTypeService.getAllNoticeTypeCount(typeName),noticeTypeService
+        .getAllNoticeTypeByPage(typeName,page,limit));
+
+    }
+
+    /**
+     * 根据id删除公告类型
+     * @return
+     */
+    @RequestMapping("deleteNoticeTypeById.json")
+    @ResponseBody
+    public  Object deleteNoticeTypeById(@RequestParam("noticeTypeId") Long noticeTypeId){
+         return  noticeTypeService.deleteNoticeType(noticeTypeId);
     }
 }

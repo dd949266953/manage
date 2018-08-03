@@ -9,44 +9,34 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
-		<link rel="stylesheet" th:href="@{/css/admin_public.css}" />
 		<link th:href="@{/layui/css/layui.css}" rel="stylesheet">
         <link th:href="@{/css/fiont.css}" rel="stylesheet">
-		<style>
-			.iconfont{
-				color: white!important;
-				padding-right: 7px;
-				vertical-align: top;
-			}
-            .layui-table th {
-                border-style: none;
-            }
-		</style>
+        <link rel="stylesheet" th:href="@{/css/back_public.css}" />
 	</head>
 <body>
-		<section style="width: 96%;background-color: white;margin: 0px auto;">
+<header>
+    未缴账单
+</header>
+		<section>
 			<!--
               	作者：ADD
               	时间：2018-04-13
               	描述：未缴账单
-              -->
-			<header>
-				<h2 class="h2">未缴账单</h2>
-			</header>
+             -->
 			<!--主体 -->
-			<div id="subject" style="margin: 20px  30px">
+			<div class="main">
 	            <button id="addBill" class="button noborder"><i class="layui-icon btn-icon">&#xe654;</i>录入</button>
 				<button class="button noborder" id="load"><i class="iconfont">&#xe60f;</i>导入</button>		
-				<button class="button noborder" id="daochu"><i  class="iconfont">&#xe647;</i>导出</button>		
-				<div style="float: right;">
-					<input id="checkName" type="text" placeholder="请输入住户/房号/小区/楼宇" class="search-keyword" />
-					<button onclick="page()" class="noborder">
-								<i class="layui-icon search">&#xe615;</i>
-							</button>
-					<button type="submit" class="noborder">
-								<i class="layui-icon search">&#xe607;</i>
-							</button>
-				</div>
+				<button class="button noborder" id="daochu"><i  class="iconfont">&#xe647;</i>导出</button>
+                <div style="float: right;" class="grabble" >
+                    <input id="checkName" type="text" placeholder="请输入小区名称" class="search-keyword" />
+                    <button onclick="page()" class="noborder">
+                        <i class="layui-icon search">&#xe615;</i>
+                    </button>
+                    <button type="submit" class="noborder">
+                        <i class="layui-icon search">&#xe607;</i>
+                    </button>
+                </div>
 				<table  id="table" lay-filter="table"></table>
 				<footer class="fenye p-20">
 					
@@ -54,6 +44,7 @@
 			</div>
 
 		</section>
+
 		<script th:src="@{/layui/layui.js}"></script>
 		<script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
 		<script type="text/html" id="barDemo">

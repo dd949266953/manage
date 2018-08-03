@@ -1,7 +1,9 @@
 package com.m78.serviceImpl.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.m78.entity.CommunityNotice;
 import com.m78.entity.Notice;
+import com.m78.mapper.CommunityNoticeMapper;
 import com.m78.mapper.NoticeMapper;
 import com.m78.service.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +14,13 @@ import java.util.List;
  * 公告实现类
  */
 @Service(version = "1.0.0")
-public class NoticeServiceImpl implements NoticeService {
+public class
+NoticeServiceImpl implements NoticeService {
 
     @Autowired
     private NoticeMapper noticeMapper;
+    @Autowired
+    private CommunityNoticeMapper communityNoticeMapper;
 
     @Override
     public List<Notice> getAllNotice(String noticeName, int page, int limit) {
@@ -53,5 +58,17 @@ public class NoticeServiceImpl implements NoticeService {
     @Override
     public int updateNoticeById(Notice notice) {
         return noticeMapper.updateByPrimaryKeySelective(notice);
+    }
+
+    @Override
+    public int addNotice_Community(Long noticeId, Long[] communityId) {
+        int num=0;
+        CommunityNotice communityNotice=new CommunityNotice();
+        communityNotice.setNoticeid(noticeId);
+        for (int i =0;i<communityId.length;i++){
+            communityNotice.setCommunityid(communityId[i]);
+            num=communityNoticeMapper.insertSelective(communityNotice);
+        }
+        return num;
     }
 }

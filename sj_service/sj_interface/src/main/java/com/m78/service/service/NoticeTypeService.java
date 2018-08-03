@@ -36,4 +36,11 @@ public interface NoticeTypeService {
      * @return
      */
     int addNoticeType(String typeName);
+
+    /**
+     * 删除公告
+     * @param noticeTypeId
+     * @return
+     */
+    int deleteNoticeType(Long noticeTypeId);
 }

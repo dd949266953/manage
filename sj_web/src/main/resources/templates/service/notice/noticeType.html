@@ -91,10 +91,10 @@
                 var layer = layui.layer;
                 table.render({
                     elem : '#table',
-                    url : 'getAllNotice.json',
+                    url : 'getAllNoticeByPage.json',
                     loading : true,
                     where : {
-                        noticeName : $("#noticeTitle").val()
+                        typeName : $("#noticeTitle").val()
                     },
                     cellMinWidth : 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                     ,
@@ -128,11 +128,11 @@
                             shade : '0'
                         }, function(index) {
                             $.ajax({
-                                url : '../notice/deleteNoticeById.json',
+                                url : 'deleteNoticeTypeById.json',
                                 type : 'post',
                                 dataType : 'json',
                                 data : {
-                                    noticeid : data.noticeid
+                                    noticeTypeId : data.noticeid
                                 },
                                 success : function(data) {
                                     if (data === 1) {

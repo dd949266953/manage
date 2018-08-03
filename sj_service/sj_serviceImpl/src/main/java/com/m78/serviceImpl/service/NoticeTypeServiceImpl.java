@@ -37,4 +37,9 @@ public class NoticeTypeServiceImpl implements NoticeTypeService {
     public int addNoticeType(String typeName) {
         return noticetypeMapper.insert(typeName);
     }
+
+    @Override
+    public int deleteNoticeType(Long noticeTypeId) {
+        return noticetypeMapper.deleteByPrimaryKey(noticeTypeId);
+    }
 }

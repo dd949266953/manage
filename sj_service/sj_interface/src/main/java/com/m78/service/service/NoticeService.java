@@ -1,5 +1,6 @@
 package com.m78.service.service;
 
+import com.m78.entity.CommunityNotice;
 import com.m78.entity.Notice;
 
 import java.util.List;
@@ -44,4 +45,10 @@ public interface NoticeService {
      * @return
      */
     int updateNoticeById(Notice notice);
+
+    /**
+     * 添加小区与公告关联
+     * @return
+     */
+    int addNotice_Community(Long noticeId,Long [] communityId);
 }

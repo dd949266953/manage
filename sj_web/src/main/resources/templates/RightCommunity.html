@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/layui/css/layui.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/back_public.css}" />
+    <style>
+        body{
+            background-color: white;
+        }
+        ul{
+            margin: 15px 50px;
+        }
+        form{
+            height: 100%;
+        }
+        #check{
+            margin: 15px;
+        }
+        li{
+            margin: 15px;
+        }
+        #foot{
+            height: 50px;
+            line-height: 50px;
+            font-size: 18px;
+            margin: 50px 15px;
+            border: 1px rgb(240,240,240) solid;
+            text-align: center;
+            cursor: pointer;
+        }
+        #foot:hover{
+            background-color: rgb(77,177,81)!important;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div id="check">
+<input id="noticeTitle" type="text" placeholder="请输入关键字"
+       class="search-keyword" />
+<button onclick="page()" class="noborder">
+    <i class="layui-icon search">&#xe615;</i>
+</button>
+</div>
+<form id="form1" class="layui-form" action="" onsubmit="return false">
+<ul>
+   <li th:each="communityList:${communityList}">
+       <input type="checkbox" lay-filter="community" th:value="${communityList.id}" lay-skin="primary"  name="" th:title="${communityList.name}">
+   </li>
+</ul>
+    <div id="foot">
+        确定
+    </div>
+</form>
+<script th:src="@{/js/jquery-3.2.1.js}"></script>
+<script th:src="@{/layui/layui.js}"></script>
+<script th:inline="javascript">
+//回显
+//1.查询出已经关联的 给单选框+ checked 属性
+//2.再次提交，到业务逻辑层，判断是否重复，（重复，不管。不重复的，查出来删除，前台传过来的添加）
+
+    function contains(a, obj) {
+        var i = a.length;
+        while (i--) {
+            if (a[i] === obj) {
+                return i;
+            }
+        }
+        return false;
+    }
+
+        layui.use('form', function(){
+        var form = layui.form;
+        var id=new Array();
+        form.on('checkbox(community)', function(data){
+            if(data.elem.checked){
+                id.push(data.value)
+            }else {
+                id.splice(contains(id,data.value),1);
+            }
+
+        });
+        $("#foot").click(function () {
+            if(id.length<1){
+                layer.msg("请选择小区");
+                return;
+            }
+
+            $.ajax({
+                url : '../addCommunityNotice.json',
+                type : 'post',
+                dataType : 'json',
+                data : {
+                    noticeId :[[${noticeId}]],
+                    communityIds:id
+                },
+                success : function(data) {
+                    if (data === 1) {
+                        layer.msg('关联成功', {icon : 1});
+                        parent.location.reload();
+                    } else {
+                        layer.msg('关联失败,请检查是否有关联信息', {icon : 2});
+                    }
+                }
+            })
+        })
+        //各种基于事件的操作，下面会有进一步介绍
+    });
+</script>
+</body>
+</html>

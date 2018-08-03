@@ -54,7 +54,6 @@
             <ul class="layui-tab-title">
                 <li class="layui-this">文字</li>
                 <li>图片</li>
-                <li>图文</li>
             </ul>
             <div class="layui-tab-content" style="height: 200px;">
                 <div class="layui-tab-item layui-show">
@@ -76,11 +75,6 @@
                             </div>
 
                         </div>
-                    </div>
-                </div>
-                <div class="layui-tab-item">
-                    <div style="margin: 25px 0px 0px 25px">
-                        <button id="doAdd" class="layui-btn   layui-btn-danger ">添加图文素材</button>
                     </div>
                 </div>
             </div>
@@ -127,8 +121,6 @@
                 conten = $("#textContent").text();
             } else if (index == "1") {
                 img = getImgName("imgs");
-            } else if (index == '2') {
-
             }
             $.ajax({
                 url: 'addNotice.json',
