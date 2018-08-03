@@ -6,6 +6,8 @@ import java.io.Serializable;
 public class BuildingVo implements Serializable {
     private Long id;
 
+    private Long communityId;
+
     private String communityName;
 
     private String name;
@@ -26,6 +28,14 @@ public class BuildingVo implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getCommunityId() {
+        return communityId;
+    }
+
+    public void setCommunityId(Long communityId) {
+        this.communityId = communityId;
     }
 
     public String getCommunityName() {
