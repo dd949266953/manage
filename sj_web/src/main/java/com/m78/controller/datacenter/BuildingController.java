@@ -26,6 +26,9 @@ public class BuildingController {
     @Reference(version = "1.0.0")
     private BuildingService buildingService;
 
+    @Reference(version = "1.0.0")
+    private CommunityService communityService;
+
 
     /**
      * 楼宇列表页面
@@ -45,6 +48,7 @@ public class BuildingController {
         ModelAndView mv = new ModelAndView();
         mv.addObject("building", building);
         mv.addObject("buildingType", buildingService.getBuildingType());
+        mv.addObject("community",communityService.getCommunityIdAndName());
         mv.setViewName("dataCenter/building/addBuilding");
         return mv;
     }
@@ -59,7 +63,6 @@ public class BuildingController {
     public Object getBuildingList(@RequestParam("page") int page,
                                   @RequestParam("limit") int limit,
                                   @RequestParam("buildingName") String buildingName) {
-        System.out.println(buildingService.getBuildingList(page, limit, buildingName).toString());
         return DataTable.bindTableUtil(0, buildingService.getBuildingCountByName(buildingName), buildingService.getBuildingList(page, limit, buildingName));
     }
 
@@ -93,7 +96,7 @@ public class BuildingController {
      */
     @RequestMapping("addBuilding")
     @ResponseBody
-    public int insert(Building record) {
+    public int insert(BuildingVo record) {
         return buildingService.insert(record);
     }
 

@@ -1,6 +1,7 @@
 package com.m78.service.dataCenter;
 
 import com.m78.entity.Building;
+import com.m78.entity.CommunityBuilding;
 import com.m78.entity.DictionaryItem;
 import com.m78.vo.BuildingVo;
 
@@ -37,7 +38,7 @@ public interface BuildingService {
     /**
      * 添加楼宇
      */
-    int insert(Building record);
+    int insert(BuildingVo record);
 
     /**
      * 查询楼宇类型

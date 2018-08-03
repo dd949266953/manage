@@ -2,13 +2,16 @@ package com.m78.serviceImpl.dataCenter;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.m78.entity.Building;
+import com.m78.entity.CommunityBuilding;
 import com.m78.entity.DictionaryItem;
 import com.m78.mapper.BuildingMapper;
+import com.m78.mapper.CommunityBuildingMapper;
 import com.m78.mapper.DictionaryItemMapper;
 import com.m78.service.dataCenter.BuildingService;
 import com.m78.util.BeanUtil;
 import com.m78.vo.BuildingVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,6 +26,9 @@ public class BuildingServiceImpl implements BuildingService {
     // 字典
     @Autowired
     private DictionaryItemMapper dictionaryItemMapper;
+    //小区楼宇关系
+    @Autowired
+    private CommunityBuildingMapper communityBuildingMapper;
 
     /**
      * 楼宇列表
@@ -70,8 +76,27 @@ public class BuildingServiceImpl implements BuildingService {
      * @return
      */
     @Override
-    public int insert(Building record) {
-        return buildingMapper.insert(record);
+
+    public int insert(BuildingVo record) {
+        Building building=new Building();
+        building.setName(record.getName());
+        building.setUnittotal(record.getUnittotal());
+        building.setPliestotal(record.getPliestotal());
+        building.setBuildingtype(Long.valueOf(record.getBuildingtype()));
+        building.setBuildingstructure(record.getBuildingstructure());
+        building.setOrientation(record.getOrientation());
+        //添加成功返回值
+        int buildid=buildingMapper.insert(building);
+        Long buildingId=building.getId();
+        CommunityBuilding communityBuilding=new CommunityBuilding();
+        communityBuilding.setCommunitid(record.getCommunityId());
+        communityBuilding.setBuildingid(buildingId);
+        int cb=communityBuildingMapper.insert(communityBuilding);
+        int num=0;
+        if(buildid==1&&cb==1){
+            num=1;
+        }
+        return num;
     }
 
     /**
