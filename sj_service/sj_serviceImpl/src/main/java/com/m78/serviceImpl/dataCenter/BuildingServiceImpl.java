@@ -76,7 +76,7 @@ public class BuildingServiceImpl implements BuildingService {
      * @return
      */
     @Override
-
+    @Transactional
     public int insert(BuildingVo record) {
         Building building=new Building();
         building.setName(record.getName());
