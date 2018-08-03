@@ -97,8 +97,7 @@ public class BuildingController {
     @RequestMapping("addBuilding")
     @ResponseBody
     public int insert(BuildingVo record) {
-        System.out.println(record.toString());
-        return 0;
+        return buildingService.insert(record);
     }
 
 }

@@ -20,12 +20,11 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.m78.entity.CommunityBuilding" >
-    insert into community_building (id, communitId, buildingId
-      )
-    values (#{id,jdbcType=BIGINT}, #{communitid,jdbcType=BIGINT}, #{buildingid,jdbcType=BIGINT}
+    insert into community_building (communitId, buildingId)
+    values ( #{communitid,jdbcType=BIGINT}, #{buildingid,jdbcType=BIGINT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.m78.entity.CommunityBuilding" >
+  <insert id="insertSelective" parameterType="com.m78.entity.CommunityBuilding"  >
     insert into community_building
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

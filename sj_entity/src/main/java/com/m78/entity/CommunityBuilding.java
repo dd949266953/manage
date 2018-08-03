@@ -1,7 +1,9 @@
 package com.m78.entity;
 
 
-public class CommunityBuilding {
+import java.io.Serializable;
+
+public class CommunityBuilding implements Serializable {
 
     private Long id;
 

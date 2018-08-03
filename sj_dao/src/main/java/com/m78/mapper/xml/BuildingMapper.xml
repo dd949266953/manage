@@ -63,7 +63,7 @@
     delete from building
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.m78.entity.Building" >
+  <insert id="insert" parameterType="com.m78.entity.Building" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
     insert into building (name, unitTotal,
       pliesTotal, buildingType, buildingStructure, 
       orientation)
