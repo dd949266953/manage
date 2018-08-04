@@ -14,12 +14,24 @@
     <result column="equity" property="equity" jdbcType="BIGINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    houseId, unitNumber, fool, area, houseType, inArea, publicArea, returnTime, state, 
+    houseId, unitNumber, fool, area, houseType, inArea, publicArea, returnTime, state,
     equity
   </sql>
-
+  <sql id="Base_HouseView" >
+    houseId,communityName,buildingName,unitNumber,houseNo,charNum,`area`,houseType
+  </sql>
+  <!-- 查询所有房屋 -->
+  <select id="getAllHouse" resultType="com.m78.vo.HouseVo">
+    SELECT
+     <include refid="Base_HouseView"/>
+     FROM houseView
+    <if test="houseName!=''">
+      where houseNo like concat('%',#{houseName},'%')
+    </if>
+    limit #{start},#{limit}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from house
     where houseId = #{houseid,jdbcType=BIGINT}
@@ -29,13 +41,13 @@
     where houseId = #{houseid,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.m78.entity.House" >
-    insert into house (houseId, unitNumber, fool, 
-      area, houseType, inArea, 
-      publicArea, returnTime, state, 
+    insert into house (houseId, unitNumber, fool,
+      area, houseType, inArea,
+      publicArea, returnTime, state,
       equity)
-    values (#{houseid,jdbcType=BIGINT}, #{unitnumber,jdbcType=BIGINT}, #{fool,jdbcType=BIGINT}, 
-      #{area,jdbcType=DOUBLE}, #{housetype,jdbcType=BIGINT}, #{inarea,jdbcType=DOUBLE}, 
-      #{publicarea,jdbcType=DOUBLE}, #{returntime,jdbcType=TIMESTAMP}, #{state,jdbcType=BIGINT}, 
+    values (#{houseid,jdbcType=BIGINT}, #{unitnumber,jdbcType=BIGINT}, #{fool,jdbcType=BIGINT},
+      #{area,jdbcType=DOUBLE}, #{housetype,jdbcType=BIGINT}, #{inarea,jdbcType=DOUBLE},
+      #{publicarea,jdbcType=DOUBLE}, #{returntime,jdbcType=TIMESTAMP}, #{state,jdbcType=BIGINT},
       #{equity,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.m78.entity.House" >

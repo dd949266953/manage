@@ -8,7 +8,6 @@ import com.m78.mapper.BuildingMapper;
 import com.m78.mapper.CommunityBuildingMapper;
 import com.m78.mapper.DictionaryItemMapper;
 import com.m78.service.dataCenter.BuildingService;
-import com.m78.util.BeanUtil;
 import com.m78.vo.BuildingVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,6 +57,15 @@ public class BuildingServiceImpl implements BuildingService {
         return buildingMapper.updateByPrimaryKeySelective(record);
     }
 
+//    /**
+//     * 查询楼宇id和名称根据小区名称
+//     * @return
+//     */
+//    @Override
+//    public List<BuildingVo> getBuildingIdAndNameByCommunityId(Long communityId) {
+//        return buildingMapper.getBuildingIdAndNameByCommunityId(communityId);
+//    }
+
     /**
      * 根据id删除
      *
@@ -76,7 +84,6 @@ public class BuildingServiceImpl implements BuildingService {
      * @return
      */
     @Override
-    @Transactional
     public int insert(BuildingVo record) {
         Building building=new Building();
         building.setName(record.getName());

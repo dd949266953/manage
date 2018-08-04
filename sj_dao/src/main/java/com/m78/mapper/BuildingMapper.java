@@ -26,6 +26,12 @@ public interface BuildingMapper {
      */
     int updateByPrimaryKeySelective(Building record);
 
+    /**
+     * 查询楼宇id和名称
+     * @return
+     */
+    List<BuildingVo>getBuildingIdAndNameByCommunityId(@Param("communityId") Long communityId);
+
     int updateByPrimaryKey(Building record);
 
     /**

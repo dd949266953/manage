@@ -22,6 +22,12 @@ public interface BuildingService {
      * @return
      */
     Long getBuildingCountByName(String buildingName);
+//
+//    /**
+//     * 查询楼宇id和名称根据小区id
+//     * @return
+//     */
+//    List<BuildingVo>getBuildingIdAndNameByCommunityId(Long communityId);
 
     /**
      * 根据id修改楼宇

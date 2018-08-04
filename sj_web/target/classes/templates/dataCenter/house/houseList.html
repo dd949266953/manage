@@ -40,7 +40,7 @@
                     table.render({
                         elem: "#houseList",
                         loading: true,
-                        url: '/house/getBuilldingList',
+                        url: '/House/getAllHouse',
                         where: {
                             houseName: $("#houseName").val()
                         },
@@ -62,31 +62,38 @@
                                     title: '房屋编号',
                                 },
                                 {
-                                    field: "unitNumber",
+                                    field: "communityName",
+                                    align: 'center',
                                     title: '小区'
                                 },
                                 {
-                                    field: "fool",
+                                    field: "buildingName",
+                                    align: 'center',
                                     title: '楼宇'
                                 },
                                 {
-                                    field: "area",
+                                    field: "unitNumber",
+                                    align: 'center',
                                     title: '单元号'
                                 },
                                 {
-                                    field: "housetype",
+                                    field: "houseNo",
+                                    align: 'center',
                                     title: '房号'
                                 },
                                 {
-                                    field: "housestructure",
+                                    field: "charNum",
+                                    align: 'center',
                                     title: '收费标准个数'
                                 },
                                 {
-                                    field: "orientation",
-                                    title: '房屋面积'
+                                    field: "area",
+                                    align: 'center',
+                                    title: '面积'
                                 },
                                 {
-                                    field: "orientation",
+                                    field: "houseType",
+                                    align: 'center',
                                     title: '房屋类型'
                                 },
                                 {
@@ -147,7 +154,7 @@
 
             //添加房屋
             function add() {
-                window.location = "addhouse.html";
+                window.location = "addHouse.html";
             }
         </script>
         <script type="text/html" id="bar">
