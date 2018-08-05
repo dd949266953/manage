@@ -1,269 +1,272 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-		<link th:href="@{/layui/css/layui.css}" rel="stylesheet">
-		<meta http-equiv="description" content="" />
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link rel="stylesheet" th:href="@{/jquery/jMenu.jquery.css}" type="text/css" />
-		<style>
-            iframe{
-                height: 650px;
-            }
-			form {
-				margin: 20px 38px 20px 0px;
-			}
-		</style>
-	</head>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link th:href="@{/layui/css/layui.css}" rel="stylesheet">
+    <meta http-equiv="description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" th:href="@{/jquery/jMenu.jquery.css}" type="text/css"/>
+    <style>
+        iframe {
+            height: 650px;
+        }
 
-	<body>
-		<form id="form1" class="layui-form" action="" onsubmit="return false">
-		<div class="layui-form-item">
-            <label class="layui-form-label">筛选信息</label>
-            <div class="layui-input-block">
-              <input type="text" id="tentmentName" name="tentmentName"  lay-verify="title" autocomplete="off" placeholder="请输入姓名" class="layui-input" />
-            
-            </div>
-            
+        form {
+            margin: 20px 38px 20px 0px;
+        }
+    </style>
+</head>
+
+<body>
+<form id="form1" class="layui-form" action="" onsubmit="return false">
+    <div class="layui-form-item">
+        <label class="layui-form-label">筛选信息</label>
+        <div class="layui-input-block">
+            <input type="text" id="tentmentName" name="tentmentName" lay-verify="title" autocomplete="off"
+                   placeholder="请输入姓名" class="layui-input"/>
+
         </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">选择主体</label>
-            <div class="layui-input-block">
-              <table id="table" lay-filter="table" class="layui-table"></table>
-              <div id="test"></div>
-            </div>
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择主体</label>
+        <div class="layui-input-block">
+            <table id="table" lay-filter="table" class="layui-table"></table>
+            <div id="test"></div>
         </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">📅起始时间</label>
-                        <div class="layui-input-inline">
-                       <input class="layui-input" style="color:rgb(61,216,251);font-weight: bold;" id="test6" placeholder="~" type="text">
-              </div>
-            
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">📅起始时间</label>
+        <div class="layui-input-inline">
+            <input class="layui-input" style="color:rgb(61,216,251);font-weight: bold;" id="test6" placeholder="~"
+                   type="text">
         </div>
-        	<div class="layui-form-item" style="z-index: 1000;position: absolute;">
-            <label class="layui-form-label">收费标准</label>
-            <ul id="jMenu" >
-			<li>
+
+    </div>
+    <div class="layui-form-item" style="z-index: 1000;position: absolute;">
+        <label class="layui-form-label">收费标准</label>
+        <ul id="jMenu">
+            <li>
 
 
-				<a class="fNiv" data_id="0" style="width: 200px;"> 请选择收费标准 </a>
+                <a class="fNiv" data_id="0" style="width: 200px;"> 请选择收费标准 </a>
 
 
-
-
-				<ul id="uls">
-                    <li th:each="charName:${charName}"    id="lis" >
+                <ul id="uls">
+                    <li th:each="charName:${charName}" id="lis">
 
                         <a th:text="${charName.name}"></a>
-                        <ul >
-                            <li th:each="itmeName:${itmeName}"   th:if="${charName.id} eq ${itmeName.type} " class="last">
+                        <ul>
+                            <li th:each="itmeName:${itmeName}" th:if="${charName.id} eq ${itmeName.type} " class="last">
                                 <a th:text="${itmeName.name}" th:data_id="${itmeName.id}"></a>
                             </li>
                         </ul>
 
 
                     </li>
-					
-
-				</ul>
 
 
-			</li>
-		</ul>
-            
+                </ul>
+
+
+            </li>
+        </ul>
+
+    </div>
+    <div class="layui-form-item" style="position: relative;top: 50px;">
+        <label class="layui-form-label">用量</label>
+        <div class="layui-input-block">
+            <input type="text" id="conmos" name="address" lay-verify="required" autocomplete="off" class="layui-input">
+
         </div>
-        	<div class="layui-form-item" style="position: relative;top: 50px;">
-            <label class="layui-form-label">用量</label>
-            <div class="layui-input-block">
-              <input type="text" id="conmos" name="address" lay-verify="required"  autocomplete="off"  class="layui-input">
-            
-            </div>
-            
+
+    </div>
+    <div class="layui-form-item" style="position: relative;top: 50px;">
+        <label class="layui-form-label">总金额</label>
+        <div class="layui-input-block">
+            <input type="text" id="moneys" name="address" lay-verify="required" autocomplete="off" class="layui-input">
+
         </div>
-            <div class="layui-form-item" style="position: relative;top: 50px;">
-                <label class="layui-form-label">总金额</label>
-                <div class="layui-input-block">
-                    <input type="text" id="moneys" name="address" lay-verify="required"  autocomplete="off"  class="layui-input">
 
-                </div>
+    </div>
+    <div class="layui-form-item" style="position: relative;top: 50px;">
+        <label class="layui-form-label">备注</label>
+        <div class="layui-input-block">
+            <input type="text" id="remork" name="address" autocomplete="off" class="layui-input">
 
-            </div>
-        	<div class="layui-form-item" style="position: relative;top: 50px;">
-            <label class="layui-form-label">备注</label>
-            <div class="layui-input-block">
-              <input type="text" id="remork" name="address"   autocomplete="off"  class="layui-input">
-            
-            </div>
-            
         </div>
-          <div class="layui-form-item" id="sure" style="position: relative;top: 50px;">
-            <div class="layui-input-block">
-              <button class="layui-btn"  lay-submit="" lay-filter="demo1">立即提交</button>
-              <button id="reset"  class="layui-btn layui-btn-primary">重置</button>
-            </div>
+
+    </div>
+    <div class="layui-form-item" id="sure" style="position: relative;top: 50px;">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+            <button id="reset" class="layui-btn layui-btn-primary">重置</button>
         </div>
-		</form>
-		<script th:src="@{/js/jquery-3.2.1.js}"></script>
-		<script th:src="@{/layui/layui.all.js}"></script>
-		<script type="text/javascript" th:src="@{/jquery/jquery.js}"></script>
-		<script type="text/javascript" th:src="@{/jquery/jquery-ui.js}"></script>
-		<script type="text/javascript" th:src="@{/jquery/jMenu.jquery.js}"></script>
-		<script>
-			$("#reset").click(function(){
-	           window.location.reload();
-            })
-			$(".last a").click(function(){
-				var con=$(this).text();
-				$(".fNiv").text(con);
-				$(".fNiv").attr("data_id",$(this).attr("data_id"));
-				$("#jMenu ul").hide();
-			})
-			$(document).ready(function() {
-				$("#jMenu").jMenu();
-			})
-            var checkStatus=null;
-			$("#tentmentName").change(function() {
-                page();
-            })
-			$(function () {
-                page();
-            })
-           function page(){
-               layui.use(['layer', 'table'], function() {
-                   table = layui.table;
-                   var layer = layui.layer;
-                   table.render({
-                       elem: '#table',
-                       loading: true,
-                       limit:4,
-                       url: '../Tenement/getDetailAddressByName.json',
-                       where: {
-                           name: $("#tentmentName").val()
-                       },
-                       cols: [
-                           [
-                               {checkbox: true}, {
-                               align: 'center',
-                               title: '小区',
-                               unresize: 'true',
-                               templet: function (d) {
-                                   return d.community.name
-                               }
-                           },{
-                               align: 'center',
-                               title: '楼宇',
-                               unresize: 'true',
-                               templet: function(d){
-                                   return d.building.name
-                               }
-                           },{
-                               align: 'center',
-                               title: '单元',
-                               unresize: 'true',
-                               templet: function(d){
-                                   return d.house.unitnumber
-                               }
-                           },{
-                               align: 'center',
-                               title: '房号',
-                               unresize: 'true',
-                               templet: function(d){
-                                   return d.house.fool
-                               }
-                           },{
-                               field:'name',
-                               align: 'center',
-                               title: '住户',
-                               unresize: 'true'
-                           }
+    </div>
+</form>
+<script th:src="@{/js/jquery-3.2.1.js}"></script>
+<script th:src="@{/layui/layui.all.js}"></script>
+<script type="text/javascript" th:src="@{/jquery/jquery.js}"></script>
+<script type="text/javascript" th:src="@{/jquery/jquery-ui.js}"></script>
+<script type="text/javascript" th:src="@{/jquery/jMenu.jquery.js}"></script>
+<script>
+    $("#reset").click(function () {
+        window.location.reload();
+    })
+    $(".last a").click(function () {
+        var con = $(this).text();
+        $(".fNiv").text(con);
+        $(".fNiv").attr("data_id", $(this).attr("data_id"));
+        $("#jMenu ul").hide();
+    })
+    $(document).ready(function () {
+        $("#jMenu").jMenu();
+    })
+    var checkStatus = null;
+    $("#tentmentName").change(function () {
+        page();
+    })
+    $(function () {
+        page();
+    })
 
-                           ]
-                       ],
-                       page: true
-                   })
-                   table.on('checkbox(table)', function(obj){
-                       checkStatus = table.checkStatus('table');
-                       communityId=obj.data.community.id;
-                       houseId=obj.data.house.houseid;
-
-                   });
-               })
-           }
-            var communityId=0;
-			var houseId=0;
-            layui.use('form', function(){
-                var form = layui.form;
-                form.on('submit(demo1)', function(data){
-                    if(checkStatus==null){
-                        layer.msg('请选择一个住户',{icon: 2})
-                        return false;
-                    }else if(checkStatus.data.length!=1){
-                        layer.msg('请选择一个住户',{icon: 2})
-                        return false;
-                    }else {
-                        if(startTime!=''){
-                            if($(".fNiv").attr("data_id")!=0){
-                                $.ajax({
-                                    url:'addBill.json',
-                                    type:'get',
-                                    dataType:'json',
-                                    data:{
-                                        remork:$("#remork").val(),
-                                        start:startTime,
-                                        end:endTime,
-                                        consume:$("#conmos").val(),
-                                        communityId:communityId,
-                                        charItemId:$(".fNiv").attr("data_id"),
-                                        houseId:houseId,
-                                        moneys:$("#moneys").val()
-                                    },
-                                    success:function(data){
-                                        if(data=='1'){
-                                            parent.location.reload();
-                                        }else{
-                                            layer.msg("错误");
-                                        }
-
-                                    }
-                                })
-                            }else{
-                                layer.msg('请选择收费标准',{icon: 2})
-                                return false;
-                            }
-
-
-                        }else {
-                            layer.msg('请选择时间',{icon: 2})
-                            return false;
+    function page() {
+        layui.use(['layer', 'table'], function () {
+            table = layui.table;
+            var layer = layui.layer;
+            table.render({
+                elem: '#table',
+                loading: true,
+                limit: 4,
+                url: '../Tenement/getDetailAddressByName.json',
+                where: {
+                    name: $("#tentmentName").val()
+                },
+                cols: [
+                    [
+                        {checkbox: true}, {
+                        align: 'center',
+                        title: '小区',
+                        unresize: 'true',
+                        templet: function (d) {
+                            return d.community.name
                         }
+                    }, {
+                        align: 'center',
+                        title: '楼宇',
+                        unresize: 'true',
+                        templet: function (d) {
+                            return d.building.name
+                        }
+                    }, {
+                        align: 'center',
+                        title: '单元',
+                        unresize: 'true',
+                        templet: function (d) {
+                            return d.house.unitnumber
+                        }
+                    }, {
+                        align: 'center',
+                        title: '房号',
+                        unresize: 'true',
+                        templet: function (d) {
+                            return d.house.fool
+                        }
+                    }, {
+                        field: 'name',
+                        align: 'center',
+                        title: '住户',
+                        unresize: 'true'
+                    }
+
+                    ]
+                ],
+                page: true
+            })
+            table.on('checkbox(table)', function (obj) {
+                checkStatus = table.checkStatus('table');
+                communityId = obj.data.community.id;
+                houseId = obj.data.house.houseid;
+
+            });
+        })
+    }
+
+    var communityId = 0;
+    var houseId = 0;
+    layui.use('form', function () {
+        var form = layui.form;
+        form.on('submit(demo1)', function (data) {
+            if (checkStatus == null) {
+                layer.msg('请选择一个住户', {icon: 2})
+                return false;
+            } else if (checkStatus.data.length != 1) {
+                layer.msg('请选择一个住户', {icon: 2})
+                return false;
+            } else {
+                if (startTime != '') {
+                    if ($(".fNiv").attr("data_id") != 0) {
+                        $.ajax({
+                            url: 'addBill.json',
+                            type: 'get',
+                            dataType: 'json',
+                            data: {
+                                remork: $("#remork").val(),
+                                start: startTime,
+                                end: endTime,
+                                consume: $("#conmos").val(),
+                                communityId: communityId,
+                                charItemId: $(".fNiv").attr("data_id"),
+                                houseId: houseId,
+                                moneys: $("#moneys").val()
+                            },
+                            success: function (data) {
+                                if (data == '1') {
+                                    parent.location.reload();
+                                } else {
+                                    layer.msg("错误");
+                                }
+
+                            }
+                        })
+                    } else {
+                        layer.msg('请选择收费标准', {icon: 2})
+                        return false;
                     }
 
 
-                });
-
-            });
-
-
-            var startTime='';
-            var endTime='';
-		layui.use('laydate', function(){
-           var laydate = layui.laydate;
-            //日期时间选择器
-  laydate.render({
-    elem: '#test6'
-    ,range: true,
-    theme: '#34A5C7', done: function(value, date, endDate){
-          var times= value.split("-");
-           startTime=times[0]+"-"+times[1]+"-"+times[2];
-           endTime=times[3]+"-"+times[4]+"-"+times[5];
-      }
-  })
-  })
+                } else {
+                    layer.msg('请选择时间', {icon: 2})
+                    return false;
+                }
+            }
 
 
-		</script>
-	</body>
+        });
+
+    });
+
+
+    var startTime = '';
+    var endTime = '';
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+        //日期时间选择器
+        laydate.render({
+            elem: '#test6'
+            , range: true,
+            theme: '#34A5C7', done: function (value, date, endDate) {
+                var times = value.split("-");
+                startTime = times[0] + "-" + times[1] + "-" + times[2];
+                endTime = times[3] + "-" + times[4] + "-" + times[5];
+            }
+        })
+    })
+
+
+</script>
+</body>
 
 </html>

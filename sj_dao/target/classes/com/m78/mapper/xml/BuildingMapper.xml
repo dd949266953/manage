@@ -28,6 +28,10 @@
       and `name` LIKE CONCAT ('%',#{buildingName },'%')
     </if>
   </select>
+  <!--根据小区id查询楼宇id和名称-->
+  <select id="getBuildingIdAndNameByCommunityId" resultType="com.m78.vo.BuildingVo">
+    SELECT id,`name` FROM buildingView WHERE communityId=#{communityId}
+  </select>
   <!--根据id修改楼宇-->
   <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.Building" >
     update building
