@@ -56,52 +56,15 @@
                         },
                         cols: [
                             [
-                                {
-                                    field: 'houseId',
-                                    align: 'center',
-                                    title: '房屋编号',
-                                },
-                                {
-                                    field: "communityName",
-                                    align: 'center',
-                                    title: '小区'
-                                },
-                                {
-                                    field: "buildingName",
-                                    align: 'center',
-                                    title: '楼宇'
-                                },
-                                {
-                                    field: "unitNumber",
-                                    align: 'center',
-                                    title: '单元号'
-                                },
-                                {
-                                    field: "houseNo",
-                                    align: 'center',
-                                    title: '房号'
-                                },
-                                {
-                                    field: "charNum",
-                                    align: 'center',
-                                    title: '收费标准个数'
-                                },
-                                {
-                                    field: "area",
-                                    align: 'center',
-                                    title: '面积'
-                                },
-                                {
-                                    field: "houseType",
-                                    align: 'center',
-                                    title: '房屋类型'
-                                },
-                                {
-                                    field: "right",
-                                    title: '编辑',
-                                    align: 'center',
-                                    toolbar: "#bar"
-                                }
+                                {field: 'houseId', align: 'center', title: '房屋编号',},
+                                {field: "communityName", align: 'center', title: '小区'},
+                                {field: "buildingName", align: 'center', title: '楼宇'},
+                                {field: "unitNumber", align: 'center', title: '单元号'},
+                                {field: "houseNo", align: 'center', title: '房号'},
+                                {field: "charNum", align: 'center', title: '收费标准个数'},
+                                {field: "area", align: 'center', title: '面积'},
+                                {field: "houseType", align: 'center', title: '房屋类型'},
+                                {field: "right", title: '编辑', align: 'center', toolbar: "#bar"}
                             ]
                         ],
                         page: true
@@ -124,7 +87,7 @@
                                     url: 'deleteByPrimaryKey',
                                     dataType: 'json',
                                     data: {
-                                        id: data.id
+                                        houseId: data.houseId
                                     },
                                     success: function (data) {
                                         if (data == 1) {

@@ -55,4 +55,19 @@ public class HouseServiceImpl implements HouseService {
         }
         return result;
     }
+
+    /**
+     * 根据主键删除
+     * @param houseid
+     * @return
+     */
+    @Override
+    public int deleteByPrimaryKey(Long houseid) {
+        return houseMapper.deleteByPrimaryKey(houseid);
+    }
+
+    @Override
+    public Long getHouseCountByName(Long houseNo) {
+        return houseMapper.getHouseCountByName(houseNo);
+    }
 }

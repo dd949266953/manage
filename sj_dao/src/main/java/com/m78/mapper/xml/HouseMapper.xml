@@ -28,6 +28,13 @@
     </if>
     limit #{start},#{limit}
   </select>
+  <!--查询楼宇总数根据名称-->
+  <select id="getHouseCountByName" resultType="java.lang.Long" >
+    select count(1)  from houseView where 1=1
+    <if test="houseNo!=''">
+      and `fool` LIKE CONCAT ('%',#{houseNo },'%')
+    </if>
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select
     <include refid="Base_Column_List" />

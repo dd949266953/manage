@@ -30,4 +30,18 @@ public interface HouseService {
      * @return
      */
     int insertHouse(Long buildingId, House house);
+
+    /**
+     * 根据主键删除
+     * @param houseid
+     * @return
+     */
+    int deleteByPrimaryKey(Long houseid);
+
+    /**
+     * 查询房屋总数根据房号
+     * @param houseNo
+     * @return
+     */
+    Long getHouseCountByName(Long houseNo);
 }

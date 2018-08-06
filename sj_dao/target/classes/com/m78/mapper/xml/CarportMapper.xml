@@ -11,6 +11,26 @@
   <sql id="Base_Column_List" >
     carportNo, area, carportType, state, remark
   </sql>
+  <sql id="carportView">
+    communityId,communityName,carportNo,carportTypeId,carportType,carportStateId,carportState,`area`,charNum,remark
+  </sql>
+  <!--查询所有车位-->
+  <select id="getAllCarport" resultType="com.m78.vo.CarportVo">
+      select
+      <include refid="carportView"/>
+      from carportView
+      <if test="carportNo!=''">
+      where carportNo like concat('%',#{carportNo},'%')
+      </if>
+      limit #{start},#{limit}
+  </select>
+  <!--查询车位数量-->
+  <select id="getCountCarport" resultType="java.lang.Long">
+    select count(1) from carportView
+    <if test="carportNo!=''">
+      where carportNo like concat('%',#{carportNo},'%')
+    </if>s
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />

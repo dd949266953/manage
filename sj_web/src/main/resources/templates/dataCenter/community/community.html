@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>小区列表</title>
-    <link rel="stylesheet" th:href="@{/css/back_public.css}" />
+    <link rel="stylesheet" th:href="@{/css/back_public.css}"/>
     <link rel="stylesheet" th:href="@{/layui/css/layui.css}"/>
 </head>
 <body>
@@ -16,8 +16,8 @@
     <div class="main">
 
         <button class="button noborder" onclick="add()"><i class="layui-icon btn-icon">&#xe654;</i>添加小区</button>
-        <div style="float: right;" class="grabble" >
-            <input id="communityName" type="text" placeholder="请输入小区名称" class="search-keyword" />
+        <div style="float: right;" class="grabble">
+            <input id="communityName" type="text" placeholder="请输入小区名称" class="search-keyword"/>
             <button onclick="page()" class="noborder">
                 <i class="layui-icon search">&#xe615;</i>
             </button>
@@ -56,51 +56,17 @@
                             last: false //不显示尾页
                         },
                         cols: [
-                                [
-                                {
-                                    field:'id',
-                                    align: 'center',
-                                    title: '小区编号',
-                                },
-                                {
-                                    field: "name",
-                                    title: '小区名称'
-                                },
-                                {
-                                    field: "address",
-                                    title: '所在地区'
-                                },
-                                {
-                                    field: "detailaddress",
-                                    title: '详细地址'
-                                },
-                                {
-                                    field: "servicetel",
-                                    title: '服务热线'
-                                },
-                                {
-                                    field: "leader",
-                                    title: '负责人'
-                                },
-                                {
-                                    field: "leaderphone",
-                                    title: '负责电话'
-                                },
-                                {
-                                    field: "logo",
-                                    title: '小区Logo'
-                                },
-
-                                {
-                                    field: "backgroundimage",
-                                    title: '背景图片'
-                                },
-                                {
-                                    field: "right",
-                                    title: '编辑',
-                                    align: 'center',
-                                    toolbar: "#bar"
-                                }
+                            [
+                                { field: 'id', align: 'center', title: '小区编号',},
+                                { field: "name", title: '小区名称'},
+                                { field: "address", title: '所在地区'},
+                                { field: "detailaddress", title: '详细地址'},
+                                { field: "servicetel", title: '服务热线'},
+                                { field: "leader", title: '负责人'},
+                                { field: "leaderphone", title: '负责电话'},
+                                { field: "logo", title: '小区Logo'},
+                                { field: "backgroundimage", title: '背景图片'},
+                                { field: "right", title: '编辑', align: 'center', toolbar: "#bar"}
                             ]
                         ],
                         page: true
@@ -110,9 +76,9 @@
                         var data = obj.data; //获得当前行数据
                         var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
                         var tr = obj.tr; //获得当前行 tr 的DOM对象
-                        if (layEvent === 'edit'){
-                            var community =$.param(data);
-                            window.location="updateCommunity.html?"+community;
+                        if (layEvent === 'edit') {
+                            var community = $.param(data);
+                            window.location = "updateCommunity.html?" + community;
                         }
                         if (layEvent === 'del') {
                             layer.confirm('确定要删除吗?', {
@@ -146,10 +112,12 @@
                     });
                 });
             }
+
             //搜索
             function search() {
                 page();
             }
+
             //添加小区
             function add() {
                 window.location = "addCommunity.html";
