@@ -86,7 +86,12 @@ public class CommunityServiceImpl implements CommunityService {
      */
     @Override
     public int updateByPrimaryKeySelective(Community record) {
-        System.out.println(2);
         return communityMapper.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public List<Community> getIdNameAddressByName(int page, int limit, String name) {
+        int start=(page-1)*limit;
+        return communityMapper.getIdNameAddressByName(start,limit,name);
     }
 }

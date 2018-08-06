@@ -53,5 +53,9 @@ public interface CommunityService {
      */
     int updateByPrimaryKeySelective(Community record);
 
+    /**
+     * 查询id,name,住址根据name 带分页
+     */
+    List<Community> getIdNameAddressByName(int page,int limit,String name);
 
 }

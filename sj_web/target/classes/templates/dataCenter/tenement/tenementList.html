@@ -56,52 +56,15 @@
                         },
                         cols: [
                             [
-                                {
-                                    field: "tenementId",
-                                    align: 'center',
-                                    title: 'id'
-                                },
-                                {
-                                    field: "communityName",
-                                    align: 'center',
-                                    title: '小区'
-                                },
-                                {
-                                    field: "buildingName",
-                                    align: 'center',
-                                    title: '楼宇'
-                                },
-                                {
-                                    field: "unitNumber",
-                                    align: 'center',
-                                    title: '单元号'
-                                },
-                                {
-                                    field: "houseId",
-                                    align: 'center',
-                                    title: '房号'
-                                },
-
-                                {
-                                    field: "tenementName",
-                                    align: 'center',
-                                    title: '用户姓名'
-                                },
-                                {
-                                    field: "phone",
-                                    align: 'center',
-                                    title: '联系方式'
-                                },
-                                {
-                                    field: "state",
-                                    title: '住户身份'
-                                },
-                                {
-                                    field: "right",
-                                    title: '编辑',
-                                    align: 'center',
-                                    toolbar: "#bar"
-                                }
+                                {field: 'tenementId', align: 'center', title: '住户编号',},
+                                {field: "communityName", align: 'center', title: '小区'},
+                                {field: "buildingName", align: 'center', title: '楼宇'},
+                                {field: "unitNumber", align: 'center', title: '单元'},
+                                {field: "fool", align: 'center', title: '房号'},
+                                {field: "tenementName", align: 'center', title: '住户姓名'},
+                                {field: "phone", align: 'center', title: '联系方式'},
+                                {field: "relation", align: 'center', title: '住户身份'},
+                                {field: "right", title: '编辑', align: 'center', toolbar: "#bar"}
                             ]
                         ],
                         page: true
@@ -112,9 +75,7 @@
                         var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
                         var tr = obj.tr; //获得当前行 tr 的DOM对象
                         if (layEvent === 'edit') {
-                            var Tenement = $.param(data);
-                            console.log(Tenement);
-                            window.location = "updateTenement.html?" + Tenement;
+                            window.location = "updateTenement.html?tenementId=" + data.tenementId;
                         }
                         if (layEvent === 'del') {
                             layer.confirm('确定要删除吗?', {

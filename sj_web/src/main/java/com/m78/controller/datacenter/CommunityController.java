@@ -135,4 +135,9 @@ public class CommunityController {
         return communityService.selectByPrimaryKey(id);
     }
 
+    @RequestMapping("getIdNameAddressByName")
+    @ResponseBody
+    public List<Community> getIdNameAddressByName(int page, int limit, String name) {
+        return communityService.getIdNameAddressByName(page,limit,name);
+    }
 }

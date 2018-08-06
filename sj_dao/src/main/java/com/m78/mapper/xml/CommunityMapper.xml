@@ -71,6 +71,14 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <!--查询id,name,住址根据name 带分页-->
+  <select id="getIdNameAddressByName" resultType="com.m78.entity.Community">
+     SELECT id,`name`,address FROM community
+     <if test="name=!''">
+       WHERE `name` LIKE concat('%',#{name},'%')
+     </if>
+      LIMIT #{start},#{limit}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />

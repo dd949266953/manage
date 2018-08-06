@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title>
-        添加房屋
+        添加住户
     </title>
     <link rel="stylesheet" th:href="@{/jquery/jMenu.jquery.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/back_public.css}"/>
@@ -16,12 +16,15 @@
         .layui-form-select dl {
             max-height: 190px !important;
         }
+        .layui-form-item .layui-input-inline{
+            width: inherit !important;
+        }
     </style>
 </head>
 
 <body>
 <header>
-    <header th:text="${tenement.id}==null?'添加住户':'修改住户'"></header>
+    <header th:text="${tenementId}==null?'添加住户':'修改住户'"></header>
 </header>
 <section>
     <div class="main">
@@ -34,7 +37,7 @@
                     <div class="layui-input-block row" style="display: flex">
                         <div class="layui-input-inline row" id="community">
                             <select name="community" class="layui-form" lay-filter="community">
-                                <!--<option th:each="c:${communityList}" th:value="${c.id}" th:text="${c.name}"></option>-->
+                                <option th:each="c:${communityList}" th:value="${c.id}" th:text="${c.name}"></option>
                             </select>
                         </div>
                         <div class="layui-input-inline row layui-form" id="building" lay-filter="building">
@@ -43,6 +46,10 @@
                         </div>
                         <div class="layui-input-inline row layui-form" id="unit" lay-filter="unit">
                             <select name="unit" lay-filter="unit">
+                            </select>
+                        </div>
+                        <div class="layui-input-inline row layui-form" id="house" lay-filter="unit">
+                            <select name="house" lay-filter="house">
                             </select>
                         </div>
                     </div>
@@ -74,22 +81,6 @@
             </div>
             <div class="layui-form-item form-item">
                 <label class="layui-form-label row lable">
-                    <span>*</span>总积分 :</label>
-                <div class="layui-input-block row row-div">
-                    <input type="text" name="integrals" lay-verify="title" autocomplete="off" placeholder="请输入住户的总积分"  th:value="*{integrals}"
-                           class="layui-input input short-div">
-                </div>
-            </div>
-            <div class="layui-form-item form-item">
-                <label class="layui-form-label row lable">
-                    注册时间 :</label>
-                <div class="layui-input-block row row-div">
-                    <input type="text" name="registrationdate" lay-verify="title" autocomplete="off" placeholder="请输入住户的注册时间" th:value="*{registrationdate}"
-                           class="layui-input input short-div">
-                </div>
-            </div>
-            <div class="layui-form-item form-item">
-                <label class="layui-form-label row lable">
                     <span>*</span>身份 :</label>
                 <div class="layui-input-block row row-div">
                     <input type="text" name="state" lay-verify="title" autocomplete="off"th:value="*{state}" placeholder="请输入身份"
@@ -100,8 +91,7 @@
                 <label class="layui-form-label row lable">
                     QQ :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="qqnumber" lay-verify="title" autocomplete="off"  th:value="*{qqnumber}" placeholder="请输入住户QQ"  th:value="*{qqnumber}"
-                           class="layui-input input short-div"/>
+                    <input type="text" name="qqnumber" lay-verify="title" autocomplete="off"  th:value="*{qqnumber}" placeholder="请输入住户QQ" class="layui-input input short-div"/>
                 </div>
             </div>
             <div class="layui-form-item form-item">
@@ -141,10 +131,9 @@
             </div>
             <div class="layui-form-item form-item">
                 <label class="layui-form-label row lable">
-                    <span>*</span>出生日期 :</label>
+                    出生日期 :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="birthday" lay-verify="title" autocomplete="off"  th:value="*{idcard}" placeholder="请输入出生日期"
-                           class="layui-input input short-div">
+                    <input type="text" name="registrationdate" id="date1" lay-verify="title" autocomplete="off" placeholder="请输入住户的注册时间" class="layui-input short-div">
                 </div>
             </div>
             <div class="layui-form-item form-item">

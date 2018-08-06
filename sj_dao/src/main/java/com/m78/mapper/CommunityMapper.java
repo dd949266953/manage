@@ -44,4 +44,9 @@ public interface CommunityMapper {
      * 根据小区名称查询小区id
      */
     Long getCommunityIdByName(@Param("communityName")String communityName);
+
+    /**
+     * 查询id,name,住址根据name 带分页
+     */
+    List<Community> getIdNameAddressByName(@Param("start") int start,@Param("limit") int limit,@Param("name")String name);
 }

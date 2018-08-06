@@ -33,12 +33,22 @@ public class TenementController {
      * 添加/修改界面
      * @return
      */
-    @RequestMapping(value = {"updateTenement.html","addTenement.html"})
-    public Object updateTenementView(Tenement tenement,@RequestParam("tenementId")Long tenementId){
+    @RequestMapping(value = {"addTenement.html","updateTenement.html"})
+    public Object updateTenementView(@RequestParam(value = "tenementId",required = false)String tenementId){
         ModelAndView mv=new ModelAndView();
+        //小区列表
+        System.out.println(tenementId);
+        mv.addObject("tenementId",tenementId);
+        mv.addObject("communityList",communityService.getCommunityIdAndName());
+        if (tenementId==null){
+            //添加
+
+        }else {
+
+            //修改
+            mv.addObject("tenement",tenementService.getTenementByPrimaryKeyId(Long.valueOf(tenementId)));
+        }
         mv.setViewName("dataCenter/tenement/addTenement");
-        tenement = tenementService.getTenementByPrimaryKeyId(tenementId);
-        mv.addObject("tenement",tenement);
         return mv;
     }
     /**
@@ -63,27 +73,13 @@ public class TenementController {
         return tenementService.deleteByPrimaryKey(id);
     }
 
-
-    /**
-     * 修改小区
-     */
-    @RequestMapping("updateTenement/{id}")
-    @ResponseBody
-    public Object updateTenement(@PathVariable("id")Long id, Tenement tenement){
-        System.out.println(id);
-        tenement.setId(id);
-        ModelAndView mv=new ModelAndView();
-        mv.addObject("communityList",communityService.getCommunityIdAndName());
-        return tenementService.updateByPrimaryKeySelective(tenement);
-    }
-
     /**
      * 获取所有住户 根据住户姓名 模糊查询
      * @return
      */
     @RequestMapping("/getAllTenement")
     @ResponseBody
-    public Object getAllTenement(@RequestParam("name")String name,@RequestParam("page")int page,@RequestParam("limit")int limit){ System.out.println(tenementService.getTenementCount(name));
+    public Object getAllTenement(@RequestParam("name")String name,@RequestParam("page")int page,@RequestParam("limit")int limit){
         return DataTable.bindTableUtil(0, tenementService.getTenementCount(name),tenementService.getAllTenement(name,page,limit));
     }
 
@@ -105,22 +101,6 @@ public class TenementController {
     @ResponseBody
     public Object getTenementCountByName(@RequestParam("tenementName")String tenementName) {
         return tenementService.getTenementCountByName(tenementName);
-    }
-    /**
-     * 添加房屋页面
-     * @return
-     */
-    @RequestMapping("addTenement.html")
-    public Object addHouse(){
-        ModelAndView mv=new ModelAndView();
-        //所有小区id和名称
-        mv.addObject("communityList",communityService.getCommunityIdAndName());
-//        //所有房屋类型
-//        mv.addObject("houseType",houseService.getHouseType());
-//        //所有房屋状态
-//        mv.addObject("houseState",houseService.getHouseState());
-        mv.setViewName("dataCenter/tenement/addTenement");
-        return mv;
     }
     /**
      * 根据住户手机号查询车位主键

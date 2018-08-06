@@ -25,10 +25,8 @@
     urgencyManPhone, sex, nation, remark, communityId, idCard, birthday, ownerNumber
   </sql>
   <sql id="Base_TenementView">
-    tenementId,houseId ,tenementName , communityName , buildingName,state,phone,unitNumber
-
+    tenementId,communityId,communityName,buildingId,buildingName,houseId,unitNumber,fool,tenementName,phone,relation
   </sql>
-  <!-- zhe  shi  wo  xie   de    -->
   <!--获取所有住户-->
   <select id="getAllTenement" resultType="com.m78.vo.TenementVo">
     SELECT
@@ -36,16 +34,16 @@
     from
      tenementView
     <if test="name!=''">
-      where name like concat('%',#{name},'%')
+      where tenementName like concat('%',#{name},'%')
     </if>
     limit #{start},#{limit}
   </select>
-
+  <!--查询住户总数-->
   <select id="getTenementCount" resultType="java.lang.Integer">
     select count(id)
     from tenement
     <if test="name!=''">
-      where name like concat('%',#{name},'%')
+      where tenementName like concat('%',#{name},'%')
     </if>
   </select>
 
@@ -56,9 +54,6 @@
      tenement
     where id = #{id}
   </select>
-
-  <!--   end   -->
-
   <!--住户住址详情-->
   <resultMap id="tenementDetailAddress" type="com.m78.entity.Tenement">
     <id column="id" jdbcType="BIGINT" property="id" />

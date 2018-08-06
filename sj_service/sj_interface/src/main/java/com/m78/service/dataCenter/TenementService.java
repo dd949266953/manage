@@ -67,4 +67,6 @@ public interface TenementService {
      * @return
      */
     Long getHouseIdByTenementPhone(String phone);
+
+
 }

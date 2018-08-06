@@ -3,39 +3,32 @@ package com.m78.vo;
 import java.io.Serializable;
 
 public class TenementVo implements Serializable {
-    //  tenementId,houseId ,tenementName , communityName , buildingName,state,phone
-    private Integer tenementId;
-    private Integer houseId;
-    private String tenementName;
+    private Long tenementId;
+    private Long communityId;
     private String communityName;
+    private Long buildingId;
     private String buildingName;
-    private Long state;
-    private String phone;
+    private Long houseId;
     private Long unitNumber;
+    private Long fool;
+    private String tenementName;
+    private String phone;
+    private String relation;
 
-
-    public Integer getTenementId() {
+    public Long getTenementId() {
         return tenementId;
     }
 
-    public void setTenementId(Integer tenementId) {
+    public void setTenementId(Long tenementId) {
         this.tenementId = tenementId;
     }
 
-    public Integer getHouseId() {
-        return houseId;
+    public Long getCommunityId() {
+        return communityId;
     }
 
-    public void setHouseId(Integer houseId) {
-        this.houseId = houseId;
-    }
-
-    public String getTenementName() {
-        return tenementName;
-    }
-
-    public void setTenementName(String tenementName) {
-        this.tenementName = tenementName;
+    public void setCommunityId(Long communityId) {
+        this.communityId = communityId;
     }
 
     public String getCommunityName() {
@@ -46,6 +39,14 @@ public class TenementVo implements Serializable {
         this.communityName = communityName;
     }
 
+    public Long getBuildingId() {
+        return buildingId;
+    }
+
+    public void setBuildingId(Long buildingId) {
+        this.buildingId = buildingId;
+    }
+
     public String getBuildingName() {
         return buildingName;
     }
@@ -54,12 +55,36 @@ public class TenementVo implements Serializable {
         this.buildingName = buildingName;
     }
 
-    public Long getState() {
-        return state;
+    public Long getHouseId() {
+        return houseId;
     }
 
-    public void setState(Long state) {
-        this.state = state;
+    public void setHouseId(Long houseId) {
+        this.houseId = houseId;
+    }
+
+    public Long getUnitNumber() {
+        return unitNumber;
+    }
+
+    public void setUnitNumber(Long unitNumber) {
+        this.unitNumber = unitNumber;
+    }
+
+    public Long getFool() {
+        return fool;
+    }
+
+    public void setFool(Long fool) {
+        this.fool = fool;
+    }
+
+    public String getTenementName() {
+        return tenementName;
+    }
+
+    public void setTenementName(String tenementName) {
+        this.tenementName = tenementName;
     }
 
     public String getPhone() {
@@ -70,11 +95,28 @@ public class TenementVo implements Serializable {
         this.phone = phone;
     }
 
-    public Long getUnitNumber() {
-        return unitNumber;
+    public String getRelation() {
+        return relation;
     }
 
-    public void setUnitNumber(Long unitNumber) {
-        this.unitNumber = unitNumber;
+    public void setRelation(String relation) {
+        this.relation = relation;
+    }
+
+    @Override
+    public String toString() {
+        return "TenementVo{" +
+                "tenementId=" + tenementId +
+                ", communityId=" + communityId +
+                ", communityName='" + communityName + '\'' +
+                ", buildingId=" + buildingId +
+                ", buildingName='" + buildingName + '\'' +
+                ", houseId=" + houseId +
+                ", unitNumber=" + unitNumber +
+                ", fool=" + fool +
+                ", tenementName='" + tenementName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", relation='" + relation + '\'' +
+                '}';
     }
 }
