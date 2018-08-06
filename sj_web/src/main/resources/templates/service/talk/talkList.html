@@ -14,8 +14,10 @@
 </header>
 <section>
     <div class="main">
+
+        <button class="button noborder" onclick="add()"><i class="layui-icon btn-icon">&#xe654;</i>添加工单</button>
         <div style="float: right;" class="grabble" >
-            <input id="communityName" type="text" placeholder="请输入工单标题或者住户名" class="search-keyword" />
+            <input id="talkName" type="text" placeholder="请输入工单标题或者住户名" class="search-keyword" />
             <button onclick="page()" class="noborder">
                 <i class="layui-icon search">&#xe615;</i>
             </button>
@@ -26,6 +28,10 @@
         <table id="talkList" lay-filter="test"></table>
         <script th:src="@{/layui/layui.js}" type="text/javascript"></script>
         <script th:src="@{/js/jquery-3.2.1.js}" type="text/javascript"></script>
+        <script type="text/html" id="barDemo">
+            <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="ok">处理</a>
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        </script>
         <script>
             $(function () {
                 page();
@@ -39,9 +45,9 @@
                     table.render({
                         elem: "#talkList",
                         loading: true,
-                        url: '/Community/communityData',
+                        url: 'getAllTalk.json',
                         where: {
-                            communityName: $("#communityName").val()
+                            name: $("#talkName").val()
                         },
                         page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
                             layout: ['limit:10', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
@@ -56,48 +62,39 @@
                         cols: [
                                 [
                                 {
-                                    field:'id',
+                                    field:'title',
                                     align: 'center',
-                                    title: '小区编号',
+                                    align: 'center',
+                                    title: '工单标题',
                                 },
                                 {
                                     field: "name",
-                                    title: '小区名称'
+                                    title: '住户',
+                                    align: 'center',
+                                    templet: function(d){
+                                          return d.tenement.name
+                                      }
                                 },
                                 {
-                                    field: "address",
-                                    title: '所在地区'
+                                    field: "typeName",
+                                    align: 'center',
+                                    title: '类型'
                                 },
                                 {
-                                    field: "detailaddress",
-                                    title: '详细地址'
+                                    field: "time",
+                                    align: 'center',
+                                    title: '时间'
                                 },
                                 {
-                                    field: "servicetel",
-                                    title: '服务热线'
-                                },
-                                {
-                                    field: "leader",
-                                    title: '负责人'
-                                },
-                                {
-                                    field: "leaderphone",
-                                    title: '负责电话'
-                                },
-                                {
-                                    field: "logo",
-                                    title: '小区Logo'
-                                },
-
-                                {
-                                    field: "backgroundimage",
-                                    title: '背景图片'
+                                    field: "stateName",
+                                    align: 'center',
+                                    title: '状态'
                                 },
                                 {
                                     field: "right",
-                                    title: '编辑',
+                                    title: '操作',
                                     align: 'center',
-                                    toolbar: "#bar"
+                                    toolbar: "#barDemo"
                                 }
                             ]
                         ],
@@ -109,8 +106,7 @@
                         var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
                         var tr = obj.tr; //获得当前行 tr 的DOM对象
                         if (layEvent === 'edit'){
-                            var community =$.param(data);
-                            window.location="updateCommunity.html?"+community;
+
                         }
                         if (layEvent === 'del') {
                             layer.confirm('确定要删除吗?', {
@@ -119,7 +115,7 @@
                                 shade: '0'
                             }, function (index) {
                                 $.ajax({
-                                    url: 'deleteCommunity',
+                                    url: 'deleteTalkById.json',
                                     type: 'get',
                                     dataType: 'json',
                                     data: {

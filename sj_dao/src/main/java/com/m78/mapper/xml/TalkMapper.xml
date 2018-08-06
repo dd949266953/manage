@@ -22,7 +22,7 @@
             <result property="name" column="name"/>
         </association>
     </resultMap>
-    //获取所有工单信息
+    <!--获取信息 -->
     <select id="getAllTalk" resultMap="talkList">
            SELECT ta.id,ta.title,te.id as tenementId,te.`name`,di.content as state,dc.content as type,ta.time FROM talk ta
            INNER JOIN tenement te on te.id=ta.tentmentId
@@ -34,7 +34,7 @@
         </if>
         limit #{start},#{end}
     </select>
-    //获取工单信息总数
+    <!--获取总数 -->
     <select id="getAllTalkCount" resultType="java.lang.Long">
           select  count(1) from  talk ta
           INNER JOIN tenement te on te.id=ta.tentmentId

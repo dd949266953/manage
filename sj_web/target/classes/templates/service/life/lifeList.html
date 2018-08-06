@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>工单列表</title>
+    <title>生活导航</title>
     <link rel="stylesheet" th:href="@{/css/back_public.css}" />
     <link rel="stylesheet" th:href="@{/layui/css/layui.css}"/>
 </head>
 <body>
 <header>
-    工单列表
+    生活导航
 </header>
 <section>
     <div class="main">
 
-        <button class="button noborder" onclick="add()"><i class="layui-icon btn-icon">&#xe654;</i>添加工单</button>
+        <button class="button noborder" onclick="add()"><i class="layui-icon btn-icon">&#xe654;</i>添加导航</button>
         <div style="float: right;" class="grabble" >
-            <input id="talkName" type="text" placeholder="请输入工单标题或者住户名" class="search-keyword" />
+            <input id="lifeName" type="text" placeholder="请输入名称" class="search-keyword" />
             <button onclick="page()" class="noborder">
                 <i class="layui-icon search">&#xe615;</i>
             </button>
@@ -25,14 +25,22 @@
                 <i class="layui-icon search">&#xe607;</i>
             </button>
         </div>
-        <table id="talkList" lay-filter="test"></table>
+        <table id="lifeList" lay-filter="test"></table>
         <script th:src="@{/layui/layui.js}" type="text/javascript"></script>
         <script th:src="@{/js/jquery-3.2.1.js}" type="text/javascript"></script>
         <script type="text/html" id="barDemo">
-            <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="ok">处理</a>
+            <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="ok">关联小区</a>
             <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
         </script>
         <script>
+            function add(){
+                layer.open({
+                    type: 2,
+                    title:'添加导航',
+                    area: ['100%', '100%'],
+                    content: 'doAddLife'
+                })
+            }
             $(function () {
                 page();
             })
@@ -43,11 +51,11 @@
                     var table = layui.table;
                     //第一个实例
                     table.render({
-                        elem: "#talkList",
+                        elem: "#lifeList",
                         loading: true,
-                        url: 'getAllTalk.json',
+                        url: 'getAllLift.json',
                         where: {
-                            name: $("#talkName").val()
+                            name: $("#lifeName").val()
                         },
                         page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
                             layout: ['limit:10', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
@@ -62,33 +70,27 @@
                         cols: [
                                 [
                                 {
-                                    field:'title',
+                                    field:'name',
                                     align: 'center',
-                                    align: 'center',
-                                    title: '工单标题',
+                                    title: '名称'
                                 },
                                 {
-                                    field: "name",
-                                    title: '住户',
+                                    field: "option",
+                                    title: '类型',
                                     align: 'center',
                                     templet: function(d){
-                                          return d.tenement.name
+                                          return d.lifeOption.name
                                       }
                                 },
                                 {
-                                    field: "typeName",
+                                    field: "adress",
                                     align: 'center',
-                                    title: '类型'
+                                    title: '地点'
                                 },
                                 {
                                     field: "time",
                                     align: 'center',
                                     title: '时间'
-                                },
-                                {
-                                    field: "stateName",
-                                    align: 'center',
-                                    title: '状态'
                                 },
                                 {
                                     field: "right",
@@ -115,11 +117,11 @@
                                 shade: '0'
                             }, function (index) {
                                 $.ajax({
-                                    url: 'deleteTalkById.json',
+                                    url: 'deleteLifeById.json',
                                     type: 'get',
                                     dataType: 'json',
                                     data: {
-                                        id: data.id
+                                        lifeId: data.id
                                     },
                                     success: function (data) {
                                         if (data == 1) {
@@ -144,10 +146,6 @@
             function search() {
                 page();
             }
-        </script>
-        <script type="text/html" id="bar">
-            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
         </script>
     </div>
 </section>

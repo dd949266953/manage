@@ -27,4 +27,9 @@ public class TalkServiceImpl implements TalkService {
     public Long getTalkCount(String name) {
         return mapper.getAllTalkCount(name);
     }
+
+    @Override
+    public int deleteTalkById(Long talkId) {
+        return mapper.deleteByPrimaryKey(talkId);
+    }
 }
