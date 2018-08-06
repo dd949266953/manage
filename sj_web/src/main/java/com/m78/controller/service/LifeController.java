@@ -1,6 +1,7 @@
 package com.m78.controller.service;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.m78.entity.Life;
 import com.m78.service.service.LifeOptionService;
 import com.m78.service.service.LifeService;
 import com.m78.util.DataTable;
@@ -71,6 +72,26 @@ public class LifeController {
     @ResponseBody
     public  Object getAllOption(){
        return  lifeOptionService.getAllOption();
+    }
+
+    /**
+     * 添加标签
+     * @return
+     */
+    @RequestMapping("addLifeOption.json")
+    @ResponseBody
+    public  Object addLifeOption(@RequestParam("name") String name){
+      return  lifeOptionService.addLifeOption(name);
+    }
+
+    /**
+     * 添加导航
+     * @return
+     */
+    @RequestMapping("addLife.json")
+    @ResponseBody
+    public  Object addLife(Life life){
+          return lifeService.addLife(life);
     }
 
 

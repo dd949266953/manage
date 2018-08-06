@@ -27,4 +27,11 @@ public interface LifeService {
      * @return
      */
     int deleteLifeById(Long lifeId);
+
+    /**
+     *
+     * 添加导航
+     * @return
+     */
+    int addLife(Life life);
 }

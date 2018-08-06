@@ -21,4 +21,9 @@ public class LifeOptionServiceImpl implements LifeOptionService {
     public List<LifeOption> getAllOption() {
         return lifeOptionMapper.getAllOption();
     }
+
+    @Override
+    public int addLifeOption(String name) {
+        return lifeOptionMapper.addLifeOption(name);
+    }
 }

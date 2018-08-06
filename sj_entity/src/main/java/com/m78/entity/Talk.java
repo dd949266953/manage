@@ -1,5 +1,7 @@
 package com.m78.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -14,7 +16,7 @@ public class Talk implements Serializable {
 
     private Long state;
     private  String stateName;
-
+    @JSONField(format = "yyyy-MM-dd hh:mm:ss")
     private Date time;
 
     private Long type;

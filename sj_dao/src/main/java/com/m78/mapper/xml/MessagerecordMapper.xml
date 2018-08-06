@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.m78.mapper.MessagerecordMapper">
+  <resultMap id="BaseResultMap" type="com.m78.entity.Messagerecord">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="messageId" jdbcType="BIGINT" property="messageid" />
+    <result column="sendObject" jdbcType="VARCHAR" property="sendobject" />
+    <result column="sendTime" jdbcType="TIMESTAMP" property="sendtime" />
+    <result column="sendCount" jdbcType="BIGINT" property="sendcount" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, messageId, sendObject, sendTime, sendCount
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from messageRecord
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from messageRecord
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.m78.entity.Messagerecord">
+    insert into messageRecord (id, messageId, sendObject, 
+      sendTime, sendCount)
+    values (#{id,jdbcType=BIGINT}, #{messageid,jdbcType=BIGINT}, #{sendobject,jdbcType=VARCHAR}, 
+      #{sendtime,jdbcType=TIMESTAMP}, #{sendcount,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.m78.entity.Messagerecord">
+    insert into messageRecord
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="messageid != null">
+        messageId,
+      </if>
+      <if test="sendobject != null">
+        sendObject,
+      </if>
+      <if test="sendtime != null">
+        sendTime,
+      </if>
+      <if test="sendcount != null">
+        sendCount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="messageid != null">
+        #{messageid,jdbcType=BIGINT},
+      </if>
+      <if test="sendobject != null">
+        #{sendobject,jdbcType=VARCHAR},
+      </if>
+      <if test="sendtime != null">
+        #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendcount != null">
+        #{sendcount,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.Messagerecord">
+    update messageRecord
+    <set>
+      <if test="messageid != null">
+        messageId = #{messageid,jdbcType=BIGINT},
+      </if>
+      <if test="sendobject != null">
+        sendObject = #{sendobject,jdbcType=VARCHAR},
+      </if>
+      <if test="sendtime != null">
+        sendTime = #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendcount != null">
+        sendCount = #{sendcount,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.m78.entity.Messagerecord">
+    update messageRecord
+    set messageId = #{messageid,jdbcType=BIGINT},
+      sendObject = #{sendobject,jdbcType=VARCHAR},
+      sendTime = #{sendtime,jdbcType=TIMESTAMP},
+      sendCount = #{sendcount,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

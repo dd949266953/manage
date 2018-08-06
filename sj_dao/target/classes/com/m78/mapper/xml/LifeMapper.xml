@@ -52,8 +52,8 @@
     insert into life (id, name, imgs, 
       time, adress, optionId
       )
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{imgs,jdbcType=VARCHAR}, 
-      #{time,jdbcType=TIMESTAMP}, #{adress,jdbcType=VARCHAR}, #{optionid,jdbcType=BIGINT}
+    values (default , #{name,jdbcType=VARCHAR}, #{imgs,jdbcType=VARCHAR},
+      now(), #{adress,jdbcType=VARCHAR}, #{optionid,jdbcType=BIGINT}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.m78.entity.Life">
