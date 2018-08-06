@@ -1,5 +1,6 @@
 package com.m78.service.dataCenter;
 
+import com.m78.entity.DictionaryItem;
 import com.m78.vo.CarportVo;
 
 import java.util.List;
@@ -7,17 +8,27 @@ import java.util.List;
 public interface CarportService {
     /**
      * 查询所有车位
-     * @param carportNo
-     * @param page
+     * @param
      * @param limit
      * @return
      */
-    List<CarportVo> getAllCarport(Long carportNo, int page, int limit);
+    List<CarportVo> getAllCarport(String carportName,int page, int limit);
 
     /**
      * 查询车位数量
-     * @param carportNo
      * @return
      */
-    Long getCountCarport(Long carportNo);
+    Long getCountCarport(String carportName);
+
+    /**
+     * 查询车位类型
+     * @return
+     */
+    List<DictionaryItem>getCarportType();
+
+    /**
+     * 查询车位状态
+     * @return
+     */
+    List<DictionaryItem>getCarportState();
 }

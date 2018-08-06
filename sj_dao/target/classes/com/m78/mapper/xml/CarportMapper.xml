@@ -19,17 +19,17 @@
       select
       <include refid="carportView"/>
       from carportView
-      <if test="carportNo!=''">
-      where carportNo like concat('%',#{carportNo},'%')
+      <if test="carportName!=''">
+        where carportNo like concat('%',#{carportName},'%')
       </if>
       limit #{start},#{limit}
   </select>
   <!--查询车位数量-->
   <select id="getCountCarport" resultType="java.lang.Long">
     select count(1) from carportView
-    <if test="carportNo!=''">
-      where carportNo like concat('%',#{carportNo},'%')
-    </if>s
+    <if test="carportName!=''">
+      where carportNo like concat('%',#{carportName},'%')
+    </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 

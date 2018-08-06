@@ -31,11 +31,18 @@
     INNER JOIN dicionary_type dt ON dt.id=di.`type_id`
     WHERE dt.id=10
   </select>
-    <!--查询房屋状态-->
+    <!--查询车房屋状态-->
     <select id="getHouseState" resultMap="BaseResultMap">
     SELECT di.id,content FROM dictionary_item di
     INNER JOIN dicionary_type dt ON dt.id=di.`type_id`
     WHERE dt.id=3
+    </select>
+    <!--查询车位类型-->
+    <select id="getCarportType" resultMap="BaseResultMap">
+        SELECT di.id,di.content FROM dictionary_item di
+INNER JOIN dicionary_type dt ON dt.id=di.type_id
+WHERE dt.id=2
+
     </select>
     <!--查询职业类型-->
     <select id="getDictionaryItem" resultMap="BaseResultMap" parameterType="java.lang.Long">

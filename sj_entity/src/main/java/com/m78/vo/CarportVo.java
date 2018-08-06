@@ -14,11 +14,11 @@ public class CarportVo implements Serializable {
     private Long charNum;
     private String remark;
 
-    public Long getcarportNo() {
+    public Long getCarportNo() {
         return carportNo;
     }
 
-    public void setcarportNo(Long carportNo) {
+    public void setCarportNo(Long carportNo) {
         this.carportNo = carportNo;
     }
 
@@ -46,11 +46,11 @@ public class CarportVo implements Serializable {
         this.carportTypeId = carportTypeId;
     }
 
-    public String getcarportType() {
+    public String getCarportType() {
         return carportType;
     }
 
-    public void setcarportType(String carportType) {
+    public void setCarportType(String carportType) {
         this.carportType = carportType;
     }
 

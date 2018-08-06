@@ -1,6 +1,7 @@
 package com.m78.service.dataCenter;
 
 import com.m78.entity.Tenement;
+import com.m78.vo.TenementVo;
 
 import java.util.List;
 
@@ -10,17 +11,43 @@ import java.util.List;
 public interface TenementService {
 
     /**
-     * 获取所有住户
+     * 获取所有住户 分页
      * @return
      */
-    List<Tenement> getAllTenement();
+    List<TenementVo> getAllTenement(String name,int page,int limit);
 
+
+    /**
+     * 根据主键id查询住户详情
+     * @param id
+     * @return
+     */
+    Tenement getTenementByPrimaryKeyId(Long id);
+
+    /**
+     * 根据主键id删除 住户
+     * @param id
+     * @return
+     */
+    int deleteByPrimaryKey(Long id);
+
+    /**
+     * 获取总记录数
+     * @return
+     */
+    Integer getTenementCount(String name);
     /**
      * 根据住户姓名获取住户详细住址
      * @return
      */
     List<Tenement> getDetailAddressByName(String tenementName,int page,int limit);
 
+    /**
+     * 更新
+     * @param tenement
+     * @return
+     */
+    Integer updateByPrimaryKeySelective(Tenement tenement);
     /**
      * 根据住户姓名查询住户总数
      * @return
