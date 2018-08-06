@@ -32,6 +32,14 @@
   <select id="getBuildingIdAndNameByCommunityId" resultType="com.m78.vo.BuildingVo">
     SELECT id,`name` FROM buildingView WHERE communityId=#{communityId}
   </select>
+  <!--查询单元总数根据楼宇id-->
+  <select id="getUnitTotalByBuildingId" resultType="java.lang.Long">
+      SELECT unitTotal FROM building WHERE id=#{buildingId}
+  </select>
+  <!--查询楼层总数根据楼宇id-->
+  <select id="getBuildingPliesById" resultType="java.lang.Long">
+    SELECT pliesTotal FROM building WHERE id=#{buildingId}
+  </select>
   <!--根据id修改楼宇-->
   <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.Building" >
     update building
@@ -67,7 +75,7 @@
     delete from building
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.m78.entity.Building" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+  <insert id="insert" parameterType="com.m78.entity.Building">
     insert into building (name, unitTotal,
       pliesTotal, buildingType, buildingStructure, 
       orientation)

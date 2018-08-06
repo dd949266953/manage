@@ -22,8 +22,6 @@ public class House implements Serializable {
 
     private Long state;
 
-    private Long equity;
-
     public Long getHouseid() {
         return houseid;
     }
@@ -96,13 +94,6 @@ public class House implements Serializable {
         this.state = state;
     }
 
-    public Long getEquity() {
-        return equity;
-    }
-
-    public void setEquity(Long equity) {
-        this.equity = equity;
-    }
 
     @Override
     public String toString() {
@@ -116,7 +107,6 @@ public class House implements Serializable {
                 ", publicarea=" + publicarea +
                 ", returntime=" + returntime +
                 ", state=" + state +
-                ", equity=" + equity +
                 '}';
     }
 }

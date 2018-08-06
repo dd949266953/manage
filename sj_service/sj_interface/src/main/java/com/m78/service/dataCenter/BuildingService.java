@@ -1,7 +1,6 @@
 package com.m78.service.dataCenter;
 
 import com.m78.entity.Building;
-import com.m78.entity.CommunityBuilding;
 import com.m78.entity.DictionaryItem;
 import com.m78.vo.BuildingVo;
 
@@ -22,12 +21,12 @@ public interface BuildingService {
      * @return
      */
     Long getBuildingCountByName(String buildingName);
-//
-//    /**
-//     * 查询楼宇id和名称根据小区id
-//     * @return
-//     */
-//    List<BuildingVo>getBuildingIdAndNameByCommunityId(Long communityId);
+
+    /**
+     * 查询楼宇id和名称根据小区id
+     * @return
+     */
+    List<BuildingVo>getBuildingIdAndNameByCommunityId(Long communityId);
 
     /**
      * 根据id修改楼宇
@@ -50,6 +49,17 @@ public interface BuildingService {
      * 查询楼宇类型
      */
     List<DictionaryItem> getBuildingType();
+
+    /**
+     * 查询单元总数根据楼宇id
+     */
+    Long getUnitTotalByBuildingId(Long buildingId);
+
+    /**
+     * 查询楼层总数根据楼宇id
+     * @return
+     */
+    Long getBuildingPliesById(Long buildingId);
 
 
 }

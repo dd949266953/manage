@@ -112,8 +112,7 @@
                         var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
                         var tr = obj.tr; //获得当前行 tr 的DOM对象
                         if (layEvent === 'edit') {
-                            var house = $.param(data);
-                            window.location = "updatehouse.html?" + house;
+                            window.location = "updateHouse.html?houseId="+data.houseId ;
                         }
                         if (layEvent === 'del') {
                             layer.confirm('确定要删除吗?', {

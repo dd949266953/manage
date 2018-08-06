@@ -19,10 +19,10 @@
     delete from house_buliding
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.m78.entity.HouseBuliding" >
-    insert into house_buliding (id, buildingId, houseId
+  <insert id="insert">
+    insert into house_buliding (buildingId, houseId
       )
-    values (#{id,jdbcType=BIGINT}, #{buildingid,jdbcType=BIGINT}, #{houseid,jdbcType=BIGINT}
+    values (#{buildingid,jdbcType=BIGINT}, #{houseid,jdbcType=BIGINT}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.m78.entity.HouseBuliding" >

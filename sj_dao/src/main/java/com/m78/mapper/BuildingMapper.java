@@ -45,4 +45,15 @@ public interface BuildingMapper {
      * @return
      */
     Long getBuildingCountByName(@Param("buildingName")String buildingName);
+
+    /**
+     * 查询单元总数根据楼宇id
+     */
+    Long getUnitTotalByBuildingId(@Param("buildingId")Long buildingId);
+
+    /**
+     * 查询楼层总数根据楼宇id
+     * @return
+     */
+    Long getBuildingPliesById(@Param("buildingId")Long buildingId);
 }
