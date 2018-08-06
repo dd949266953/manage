@@ -3,21 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>小区列表</title>
-    <link rel="stylesheet" th:href="@{/css/back_public.css}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>车位列表</title>
+    <link rel="stylesheet" th:href="@{/css/back_public.css}" />
     <link rel="stylesheet" th:href="@{/layui/css/layui.css}"/>
 </head>
 <body>
 <header>
-    小区列表
+    车位列表
 </header>
 <section>
     <div class="main">
-
-        <button class="button noborder" onclick="add()"><i class="layui-icon btn-icon">&#xe654;</i>添加小区</button>
-        <div style="float: right;" class="grabble">
-            <input id="communityName" type="text" placeholder="请输入小区名称" class="search-keyword"/>
+        <button class="button noborder" onclick="add()"><i class="layui-icon btn-icon">&#xe654;</i>添加车位</button>
+        <div style="float: right;" class="grabble" >
+            <input id="carportNo" type="text" placeholder="请输入车位号" class="search-keyword" />
             <button onclick="page()" class="noborder">
                 <i class="layui-icon search">&#xe615;</i>
             </button>
@@ -25,7 +24,7 @@
                 <i class="layui-icon search">&#xe607;</i>
             </button>
         </div>
-        <table id="communityList" lay-filter="test"></table>
+        <table id="carportList" lay-filter="test"></table>
         <script th:src="@{/layui/layui.js}" type="text/javascript"></script>
         <script th:src="@{/js/jquery-3.2.1.js}" type="text/javascript"></script>
         <script>
@@ -39,11 +38,11 @@
                     var table = layui.table;
                     //第一个实例
                     table.render({
-                        elem: "#communityList",
+                        elem: "#carportList",
                         loading: true,
-                        url: '/Community/communityData',
+                        url: '/Carport/getAllCarport',
                         where: {
-                            communityName: $("#communityName").val()
+                            carportNo: $("#carportNo").val()
                         },
                         page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
                             layout: ['limit:10', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
@@ -57,15 +56,14 @@
                         },
                         cols: [
                             [
-                                { field: 'id', align: 'center', title: '小区编号',},
-                                { field: "name", title: '小区名称'},
-                                { field: "address", title: '所在地区'},
-                                { field: "detailaddress", title: '详细地址'},
-                                { field: "servicetel", title: '服务热线'},
-                                { field: "leader", title: '负责人'},
-                                { field: "leaderphone", title: '负责电话'},
-                                { field: "logo", title: '小区Logo'},
-                                { field: "backgroundimage", title: '背景图片'},
+                                { field:'zizeng', align: 'center', title: '车位编号', type:'numbers'},
+                                { field:'communityName', align: 'center', title: '所属小区' },
+                                { field:'carportNo', align: 'center', title: '车位号'},
+                                { field:'carportType', align: 'center', title: '车位类型'},
+                                { field:'carportState', align: 'center', title: '车位状态'},
+                                { field:'area', align: 'center', title: '车位面积'},
+                                { field:'charNum', align: 'center', title: '收费标准个数'},
+                                { field:'remark', align: 'center', title: '备注'},
                                 { field: "right", title: '编辑', align: 'center', toolbar: "#bar"}
                             ]
                         ],
@@ -76,9 +74,9 @@
                         var data = obj.data; //获得当前行数据
                         var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
                         var tr = obj.tr; //获得当前行 tr 的DOM对象
-                        if (layEvent === 'edit') {
-                            var community = $.param(data);
-                            window.location = "updateCommunity.html?" + community;
+                        if (layEvent === 'edit'){
+                            var carport =$.param(data);
+                            window.location="updatecarport.html?"+carport;
                         }
                         if (layEvent === 'del') {
                             layer.confirm('确定要删除吗?', {
@@ -87,7 +85,7 @@
                                 shade: '0'
                             }, function (index) {
                                 $.ajax({
-                                    url: 'deleteCommunity',
+                                    url: 'deletecarport',
                                     type: 'get',
                                     dataType: 'json',
                                     data: {
@@ -112,15 +110,13 @@
                     });
                 });
             }
-
             //搜索
             function search() {
                 page();
             }
-
-            //添加小区
+            //添加车位
             function add() {
-                window.location = "addCommunity.html";
+                window.location = "addcarport.html";
             }
         </script>
         <script type="text/html" id="bar">

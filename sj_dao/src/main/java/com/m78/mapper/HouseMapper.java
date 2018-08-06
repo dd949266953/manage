@@ -7,6 +7,11 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface HouseMapper {
+    /**
+     * 根据主键删除
+     * @param houseid
+     * @return
+     */
     int deleteByPrimaryKey(Long houseid);
 
     int insert(House record);
@@ -24,6 +29,13 @@ public interface HouseMapper {
      * @return
      */
     List<HouseVo>getAllHouse(@Param("houseName")String houseName,@Param("start") int start,@Param("limit") int limit);
+
+    /**
+     * 查询房屋总数根据房号
+     * @param houseNo
+     * @return
+     */
+    Long getHouseCountByName(Long houseNo);
 
 
 

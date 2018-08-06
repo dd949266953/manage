@@ -2,7 +2,6 @@ package com.m78.vo;
 
 import java.io.Serializable;
 
-
 public class BuildingVo implements Serializable {
     private Long id;
 

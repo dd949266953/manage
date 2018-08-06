@@ -57,14 +57,14 @@ public class BuildingServiceImpl implements BuildingService {
         return buildingMapper.updateByPrimaryKeySelective(record);
     }
 
-//    /**
-//     * 查询楼宇id和名称根据小区名称
-//     * @return
-//     */
-//    @Override
-//    public List<BuildingVo> getBuildingIdAndNameByCommunityId(Long communityId) {
-//        return buildingMapper.getBuildingIdAndNameByCommunityId(communityId);
-//    }
+    /**
+     * 查询楼宇id和名称根据小区名称
+     * @return
+     */
+    @Override
+    public List<BuildingVo> getBuildingIdAndNameByCommunityId(Long communityId) {
+        return buildingMapper.getBuildingIdAndNameByCommunityId(communityId);
+    }
 
     /**
      * 根据id删除
@@ -114,5 +114,21 @@ public class BuildingServiceImpl implements BuildingService {
     @Override
     public List<DictionaryItem> getBuildingType() {
         return dictionaryItemMapper.getBuildingType();
+    }
+
+    /**
+     * 查询单元总数根据楼宇id
+     */
+    @Override
+    public Long getUnitTotalByBuildingId(Long buildingId) {
+        return buildingMapper.getUnitTotalByBuildingId(buildingId);
+    }
+    /**
+     * 查询楼层总数根据楼宇id
+     * @return
+     */
+    @Override
+    public Long getBuildingPliesById(Long buildingId) {
+        return buildingMapper.getBuildingPliesById(buildingId);
     }
 }
