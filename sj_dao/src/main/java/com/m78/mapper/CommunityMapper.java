@@ -48,5 +48,5 @@ public interface CommunityMapper {
     /**
      * 查询id,name,住址根据name 带分页
      */
-    List<Community> getIdNameAddressByName(@Param("start") int start,@Param("limit") int limit,@Param("name")String name);
+    List<Community> getIdNameAddressByName(@Param("start") int start,@Param("limit") int limit,@Param("communityName")String communityName);
 }

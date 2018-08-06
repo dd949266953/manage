@@ -34,7 +34,7 @@ public class TenementController {
      * @return
      */
     @RequestMapping(value = {"addTenement.html","updateTenement.html"})
-    public Object updateTenementView(@RequestParam(value = "tenementId",required = false)String tenementId){
+    public Object updateTenementView(@RequestParam(value = "tenementId",required = false)Long tenementId){
         ModelAndView mv=new ModelAndView();
         //小区列表
         System.out.println(tenementId);
@@ -44,9 +44,8 @@ public class TenementController {
             //添加
 
         }else {
-
             //修改
-            mv.addObject("tenement",tenementService.getTenementByPrimaryKeyId(Long.valueOf(tenementId)));
+            mv.addObject("tenement",tenementService.getTenementByPrimaryKeyId(tenementId));
         }
         mv.setViewName("dataCenter/tenement/addTenement");
         return mv;

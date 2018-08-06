@@ -73,11 +73,13 @@
   </update>
   <!--查询id,name,住址根据name 带分页-->
   <select id="getIdNameAddressByName" resultType="com.m78.entity.Community">
-     SELECT id,`name`,address FROM community
-     <if test="name=!''">
-       WHERE `name` LIKE concat('%',#{name},'%')
-     </if>
-      LIMIT #{start},#{limit}
+    select
+    id,`name`,address
+    from community
+    <if test="communityName!=''">
+      where `name` LIKE CONCAT ('%',#{communityName },'%')
+    </if>
+    limit #{start},#{limit}
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 

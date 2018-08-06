@@ -24,7 +24,7 @@
 
 <body>
 <header>
-    <header th:text="${tenementId}==null?'添加住户':'修改住户'"></header>
+    <header th:text="${tenementId}==null||${tenementId}==''?'添加住户':'修改住户'"></header>
 </header>
 <section>
     <div class="main">
