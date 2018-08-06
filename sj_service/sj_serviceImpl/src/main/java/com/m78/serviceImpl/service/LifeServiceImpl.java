@@ -32,4 +32,9 @@ public class LifeServiceImpl implements LifeService {
     public int deleteLifeById(Long lifeId) {
         return lifeMapper.deleteByPrimaryKey(lifeId);
     }
+
+    @Override
+    public int addLife(Life life) {
+        return  lifeMapper.insert(life);
+    }
 }

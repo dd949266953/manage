@@ -13,4 +13,10 @@ public interface LifeOptionService {
      * @return
      */
     List<LifeOption> getAllOption();
+
+    /**
+     * 添加标签
+     * @return
+     */
+    int addLifeOption(String name);
 }

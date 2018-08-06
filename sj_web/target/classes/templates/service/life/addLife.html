@@ -41,7 +41,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">地点</label>
         <div class="layui-input-block">
-            <input type="text" id="adress" name="noticename" lay-verify="required" autocomplete="off"
+            <input type="text" id="adress" name="adress" lay-verify="required" autocomplete="off"
                    placeholder="请输入位置" class="layui-input"/>
         </div>
     </div>
@@ -65,6 +65,7 @@
         <div class="layui-input-block">
 
             <select class="input" name="type" id="lifeOption">
+
             </select>
             <a onclick="addType()" style="color:rgb(46,204,113);margin-top:20px;display: block" href="javascript:(0)">添加导航分类</a>
         </div>
@@ -82,28 +83,20 @@
 <script th:src="@{/js/jquery-3.2.1.js}"></script>
 <script th:src="@{/layui/layui.js}"></script>
 <script>
-    var conten = '';
     var img = '';
     layui.use('form', function () {
-        var level = 0;
         var form = layui.form;
         form.on('submit(demo1)', function (data) {
-
-            if (index == '0') {
-                conten = $("#textContent").text();
-            } else if (index == "1") {
-                img = getImgName("imgs");
-            }
+            img = getImgName("imgs");
             $.ajax({
-                url: 'addNotice.json',
+                url: 'addLife.json',
                 type: 'get',
                 dataType: 'json',
                 data: {
-                    noticeName: $("#noticename").val(),
-                    type: $("#noticetype").val(),
-                    content: conten,
-                    level: level,
-                    img: img
+                    name: $("#lifeName").val(),
+                    optionid: $("#lifeOption").val(),
+                    adress: $("#adress").val(),
+                    imgs: img
                 },
                 success: function (data) {
                     if (data == '1') {
@@ -160,16 +153,16 @@
     });
 
     function getType() {
-        $("#noticetype option").remove();
+        $("#lifeOption option").remove();
         $.ajax({
             url: 'getAllOption.json',
             dataType: 'json',
             type: 'post',
             success: function (data) {
                 $.each(data, function (i, val) {
-                    $("#noticetype").append(
+                    $("#lifeOption").append(
                         "<option name='type'  value=" + val.id + ">"
-                        + val.typename + "</option>")
+                        + val.name + "</option>")
                 })
                 layui.form.render('select');
             }
@@ -182,7 +175,7 @@
 
     function addType() {
         layer.open({
-            title: '添加公告类型',
+            title: '添加导航类型',
             shade: 0,
             offset: '150px'
             , content: '<input class="layui-input"   id="type"  type="text" placeholder="请输入类型名称" />',
@@ -192,11 +185,11 @@
                     return;
                 }
                 $.ajax({
-                    url: '../noticeType/addNoticeType.json',
+                    url: 'addLifeOption.json',
                     dataType: 'text',
                     type: 'post',
                     data: {
-                        typeName: $("#type").val()
+                        name: $("#type").val()
                     },
                     success: function (data) {
                         if (data === '1') {

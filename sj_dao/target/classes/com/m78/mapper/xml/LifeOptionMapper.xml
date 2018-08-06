@@ -8,6 +8,9 @@
     <select id="getAllOption" resultMap="BaseResultMap">
         SELECT id,`name` FROM life_option
     </select>
+    <insert id="addLifeOption" parameterType="java.lang.String">
+      INSERT INTO life_option VALUES(DEFAULT,#{name})
+    </insert>
   <sql id="Base_Column_List">
     id, name
   </sql>
