@@ -16,7 +16,7 @@
     <div class="main">
         <button class="button noborder" onclick="add()"><i class="layui-icon btn-icon">&#xe654;</i>添加车位</button>
         <div style="float: right;" class="grabble" >
-            <input id="carportNo" type="text" placeholder="请输入车位号" class="search-keyword" />
+            <input id="carportName" type="text" placeholder="请输入车位号" class="search-keyword" />
             <button onclick="page()" class="noborder">
                 <i class="layui-icon search">&#xe615;</i>
             </button>
@@ -42,7 +42,7 @@
                         loading: true,
                         url: '/Carport/getAllCarport',
                         where: {
-                            carportNo: $("#carportNo").val()
+                            carportName: $("#carportName").val()
                         },
                         page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
                             layout: ['limit:10', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
@@ -56,9 +56,8 @@
                         },
                         cols: [
                             [
-                                { field:'zizeng', align: 'center', title: '车位编号', type:'numbers'},
-                                { field:'communityName', align: 'center', title: '所属小区' },
                                 { field:'carportNo', align: 'center', title: '车位号'},
+                                { field:'communityName', align: 'center', title: '所属小区' },
                                 { field:'carportType', align: 'center', title: '车位类型'},
                                 { field:'carportState', align: 'center', title: '车位状态'},
                                 { field:'area', align: 'center', title: '车位面积'},
@@ -116,7 +115,7 @@
             }
             //添加车位
             function add() {
-                window.location = "addcarport.html";
+                window.location = "addCarport.html";
             }
         </script>
         <script type="text/html" id="bar">

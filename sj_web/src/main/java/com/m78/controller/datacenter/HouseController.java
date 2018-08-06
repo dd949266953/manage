@@ -63,7 +63,7 @@ public class HouseController {
     @RequestMapping("/getAllHouse")
     @ResponseBody
     public Object getAllHouse(@RequestParam("houseName")String houseName,@RequestParam("page")int page,@RequestParam("limit")int limit) {
-        return DataTable.bindTableUtil(0, houseService.getHouseCountByName(Long.valueOf(houseName)), houseService.getAllHouse(houseName, page, limit));
+        return DataTable.bindTableUtil(0,houseService.getHouseCountByName(houseName), houseService.getAllHouse(houseName, page, limit));
     }
 
     /**

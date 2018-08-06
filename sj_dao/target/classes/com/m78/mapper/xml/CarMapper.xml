@@ -11,11 +11,21 @@
   <sql id="Base_Column_List" >
     carId, ownerName, ownerPhone, carNumber, carDisplacement
   </sql>
-  <!--查询全部车辆-->
-  <select id="getAllCar" resultMap="BaseResultMap">
-      select
-    <include refid="Base_Column_List" />
-      from car
+  <sql id="carView">
+    carId,communityId,communityName,carportNo,carNumber,tenementId,tenementName,phone
+  </sql>
+  <!--查询所有车辆-->
+  <select id="getAllCar" resultType="com.m78.vo.carVo">
+    SELECT
+    <include refid="carView"/>
+     FROM carView where 1=1
+    <if test="carNumber!=''">
+      and carNumber like concat('%',#{carNumber},'%')
+    </if>
+    <if test="tenementName!=''">
+      and tenementName like concat('%',#{tenementName},'%')
+    </if>
+    limit #{start},#{limit}
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 

@@ -31,8 +31,8 @@
   <!--查询楼宇总数根据名称-->
   <select id="getHouseCountByName" resultType="java.lang.Long" >
     select count(1)  from houseView where 1=1
-    <if test="houseNo!=''">
-      and `fool` LIKE CONCAT ('%',#{houseNo },'%')
+    <if test="houseName!=''">
+      and `houseNo` LIKE CONCAT ('%',#{houseName },'%')
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >

@@ -40,8 +40,8 @@ public interface HouseService {
 
     /**
      * 查询房屋总数根据房号
-     * @param houseNo
+     * @param houseName
      * @return
      */
-    Long getHouseCountByName(Long houseNo);
+    Long getHouseCountByName(String houseName);
 }

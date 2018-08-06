@@ -67,7 +67,7 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public Long getHouseCountByName(Long houseNo) {
-        return houseMapper.getHouseCountByName(houseNo);
+    public Long getHouseCountByName(String houseName) {
+        return houseMapper.getHouseCountByName(houseName);
     }
 }
