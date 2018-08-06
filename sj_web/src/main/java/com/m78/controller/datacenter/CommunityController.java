@@ -10,6 +10,7 @@ import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
 import java.util.List;
 
 /**
@@ -19,38 +20,42 @@ import java.util.List;
 @Controller
 public class CommunityController {
 
-    @Reference(version="1.0.0")
+    @Reference(version = "1.0.0")
     private CommunityService communityService;
 
     /**
      * 查询界面
+     *
      * @return
      */
 
     @RequestMapping("communityList.html")
-    public String CommunityList(){
+    public String CommunityList() {
         return "dataCenter/community/community";
     }
 
     /**
      * 添加/修改界面
+     *
      * @return
      */
-    @RequestMapping(value = {"updateCommunity.html","addCommunity.html"})
-    public Object updateCommunityView(Community community){
-        ModelAndView mv=new ModelAndView();
+    @RequestMapping(value = {"updateCommunity.html", "addCommunity.html"})
+    public Object updateCommunityView(Community community) {
+        ModelAndView mv = new ModelAndView();
         mv.setViewName("dataCenter/community/addCommunity");
-        mv.addObject("community",community);
+        mv.addObject("community", community);
         return mv;
     }
+
     /**
      * 查询界面数据
+     *
      * @return
      */
     @RequestMapping(value = "/communityData")
     @ResponseBody
-    public  Object  findAllCommunity(@RequestParam("page") int page, @RequestParam("limit") int limit,@RequestParam("communityName") String communityName){
-        return  DataTable.bindTableUtil(0,communityService.getCommunityCountByName("communityName"),communityService.findAll(page,limit,communityName));
+    public Object findAllCommunity(@RequestParam("page") int page, @RequestParam("limit") int limit, @RequestParam("communityName") String communityName) {
+        return DataTable.bindTableUtil(0, communityService.getCommunityCountByName("communityName"), communityService.findAll(page, limit, communityName));
     }
 
     /**
@@ -58,7 +63,8 @@ public class CommunityController {
      */
     @RequestMapping("addCommunity")
     @ResponseBody
-    public int insertCommunity(Community record){ return  communityService.insert(record);
+    public int insertCommunity(Community record) {
+        return communityService.insert(record);
     }
 
     /**
@@ -66,7 +72,7 @@ public class CommunityController {
      */
     @RequestMapping("updateCommunity/{id}")
     @ResponseBody
-    public Object updateCommunity(@PathVariable("id")Long id, Community community){
+    public Object updateCommunity(@PathVariable("id") Long id, Community community) {
         community.setId(id);
         return communityService.updateByPrimaryKeySelective(community);
     }
@@ -74,10 +80,10 @@ public class CommunityController {
     /**
      * 删除小区
      */
-    @RequestMapping(value = "deleteCommunity",method = RequestMethod.GET)
+    @RequestMapping(value = "deleteCommunity", method = RequestMethod.GET)
     @ResponseBody
-    public int delCommunity(long id){
-        return  communityService.deleteByPrimaryKey((long)id);
+    public int delCommunity(long id) {
+        return communityService.deleteByPrimaryKey((long) id);
     }
 
     /**
@@ -85,26 +91,27 @@ public class CommunityController {
      */
     @RequestMapping("getCommunityIdAndName")
     @ResponseBody
-    public List<Community> getCommunityIdAndName(){
+    public List<Community> getCommunityIdAndName() {
         return communityService.getCommunityIdAndName();
     }
 
     /**
      * 根据小区名称查询小区id
+     *
      * @return
      */
     @RequestMapping("getCommunityIdByName")
     @ResponseBody
-    public Long getCommunityIdByName(@RequestParam("communityName")String communityName){
+    public Long getCommunityIdByName(@RequestParam("communityName") String communityName) {
         return communityService.getCommunityIdByName(communityName);
     }
 
     @RequestMapping("upload")
     @ResponseBody
-    public Object uploadimg(@RequestParam("file") MultipartFile file){
+    public Object uploadimg(@RequestParam("file") MultipartFile file) {
         try {
             String fileName = file.getOriginalFilename();//获取file图片名称
-            String filePath= ResourceUtils.getURL("sj_web\\src\\main\\resources\\static\\img\\upload-img").getPath();
+            String filePath = ResourceUtils.getURL("sj_web\\src\\main\\resources\\static\\img\\upload-img").getPath();
             upload.upload(file, filePath, fileName);
         } catch (Exception e) {
             e.printStackTrace();
@@ -115,6 +122,7 @@ public class CommunityController {
 
     /**
      * 根据小区id查询小区
+     *
      * @param id
      * @return
      */
