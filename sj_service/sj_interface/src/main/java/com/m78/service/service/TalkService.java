@@ -23,4 +23,11 @@ public interface TalkService {
      * @return
      */
     Long getTalkCount(String name);
+
+    /**
+     * 删除工单
+     * @param talkId
+     * @return
+     */
+    int deleteTalkById(Long talkId);
 }
