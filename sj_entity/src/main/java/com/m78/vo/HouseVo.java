@@ -7,6 +7,8 @@ public class HouseVo implements Serializable {
 
     private String communityName;
 
+    private Long buildingId;
+
     private String buildingName;
 
     private Long unitNumber;
@@ -33,6 +35,14 @@ public class HouseVo implements Serializable {
 
     public void setCommunityName(String communityName) {
         this.communityName = communityName;
+    }
+
+    public Long getBuildingId() {
+        return buildingId;
+    }
+
+    public void setBuildingId(Long buildingId) {
+        this.buildingId = buildingId;
     }
 
     public String getBuildingName() {
@@ -88,6 +98,7 @@ public class HouseVo implements Serializable {
         return "HouseVo{" +
                 "houseId=" + houseId +
                 ", communityName='" + communityName + '\'' +
+                ", buildingId=" + buildingId +
                 ", buildingName='" + buildingName + '\'' +
                 ", unitNumber=" + unitNumber +
                 ", houseNo=" + houseNo +

@@ -18,7 +18,7 @@
     equity
   </sql>
   <sql id="Base_HouseView" >
-    houseId,communityName,buildingName,unitNumber,houseNo,charNum,`area`,houseType
+    houseId,communityName,buildingId,buildingName,unitNumber,houseNo,charNum,`area`,houseType
   </sql>
   <!-- 查询所有房屋 -->
   <select id="getAllHouse" resultType="com.m78.vo.HouseVo">

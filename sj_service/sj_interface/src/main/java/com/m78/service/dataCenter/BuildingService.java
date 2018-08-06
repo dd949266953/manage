@@ -22,12 +22,12 @@ public interface BuildingService {
      * @return
      */
     Long getBuildingCountByName(String buildingName);
-//
-//    /**
-//     * 查询楼宇id和名称根据小区id
-//     * @return
-//     */
-//    List<BuildingVo>getBuildingIdAndNameByCommunityId(Long communityId);
+
+    /**
+     * 查询楼宇id和名称根据小区id
+     * @return
+     */
+    List<BuildingVo>getBuildingIdAndNameByCommunityId(Long communityId);
 
     /**
      * 根据id修改楼宇
@@ -51,5 +51,14 @@ public interface BuildingService {
      */
     List<DictionaryItem> getBuildingType();
 
+    /**
+     * 查询单元总数根据楼宇id
+     */
+    Long getUnitTotalByBuildingId(Long buildingId);
 
+    /**
+     * 查询楼层总数根据楼宇id
+     * @return
+     */
+    Long getBuildingPliesById(Long buildingId);
 }

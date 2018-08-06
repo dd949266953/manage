@@ -42,7 +42,12 @@ public class HouseController {
         ModelAndView mv=new ModelAndView();
         //所有小区id和名称
         mv.addObject("communityList",communityService.getCommunityIdAndName());
-        return "dataCenter/house/addHouse";
+        //所有房屋类型
+        mv.addObject("houseType",houseService.getHouseType());
+        //所有房屋状态
+        mv.addObject("houseState",houseService.getHouseState());
+        mv.setViewName("dataCenter/house/addHouse");
+        return mv;
     }
 
     /**
@@ -56,5 +61,34 @@ public class HouseController {
     @ResponseBody
     public Object getAllHouse(@RequestParam("houseName")String houseName,@RequestParam("page")int page,@RequestParam("limit")int limit) {
         return DataTable.bindTableUtil(0, 100, houseService.getAllHouse(houseName, page, limit));
+    }
+
+    /**
+     * 查询楼宇id和名称根据小区id
+     * @param communityId
+     * @return
+     */
+    @RequestMapping("/getBuildingIdAndNameByCommunityId")
+    @ResponseBody
+    public Object getBuildingIdAndNameByCommunityId(@RequestParam("communityId") Long communityId){
+        return buildingService.getBuildingIdAndNameByCommunityId(communityId);
+    }
+
+    /**
+     * 查询单元总数根据楼宇id
+     */
+    @RequestMapping("/getUnitTotalByBuildingId")
+    @ResponseBody
+    public Long getUnitTotalByBuildingId(Long buildingId) {
+        return buildingService.getUnitTotalByBuildingId(buildingId);
+    }
+    /**
+     * 查询楼层总数根据楼宇id
+     * @return
+     */
+    @RequestMapping("/getBuildingPliesById")
+    @ResponseBody
+    public Long getBuildingPliesById(Long buildingId) {
+        return buildingService.getBuildingPliesById(buildingId);
     }
 }

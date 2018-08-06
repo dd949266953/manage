@@ -25,4 +25,16 @@ public interface DictionaryItemMapper {
      * 查询职业类型
      */
     List<DictionaryItem> getDictionaryItem();
+
+    /**
+     * 查询房屋类型
+     * @return
+     */
+    List<DictionaryItem>getHouseType();
+
+    /**
+     * 查询房屋状态
+     * @return
+     */
+    List<DictionaryItem>getHouseState();
 }
