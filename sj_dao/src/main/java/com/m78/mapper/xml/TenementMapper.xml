@@ -24,12 +24,41 @@
     id, name, phone, integrals, registrationDate, state, qqNumber, WxNumber, urgencyMan, 
     urgencyManPhone, sex, nation, remark, communityId, idCard, birthday, ownerNumber
   </sql>
+  <sql id="Base_TenementView">
+    tenementId,houseId ,tenementName , communityName , buildingName,state,phone,unitNumber
+
+  </sql>
+  <!-- zhe  shi  wo  xie   de    -->
   <!--获取所有住户-->
-  <select id="getAllTenement" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from tenement
+  <select id="getAllTenement" resultType="com.m78.vo.TenementVo">
+    SELECT
+    <include refid="Base_TenementView"/>
+    from
+     tenementView
+    <if test="name!=''">
+      where name like concat('%',#{name},'%')
+    </if>
+    limit #{start},#{limit}
   </select>
+
+  <select id="getTenementCount" resultType="java.lang.Integer">
+    select count(id)
+    from tenement
+    <if test="name!=''">
+      where name like concat('%',#{name},'%')
+    </if>
+  </select>
+
+  <select id="getTenementByPrimaryKeyId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from
+     tenement
+    where id = #{id}
+  </select>
+
+  <!--   end   -->
+
   <!--住户住址详情-->
   <resultMap id="tenementDetailAddress" type="com.m78.entity.Tenement">
     <id column="id" jdbcType="BIGINT" property="id" />

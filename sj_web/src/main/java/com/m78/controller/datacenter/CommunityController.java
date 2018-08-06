@@ -49,8 +49,11 @@ public class CommunityController {
 
     /**
      * 查询界面数据
+<<<<<<< HEAD
      *
      * @return
+=======
+>>>>>>> 0c9f2f942eaad6ea83ebbf2a6d970a806f70af79
      */
     @RequestMapping(value = "/communityData")
     @ResponseBody

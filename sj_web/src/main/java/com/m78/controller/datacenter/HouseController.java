@@ -65,7 +65,6 @@ public class HouseController {
     public Object getAllHouse(@RequestParam("houseName")String houseName,@RequestParam("page")int page,@RequestParam("limit")int limit) {
         return DataTable.bindTableUtil(0,houseService.getHouseCountByName(houseName), houseService.getAllHouse(houseName, page, limit));
     }
-
     /**
      * 查询楼宇id和名称根据小区id
      * @param communityId
@@ -76,7 +75,6 @@ public class HouseController {
     public Object getBuildingIdAndNameByCommunityId(@RequestParam("communityId") Long communityId){
         return buildingService.getBuildingIdAndNameByCommunityId(communityId);
     }
-
     /**
      * 查询单元总数根据楼宇id
      */
@@ -114,4 +112,5 @@ public class HouseController {
     public int deleteByPrimaryKey(Long houseId){
         return houseService.deleteByPrimaryKey(houseId);
     }
+
 }
