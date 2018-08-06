@@ -10,6 +10,39 @@
     <result column="type" property="type" jdbcType="BIGINT" />
     <result column="pictures" property="pictures" jdbcType="VARCHAR" />
   </resultMap>
+    <resultMap id="talkList" type="com.m78.entity.Talk" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="state" property="stateName"  />
+        <result column="time" property="time" jdbcType="TIMESTAMP" />
+        <result column="type" property="typeName" />
+        <result column="pictures" property="pictures" jdbcType="VARCHAR" />
+        <association property="tenement" javaType="com.m78.entity.Tenement">
+            <result property="id" column="tenementId"/>
+            <result property="name" column="name"/>
+        </association>
+    </resultMap>
+    <!--获取信息 -->
+    <select id="getAllTalk" resultMap="talkList">
+           SELECT ta.id,ta.title,te.id as tenementId,te.`name`,di.content as state,dc.content as type,ta.time FROM talk ta
+           INNER JOIN tenement te on te.id=ta.tentmentId
+           INNER JOIN dictionary_item di on di.id=ta.state
+           INNER JOIN dictionary_item dc on dc.id=ta.type
+           WHERE 1=1
+        <if test="name!=''">
+            AND ta.title LIKE CONCAT ('%',#{name},'%')  OR  te.`name`  LIKE CONCAT ('%',#{name},'%')
+        </if>
+        limit #{start},#{end}
+    </select>
+    <!--获取总数 -->
+    <select id="getAllTalkCount" resultType="java.lang.Long">
+          select  count(1) from  talk ta
+          INNER JOIN tenement te on te.id=ta.tentmentId
+        where 1=1
+        <if test="name!=''">
+            AND ta.title LIKE CONCAT ('%',#{name},'%')  OR  te.`name`  LIKE CONCAT ('%',#{name},'%')
+        </if>
+    </select>
   <sql id="Base_Column_List" >
     id, title, tentmentId, state, time, type, pictures
   </sql>

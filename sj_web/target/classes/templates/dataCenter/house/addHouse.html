@@ -20,8 +20,7 @@
 </head>
 
 <body>
-<header>
-    添加房屋
+<header th:text="${houseId==null}?'添加房屋':'修改房屋'">
 </header>
 <section>
     <div class="main">
@@ -60,7 +59,7 @@
                 <label class="layui-form-label row lable">
                     <span>*</span>房号 :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入房号"
+                    <input type="text" name="fool" lay-verify="title" autocomplete="off" placeholder="请输入房号"
                            class="layui-input input short-div">
                 </div>
             </div>
@@ -68,7 +67,7 @@
                 <label class="layui-form-label row lable">
                     <span>*</span>建筑面积 :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入建筑面积/平方米"
+                    <input type="text" name="area" lay-verify="title" autocomplete="off" placeholder="请输入建筑面积/平方米"
                            class="layui-input input short-div">
                 </div>
             </div>
@@ -76,7 +75,7 @@
                 <label class="layui-form-label row lable">
                     套内面积 :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入套内面积/平方米"
+                    <input type="text" name="inarea" lay-verify="title" autocomplete="off" placeholder="请输入套内面积/平方米"
                            class="layui-input input short-div">
                 </div>
             </div>
@@ -84,7 +83,7 @@
                 <label class="layui-form-label row lable">
                     公摊面积 :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入公摊面积/平方米"
+                    <input type="text" name="publicarea" lay-verify="title" autocomplete="off" placeholder="请输入公摊面积/平方米"
                            class="layui-input input short-div">
                 </div>
             </div>
@@ -92,7 +91,7 @@
                 <label class="layui-form-label row lable">
                     房屋类型 :</label>
                 <div class="layui-input-block row row-div">
-                    <select name="houseType">
+                    <select name="housetype">
                         <option th:each="house : ${houseType}" th:text="${house.content}" th:value="${house.id}"></option>
                     </select>
                 </div>
@@ -101,32 +100,32 @@
                 <label class="layui-form-label row lable">
                     交房时间 :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="date" id="date1" autocomplete="off" class="layui-input short-div">
+                    <input type="text" name="returntime" id="date1" autocomplete="off" class="layui-input short-div">
                 </div>
             </div>
             <div class="layui-form-item form-item">
                 <label class="layui-form-label row lable">
                     房屋状态 :</label>
                 <div class="layui-input-block row row-div">
-                    <select name="interest" lay-filter="aihao">
+                    <select name="state" lay-filter="aihao">
                         <option th:each="housestate:${houseState}" th:value="${housestate.id}" th:text="${housestate.content}"></option>
                     </select>
                 </div>
             </div>
-            <div class="buttondiv">
-                <div class="button-item"></div>
-                <div class="button-item">
-                    <button class="layui-btn layui-btn-normal layui-btn-radius  save">保存</button>
-                    <button class="layui-btn layui-btn-normal layui-btn-radius ">返回</button>
-                </div>
-            </div>
         </form>
+        <div class="buttondiv">
+            <div class="button-item"></div>
+            <div class="button-item">
+                <button class="layui-btn layui-btn-normal layui-btn-radius  save">保存</button>
+                <button class="layui-btn layui-btn-normal layui-btn-radius ">返回</button>
+            </div>
+        </div>
     </div>
 </section>
 <footer>
     Copyright 2013-2018 weixiaoqu.com 成都云联峰创科技有限公司旗下产品
 </footer>
-<script>
+<script th:inline="javascript">
     layui.use(['form','laydate'], function () {
         var form = layui.form;
         var laydate = layui.laydate;
@@ -134,8 +133,16 @@
         laydate.render({
             elem: '#date1'
         });
+
+        //修改时回显
+        $(function () {
+            var houseId=[[${houseId}]];
+            // $.post('修改的接口',houseId,function(){
+            // })
+        })
         var communityName = null;
         var buildingName = null;
+        var unitnumber=0;
         var unitName = null;
         //监听小区下拉框
         form.on('select(community)', function (data) {
@@ -159,7 +166,7 @@
             select.children().remove();
             $.post('getUnitTotalByBuildingId', {'buildingId': data.value}, function (unitTotal) {
                 for (var i = 1; i <= unitTotal; i++) {
-                    var option = '<option>' + i + '单元</option>';
+                    var option = '<option value="'+i+'">' + i + '单元</option>';
                     select.append(option);
                 }
                 form.render('select', 'unit');
@@ -170,7 +177,8 @@
         });
         //监听单元下拉框
         form.on('select(unit)', function (data) {
-            unitName = data.value;
+            unitnumber = data.value;
+            unitName=$(data.elem).find("option:selected").text();
             var address = communityName + "/" + buildingName + "/" + unitName;
             $("input[name='address']").val(address);
             $("#community dl").hide();
@@ -180,6 +188,33 @@
         form.on('select(pliesTotal)', function(data){
             $("#pliesTotal dl").hide();
         });
+        $(".save").click(function () {
+            var fool=$("input[name='fool']").val();
+            var area=$("input[name='area']").val();
+            var inarea=$("input[name='inarea']").val();
+            var publicarea=$("input[name='publicarea']").val();
+            var housetype=$("select[name='housetype'] option:selected").val();
+            var returntime=$("input[name='returntime']").val();
+            var state=$("select[name='state'] option:selected").val();
+            $.ajax({
+                url:'insertHouse',
+                data:{
+                    'buildingId':buildingId,
+                    'unitnumber':unitnumber,
+                    'fool':fool,
+                    'area':area,
+                    'inarea':inarea,
+                    'publicarea':publicarea,
+                    'housetype':housetype,
+                    'returntime':new Date(returntime),
+                    'state':state
+                },
+                traditional:true,
+                success:function (result) {
+                    console.log(result);
+                }
+            })
+        })
     })
     //下拉框开关
     var select_on_off = false;

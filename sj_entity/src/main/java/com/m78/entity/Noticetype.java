@@ -1,5 +1,7 @@
 package com.m78.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -7,7 +9,7 @@ public class Noticetype implements Serializable {
     private Long id;
 
     private String typename;
-
+    @JSONField(format="yyyy-MM-dd hh:mm:ss")
     private Date createtime;
 
     private Long count;

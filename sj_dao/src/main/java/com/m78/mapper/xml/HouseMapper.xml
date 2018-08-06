@@ -11,11 +11,9 @@
     <result column="publicArea" property="publicarea" jdbcType="DOUBLE" />
     <result column="returnTime" property="returntime" jdbcType="TIMESTAMP" />
     <result column="state" property="state" jdbcType="BIGINT" />
-    <result column="equity" property="equity" jdbcType="BIGINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    houseId, unitNumber, fool, area, houseType, inArea, publicArea, returnTime, state,
-    equity
+    houseId, unitNumber, fool, area, houseType, inArea, publicArea, returnTime, state
   </sql>
   <sql id="Base_HouseView" >
     houseId,communityName,buildingId,buildingName,unitNumber,houseNo,charNum,`area`,houseType
@@ -30,6 +28,13 @@
     </if>
     limit #{start},#{limit}
   </select>
+  <!--查询楼宇总数根据名称-->
+  <select id="getHouseCountByName" resultType="java.lang.Long" >
+    select count(1)  from houseView where 1=1
+    <if test="houseName!=''">
+      and `houseNo` LIKE CONCAT ('%',#{houseName },'%')
+    </if>
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select
     <include refid="Base_Column_List" />
@@ -43,14 +48,12 @@
   <insert id="insert" parameterType="com.m78.entity.House" >
     insert into house (houseId, unitNumber, fool,
       area, houseType, inArea,
-      publicArea, returnTime, state,
-      equity)
+      publicArea, returnTime, state)
     values (#{houseid,jdbcType=BIGINT}, #{unitnumber,jdbcType=BIGINT}, #{fool,jdbcType=BIGINT},
       #{area,jdbcType=DOUBLE}, #{housetype,jdbcType=BIGINT}, #{inarea,jdbcType=DOUBLE},
-      #{publicarea,jdbcType=DOUBLE}, #{returntime,jdbcType=TIMESTAMP}, #{state,jdbcType=BIGINT},
-      #{equity,jdbcType=BIGINT})
+      #{publicarea,jdbcType=DOUBLE}, #{returntime,jdbcType=TIMESTAMP}, #{state,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.m78.entity.House" >
+  <insert id="insertSelective" parameterType="com.m78.entity.House" useGeneratedKeys="true" keyProperty="houseid" keyColumn="houseId">
     insert into house
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="houseid != null" >
@@ -79,9 +82,6 @@
       </if>
       <if test="state != null" >
         state,
-      </if>
-      <if test="equity != null" >
-        equity,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -112,9 +112,6 @@
       <if test="state != null" >
         #{state,jdbcType=BIGINT},
       </if>
-      <if test="equity != null" >
-        #{equity,jdbcType=BIGINT},
-      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.House" >
@@ -144,9 +141,6 @@
       <if test="state != null" >
         state = #{state,jdbcType=BIGINT},
       </if>
-      <if test="equity != null" >
-        equity = #{equity,jdbcType=BIGINT},
-      </if>
     </set>
     where houseId = #{houseid,jdbcType=BIGINT}
   </update>
@@ -160,7 +154,6 @@
       publicArea = #{publicarea,jdbcType=DOUBLE},
       returnTime = #{returntime,jdbcType=TIMESTAMP},
       state = #{state,jdbcType=BIGINT},
-      equity = #{equity,jdbcType=BIGINT}
     where houseId = #{houseid,jdbcType=BIGINT}
   </update>
 </mapper>

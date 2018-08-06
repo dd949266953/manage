@@ -13,9 +13,9 @@
         <result column="count" property="count"/>
     </resultMap>
     <select id="getAllNoticeTypeByPage" resultMap="noticeTypeList">
-      SELECT nt.id,nt.typeName,nt.createTime,SUM(1) as count
+      SELECT nt.id,nt.typeName,nt.createTime,count(no.type) as count
       FROM noticetype nt
-      INNER JOIN notice no on no.type=nt.id
+      LEFT JOIN notice no on no.type=nt.id
       <if test="noticeTypeName!=''">
           WHERE nt.typeName LIKE CONCAT ('%',#{noticeTypeName},'%')
       </if>

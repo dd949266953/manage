@@ -1,19 +1,24 @@
 package com.m78.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Talk {
+public class Talk implements Serializable {
     private Long id;
 
     private String title;
 
     private Long tentmentid;
 
+    private  Tenement tenement;
+
     private Long state;
+    private  String stateName;
 
     private Date time;
 
     private Long type;
+    private  String typeName;
 
     private String pictures;
 
@@ -73,15 +78,43 @@ public class Talk {
         this.pictures = pictures == null ? null : pictures.trim();
     }
 
+    public Tenement getTenement() {
+        return tenement;
+    }
+
+    public void setTenement(Tenement tenement) {
+        this.tenement = tenement;
+    }
+
+
+    public String getStateName() {
+        return stateName;
+    }
+
+    public void setStateName(String stateName) {
+        this.stateName = stateName;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
+
     @Override
     public String toString() {
         return "Talk{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", tentmentid=" + tentmentid +
+                ", tenement=" + tenement +
                 ", state=" + state +
+                ", stateName='" + stateName + '\'' +
                 ", time=" + time +
                 ", type=" + type +
+                ", typeName='" + typeName + '\'' +
                 ", pictures='" + pictures + '\'' +
                 '}';
     }

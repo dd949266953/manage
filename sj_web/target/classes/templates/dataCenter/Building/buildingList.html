@@ -14,7 +14,6 @@
 </header>
 <section>
 	<div class="main">
-
 		<button class="button noborder" onclick="add()"><i class="layui-icon btn-icon">&#xe654;</i>添加楼宇</button>
 		<div style="float: right;" class="grabble" >
 			<input id="buildingName" type="text" placeholder="请输入楼宇名称" class="search-keyword" />
@@ -57,52 +56,15 @@
                         },
                         cols: [
                             [
-                                {
-                                    field:'id',
-                                    align: 'center',
-                                    title: '序号',
-                                    sort : true
-                                },
-                                {
-                                    field:'communityName',
-                                    align: 'center',
-                                    title: '所属小区',
-                                },
-                                {
-                                    field: "name",
-                                    align: 'center',
-                                    title: '楼宇名称'
-                                },
-                                {
-                                    field: "unittotal",
-                                    align: 'center',
-                                    title: '单元数'
-                                },
-                                {
-                                    field: "pliestotal",
-                                    align: 'center',
-                                    title: '楼宇层'
-                                },
-                                {
-                                    field: "buildingtype",
-                                    align: 'center',
-                                    title: '楼宇类型'
-                                },
-                                {
-                                    field: "buildingstructure",
-                                    align: 'center',
-                                    title: '楼宇结构'
-                                },
-                                {
-                                    field: "orientation",
-                                    align: 'center',
-                                    title: '楼宇朝向'
-                                },
-                                {
-                                    field: "right",
-                                    align: 'center',
-                                    toolbar: "#bar"
-                                }
+                                { field:'id', align: 'center', title: '序号', sort : true},
+                                { field:'communityName', align: 'center', title: '所属小区',},
+                                { field: "name", align: 'center', title: '楼宇名称'},
+                                { field: "unittotal", align: 'center', title: '单元数'},
+                                { field: "pliestotal", align: 'center', title: '楼宇层'},
+                                { field: "buildingtype", align: 'center', title: '楼宇类型'},
+                                { field: "buildingstructure", align: 'center', title: '楼宇结构'},
+                                { field: "orientation", align: 'center', title: '楼宇朝向'},
+                                { field: "right", align: 'center', toolbar: "#bar"}
                             ]
                         ],
                         page: true
