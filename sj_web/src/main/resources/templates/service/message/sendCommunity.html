@@ -19,7 +19,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">筛选信息</label>
         <div class="layui-input-block">
-            <input type="text" id="tentmentName" name="tentmentName" lay-verify="title" autocomplete="off"
+            <input type="text" id="communityName" name="communityName" lay-verify="title" autocomplete="off"
                    placeholder="请输入小区名" class="layui-input"/>
 
         </div>
@@ -34,7 +34,7 @@
     </div>
     <div class="layui-form-item" id="sure" style="position: relative;top: 50px;">
         <div class="layui-input-block">
-            <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+            <button class="layui-btn" lay-submit="" lay-filter="demo1">立即发送</button>
             <button id="reset" class="layui-btn layui-btn-primary">重置</button>
         </div>
     </div>
@@ -53,23 +53,22 @@
                 elem: '#table',
                 loading: true,
                 limit: 8,
-                url: '../Tenement/getDetailAddressByName.json',
+                url: '../Community/getIdNameAddressByName',
                 where: {
-                    name: $("#tentmentName").val()
+                    name: $("#communityName").val()
                 },
                 cols: [
                     [
                         {checkbox: true}, {
+                        field: 'name',
                         align: 'center',
                         title: '小区',
                         unresize: 'true'
                     }, {
+                        field: 'address',
                         align: 'center',
                         title: '楼宇',
-                        unresize: 'true',
-                        templet: function (d) {
-                            return d.building.name
-                        }
+                        unresize: 'true'
                     }
                     ]
                 ],

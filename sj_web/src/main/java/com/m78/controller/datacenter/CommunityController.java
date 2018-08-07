@@ -129,7 +129,7 @@ public class CommunityController {
 
     @RequestMapping("getIdNameAddressByName")
     @ResponseBody
-    public List<Community> getIdNameAddressByName(int page, int limit, String name) {
-        return communityService.getIdNameAddressByName(page,limit,name);
+    public Object getIdNameAddressByName(int page, int limit, String name) {
+        return DataTable.bindTableUtil(0,communityService.getCommunityCountByName(name),communityService.getIdNameAddressByName(page,limit,name));
     }
 }
