@@ -36,7 +36,6 @@
             function page() {
                 layui.use('table', function () {
                     var table = layui.table;
-                    //第一个实例
                     table.render({
                         elem: "#TenementList",
                         loading: true,
@@ -74,6 +73,9 @@
                         var data = obj.data; //获得当前行数据
                         var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
                         var tr = obj.tr; //获得当前行 tr 的DOM对象
+                        if (layEvent === 'detail'){
+                            window.location="detailTenement.html?tenementId=" + data.tenementId;
+                        }
                         if (layEvent === 'edit') {
                             window.location = "updateTenement.html?tenementId=" + data.tenementId;
                         }
@@ -108,18 +110,17 @@
                     });
                 });
             }
-
             //搜索
             function search() {
                 page();
             }
-
             //添加住户
             function add() {
                 window.location = "addTenement.html";
             }
         </script>
         <script type="text/html" id="bar">
+            <a class="layui-btn layui-btn-xs" lay-event="detail">详情</a>
             <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
             <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
         </script>

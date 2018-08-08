@@ -67,4 +67,16 @@ public interface TenementMapper {
      * @return
      */
     Long getHouseIdByTenementPhone(@Param("phone")String phone);
+
+    /**
+     * 根据住户手机号查询房屋主键
+     * @return
+     */
+    Tenement getDetailTenementById(@Param("tenementId")Long tenementId);
+
+    /**
+     * 查询小区下的所有手机号根据小区id
+     * @return
+     */
+    List<String> getPhoneByCommunityId(@Param("communityId")Long communityId);
 }

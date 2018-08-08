@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 
 @RequestMapping("Tenement")
 @Controller
@@ -24,10 +26,27 @@ public class TenementController {
      * @return
      */
     @RequestMapping("/tenementList.html")
-    public String houseList(){
+    public String tenementList(){
         return "dataCenter/tenement/tenementList";
     }
 
+    /**
+     * 住户详情
+     * @return
+     */
+    @RequestMapping("/detailTenement.html")
+    public String detailTenement(Long tenementId){
+        System.out.println(tenementId);
+        return "dataCenter/tenement/detailTenement";
+    }
+
+    @RequestMapping("/getDetailTenementById")
+    @ResponseBody
+    public Object getDetailTenementById(Long tenementId) {
+         Tenement t=tenementService.getDetailTenementById(Long.valueOf(tenementId));
+            System.out.println(t.toString());
+            return  t;
+    }
 
     /**
      * 添加/修改界面
@@ -120,5 +139,18 @@ public class TenementController {
     @ResponseBody
     public Object getHouseIdByTenementPhone(String phone) {
         return tenementService.getHouseIdByTenementPhone(phone);
+    }
+
+    /**
+     * 查询小区下的所有手机号根据小区id
+     * @return
+     */
+    @RequestMapping("/getPhoneByCommunityId")
+    @ResponseBody
+    public Object getPhoneByCommunityId(Long communityId) {
+
+         List<String> list=tenementService.getPhoneByCommunityId(communityId);
+        System.out.println(list.size());
+        return list;
     }
 }

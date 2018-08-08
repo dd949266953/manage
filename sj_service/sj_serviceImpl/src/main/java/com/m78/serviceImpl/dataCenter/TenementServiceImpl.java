@@ -87,4 +87,18 @@ public class TenementServiceImpl implements TenementService {
     public Long getHouseIdByTenementPhone(String phone) {
         return tenementMapper.getHouseIdByTenementPhone(phone);
     }
+
+    @Override
+    public Tenement getDetailTenementById(Long tenementId) {
+        return tenementMapper.getDetailTenementById(tenementId);
+    }
+
+    /**
+     * 查询小区下的所有手机号根据小区id
+     * @return
+     */
+    @Override
+    public List<String> getPhoneByCommunityId(Long communityId) {
+        return tenementMapper.getPhoneByCommunityId(communityId);
+    }
 }
