@@ -24,7 +24,7 @@
 
 <body>
 <header>
-    <header th:text="${tenementId}==null||${tenementId}==''?'添加住户':'修改住户'"></header>
+    <header th:text="${tenementId}==null?'添加住户':'修改住户'"></header>
 </header>
 <section>
     <div class="main">
@@ -75,7 +75,7 @@
                 <label class="layui-form-label row lable">
                     <span>*</span>联系方式 :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="phone" lay-verify="title" autocomplete="off" placeholder="请输入住户联系方式"  th:value="*{phone}"
+                    <input type="text" name="phone" lay-verify="title" autocomplete="off" th:value="*{phone}" placeholder="请输入住户联系方式"
                            class="layui-input input short-div">
                 </div>
             </div>
@@ -83,7 +83,7 @@
                 <label class="layui-form-label row lable">
                     <span>*</span>身份 :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="state" lay-verify="title" autocomplete="off"th:value="*{state}" placeholder="请输入身份"
+                    <input type="text" name="state" lay-verify="title" autocomplete="off" th:value="*{state}" placeholder="请输入身份"
                            class="layui-input input short-div">
                 </div>
             </div>
@@ -91,21 +91,21 @@
                 <label class="layui-form-label row lable">
                     QQ :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="qqnumber" lay-verify="title" autocomplete="off"  th:value="*{qqnumber}" placeholder="请输入住户QQ" class="layui-input input short-div"/>
+                    <input type="text" name="qqnumber" lay-verify="title" autocomplete="off" th:value="*{qqnumber}" placeholder="请输入住户QQ" class="layui-input input short-div"/>
                 </div>
             </div>
             <div class="layui-form-item form-item">
                 <label class="layui-form-label row lable">
                     <span>*</span>微信号 :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="wxnumber" lay-verify="title" autocomplete="off"  th:value="*{qqnumber}" placeholder="请输入微信号"
+                    <input type="text" name="wxnumber" lay-verify="title" autocomplete="off" th:value="*{wxnumber}"  placeholder="请输入微信号"
                            class="layui-input input short-div"/>
                 </div>
             </div>
             <div class="layui-form-item form-item">
                 <label class="layui-form-label row lable">
                     <span>*</span>性别 :</label>
-                <div class="layui-input-block row row-div layui-form" id="sex"  th:value="*{sex}" lay-filter="pliesTotal">
+                <div class="layui-input-block row row-div layui-form" id="sex"  lay-filter="pliesTotal">
                     <select name="sex" lay-filter="pliesTotal">
                         <option value="男">男</option>
                         <option value="女">女</option>
@@ -116,7 +116,7 @@
                 <label class="layui-form-label row lable">
                     <span>*</span>民族 :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="nation" lay-verify="title" autocomplete="off"  th:value="*{nation}" placeholder="请输入住户的民族"
+                    <input type="text" name="nation" lay-verify="title" autocomplete="off" th:value="*{nation}"  placeholder="请输入住户的民族"
                            class="layui-input input short-div">
                 </div>
             </div>
@@ -125,7 +125,7 @@
                 <label class="layui-form-label row lable">
                     <span>*</span>身份证号 :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="idcard" lay-verify="title" autocomplete="off"  th:value="*{idcard}" placeholder="请输入身份证号"
+                    <input type="text" name="idcard" lay-verify="title" autocomplete="off" th:value="*{idcard}" placeholder="请输入身份证号"
                            class="layui-input input short-div">
                 </div>
             </div>
@@ -133,14 +133,14 @@
                 <label class="layui-form-label row lable">
                     出生日期 :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="registrationdate" id="date1" lay-verify="title" autocomplete="off" placeholder="请输入住户的注册时间" class="layui-input short-div">
+                    <input type="text" name="registrationdate" id="date1" lay-verify="title" th:value="*{birthday}" autocomplete="off" placeholder="请输入住户的出生日期" class="layui-input short-div">
                 </div>
             </div>
             <div class="layui-form-item form-item">
                 <label class="layui-form-label row lable">
                     <span>*</span>卡号 :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="ownernumber" lay-verify="title" autocomplete="off"  th:value="*{idcard}" placeholder="请输入业主卡号"
+                    <input type="text" name="ownernumber" lay-verify="title" autocomplete="off" th:value="*{ownernumber}"  placeholder="请输入业主卡号"
                            class="layui-input input short-div">
                 </div>
             </div>
@@ -149,7 +149,7 @@
                 <label class="layui-form-label row lable">
                     <span>*</span>紧急联系人 :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="urgencyman" lay-verify="title" autocomplete="off"  th:value="*{urgencyman}" placeholder="请输入紧急联系人"
+                    <input type="text" name="urgencyman" lay-verify="title" autocomplete="off" th:value="*{urgencyman}"   placeholder="请输入紧急联系人"
                            class="layui-input input short-div">
                 </div>
             </div>
@@ -157,7 +157,7 @@
                 <label class="layui-form-label row lable">
                     <span>*</span>紧急联系人方式 :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="urgencymanphone" lay-verify="title" autocomplete="off"  th:value="*{urgencymanphone}" placeholder="请输入紧急联系人方式"
+                    <input type="text" name="urgencymanphone" lay-verify="title" autocomplete="off" th:value="*{urgencymanphone}"   placeholder="请输入紧急联系人方式"
                            class="layui-input input short-div">
                 </div>
             </div>
@@ -165,7 +165,7 @@
                 <label class="layui-form-label row lable">
                     备注 :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="remark" lay-verify="title" autocomplete="off"  th:value="*{remark}" placeholder="请输入备注"
+                    <input type="text" name="remark" lay-verify="title" autocomplete="off" th:value="*{remark}"   placeholder="请输入备注"
                            class="layui-input input short-div">
                 </div>
             </div>

@@ -34,7 +34,7 @@ public class TenementController {
      * @return
      */
     @RequestMapping(value = {"addTenement.html","updateTenement.html"})
-    public Object updateTenementView(@RequestParam(value = "tenementId",required = false)Long tenementId){
+    public Object updateTenementView(@RequestParam(value = "tenementId",required = false)Long tenementId,Tenement tenement){
         ModelAndView mv=new ModelAndView();
         //小区列表
         System.out.println(tenementId);
@@ -42,7 +42,7 @@ public class TenementController {
         mv.addObject("communityList",communityService.getCommunityIdAndName());
         if (tenementId==null){
             //添加
-
+            mv.addObject("tenement",tenement);
         }else {
             //修改
             mv.addObject("tenement",tenementService.getTenementByPrimaryKeyId(tenementId));
@@ -81,7 +81,6 @@ public class TenementController {
     public Object getAllTenement(@RequestParam("name")String name,@RequestParam("page")int page,@RequestParam("limit")int limit){
         return DataTable.bindTableUtil(0, tenementService.getTenementCount(name),tenementService.getAllTenement(name,page,limit));
     }
-
     /**
      * 根据住户姓名获取住户详细住址
      * @return
