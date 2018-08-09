@@ -131,5 +131,13 @@ public class TenementServiceImpl implements TenementService {
     public List<TenementVo> getDetailCarByTenementId(Long tenementId) {
         return tenementMapper.getDetailCarByTenementId(tenementId);
     }
-
+    /**
+     * 查询相关住户信息
+     * @param tenementId
+     * @return
+     */
+    @Override
+    public List<TenementVo> getDetailRelationByTenementId(Long tenementId) {
+        return tenementMapper.getDetailRelationByTenementId(tenementId);
+    }
 }

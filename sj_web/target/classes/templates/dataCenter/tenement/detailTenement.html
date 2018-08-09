@@ -68,9 +68,9 @@
         <button class="button noborder">相关车辆</button>
         <table style="padding: 0 20px" id="carList" lay-filter="test"></table>
     </div>
-    <div class="main" th:remove="${carList.size()==0}? all : all" th:each="car : ${carList}">
+    <div class="main" th:remove="${relationList.size()==0}? all : none">
         <button class="button noborder">相关住户</button>
-        <table style="padding: 0 20px" id="carLit" lay-filter="test"></table>
+        <table style="padding: 0 20px" id="relationList" lay-filter="test"></table>
     </div>
 </section>
 <footer>
@@ -83,8 +83,6 @@
         var table = layui.table;
         //大于0 则说明该用户有房子
         if($("#houseList").length>0){
-            console.log([[${houseList}]]);
-
                 //第一个实例
                 table.render({
                     elem: "#houseList",
@@ -95,7 +93,11 @@
                             {field: 'buildingName', align: 'center', title: '楼宇'},
                             {field: 'houseType', align: 'center', title: '房屋类型'},
                             {field: 'relation', align: 'center', title: '身份'},
-                            {field: 'returnTime', align: 'center', title: '交房时间'},
+                            {field: 'returnTime', align: 'center', title: '交房时间',templet: function(house){
+                                    var d = new Date(house.returnTime);
+                                    var time=d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+                                    return time;
+                                }},
                         ]
                     ],
                     data:[[${houseList}]]
@@ -103,23 +105,7 @@
 
         }
         //大于0 则说明该用户有车位
-        //             private Long tenementId;
-        // private Long communityId;
-        // private String communityName;
-        // private Long buildingId;
-        // private String buildingName;
-        // private Long houseId;
-        // private Long unitNumber;
-        // private Long fool;
-        // private String houseType;
-        // private String tenementName;
-        // private String phone;
-        // private String relation;
-        // private String carNo;
-        // private String carportNo;
-        // private Date returnTime;
         if($("#carportList").length>0){
-            var carportList=[[${carportList}]];
             table.render({
                 elem: "#carportList",
                 cols: [
@@ -128,16 +114,45 @@
                         {field: 'communityName', align: 'center', title: '小区'},
                         {field: 'tenementName', align: 'center', title: '车主姓名'},
                         {field: 'phone', align: 'center', title: '车主电话'},
-                        {field: 'carNumber', align: 'center', title: '相关车牌号'},
+                        {field: 'carNumber', align: 'center', title: '相关车辆'},
                         {field: 'carportType', align: 'center', title: '车位类型'},
                     ]
                 ],
                 data:[[${carportList}]]
             });
         }
-        //大于0 则说明该用户有房子
-        if($("#houseList").length>0){
-            var houseList=[[${houseList}]];
+        //大于0 则说明该用户有车
+        if($("#carList").length>0){
+            table.render({
+                elem: "#carList",
+                cols: [
+                    [
+                        {field: 'carNumber', align: 'center', title: '车牌号'},
+                        {field: 'communityName', align: 'center', title: '小区'},
+                        {field: 'tenementName', align: 'center', title: '车主姓名'},
+                        {field: 'phone', align: 'center', title: '车主电话'},
+                        {field: 'carportNo', align: 'center', title: '相关车位'},
+                    ]
+                ],
+                data:[[${carList}]]
+            });
+        }
+        if($("#relationList").length>0){
+            table.render({
+                elem: "#relationList",
+                cols: [
+                    [
+                        {field: 'tenementName', align: 'center', title: '姓名'},
+                        {field: 'communityName', align: 'center', title: '小区'},
+                        {field: 'buildingName', align: 'center', title: '楼宇'},
+                        {field: 'unitNumber', align: 'center', title: '单元'},
+                        {field: 'fool', align: 'center', title: '房号'},
+                        {field: 'phone', align: 'center', title: '电话'},
+                        {field: 'relation', align: 'center', title: '住户关系'},
+                    ]
+                ],
+                data:[[${relationList}]]
+            });
         }
     });
 </script>

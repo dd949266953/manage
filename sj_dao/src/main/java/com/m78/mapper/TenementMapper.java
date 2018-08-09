@@ -113,4 +113,11 @@ public interface TenementMapper {
      */
     List<TenementVo> getDetailCarByTenementId(@Param("tenementId")Long tenementId);
 
+    /**
+     * 查询相关住户信息
+     * @param tenementId
+     * @return
+     */
+    List<TenementVo> getDetailRelationByTenementId(@Param("tenementId")Long tenementId);
+
 }

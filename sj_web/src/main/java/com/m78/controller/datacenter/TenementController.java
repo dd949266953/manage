@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.m78.entity.Tenement;
 import com.m78.service.dataCenter.*;
 import com.m78.util.DataTable;
+import com.m78.vo.TenementVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,22 +33,16 @@ public class TenementController {
         return "dataCenter/tenement/tenementList";
     }
 
-    /**
-     * 住户详情
-     *
-     * @return++++++++++++++++++++++++++++++++
-     */
-
-    public  ModelAndView getList(ModelAndView modelAndView, List<Long>list, Method clazz, Long tenementId){
-
-        return modelAndView;
-    }
     @RequestMapping("/detailTenement.html")
     public ModelAndView detailTenement(Long tenementId) {
         ModelAndView mv=new ModelAndView();
         mv.addObject("houseList",tenementService.getDetailHouseByTenementId(tenementId));
         mv.addObject("carportList",tenementService.getDetailCarportByTenementId(tenementId));
         mv.addObject("carList",tenementService.getDetailCarByTenementId(tenementId));
+        mv.addObject("relationList",tenementService.getDetailRelationByTenementId(tenementId));
+        for (TenementVo t:tenementService.getDetailHouseByTenementId(tenementId)) {
+            System.out.println(t.getReturnTime());
+        }
         mv.addObject("tenement",tenementService.getDetailTenementById(tenementId));
         mv.setViewName("dataCenter/tenement/detailTenement");
         return mv;

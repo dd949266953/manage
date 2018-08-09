@@ -100,4 +100,11 @@ public interface TenementService {
      * @return
      */
     List<TenementVo> getDetailCarByTenementId(Long tenementId);
+
+    /**
+     * 查询相关住户信息
+     * @param tenementId
+     * @return
+     */
+    List<TenementVo> getDetailRelationByTenementId(Long tenementId);
 }

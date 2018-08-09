@@ -349,11 +349,24 @@ WHERE c.`id`=#{communityId}
     </select>
     <!--查询住户相关车辆信息-->
     <select id="getDetailCarByTenementId" resultType="com.m78.vo.TenementVo">
-     SELECT t.id,t.name AS tenementName,c.name AS communityName,cp.carportNo,car.`carNumber` FROM tenement t
+     SELECT t.id,t.name AS tenementName,c.name AS communityName,t.phone,cp.carportNo,car.`carNumber` FROM tenement t
         INNER JOIN community c 	        ON c.id=t.communityId
         INNER JOIN `tenement_carport` tc	ON tc.`tentmentId`=t.id
         INNER JOIN `carport` cp            ON cp.carportNo=tc.`carportId`
         INNER JOIN car 	                    ON car.`carId`=cp.carportNo
     WHERE t.id=#{tenementId}
+    </select>
+    <!-- 查询相关住户信息-->
+    <select id="getDetailRelationByTenementId" resultType="com.m78.vo.TenementVo">
+      SELECT t.id,t.name AS tenementName,c.name AS communityName,b.name AS buildingName,CONCAT(LEFT(fool,1),'单元') AS unitNumber,h.fool,t.phone,di       .content AS relation FROM  house_tentment ht
+     INNER JOIN tenement t ON ht.`tentmentId`=t.id
+     INNER JOIN community c 	ON c.id=t.communityId
+     INNER JOIN `house` h 		ON ht.`houseId`=h.`houseId`
+     INNER JOIN `house_buliding` hb ON hb.`houseId`=h.`houseId`
+     INNER JOIN `building` b 	ON b.id=hb.`buildingId`
+     INNER JOIN dictionary_item di ON di.id=t.state
+     WHERE t.id IN (
+     SELECT ht.`tentmentId` FROM house_tentment ht WHERE `houseId`=
+    (SELECT ht.houseId FROM house_tentment ht WHERE `tentmentId`=#{tenementId}))
     </select>
 </mapper>
