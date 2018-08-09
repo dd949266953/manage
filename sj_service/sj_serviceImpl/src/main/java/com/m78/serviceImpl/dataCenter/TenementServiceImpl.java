@@ -101,4 +101,35 @@ public class TenementServiceImpl implements TenementService {
     public List<String> getPhoneByCommunityId(Long communityId) {
         return tenementMapper.getPhoneByCommunityId(communityId);
     }
+
+    /**
+     * 查询住户相关房屋信息
+     * @param tenementId
+     * @return
+     */
+    @Override
+    public List<TenementVo> getDetailHouseByTenementId(Long tenementId) {
+        return tenementMapper.getDetailHouseByTenementId(tenementId);
+    }
+
+    /**
+     * 查询住户相关车位信息
+     * @param tenementId
+     * @return
+     */
+    @Override
+    public List<TenementVo> getDetailCarportByTenementId(Long tenementId) {
+        return tenementMapper.getDetailCarportByTenementId(tenementId);
+    }
+
+    /**
+     * 查询住户相关车辆信息
+     * @param tenementId
+     * @return
+     */
+    @Override
+    public List<TenementVo> getDetailCarByTenementId(Long tenementId) {
+        return tenementMapper.getDetailCarByTenementId(tenementId);
+    }
+
 }

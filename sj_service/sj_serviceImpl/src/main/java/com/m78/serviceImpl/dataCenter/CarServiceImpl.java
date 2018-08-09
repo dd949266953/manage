@@ -18,4 +18,5 @@ public class CarServiceImpl implements CarService {
         int start=(page-1)*limit;
         return carMapper.getAllCar(carNumber,tenementName,start,limit);
     }
+
 }

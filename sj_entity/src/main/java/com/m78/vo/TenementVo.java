@@ -1,6 +1,7 @@
 package com.m78.vo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class TenementVo implements Serializable {
     private Long tenementId;
@@ -11,9 +12,15 @@ public class TenementVo implements Serializable {
     private Long houseId;
     private Long unitNumber;
     private Long fool;
+    private String houseType;
     private String tenementName;
     private String phone;
     private String relation;
+    private String carNo;
+    private String carNumber;
+    private String carportNo;
+    private String carportType;
+    private Date returnTime;
 
     public Long getTenementId() {
         return tenementId;
@@ -79,6 +86,14 @@ public class TenementVo implements Serializable {
         this.fool = fool;
     }
 
+    public String getHouseType() {
+        return houseType;
+    }
+
+    public void setHouseType(String houseType) {
+        this.houseType = houseType;
+    }
+
     public String getTenementName() {
         return tenementName;
     }
@@ -103,6 +118,46 @@ public class TenementVo implements Serializable {
         this.relation = relation;
     }
 
+    public String getCarNo() {
+        return carNo;
+    }
+
+    public void setCarNo(String carNo) {
+        this.carNo = carNo;
+    }
+
+    public String getCarNumber() {
+        return carNumber;
+    }
+
+    public void setCarNumber(String carNumber) {
+        this.carNumber = carNumber;
+    }
+
+    public String getCarportNo() {
+        return carportNo;
+    }
+
+    public void setCarportNo(String carportNo) {
+        this.carportNo = carportNo;
+    }
+
+    public String getCarportType() {
+        return carportType;
+    }
+
+    public void setCarportType(String carportType) {
+        this.carportType = carportType;
+    }
+
+    public Date getReturnTime() {
+        return returnTime;
+    }
+
+    public void setReturnTime(Date returnTime) {
+        this.returnTime = returnTime;
+    }
+
     @Override
     public String toString() {
         return "TenementVo{" +
@@ -114,9 +169,14 @@ public class TenementVo implements Serializable {
                 ", houseId=" + houseId +
                 ", unitNumber=" + unitNumber +
                 ", fool=" + fool +
+                ", houseType='" + houseType + '\'' +
                 ", tenementName='" + tenementName + '\'' +
                 ", phone='" + phone + '\'' +
                 ", relation='" + relation + '\'' +
+                ", carNo='" + carNo + '\'' +
+                ", carportNo='" + carportNo + '\'' +
+                ", carportType='" + carportType + '\'' +
+                ", returnTime=" + returnTime +
                 '}';
     }
 }

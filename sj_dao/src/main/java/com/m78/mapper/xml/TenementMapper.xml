@@ -36,7 +36,7 @@
   </sql>
     <!--获取住户详情根据id-->
     <select id="getDetailTenementById" resultMap="BaseResultMap">
-    SELECT t.name,t.nickname,t.`sex`,t.`phone`,t.`ownerNumber`,t.`integrals`,c.`name` AS communityName,t.`registrationDate`,t.`birthday`,t.`idCard`,t.`urgencyMan`,t.`urgencyManPhone`,t.`qqNumber`,t.`WxNumber`,di.`content` FROM tenement t
+    SELECT t.name,t.nickname,t.`sex`,t.`phone`,t.`ownerNumber`,t.`integrals`,c.`name` AS communityName,t.`registrationDate`,t.`birthday`,t.`idCard`,t.`urgencyMan`,t.`urgencyManPhone`,t.`nation`,t.`qqNumber`,t.`WxNumber`,di.`content`,t.`remark` FROM tenement t
 INNER JOIN community c        ON c.`id`=t.`communityId`
 INNER JOIN dictionary_item di ON di.`id`=t.`state`
 WHERE t.id=#{tenementId}
@@ -324,4 +324,36 @@ WHERE c.`id`=#{communityId}
       ownerNumber = #{ownernumber,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+    <!-- 查询住户相关房屋信息-->
+    <select id="getDetailHouseByTenementId" resultType="com.m78.vo.TenementVo">
+          SELECT t.id,h.fool,c.name AS communityName,b.name AS buildingName,di.content AS houseType,id.content AS relation,h.returnTime FROM tenement t
+ INNER JOIN `house_tentment` ht ON ht.`tentmentId`=t.`id`
+ INNER JOIN `house` h 		ON ht.`houseId`=h.`houseId`
+ INNER JOIN `house_buliding` hb ON hb.`houseId`=h.`houseId`
+ INNER JOIN `building` b 	ON b.id=hb.`buildingId`
+ INNER JOIN community c 	ON c.id=t.communityId
+ INNER JOIN dictionary_item di ON di.id=h.`houseType`
+  INNER JOIN dictionary_item id ON id.id=t.state
+         WHERE t.id=#{tenementId}
+    </select>
+    <!-- 查询住户相关车位信息-->
+    <select id="getDetailCarportByTenementId" resultType="com.m78.vo.TenementVo">
+      SELECT t.id,t.name AS tenementName,car.`carNumber`,c.name AS communityName,t.phone,cp.`carportNo`, di.content AS carportType FROM     tenement t
+      INNER JOIN `tenement_car` tc 		ON tc.`tenementId`=t.id
+      INNER JOIN car			        ON car.carId=tc.carId
+      INNER JOIN community c 	        ON c.id=t.communityId
+      INNER JOIN car_carport cc	        ON cc.`carId`=car.carId
+      INNER JOIN carport  cp	        ON cp.`carportNo`=cc.`carportId`
+      INNER JOIN dictionary_item di    ON di.id=cp.`carportType`
+     WHERE t.id=#{tenementId}
+    </select>
+    <!--查询住户相关车辆信息-->
+    <select id="getDetailCarByTenementId" resultType="com.m78.vo.TenementVo">
+     SELECT t.id,t.name AS tenementName,c.name AS communityName,cp.carportNo,car.`carNumber` FROM tenement t
+        INNER JOIN community c 	        ON c.id=t.communityId
+        INNER JOIN `tenement_carport` tc	ON tc.`tentmentId`=t.id
+        INNER JOIN `carport` cp            ON cp.carportNo=tc.`carportId`
+        INNER JOIN car 	                    ON car.`carId`=cp.carportNo
+    WHERE t.id=#{tenementId}
+    </select>
 </mapper>

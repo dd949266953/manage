@@ -21,6 +21,16 @@ public class HouseVo implements Serializable {
 
     private String houseType;
 
+    private String relation;
+
+    public String getRelation() {
+        return relation;
+    }
+
+    public void setRelation(String relation) {
+        this.relation = relation;
+    }
+
     public Long getHouseId() {
         return houseId;
     }

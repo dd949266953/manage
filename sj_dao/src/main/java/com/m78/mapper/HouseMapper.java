@@ -9,6 +9,7 @@ import java.util.List;
 public interface HouseMapper {
     /**
      * 根据主键删除
+     *
      * @param houseid
      * @return
      */
@@ -26,19 +27,22 @@ public interface HouseMapper {
 
     /**
      * 查询所有房屋
+     *
      * @return
      */
-    List<HouseVo>getAllHouse(@Param("houseName")String houseName,@Param("start") int start,@Param("limit") int limit);
+    List<HouseVo> getAllHouse(@Param("houseName") String houseName, @Param("start") int start, @Param("limit") int limit);
 
     /**
      * 查询房屋总数根据房号
+     *
      * @param houseName
      * @return
      */
-    Long getHouseCountByName(@Param("houseName")String houseName);
+    Long getHouseCountByName(@Param("houseName") String houseName);
 
-
-
-
-
+    /**
+     * 根据房屋id出房屋信息
+     * @param houseId
+     * @return
+     */
 }

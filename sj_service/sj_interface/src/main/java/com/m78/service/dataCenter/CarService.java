@@ -10,4 +10,5 @@ public interface CarService {
      * 查询所有车辆
      */
     List<carVo> getAllCar(String carNumber,String tenementName,int page,int limit);
+
 }

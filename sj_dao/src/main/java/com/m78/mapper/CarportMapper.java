@@ -32,4 +32,5 @@ public interface CarportMapper {
      * @return
      */
     Long getCountCarport(@Param("carportName")String carportName);
+
 }

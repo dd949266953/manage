@@ -1,6 +1,7 @@
 package com.m78.serviceImpl.dataCenter;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.m78.entity.Carport;
 import com.m78.entity.DictionaryItem;
 import com.m78.mapper.CarportMapper;
 import com.m78.mapper.DictionaryItemMapper;
@@ -37,4 +38,5 @@ public class CarportServiceImpl implements CarportService {
     public List<DictionaryItem> getCarportState() {
         return dictionaryItemMapper.getHouseState();
     }
+
 }

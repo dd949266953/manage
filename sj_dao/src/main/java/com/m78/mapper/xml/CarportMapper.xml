@@ -110,4 +110,5 @@
       remark = #{remark,jdbcType=VARCHAR}
     where carportNo = #{carportno,jdbcType=BIGINT}
   </update>
+
 </mapper>
