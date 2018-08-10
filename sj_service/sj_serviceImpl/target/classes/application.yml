@@ -6,6 +6,9 @@ spring:
     url: jdbc:mysql://47.105.105.208:3306/manage?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&autoReconnect=true&failOverReadOnly=false
     username: root
     password: mysql123
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
   dubbo:
       application:
         name: admin_provider

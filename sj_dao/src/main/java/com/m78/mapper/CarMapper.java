@@ -27,4 +27,5 @@ public interface CarMapper {
                           @Param("tenementName")String tenementName,
                           @Param("start")int start,
                           @Param("limit")int limit);
+
 }

@@ -68,5 +68,43 @@ public interface TenementService {
      */
     Long getHouseIdByTenementPhone(String phone);
 
+    /**
+     * 根据住户手机号查询房屋主键
+     * @return
+     */
+    Tenement getDetailTenementById(Long tenementId);
 
+    /**
+     * 查询小区下的所有手机号根据小区id
+     * @return
+     */
+    List<String> getPhoneByCommunityId(Long communityId);
+
+    /**
+     * 查询住户相关房屋信息
+     * @param tenementId
+     * @return
+     */
+    List<TenementVo>getDetailHouseByTenementId(Long tenementId);
+
+    /**
+     * 查询住户相关车位信息
+     * @param tenementId
+     * @return
+     */
+    List<TenementVo>getDetailCarportByTenementId(Long tenementId);
+
+    /**
+     * 查询住户相关车辆信息
+     * @param tenementId
+     * @return
+     */
+    List<TenementVo> getDetailCarByTenementId(Long tenementId);
+
+    /**
+     * 查询相关住户信息
+     * @param tenementId
+     * @return
+     */
+    List<TenementVo> getDetailRelationByTenementId(Long tenementId);
 }

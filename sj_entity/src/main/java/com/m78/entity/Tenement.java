@@ -1,5 +1,7 @@
 package com.m78.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -8,10 +10,13 @@ public class Tenement implements Serializable {
 
     private String name;
 
+    private String nickname;
+
     private String phone;
 
     private Long integrals;
 
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date registrationdate;
 
     private Long state;
@@ -38,27 +43,9 @@ public class Tenement implements Serializable {
 
     private Long ownernumber;
 
-    private House house;
-
-    private Building building;
-
     private Community community;
 
-    public House getHouse() {
-        return house;
-    }
-
-    public void setHouse(House house) {
-        this.house = house;
-    }
-
-    public Building getBuilding() {
-        return building;
-    }
-
-    public void setBuilding(Building building) {
-        this.building = building;
-    }
+    private DictionaryItem dictionaryItem;
 
     public Community getCommunity() {
         return community;
@@ -66,6 +53,14 @@ public class Tenement implements Serializable {
 
     public void setCommunity(Community community) {
         this.community = community;
+    }
+
+    public DictionaryItem getDictionaryItem() {
+        return dictionaryItem;
+    }
+
+    public void setDictionaryItem(DictionaryItem dictionaryItem) {
+        this.dictionaryItem = dictionaryItem;
     }
 
     public Long getId() {
@@ -82,6 +77,14 @@ public class Tenement implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getPhone() {
@@ -209,6 +212,7 @@ public class Tenement implements Serializable {
         return "Tenement{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", nickname='" + nickname + '\'' +
                 ", phone='" + phone + '\'' +
                 ", integrals=" + integrals +
                 ", registrationdate=" + registrationdate +

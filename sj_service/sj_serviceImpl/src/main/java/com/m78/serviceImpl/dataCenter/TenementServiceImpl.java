@@ -87,4 +87,57 @@ public class TenementServiceImpl implements TenementService {
     public Long getHouseIdByTenementPhone(String phone) {
         return tenementMapper.getHouseIdByTenementPhone(phone);
     }
+
+    @Override
+    public Tenement getDetailTenementById(Long tenementId) {
+        return tenementMapper.getDetailTenementById(tenementId);
+    }
+
+    /**
+     * 查询小区下的所有手机号根据小区id
+     * @return
+     */
+    @Override
+    public List<String> getPhoneByCommunityId(Long communityId) {
+        return tenementMapper.getPhoneByCommunityId(communityId);
+    }
+
+    /**
+     * 查询住户相关房屋信息
+     * @param tenementId
+     * @return
+     */
+    @Override
+    public List<TenementVo> getDetailHouseByTenementId(Long tenementId) {
+        return tenementMapper.getDetailHouseByTenementId(tenementId);
+    }
+
+    /**
+     * 查询住户相关车位信息
+     * @param tenementId
+     * @return
+     */
+    @Override
+    public List<TenementVo> getDetailCarportByTenementId(Long tenementId) {
+        return tenementMapper.getDetailCarportByTenementId(tenementId);
+    }
+
+    /**
+     * 查询住户相关车辆信息
+     * @param tenementId
+     * @return
+     */
+    @Override
+    public List<TenementVo> getDetailCarByTenementId(Long tenementId) {
+        return tenementMapper.getDetailCarByTenementId(tenementId);
+    }
+    /**
+     * 查询相关住户信息
+     * @param tenementId
+     * @return
+     */
+    @Override
+    public List<TenementVo> getDetailRelationByTenementId(Long tenementId) {
+        return tenementMapper.getDetailRelationByTenementId(tenementId);
+    }
 }

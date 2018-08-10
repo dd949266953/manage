@@ -106,4 +106,5 @@
       carDisplacement = #{cardisplacement,jdbcType=DOUBLE}
     where carId = #{carid,jdbcType=BIGINT}
   </update>
+
 </mapper>

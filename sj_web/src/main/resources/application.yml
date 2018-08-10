@@ -17,7 +17,7 @@ spring:
       servlet:
         content-type: text/html
   jackson:
-      date-format: yyyy-MM-dd
+      date-format: yyyy-MM-dd HH:mm:ss
       time-zone: GMT+8
   servlet:
     multipart:
