@@ -2,16 +2,23 @@ package com.m78.controller.datacenter;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.m78.entity.House;
+import com.m78.entity.HouseCharitem;
 import com.m78.service.bill.ChargeItemService;
 import com.m78.service.dataCenter.BuildingService;
 import com.m78.service.dataCenter.CommunityService;
 import com.m78.service.dataCenter.HouseService;
+import com.m78.service.dataCenter.TenementService;
 import com.m78.util.DataTable;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RequestMapping(value = "House")
 @Controller
@@ -29,6 +36,8 @@ public class HouseController {
     @Reference(version = "1.0.0")
     private ChargeItemService chargeItemService;
 
+    @Reference(version = "1.0.0")
+    private TenementService tenementService;
     /**
      * 房屋列表界面
      * @return
@@ -120,4 +129,26 @@ public class HouseController {
         return houseService.deleteByPrimaryKey(houseId);
     }
 
+    /**
+     * 给对应的房屋添加收费标准
+     * @return
+     */
+    @RequestMapping("/insertChargeByHouseId")
+    @ResponseBody
+    public int insertChargeByHouseId(HouseCharitem record) {
+        return houseService.insertChargeByHouseId(record);
+    }
+
+    /**
+     * 绑定住户
+     * @return
+     */
+    @RequestMapping("/bindTenement")
+    @ResponseBody
+    public Object bindTenement(Long communityId) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("tenementList", tenementService.getTenementByCommunity(communityId));
+        map.put("relation", tenementService.getRelation());
+        return new ModelAndView(new MappingJackson2JsonView(), map);
+    }
 }

@@ -1,7 +1,9 @@
 package com.m78.serviceImpl.dataCenter;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.m78.entity.DictionaryItem;
 import com.m78.entity.Tenement;
+import com.m78.mapper.DictionaryItemMapper;
 import com.m78.mapper.TenementMapper;
 import com.m78.service.dataCenter.TenementService;
 import com.m78.vo.TenementVo;
@@ -19,12 +21,14 @@ public class TenementServiceImpl implements TenementService {
     @Autowired
     private TenementMapper tenementMapper;
 
+    @Autowired
+    private DictionaryItemMapper dictionaryItemMapper;
+
     /**
      * 获取所有住户
      * @return
      */
     @Override
-    @Test
     public List<TenementVo> getAllTenement(String name,int page, int limit) {
         int start=(page-1)*limit;
         return tenementMapper.getAllTenement(name,start,limit);
@@ -141,5 +145,19 @@ public class TenementServiceImpl implements TenementService {
     @Override
     public List<TenementVo> getDetailRelationByTenementId(Long tenementId) {
         return tenementMapper.getDetailRelationByTenementId(tenementId);
+    }
+
+    @Override
+    public List<Tenement> getTenementByCommunity(Long communityId) {
+        return tenementMapper.getTenementByCommunity(communityId);
+    }
+
+    /**
+     * 获取所有住户身份
+     * @return
+     */
+    @Override
+    public List<DictionaryItem> getRelation() {
+        return dictionaryItemMapper.getRelation();
     }
 }

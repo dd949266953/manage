@@ -5,7 +5,12 @@ import com.m78.entity.HouseCharitem;
 public interface HouseCharitemMapper {
     int deleteByPrimaryKey(Long id);
 
-    int insert(HouseCharitem record);
+    /**
+     * 给房屋添加收费标准
+     * @param record
+     * @return
+     */
+    int insertChargeByHouseId(HouseCharitem record);
 
     int insertSelective(HouseCharitem record);
 

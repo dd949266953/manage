@@ -3,8 +3,10 @@ package com.m78.serviceImpl.dataCenter;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.m78.entity.DictionaryItem;
 import com.m78.entity.House;
+import com.m78.entity.HouseCharitem;
 import com.m78.mapper.DictionaryItemMapper;
 import com.m78.mapper.HouseBulidingMapper;
+import com.m78.mapper.HouseCharitemMapper;
 import com.m78.mapper.HouseMapper;
 import com.m78.service.dataCenter.HouseService;
 import com.m78.vo.HouseVo;
@@ -20,6 +22,8 @@ public class HouseServiceImpl implements HouseService {
     private DictionaryItemMapper dictionaryItemMapper;
     @Autowired
     private HouseBulidingMapper houseBulidingMapper;
+    @Autowired
+    private HouseCharitemMapper houseCharitemMapper;
     @Override
     public List<HouseVo> getAllHouse(String houseName, int page, int limit) {
         int start=(page-1)*limit;
@@ -69,5 +73,10 @@ public class HouseServiceImpl implements HouseService {
     @Override
     public Long getHouseCountByName(String houseName) {
         return houseMapper.getHouseCountByName(houseName);
+    }
+
+    @Override
+    public int insertChargeByHouseId(HouseCharitem record) {
+        return houseCharitemMapper.insertChargeByHouseId(record);
     }
 }

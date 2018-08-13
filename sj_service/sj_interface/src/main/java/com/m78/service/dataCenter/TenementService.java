@@ -1,5 +1,6 @@
 package com.m78.service.dataCenter;
 
+import com.m78.entity.DictionaryItem;
 import com.m78.entity.Tenement;
 import com.m78.vo.TenementVo;
 
@@ -107,4 +108,16 @@ public interface TenementService {
      * @return
      */
     List<TenementVo> getDetailRelationByTenementId(Long tenementId);
+
+    /**
+     * 查询住户根据小区
+     * @return
+     */
+    List<Tenement>getTenementByCommunity(Long communityId);
+
+    /**
+     * 获取所有住户身份
+     * @return
+     */
+    List<DictionaryItem>getRelation();
 }

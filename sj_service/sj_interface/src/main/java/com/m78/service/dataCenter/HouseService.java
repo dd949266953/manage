@@ -2,6 +2,7 @@ package com.m78.service.dataCenter;
 
 import com.m78.entity.DictionaryItem;
 import com.m78.entity.House;
+import com.m78.entity.HouseCharitem;
 import com.m78.vo.HouseVo;
 
 import java.util.List;
@@ -44,4 +45,12 @@ public interface HouseService {
      * @return
      */
     Long getHouseCountByName(String houseName);
+
+    /**
+     * 给房屋添加收费标准
+     * @param record
+     * @return
+     */
+    int insertChargeByHouseId(HouseCharitem record);
+
 }

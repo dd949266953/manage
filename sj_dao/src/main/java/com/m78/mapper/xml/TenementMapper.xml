@@ -117,6 +117,10 @@ WHERE c.`id`=#{communityId}
     INNER JOIN house_tentment ht ON t.`id`=ht.tentmentId
     WHERE phone=#{phone}
   </select>
+    <!--查询住户根据小区-->
+    <select id="getTenementByCommunity" resultType="com.m78.entity.Tenement">
+         SELECT id,NAME FROM tenement WHERE communityId=#{communityId}
+    </select>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

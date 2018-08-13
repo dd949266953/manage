@@ -43,4 +43,10 @@ public interface DictionaryItemMapper {
      * @return
      */
     List<DictionaryItem>getCarportType();
+
+    /**
+     * 查询住户身份
+     * @return
+     */
+    List<DictionaryItem>getRelation();
 }

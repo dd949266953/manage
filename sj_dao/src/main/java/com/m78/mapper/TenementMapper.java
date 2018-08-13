@@ -120,4 +120,10 @@ public interface TenementMapper {
      */
     List<TenementVo> getDetailRelationByTenementId(@Param("tenementId")Long tenementId);
 
+    /**
+     * 查询住户根据小区
+     * @return
+     */
+    List<Tenement>getTenementByCommunity(@Param("communityId")Long communityId);
+
 }

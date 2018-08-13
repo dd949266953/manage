@@ -10,7 +10,7 @@
     id, charItemId, houseId
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from House_charItem
     where id = #{id,jdbcType=BIGINT}
@@ -19,10 +19,11 @@
     delete from House_charItem
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.m78.entity.HouseCharitem">
-    insert into House_charItem (id, charItemId, houseId
+  <!--添加房屋收费标准-->
+  <insert id="insertChargeByHouseId" parameterType="com.m78.entity.HouseCharitem">
+    insert into House_charItem (charItemId, houseId
       )
-    values (#{id,jdbcType=BIGINT}, #{charitemid,jdbcType=BIGINT}, #{houseid,jdbcType=BIGINT}
+    values ( #{charitemid,jdbcType=BIGINT}, #{houseid,jdbcType=BIGINT}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.m78.entity.HouseCharitem">
