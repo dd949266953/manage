@@ -13,7 +13,7 @@ public class Bill implements Serializable {
     private String remark;
 
     private Long chargeuser;
-    private Admin admin;
+    private User admin;
     @JSONField(format="yyyy-MM-dd")
     private Date time;
 
@@ -39,14 +39,6 @@ public class Bill implements Serializable {
         this.community = community;
     }
 
-    public Admin getAdmin() {
-
-        return admin;
-    }
-
-    public void setAdmin(Admin admin) {
-        this.admin = admin;
-    }
 
     //收费项目
     private  String charName;
@@ -201,6 +193,15 @@ public class Bill implements Serializable {
     public void setFool(Long fool) {
         this.fool = fool;
     }
+
+    public User getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(User admin) {
+        this.admin = admin;
+    }
+
 
     @Override
     public String toString() {
