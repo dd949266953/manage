@@ -16,7 +16,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 
 
 /**
- * 自定义realm
+ * 自定realm
  */
 public class ShiroRealm extends AuthorizingRealm {
 
