@@ -119,7 +119,7 @@
                     if(obj.checked){
                         var show='<button id="optionId" index="'+index+'"  datavalue="'+com.id+'" class="layui-btn color layui-btn-sm">'+com.name+' <i id="fion" class="layui-icon">&#x1006;</i></button>';
                         $("#communityOption").append(show)
-                        communityId.push(com.id);
+
                     }
                     //删除
                     else {
@@ -127,7 +127,7 @@
                         removeOption(com.id);
                     }
                 }
-                console.log(communityId)
+
             });
         })
     }
@@ -151,21 +151,27 @@
 
    }
     $("body").on('click','#fion',function(){
-
      var index= $(this).parent().attr("datavalue");
-
-        communityId.splice(contains(communityId,index),1)
      var trIndex= $(this).parent().attr("index");
         $("button[datavalue="+index+"]").remove();
         $("tr[data-index="+trIndex+"] td[data-field=0]").find("div").find("div").click();
-        console.log(communityId)
     });
 
 
     layui.use('form', function () {
         var form = layui.form;
         form.on('submit(demo1)', function (data) {
+            $.ajax({
+                url: 'sendCommunityMessage.json',
+                type: 'get',
+                dataType: 'json',
+                data: {
+                   communityIds:communityId
+                },
+                success: function (data) {
 
+                }
+            })
         });
     });
 

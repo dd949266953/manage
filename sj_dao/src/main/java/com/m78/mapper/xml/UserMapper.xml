@@ -12,10 +12,11 @@
     <result column="departmentId" jdbcType="BIGINT" property="departmentid" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="time" jdbcType="DATE" property="time" />
+    <result column="communityId" jdbcType="BIGINT" property="communityid" />
   </resultMap>
   <sql id="Base_Column_List">
     id, name, password, phone, wxnumber, nickname, positionId, departmentId, remark, 
-    time
+    time, communityId
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -31,11 +32,11 @@
     insert into user (id, name, password, 
       phone, wxnumber, nickname, 
       positionId, departmentId, remark, 
-      time)
+      time, communityId)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{phone,jdbcType=VARCHAR}, #{wxnumber,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
       #{positionid,jdbcType=BIGINT}, #{departmentid,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}, 
-      #{time,jdbcType=DATE})
+      #{time,jdbcType=DATE}, #{communityid,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.m78.entity.User">
     insert into user
@@ -70,6 +71,9 @@
       <if test="time != null">
         time,
       </if>
+      <if test="communityid != null">
+        communityId,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -101,6 +105,9 @@
       </if>
       <if test="time != null">
         #{time,jdbcType=DATE},
+      </if>
+      <if test="communityid != null">
+        #{communityid,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -134,6 +141,9 @@
       <if test="time != null">
         time = #{time,jdbcType=DATE},
       </if>
+      <if test="communityid != null">
+        communityId = #{communityid,jdbcType=BIGINT},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -147,7 +157,8 @@
       positionId = #{positionid,jdbcType=BIGINT},
       departmentId = #{departmentid,jdbcType=BIGINT},
       remark = #{remark,jdbcType=VARCHAR},
-      time = #{time,jdbcType=DATE}
+      time = #{time,jdbcType=DATE},
+      communityId = #{communityid,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
     <!--根据用户名查询当前用户 -->

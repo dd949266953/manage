@@ -36,4 +36,6 @@ public interface MessageService {
      * @return
      */
     int addMessage(Message message);
+
+
 }

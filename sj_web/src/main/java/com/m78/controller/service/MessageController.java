@@ -89,5 +89,13 @@ public class MessageController {
          return  messageService.deleteMessage(id);
     }
 
-
+    /**
+     * 发送短信（小区的住户）
+     * @return
+     */
+    @RequestMapping("sendCommunityMessage.json")
+    public Object sendCommunityMessage(@RequestParam("communityIds[]")long [] communitys ){
+    
+        return null;
+    }
 }

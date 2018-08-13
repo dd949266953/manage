@@ -1,5 +1,7 @@
 package com.m78.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -21,8 +23,10 @@ public class User implements Serializable {
     private Long departmentid;
 
     private String remark;
-
+    @JSONField(format = "yyyy-MM-dd")
     private Date time;
+
+    private Long communityid;
 
     public Long getId() {
         return id;
@@ -104,6 +108,14 @@ public class User implements Serializable {
         this.time = time;
     }
 
+    public Long getCommunityid() {
+        return communityid;
+    }
+
+    public void setCommunityid(Long communityid) {
+        this.communityid = communityid;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -117,6 +129,7 @@ public class User implements Serializable {
                 ", departmentid=" + departmentid +
                 ", remark='" + remark + '\'' +
                 ", time=" + time +
+                ", communityid=" + communityid +
                 '}';
     }
 }
