@@ -32,10 +32,10 @@ public class GlobalExceptionHandler {
 			return errorInfo;
 		} else {
 			ModelAndView mv = new ModelAndView();
-
 			mv.addObject("url", request.getRequestURL());
-			mv.addObject("exception", e);
+			mv.addObject("message",e.getMessage());
 			mv.setViewName("error");
+            mv.addObject("stackTrace", e.getStackTrace());
 			return mv;
 		}
 	}

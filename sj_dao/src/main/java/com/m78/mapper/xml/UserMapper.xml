@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.m78.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.m78.entity.User">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="wxnumber" jdbcType="VARCHAR" property="wxnumber" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="positionId" jdbcType="BIGINT" property="positionid" />
+    <result column="departmentId" jdbcType="BIGINT" property="departmentid" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="time" jdbcType="DATE" property="time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, password, phone, wxnumber, nickname, positionId, departmentId, remark, 
+    time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.m78.entity.User">
+    insert into user (id, name, password, 
+      phone, wxnumber, nickname, 
+      positionId, departmentId, remark, 
+      time)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{wxnumber,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{positionid,jdbcType=BIGINT}, #{departmentid,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}, 
+      #{time,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.m78.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="wxnumber != null">
+        wxnumber,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="positionid != null">
+        positionId,
+      </if>
+      <if test="departmentid != null">
+        departmentId,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="wxnumber != null">
+        #{wxnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="positionid != null">
+        #{positionid,jdbcType=BIGINT},
+      </if>
+      <if test="departmentid != null">
+        #{departmentid,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.m78.entity.User">
+    update user
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="wxnumber != null">
+        wxnumber = #{wxnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="positionid != null">
+        positionId = #{positionid,jdbcType=BIGINT},
+      </if>
+      <if test="departmentid != null">
+        departmentId = #{departmentid,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.m78.entity.User">
+    update user
+    set name = #{name,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      wxnumber = #{wxnumber,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      positionId = #{positionid,jdbcType=BIGINT},
+      departmentId = #{departmentid,jdbcType=BIGINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      time = #{time,jdbcType=DATE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <!--根据用户名查询当前用户 -->
+    <select id="getByUserName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select  <include refid="Base_Column_List" />  from  user where  name=#{userName}
+    </select>
+    <!--根据用户名查询用户角色-->
+    <select id="getRoles" parameterType="java.lang.String" resultType="java.lang.String">
+      SELECT r.roleName FROM role  r
+      inner join user_role ur on ur.roleId=r.id
+      inner join `user` u on u.id=ur.userId
+      WHERE u.`name`=#{userName}
+    </select>
+    <!--根据用户名查询角色的权限 -->
+    <select id="getPermissions" resultType="java.lang.String" parameterType="java.lang.String">
+      SELECT p.permissionName FROM permission p
+      INNER JOIN role_permission rp on rp.permissionId=p.id
+      INNER JOIN role r on r.id=rp.roleId
+      inner join user_role ur on ur.roleId=r.id
+      inner join `user` u on u.id=ur.userId
+      WHERE u.`name`=#{userName}
+    </select>
+</mapper>

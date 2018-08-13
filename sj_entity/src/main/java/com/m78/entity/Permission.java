@@ -1,9 +1,11 @@
 package com.m78.entity;
 
-public class Permission {
+import java.io.Serializable;
+
+public class Permission implements Serializable {
     private Long id;
 
-    private String permission;
+    private String permissionname;
 
     private String url;
 
@@ -15,12 +17,12 @@ public class Permission {
         this.id = id;
     }
 
-    public String getPermission() {
-        return permission;
+    public String getPermissionname() {
+        return permissionname;
     }
 
-    public void setPermission(String permission) {
-        this.permission = permission == null ? null : permission.trim();
+    public void setPermissionname(String permissionname) {
+        this.permissionname = permissionname;
     }
 
     public String getUrl() {
@@ -28,14 +30,14 @@ public class Permission {
     }
 
     public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
+        this.url = url;
     }
 
     @Override
     public String toString() {
         return "Permission{" +
                 "id=" + id +
-                ", permission='" + permission + '\'' +
+                ", permissionname='" + permissionname + '\'' +
                 ", url='" + url + '\'' +
                 '}';
     }
