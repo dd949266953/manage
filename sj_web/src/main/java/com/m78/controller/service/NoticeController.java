@@ -2,7 +2,6 @@ package com.m78.controller.service;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.m78.entity.Community;
-import com.m78.entity.Notice;
 import com.m78.service.dataCenter.CommunityService;
 import com.m78.service.service.NoticeService;
 import com.m78.util.DataTable;

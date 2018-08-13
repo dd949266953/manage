@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 异常拦截器
  */
-//@ControllerAdvice
+@ControllerAdvice
 public class GlobalExceptionHandler {
 
 	@ExceptionHandler(Exception.class)

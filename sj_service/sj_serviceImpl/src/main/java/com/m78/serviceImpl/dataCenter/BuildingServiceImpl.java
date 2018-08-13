@@ -10,7 +10,7 @@ import com.m78.mapper.DictionaryItemMapper;
 import com.m78.service.dataCenter.BuildingService;
 import com.m78.vo.BuildingVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
 

@@ -17,6 +17,8 @@ public interface ChargeitemMapper {
     int updateByPrimaryKeySelective(Chargeitem record);
 
     int updateByPrimaryKey(Chargeitem record);
+    //查询全部收费标准
+    List<Chargeitem> getAllCharge();
     //数据表格查询所有
     List<Chargeitem> getAllById(@Param("page")int page,@Param("pageSize") int pageSize,@Param("id") int id);
     //查询总数

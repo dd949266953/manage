@@ -5,6 +5,7 @@ import com.m78.entity.Tenement;
 import com.m78.mapper.TenementMapper;
 import com.m78.service.dataCenter.TenementService;
 import com.m78.vo.TenementVo;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class TenementServiceImpl implements TenementService {
      * @return
      */
     @Override
+    @Test
     public List<TenementVo> getAllTenement(String name,int page, int limit) {
         int start=(page-1)*limit;
         return tenementMapper.getAllTenement(name,start,limit);

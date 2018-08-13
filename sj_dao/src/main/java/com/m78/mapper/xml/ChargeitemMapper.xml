@@ -12,6 +12,12 @@
   <sql id="Base_Column_List" >
     id, name, type, periodTime, price, cashPrice
   </sql>
+  <!--查询全部收费标准-->
+  <select id="getAllCharge" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from chargeitem
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />

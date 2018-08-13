@@ -4,11 +4,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServlet;
+
 /**
  * 异常例子
  */
 @Controller
-public class HelloController {
+public class HelloController extends HttpServlet {
 
 	/**
 	 * 网页跳转异常

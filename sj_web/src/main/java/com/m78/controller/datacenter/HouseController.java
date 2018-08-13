@@ -2,6 +2,7 @@ package com.m78.controller.datacenter;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.m78.entity.House;
+import com.m78.service.bill.ChargeItemService;
 import com.m78.service.dataCenter.BuildingService;
 import com.m78.service.dataCenter.CommunityService;
 import com.m78.service.dataCenter.HouseService;
@@ -25,13 +26,19 @@ public class HouseController {
     @Reference(version = "1.0.0")
     private BuildingService buildingService;
 
+    @Reference(version = "1.0.0")
+    private ChargeItemService chargeItemService;
+
     /**
      * 房屋列表界面
      * @return
      */
     @RequestMapping("houseList.html")
-    public String houseList(){
-        return "dataCenter/house/houseList";
+    public Object houseList(){
+        ModelAndView mv=new ModelAndView();
+        mv.addObject("chargeList",chargeItemService.getAllCharge());
+        mv.setViewName("dataCenter/house/houseList");
+        return mv;
     }
 
     /**

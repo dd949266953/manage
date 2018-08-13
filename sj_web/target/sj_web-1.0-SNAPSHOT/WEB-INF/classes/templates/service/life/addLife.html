@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!--
+	作者：offline
+	时间：2018-07-07
+	描述:添加生活导航
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>添加生活导航</title>
+    <link th:href="@{/layui/css/layui.css}" rel="stylesheet">
+    <link th:href="@{/css/fiont.css}" rel="stylesheet">
+    <link th:href="@{/css/back_public.css}" rel="stylesheet">
+    <style>
+        body {
+            background-color: white;
+        }
+
+        form {
+            width: 600px;
+            margin: 50px auto;
+        }
+
+        .layui-form-item {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+<form id="form1" class="layui-form" action="" onsubmit="return false" enctype="multipart/form-data">
+    <div class="layui-form-item">
+        <label class="layui-form-label">名称</label>
+        <div class="layui-input-block">
+            <input type="text" id="lifeName" name="noticename" lay-verify="required" autocomplete="off"
+                   placeholder="请输入名称" class="layui-input"/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">地点</label>
+        <div class="layui-input-block">
+            <input type="text" id="adress" name="adress" lay-verify="required" autocomplete="off"
+                   placeholder="请输入位置" class="layui-input"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">图片信息</label>
+        <div class="layui-input-block row row-div">
+            <div class="layui-upload img-div" th:data="imgs">
+                <div class="upload-before">
+                    <i class="iconfont" style="font-size: 36px;">&#xe602;</i>
+                    <p>上传图片</p>
+                </div>
+                <div class="upload-after" style="display: none;">
+                    <i class="iconfont look layui-btn laybtn" data-method="offset" style="font-size: 24px;">&#xe61e;</i>
+                    <i class="iconfont del" style="font-size: 24px;">&#xe618;</i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">导航分类</label>
+        <div class="layui-input-block">
+
+            <select class="input" name="type" id="lifeOption">
+
+            </select>
+            <a onclick="addType()" style="color:rgb(46,204,113);margin-top:20px;display: block" href="javascript:(0)">添加导航分类</a>
+        </div>
+    </div>
+
+    <div class="layui-form-item" id="sure">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+            <button id="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+
+</form>
+<div class="photo"></div>
+<script th:src="@{/js/jquery-3.2.1.js}"></script>
+<script th:src="@{/layui/layui.js}"></script>
+<script>
+    var img = '';
+    layui.use('form', function () {
+        var form = layui.form;
+        form.on('submit(demo1)', function (data) {
+            img = getImgName("imgs");
+            $.ajax({
+                url: 'addLife.json',
+                type: 'get',
+                dataType: 'json',
+                data: {
+                    name: $("#lifeName").val(),
+                    optionid: $("#lifeOption").val(),
+                    adress: $("#adress").val(),
+                    imgs: img
+                },
+                success: function (data) {
+                    if (data == '1') {
+                        parent.location.reload();
+                    } else {
+                        layer.msg("错误");
+                    }
+
+                }
+            })
+
+
+        });
+
+    });
+
+    layui.use(['layer', 'form'], function () { //独立版的layer无需执行这一句
+        var $ = layui.jquery,
+            layer = layui.layer; //独立版的layer无需执行这一句
+        var form = layui.form;
+
+        //触发事件
+        var active = {
+            offset: function (othis) {
+                var type = othis.data('type'),
+                    text = othis.text();
+                var obj = $(othis);
+                var data = obj.attr('data');
+                layer.open({
+                    type: 1,
+                    title: false,
+                    scrollbar: false,
+                    shadeClose: true,
+                    closeBtn: 0,
+                    offset: type,
+                    area: ['512px', '306px'],
+                    content: $('.photo'),
+                    btnAlign: 'c' //按钮居中
+                    ,
+                    shade: [0.7, '#080808'],
+                    yes: function () {
+                        layer.closeAll();
+                    }
+                });
+            }
+        };
+
+        $('#layerDemo .layui-btn').on('click', function () {
+            var othis = $(this),
+                method = othis.data('method');
+            active[method] ? active[method].call(this, othis) : '';
+        });
+
+    });
+
+    function getType() {
+        $("#lifeOption option").remove();
+        $.ajax({
+            url: 'getAllOption.json',
+            dataType: 'json',
+            type: 'post',
+            success: function (data) {
+                $.each(data, function (i, val) {
+                    $("#lifeOption").append(
+                        "<option name='type'  value=" + val.id + ">"
+                        + val.name + "</option>")
+                })
+                layui.form.render('select');
+            }
+        })
+    }
+
+    $(function () {
+        getType();
+    })
+
+    function addType() {
+        layer.open({
+            title: '添加导航类型',
+            shade: 0,
+            offset: '150px'
+            , content: '<input class="layui-input"   id="type"  type="text" placeholder="请输入类型名称" />',
+            yes: function (layero, index) {
+                if ($("#type").val() == '') {
+                    layer.msg('内容不能为空,请重新添加', {icon: 2});
+                    return;
+                }
+                $.ajax({
+                    url: 'addLifeOption.json',
+                    dataType: 'text',
+                    type: 'post',
+                    data: {
+                        name: $("#type").val()
+                    },
+                    success: function (data) {
+                        if (data === '1') {
+                            layer.msg('添加成功', {icon: 1});
+                            getType();
+                            layer.close(index);
+                        } else {
+                            layer.msg('添加失败，请联系客服', {icon: 2});
+                        }
+                    }
+                })
+            }
+        });
+    }
+    <!--获取图片名称 data:file的名字-->
+    function getImgName(data) {
+        var name = $(".img-div[data='" + data + "']").find("img").attr("alt");
+        return name;
+    }
+
+    //验证是否上传成功  1成功 -1失败
+    var pass = 1;
+    layui.use('upload', function () {
+        var $ = layui.jquery,
+            upload = layui.upload;
+        //多图片上传
+        upload.render({
+            elem: '.layui-upload',
+            url: '/notice/upload/',
+            field: 'file',
+            choose: function (obj) {
+                var touchObj = this.item[0].attributes[1].nodeValue;
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('.img-div[data="' + touchObj + '"]').append('<img src="' + result + '" alt="' + file.name +
+                        '" class="layui-upload-img img" height="86px" width="86px">'
+                    )
+                    $('.img-div[data="' + touchObj + '"]').find('.upload-before').hide();
+                });
+            },
+
+        });
+        //控制图片遮罩隐藏显示
+        $(".img-div").hover(
+            function () {
+                if ($(this).find('img').length != 0) {
+                    $(this).find(".upload-after").show();
+                }
+                $(this).css("border", "1px solid #999");
+            },
+            function () {
+                $(this).css("border", "1px dashed #999");
+                $(this).find(".upload-after").hide();
+            }
+        )
+        //查看图片
+        $(".look").click(function (event) {
+            event.stopPropagation();
+        })
+        //删除图片
+        $(".del").click(function (event) {
+            var dom = $(this).parents(".img-div");
+            dom.find("img").remove();
+            dom.find(".upload-before").show().removeClass('hide');
+            dom.find(".upload-after").hide();
+            event.stopPropagation();
+        })
+    });
+
+    layui.use(['layer', 'form'], function () { //独立版的layer无需执行这一句
+        var $ = layui.jquery,
+            layer = layui.layer; //独立版的layer无需执行这一句
+        var form = layui.form;
+
+        //触发事件
+        var active = {
+            offset: function (othis) {
+                var type = othis.data('type'),
+                    text = othis.text();
+                var obj = $(othis);
+                var data = obj.attr('data');
+                layer.open({
+                    type: 1,
+                    title: false,
+                    scrollbar: false,
+                    shadeClose: true,
+                    closeBtn: 0,
+                    offset: type,
+                    area: ['512px', '306px'],
+                    content: $('.photo'),
+                    btnAlign: 'c' //按钮居中
+                    ,
+                    shade: [0.7, '#080808'],
+                    yes: function () {
+                        layer.closeAll();
+                    }
+                });
+            }
+        };
+
+        $('.laybtn').on('click', function () {
+            //获取当前上传图片的路径
+            var path = $(this).parent().siblings("img").attr("src");
+            var img = $('<img src="' + path + '" height="266px" width="472px" />');
+            $(".photo").append(img);
+            var othis = $(this),
+                method = othis.data('method');
+            active[method] ? active[method].call(this, othis) : '';
+        });
+
+    });
+
+</script>
+</body>
+
+</html>

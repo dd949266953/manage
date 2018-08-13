@@ -2,10 +2,12 @@ package com.m78.mapper;
 
 import com.m78.entity.Building;
 import com.m78.vo.BuildingVo;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+@Mapper
 public interface BuildingMapper {
 
     /**

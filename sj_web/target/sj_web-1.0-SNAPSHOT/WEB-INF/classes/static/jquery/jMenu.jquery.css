@@ -1,0 +1,51 @@
+
+#jMenu {
+	display:table;
+	margin:0;
+	padding:0
+}
+
+/********************/
+/** premier niveau **/
+/********************/
+#jMenu li {
+	display:table-cell;
+	background-color:white;
+
+	margin:0;	
+	//float:left;
+}
+	#jMenu li a {
+		padding:10px;
+		display:block;
+		background-color: transparent;
+		text-transform:uppercase;
+		cursor:pointer;
+		font-size:12px;
+	}
+	
+/*******************/
+/** second niveau **/
+/*******************/
+#jMenu li ul {
+	display:none;
+	position:absolute;
+	padding:0;
+	margin:0
+}
+	#jMenu li ul li {
+		background-color:white;
+		display:block;
+		padding:0
+	}
+		#jMenu li ul li a {
+			font-size:11px;
+			text-transform:none;
+			display:block;	
+		}
+		#jMenu li ul li a.isParent {
+			background:white url(../img/arrow_right.png) no-repeat right center;
+		}
+			#jMenu li ul li a:hover {
+				background-color:#F5F5F5;
+			}
