@@ -37,7 +37,7 @@
                 <label class="layui-form-label row lable">
                     <span>*</span>住户 :</label>
                 <div class="layui-input-block row layui-form">
-                    <select name="tenement" lay-verify="tenement">
+                    <select id="tenement" name="tenement" lay-verify="tenement">
                         <option value="0">请选择绑定的业主</option>
                     </select>
                 </div>
@@ -45,8 +45,8 @@
             <div class="layui-form-item ">
                 <label class="layui-form-label row lable">
                     <span>*</span>身份 :</label>
-                <div class="layui-input-block row layui-form" >
-                    <select name="relation" lay-verify="relation">
+                <div class="layui-input-block row layui-form">
+                    <select id="relation" name="relation" lay-verify="relation">
                         <option value="0">请选择住户身份</option>
                     </select>
                 </div>
@@ -105,16 +105,16 @@
                             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
                             var tr = obj.tr; //获得当前行 tr 的DOM对象
                             var communityId = data.communityId
+                        console.log(communityId)
                             //绑定住户
                             if (layEvent === 'bind') {
                                 $.post('bindTenement', {'communityId': communityId}, function (result) {
-                                    console.log(result);
-                                    var relation=$('select[name="relation"]');
+                                    var relation = $('select[name="relation"]');
                                     $.each(result.relation, function (i, e) {
                                         var option = '<option value="' + e.id + '">' + e.content + '</option>'
                                         relation.append(option);
                                     })
-                                    var tenement=$('select[name="tenement"]');
+                                    var tenement = $('select[name="tenement"]');
                                     $.each(result.tenementList, function (i, e) {
                                         var option = '<option value="' + e.id + '">' + e.name + '</option>'
                                         tenement.append(option);
@@ -131,9 +131,12 @@
                                     shade: [0.7, '#080808'],
                                     btn: ["确定", "取消"],
                                     yes: function (index, layero) {
-
-                                        // var houseid = data.houseId;
-                                        // var charitemid = $("#charge option:selected").val();
+                                        console.log(data);
+                                        var houseid = data.houseId;
+                                        var tenementid = $("#tenement option:selected").val();
+                                        var relationid = $("#relation option:selected").val();
+                                        console.log(tenementid)
+                                        console.log(relationid)
                                         // $.post('insertChargeByHouseId', {
                                         //     'houseid': houseid,
                                         //     'charitemid': charitemid
@@ -170,10 +173,7 @@
                                     yes: function (index, layero) {
                                         var houseid = data.houseId;
                                         var charitemid = $("#charge option:selected").val();
-                                        $.post('insertChargeByHouseId', {
-                                            'houseid': houseid,
-                                            'charitemid': charitemid
-                                        }, function (result) {
+                                        $.post('insertChargeByHouseId', {'houseid': houseid, 'charitemid': charitemid}, function (result) {
                                             var hint = "添加成功";
                                             var icon = 1;
                                             if (result != 1) {

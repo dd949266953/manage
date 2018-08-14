@@ -3,6 +3,7 @@ package com.m78.controller.datacenter;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.m78.entity.House;
 import com.m78.entity.HouseCharitem;
+import com.m78.entity.HouseTentment;
 import com.m78.service.bill.ChargeItemService;
 import com.m78.service.dataCenter.BuildingService;
 import com.m78.service.dataCenter.CommunityService;
@@ -150,5 +151,15 @@ public class HouseController {
         map.put("tenementList", tenementService.getTenementByCommunity(communityId));
         map.put("relation", tenementService.getRelation());
         return new ModelAndView(new MappingJackson2JsonView(), map);
+    }
+
+    /**
+     * 绑定住户与房屋关系
+     * @return
+     */
+    @RequestMapping("/bindHouseRelationTenement")
+    @ResponseBody
+    public Object bindHouseRelationTenement(HouseTentment houseTentment){
+        return null;
     }
 }
