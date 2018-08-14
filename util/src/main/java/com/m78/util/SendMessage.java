@@ -6,8 +6,8 @@ import java.util.Map;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 
-public class Message {
-	public static Object sendMessage(String name,String phone) {
+public  class SendMessage {
+	public  static int sendMessage(String name,String phone) {
 	    String host = "https://feginesms.market.alicloudapi.com";
 	    String path = "/codeNotice";
 	    String method = "GET";
@@ -21,6 +21,7 @@ public class Message {
 	    querys.put("skin", "22");
 	    try {
 	    	HttpResponse response = HttpUtils.doGet(host, path, method, headers, querys);
+            System.out.println(EntityUtils.toString(response.getEntity()) );
 	        return 1;
 	    } catch (Exception e) {
 	    	e.printStackTrace();

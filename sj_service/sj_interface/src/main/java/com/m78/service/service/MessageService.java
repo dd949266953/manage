@@ -3,6 +3,7 @@ package com.m78.service.service;
 import com.m78.entity.Message;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 短信通知
@@ -36,6 +37,13 @@ public interface MessageService {
      * @return
      */
     int addMessage(Message message);
+
+    /**
+     * 返回小区手机号
+     * @param community
+     * @return
+     */
+    List<String> sendCommunityMessage(Long community);
 
 
 }

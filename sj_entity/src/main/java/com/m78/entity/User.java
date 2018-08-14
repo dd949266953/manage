@@ -19,16 +19,31 @@ public class User implements Serializable {
     private String nickname;
 
     private Long positionid;
+    //员工职位
+    private  String positionName;
 
     private Long departmentid;
+    //部门
+    private Department department;
 
     private String remark;
     @JSONField(format = "yyyy-MM-dd")
     private Date time;
 
+
+
     private Long communityid;
 
-    public Long getId() {
+
+    public String getPositionName() {
+        return positionName;
+    }
+
+    public void setPositionName(String positionName) {
+        this.positionName = positionName;
+    }
+
+    public  Long getId() {
         return id;
     }
 
@@ -116,8 +131,16 @@ public class User implements Serializable {
         this.communityid = communityid;
     }
 
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
     @Override
-    public String toString() {
+    public String  toString() {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
@@ -126,7 +149,9 @@ public class User implements Serializable {
                 ", wxnumber='" + wxnumber + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", positionid=" + positionid +
+                ", positionName='" + positionName + '\'' +
                 ", departmentid=" + departmentid +
+                ", department=" + department +
                 ", remark='" + remark + '\'' +
                 ", time=" + time +
                 ", communityid=" + communityid +

@@ -3,19 +3,13 @@ package com.m78.controller.datacenter;
 import com.alibaba.dubbo.config.annotation.Reference;
 
 import com.m78.entity.Building;
-import com.m78.entity.Community;
-import com.m78.entity.DictionaryItem;
 import com.m78.service.dataCenter.CommunityService;
 import com.m78.service.dataCenter.BuildingService;
 import com.m78.util.DataTable;
 import com.m78.vo.BuildingVo;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import com.m78.service.DictionaryItemSevice;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
 
 /**
  * 楼宇

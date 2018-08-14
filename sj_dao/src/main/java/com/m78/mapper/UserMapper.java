@@ -3,6 +3,7 @@ package com.m78.mapper;
 import com.m78.entity.User;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
 import java.util.Set;
 
 public interface UserMapper {
@@ -37,4 +38,17 @@ public interface UserMapper {
      * @return
      */
      Set<String> getPermissions(@Param("userName") String userName);
+
+    /**
+     * 根据姓名查询所有员工信息
+     * @return
+     */
+     List<User> getAllUserByName(@Param("userName") String userName,@Param("start") int start,
+                                 @Param("end") int end);
+
+    /**
+     * 获取所有员工数量
+     * @return
+     */
+     Long getAllCount(@Param("userName") String userName);
 }

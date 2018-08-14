@@ -21,6 +21,29 @@
     <include refid="Base_Column_List"/>
     from department
   </select>
+    <resultMap id="deparmentList" type="com.m78.entity.Department" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="count" property="count"/>
+    </resultMap>
+    <!-- 根据名称查询部门信息带分页 -->
+    <select id="getAllDepartmentByName" resultMap="deparmentList">
+     SELECT de.id,de.`name`,count(u.id) as count FROM department de
+     INNER JOIN `user` u on u.departmentId=de.id
+     GROUP BY u.id
+     <if test="name!=''">
+         HAVING de.`name` like  concat('%',#{name},'%')
+     </if>
+        limit #{start},#{end}
+    </select>
+    <!-- 根据名称获取总数 -->
+    <select id="getAllCount" resultType="java.lang.Long" >
+    select count(1) from  department
+     <if test="name!=''">
+         where  `name` like  concat('%',#{name},'%')
+     </if>
+    </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from department
     where id = #{id,jdbcType=BIGINT}

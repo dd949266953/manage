@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>员工通讯录</title>
+    <title>员工列表</title>
     <link rel="stylesheet" th:href="@{/css/back_public.css}"/>
     <link rel="stylesheet" th:href="@{/layui/css/layui.css}"/>
 </head>
 <body>
 <header>
-    员工通讯录
+    员工列表
 </header>
 <section>
     <div class="main">
-        <button class="button noborder" onclick="add()"><i class="layui-icon btn-icon">&#xe654;</i>新增员工</button>
+        <button class="button noborder" onclick="add()"><i class="layui-icon btn-icon">&#xe654;</i>添加员工</button>
         <div style="float: right;" class="grabble">
-            <input id="communityName" type="text" placeholder="请输入员工姓名或手机号" class="search-keyword"/>
+            <input id="userName" type="text" placeholder="请输入员工名称" class="search-keyword"/>
             <button onclick="page()" class="noborder">
                 <i class="layui-icon search">&#xe615;</i>
             </button>
@@ -24,24 +24,37 @@
                 <i class="layui-icon search">&#xe607;</i>
             </button>
         </div>
-        <table id="staffList" lay-filter="test"></table>
+        <table id="userList" lay-filter="test"></table>
         <script th:src="@{/layui/layui.js}" type="text/javascript"></script>
         <script th:src="@{/js/jquery-3.2.1.js}" type="text/javascript"></script>
+        <script type="text/html" id="bar">
+            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        </script>
         <script>
+            function add(){
+                layer.open({
+                    type: 2,
+                    title:'添加员工',
+                    area: ['100%', '100%'],
+                    content: 'doAddUser'
+                })
+            }
             $(function () {
                 page();
             })
+
             //分页
             function page() {
                 layui.use('table', function () {
                     var table = layui.table;
                     //第一个实例
                     table.render({
-                        elem: "#staffList",
+                        elem: "#userList",
                         loading: true,
-                        url: '/Community/communityData',
+                        url: 'getAllUserMessage',
                         where: {
-                            communityName: $("#communityName").val()
+                            userName: $("#userName").val()
                         },
                         page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
                             layout: ['limit:10', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
@@ -55,15 +68,13 @@
                         },
                         cols: [
                             [
-                                { field: 'id', align: 'center', title: '小区编号',},
-                                { field: "name", title: '小区名称'},
-                                { field: "address", title: '所在地区'},
-                                { field: "detailaddress", title: '详细地址'},
-                                { field: "servicetel", title: '服务热线'},
-                                { field: "leader", title: '负责人'},
-                                { field: "leaderphone", title: '负责电话'},
-                                { field: "logo", title: '小区Logo'},
-                                { field: "backgroundimage", title: '背景图片'},
+                                { field: "name",	align: 'center', title: '小区名称'},
+                                { field: "phone", 	align: 'center',title: '电话'},
+                                { field: "wxnumber",	align: 'center', title: '微信号码'},
+                                { field: "departmentName", 	align: 'center',title: '所属部门', templet: function(d){
+                                        return d.department.name
+                                    }},
+                                { field: "positionName",	align: 'center', title: '职位'},
                                 { field: "right", title: '编辑', align: 'center', toolbar: "#bar"}
                             ]
                         ],
@@ -75,8 +86,7 @@
                         var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
                         var tr = obj.tr; //获得当前行 tr 的DOM对象
                         if (layEvent === 'edit') {
-                            var community = $.param(data);
-                            window.location = "updateCommunity.html?" + community;
+
                         }
                         if (layEvent === 'del') {
                             layer.confirm('确定要删除吗?', {
@@ -85,11 +95,11 @@
                                 shade: '0'
                             }, function (index) {
                                 $.ajax({
-                                    url: 'deleteCommunity',
+                                    url: 'deleteUserMessage',
                                     type: 'get',
                                     dataType: 'json',
                                     data: {
-                                        id: data.id
+                                        userId: data.id
                                     },
                                     success: function (data) {
                                         if (data == 1) {
@@ -111,24 +121,10 @@
                 });
             }
 
-            //搜索
-            function search() {
-                page();
-            }
 
-            //添加小区
-            function add() {
-                window.location = "addCommunity.html";
-            }
         </script>
-        <script type="text/html" id="bar">
-            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-        </script>
+
     </div>
 </section>
-<footer>
-    Copyright 2013-2018 weixiaoqu.com 成都云联峰创科技有限公司旗下产品
-</footer>
 </body>
 </html>

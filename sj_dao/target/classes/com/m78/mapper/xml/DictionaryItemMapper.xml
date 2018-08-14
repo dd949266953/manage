@@ -25,6 +25,12 @@
     INNER JOIN dicionary_type dt ON di.`type_id`=dt.`id`
     WHERE dt.`id`=1
   </select>
+    <!--查询住户身份-->
+    <select id="getRelation" resultMap="BaseResultMap">
+         SELECT di.id,di.content FROM dictionary_item di
+         INNER JOIN dicionary_type dt ON di.type_id=dt.id
+         WHERE dt.id=13
+    </select>
     <!--查询房屋类型-->
     <select id="getHouseType" resultMap="BaseResultMap">
     SELECT di.id,content FROM dictionary_item di

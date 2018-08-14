@@ -109,7 +109,6 @@
                     for (var i=0;i<checkStatus.data.length;i++){
                           communityId.push(checkStatus.data[i].id)
                     }
-                    console.log(communityId)
                     return;
                 }else {
                     if(obj.type=='all'){
@@ -119,7 +118,7 @@
                     if(obj.checked){
                         var show='<button id="optionId" index="'+index+'"  datavalue="'+com.id+'" class="layui-btn color layui-btn-sm">'+com.name+' <i id="fion" class="layui-icon">&#x1006;</i></button>';
                         $("#communityOption").append(show)
-
+                        communityId.push(com.id)
                     }
                     //删除
                     else {
@@ -131,8 +130,7 @@
             });
         })
     }
-   //存储小区id数组
-    var communityId=new Array();
+
     //数组删除方法
     function contains(a, obj) {
         var i = a.length;
@@ -156,20 +154,27 @@
         $("button[datavalue="+index+"]").remove();
         $("tr[data-index="+trIndex+"] td[data-field=0]").find("div").find("div").click();
     });
-
-
+    //存储小区id数组
+    var communityId=new Array();
     layui.use('form', function () {
         var form = layui.form;
         form.on('submit(demo1)', function (data) {
+            console.log(communityId);
             $.ajax({
                 url: 'sendCommunityMessage.json',
-                type: 'get',
+                type: 'post',
                 dataType: 'json',
                 data: {
                    communityIds:communityId
                 },
                 success: function (data) {
-
+                    layer.msg('共发送'+data.count+'成功'+data.yes+'条，失败'+data.no+'条', {
+                        icon: 1,
+                        time: 2000,
+                        end: function () {
+                            parent.location.reload();
+                        }
+                    })
                 }
             })
         });

@@ -181,4 +181,33 @@
       inner join `user` u on u.id=ur.userId
       WHERE u.`name`=#{userName}
     </select>
+    <resultMap id="userList" type="com.m78.entity.User">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="wxnumber" jdbcType="VARCHAR" property="wxnumber" />
+        <result column="position"  property="positionName" />
+        <result column="time" jdbcType="DATE" property="time" />
+        <association property="department" javaType="com.m78.entity.Department">
+              <result column="departmentID" property="id" />
+            <result column="departmentName" property="name"/>
+        </association>
+    </resultMap>
+    <!-- 根据姓名查询所有员工带分页 -->
+    <select id="getAllUserByName" resultMap="userList">
+SELECT  u.id,u.`name`,u.phone,u.wxnumber,u.time,de.id as departmentID,de.`name` as departmentName,di.content as position FROM `user` u
+INNER JOIN department de on de.id=u.departmentId
+INNER JOIN dictionary_item di on di.id=u.positionId
+<if test="userName!=''">
+    where  u.`name` like  concat('%',#{userName},'%')
+</if>
+limit #{start},#{end}
+    </select>
+    <!-- 查询总数 -->
+    <select id="getAllCount" resultType="java.lang.Long">
+      SELECT count(1) FROM `user`
+        <if test="userName!=''">
+            where  u.`name` like  concat('%',#{userName},'%')
+        </if>
+    </select>
 </mapper>

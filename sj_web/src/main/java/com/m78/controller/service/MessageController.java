@@ -1,13 +1,21 @@
 package com.m78.controller.service;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.m78.entity.Message;
 import com.m78.service.service.MessageService;
 import com.m78.util.DataTable;
+import com.m78.util.SendMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 短信管理
@@ -90,12 +98,40 @@ public class MessageController {
     }
 
     /**
-     * 发送短信（小区的住户）
+     * 返回小区住户的手机号
      * @return
      */
     @RequestMapping("sendCommunityMessage.json")
-    public Object sendCommunityMessage(@RequestParam("communityIds[]")long [] communitys ){
-    
-        return null;
+    @ResponseBody
+    public Object sendCommunityMessage(@RequestParam("communityIds[]")Long [] communityIds ){
+        //成功条数
+        int success=0;
+        //失败条数
+        int error=0;
+        //共发送
+        int count=0;
+        Map<String,Integer> map=new HashMap<String, Integer>();
+        List<String> phones=new ArrayList<String>();
+        for (int i=0;i<communityIds.length;i++){
+           phones=messageService.sendCommunityMessage(communityIds[i]);
+           if (phones.size()>0){
+               count+=phones.size();
+               for (int j=0;j<1;j++){
+                   int num=SendMessage.sendMessage("小区住户|1000000",phones.get(j));
+                   if(num==1){
+                       success++;
+                   }else {
+                       error--;
+                   }
+               }
+           }
+            }
+
+
+
+        map.put("yes",success);
+        map.put("no",error);
+        map.put("count",count);
+        return map;
     }
 }

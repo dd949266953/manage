@@ -8,6 +8,17 @@ public class Department implements Serializable {
     private String name;
 
     private Long parentid;
+    //人员总数
+    private Long count;
+
+
+    public Long getCount() {
+        return count;
+    }
+
+    public void setCount(Long count) {
+        this.count = count;
+    }
 
     public Long getId() {
         return id;
@@ -39,6 +50,7 @@ public class Department implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", parentid=" + parentid +
+                ", count=" + count +
                 '}';
     }
 }
