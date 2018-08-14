@@ -4,10 +4,8 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.m78.entity.DictionaryItem;
 import com.m78.entity.House;
 import com.m78.entity.HouseCharitem;
-import com.m78.mapper.DictionaryItemMapper;
-import com.m78.mapper.HouseBulidingMapper;
-import com.m78.mapper.HouseCharitemMapper;
-import com.m78.mapper.HouseMapper;
+import com.m78.entity.HouseTentment;
+import com.m78.mapper.*;
 import com.m78.service.dataCenter.HouseService;
 import com.m78.vo.HouseVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +22,8 @@ public class HouseServiceImpl implements HouseService {
     private HouseBulidingMapper houseBulidingMapper;
     @Autowired
     private HouseCharitemMapper houseCharitemMapper;
+    @Autowired
+    private HouseTentmentMapper houseTentmentMapper;
     @Override
     public List<HouseVo> getAllHouse(String houseName, int page, int limit) {
         int start=(page-1)*limit;
@@ -78,5 +78,19 @@ public class HouseServiceImpl implements HouseService {
     @Override
     public int insertChargeByHouseId(HouseCharitem record) {
         return houseCharitemMapper.insertChargeByHouseId(record);
+    }
+
+    @Override
+    public int bindHouseRelationTenement(HouseTentment houseTentment) {
+        int count=houseTentmentMapper.getTenementAndHouseCount(houseTentment.getHouseid(),houseTentment.getTentmentid());
+        int result=0;
+        //说明当前住户和当前房屋存在关系  直接修改
+        if (count!=0){
+            result=houseTentmentMapper.updateRelationByTenementIdAndHouseId(houseTentment);
+        }else {
+            //不存在关系  添加
+            result=houseTentmentMapper.insertSelective(houseTentment);
+        }
+        return result;
     }
 }

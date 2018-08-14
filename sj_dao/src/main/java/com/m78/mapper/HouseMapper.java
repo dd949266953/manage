@@ -1,6 +1,7 @@
 package com.m78.mapper;
 
 import com.m78.entity.House;
+import com.m78.entity.HouseTentment;
 import com.m78.vo.HouseVo;
 import org.apache.ibatis.annotations.Param;
 
@@ -40,9 +41,4 @@ public interface HouseMapper {
      */
     Long getHouseCountByName(@Param("houseName") String houseName);
 
-    /**
-     * 根据房屋id出房屋信息
-     * @param houseId
-     * @return
-     */
 }
