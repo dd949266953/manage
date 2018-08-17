@@ -40,10 +40,6 @@ public class TenementController {
         mv.addObject("carportList",tenementService.getDetailCarportByTenementId(tenementId));
         mv.addObject("carList",tenementService.getDetailCarByTenementId(tenementId));
         mv.addObject("relationList",tenementService.getDetailRelationByTenementId(tenementId));
-        System.out.println();
-        for (TenementVo t:tenementService.getDetailHouseByTenementId(tenementId)) {
-            System.out.println(t.getReturnTime());
-        }
         mv.addObject("tenement",tenementService.getDetailTenementById(tenementId));
         mv.setViewName("dataCenter/tenement/detailTenement");
         return mv;

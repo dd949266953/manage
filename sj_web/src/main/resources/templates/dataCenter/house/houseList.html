@@ -105,7 +105,6 @@
                             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
                             var tr = obj.tr; //获得当前行 tr 的DOM对象
                             var communityId = data.communityId
-                            console.log(communityId)
                             //绑定住户
                             if (layEvent === 'bind') {
                                 $.post('bindTenement', {'communityId': communityId}, function (result) {
@@ -131,7 +130,6 @@
                                     shade: [0.7, '#080808'],
                                     btn: ["确定", "取消"],
                                     yes: function (index, layero) {
-                                        console.log(data);
                                         var houseid = data.houseId;
                                         var tenementid = $("#tenement option:selected").val();
                                         var relationid = $("#relation option:selected").val();

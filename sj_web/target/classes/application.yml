@@ -1,4 +1,3 @@
-
 server:
   port: 8081
 spring:
@@ -35,3 +34,8 @@ spring:
       max-connections: 50
       expiry-timeout: 10000
       idle-timeout: 30000
+logging:
+  file:
+    max-history: 10
+    max-size: 10MB
+  path: ${user.home}/logs
