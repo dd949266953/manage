@@ -5,6 +5,7 @@ import com.m78.entity.Community;
 import com.m78.service.dataCenter.CommunityService;
 import com.m78.util.DataTable;
 import com.m78.util.upload;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,7 @@ public class CommunityController {
      *
      * @return
      */
-
+    @RequiresPermissions("community:list")
     @RequestMapping("communityList.html")
     public String CommunityList() {
         return "dataCenter/community/community";
@@ -77,6 +78,7 @@ public class CommunityController {
      */
     @RequestMapping(value = "deleteCommunity", method = RequestMethod.GET)
     @ResponseBody
+    @RequiresPermissions("community:delete")
     public int delCommunity(long id) {
         return communityService.deleteByPrimaryKey((long) id);
     }

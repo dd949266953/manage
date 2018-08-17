@@ -32,12 +32,12 @@ public class ShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         //获取用户名
-        String name=(String)principalCollection.getPrimaryPrincipal();
+        Long userId=(Long)principalCollection.getPrimaryPrincipal();
         SimpleAuthorizationInfo authorizationInfo=new SimpleAuthorizationInfo();
         //角色
-        authorizationInfo.setRoles(userService.getRoleByUserName(name));
+        authorizationInfo.setRoles(userService.getRoleByUserName(userId));
         //权限
-        authorizationInfo.setStringPermissions(userService.getPermissionByUserName(name));
+        authorizationInfo.setStringPermissions(userService.getPermissionByUserName(userId));
         //返回
         return authorizationInfo;
     }
@@ -55,7 +55,7 @@ public class ShiroRealm extends AuthorizingRealm {
        //根据用户名查询
         User user=userService.getUserByName(name);
         if(user!=null){
-            SimpleAuthenticationInfo authcInfo=new SimpleAuthenticationInfo(user.getName(),user.getPassword(),"xx");
+            SimpleAuthenticationInfo authcInfo=new SimpleAuthenticationInfo(user.getId(),user.getPassword(),"xx");
             return authcInfo;
         }
         return null;

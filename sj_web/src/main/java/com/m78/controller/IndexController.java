@@ -6,17 +6,13 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.Method;
 
 @Controller
 public class IndexController {
@@ -26,8 +22,11 @@ public class IndexController {
      * @return
      */
     @RequestMapping("doIndex")
-    public  Object doIndex(){
-        return  "index";
+    public ModelAndView doIndex(){
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("index");
+
+        return  modelAndView;
     }
 
     /**
@@ -37,6 +36,14 @@ public class IndexController {
     @RequestMapping("demo")
     public  Object demo(){
         return  "demo";
+    }
+    /**
+     * 跳转首页456
+     * @return
+     */
+    @RequestMapping("noPermission")
+    public  Object doNoPermission(){
+        return  "noPermission";
     }
 
     /**
@@ -55,14 +62,14 @@ public class IndexController {
      */
     @RequestMapping(value = "/login")
     @ResponseBody
-    public  String login(User user, Model model){
+    public  String login(User user,HttpServletRequest request){
         //获取主体
         Subject subject=SecurityUtils.getSubject();
        user.setPassword(MyDES.encryptBasedDes(user.getPassword()));
         //创建token
-        UsernamePasswordToken token=new UsernamePasswordToken(user.getName(),user.getPassword());
+        UsernamePasswordToken token=new UsernamePasswordToken(user.getPhone(),user.getPassword());
         try {
-            model.addAttribute("user",user);
+
             subject.login(token);
             return  "0";
         }catch(IncorrectCredentialsException e){
@@ -79,7 +86,7 @@ public class IndexController {
      */
     @RequestMapping("/nopermission")
     public  Object doNoPerssion(){
-       return  "nopermission";
+       return "noPermission";
     }
 
 }

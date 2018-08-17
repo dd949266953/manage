@@ -34,7 +34,13 @@ public class User implements Serializable {
 
     private Long communityid;
 
+    public  Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
     public String getPositionName() {
         return positionName;
     }
@@ -43,13 +49,7 @@ public class User implements Serializable {
         this.positionName = positionName;
     }
 
-    public  Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

@@ -1,5 +1,6 @@
 package com.m78.mapper;
 
+import com.m78.entity.Department;
 import com.m78.entity.DictionaryItem;
 
 import java.util.List;
@@ -49,4 +50,10 @@ public interface DictionaryItemMapper {
      * @return
      */
     List<DictionaryItem>getRelation();
+
+    /**
+     * 获取员工职位信息
+     * @return
+     */
+    List<DictionaryItem> getUserOption();
 }

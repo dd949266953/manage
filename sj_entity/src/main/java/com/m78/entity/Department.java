@@ -12,6 +12,7 @@ public class Department implements Serializable {
     private Long count;
 
 
+
     public Long getCount() {
         return count;
     }

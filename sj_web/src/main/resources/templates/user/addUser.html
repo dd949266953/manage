@@ -27,7 +27,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">员工姓名</label>
         <div class="layui-input-block">
-            <input type="text" id="userName" name="noticename" lay-verify="required" autocomplete="off"
+            <input type="text" id="name" name="name" lay-verify="required" autocomplete="off"
                    placeholder="请输入姓名" class="layui-input"/>
         </div>
 
@@ -35,7 +35,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">员工电话</label>
         <div class="layui-input-block">
-            <input type="text" id="phone" name="noticename" lay-verify="required" autocomplete="off"
+            <input type="text" id="phone" name="phone" lay-verify="required|phone" autocomplete="off"
                    placeholder="请输入电话" class="layui-input"/>
         </div>
 
@@ -43,27 +43,40 @@
     <div class="layui-form-item">
         <label class="layui-form-label">微信号码</label>
         <div class="layui-input-block">
-            <input type="text" id="wxNumber" name="noticename" lay-verify="required" autocomplete="off"
+            <input type="text" id="wxnumber" name="wxnumber" lay-verify="required" autocomplete="off"
                    placeholder="请输入微信账号" class="layui-input"/>
         </div>
 
     </div>
-
     <div class="layui-form-item">
-        <label class="layui-form-label">所属部门</label>
+    <label class="layui-form-label">任职时间</label>
+    <div class="layui-input-inline">
+        <input type="text" class="layui-input" name="time" id="time" placeholder="yyyy-MM-dd">
+    </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">所属小区</label>
         <div class="layui-input-block">
-            <select class="input" name="type" id="deparment">
+            <select class="input" name="communityid" id="communityId">
 
             </select>
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">现任职位</label>
+        <label class="layui-form-label">所属部门</label>
         <div class="layui-input-block">
-            <select class="input" name="type" id="noticetype">
+            <select class="input" name="departmentid" id="departmentId">
 
             </select>
-            <a onclick="addType()" style="color:rgb(46,204,113);margin-top:20px;display: block" href="javascript:(0)">添加更多职位</a>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">分配职位</label>
+        <div class="layui-input-block">
+            <select class="input" name="positionid" id="positionId">
+
+            </select>
+            <div style="color:rgb(46,204,113);margin-top:20px;display: block" href="javascript:(0)">如需添加更多职位，请联系管理员</div>
         </div>
     </div>
     <div class="layui-form-item" id="sure">
@@ -77,26 +90,93 @@
 <script th:src="@{/js/jquery-3.2.1.js}"></script>
 <script th:src="@{/layui/layui.js}"></script>
 <script>
+    var times='';
+    //时间
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+        //日期时间选择器
+        laydate.render({
+            elem: '#time',
+            max: 0
+            ,theme: '#393D49',
+            done:function (value) {
+                times=value;
+            }
+        })
+    })
+    //选择小区
+    $.ajax({
+        url:'../Community/getCommunityIdAndName',
+        type:'post',
+        dataType:'json',
+        success:function(data){
+            $.each(data, function(i, val) {
+                $("#communityId").append(
+                    "<option name='communityid'  value=" + val.id + ">"
+                    + val.name + "</option>")
+
+
+            })
+            layui.form.render('select');
+        }
+    })
+    //获取部门信息
+    $.ajax({
+        url: '../department/getAllDepartment',
+        dataType: 'json',
+        type: 'get',
+        success: function (data) {
+            $.each(data, function (i, val) {
+                $("#departmentId").append(
+                    "<option name='departmentid'  value=" + val.id + ">"
+                    + val.name + "</option>")
+            })
+            layui.form.render('select');
+        }
+    })
+
+      //获取职位信息
+        $.ajax({
+            url: '../department/getAllUserOption',
+            dataType: 'json',
+            type: 'get',
+            success: function (data) {
+                $.each(data, function (i, val) {
+                    $("#positionId").append(
+                        "<option name='positionid'  value=" + val.id + ">"
+                        + val.content + "</option>")
+                })
+                layui.form.render('select');
+            }
+        })
+
     layui.use(['form'], function () {
         var form = layui.form;
         form.on('submit(demo1)', function (data) {
+            if(times==''){
+                layer.msg('请选择时间',{icon:2});
+                return;
+            }
             $.ajax({
-                url: 'addMessage.json',
+                url: 'addUserMessage',
                 type: 'get',
                 dataType: 'json',
-                data: {
-                    title: $("#messageName").val(),
-                    content:  layedit.getContent(index)
-                },
+                data: $("#form1").serialize(),
                 success: function (data) {
                     if (data == '1') {
-                        parent.location.reload();
+                        layer.msg('添加成功', {
+                            icon: 1,
+                            time: 2000,
+                            end: function () {
+                                parent.location.reload();
+                            }
+                        })
                     } else {
-                        layer.msg("错误");
+                        layer.msg("添加失败");
                     }
 
                 }
-            })
+             })
 
         });
 
