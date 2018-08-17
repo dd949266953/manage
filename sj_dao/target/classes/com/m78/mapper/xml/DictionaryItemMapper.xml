@@ -10,6 +10,13 @@
             <result column="description" property="description" jdbcType="VARCHAR"/>
         </association>
     </resultMap>
+
+    <resultMap id="departmentOptionList" type="com.m78.entity.DictionaryItem">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
     <sql id="Base_Column_List">
     id, content, type_id
   </sql>
@@ -55,6 +62,10 @@ WHERE dt.id=2
         select
         <include refid="Base_Column_List"/>
         from dictionary_item WHERE type_id= 12
+    </select>
+    <!--查询员工职位类型-->
+    <select id="getUserOption" resultMap="departmentOptionList">
+       SELECT  it.id,it.content FROM dictionary_item it WHERE it.type_id=15
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">

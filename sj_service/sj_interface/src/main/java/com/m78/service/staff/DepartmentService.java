@@ -1,6 +1,7 @@
 package com.m78.service.staff;
 
 import com.m78.entity.Department;
+import com.m78.entity.DictionaryItem;
 
 import java.util.List;
 
@@ -33,5 +34,11 @@ public interface DepartmentService {
      * @return
      */
     Long getAllDepartmentCount(String departmentName );
+
+    /**
+     * 获取员工职位类型
+     * @return
+     */
+    List<DictionaryItem> getUserOption();
 
 }

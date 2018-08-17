@@ -24,28 +24,43 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Set<String> getRoleByUserName(String userName) {
-        return userMapper.getRoles(userName);
+    public Set<String> getRoleByUserName(Long userId) {
+        return userMapper.getRoles(userId);
     }
 
     @Override
-    public Set<String> getPermissionByUserName(String userName) {
-        return userMapper.getPermissions(userName);
+    public Set<String> getPermissionByUserName(Long userId) {
+        return userMapper.getPermissions(userId);
     }
 
     @Override
-    public List<User> getAllUserByName(int page, int limit, String userName) {
+    public List<User> getAllUserByName(int page, int limit, String userName,String admin,Long id) {
         int start=(page-1)*limit;
-        return userMapper.getAllUserByName(userName,start,limit);
+        return userMapper.getAllUserByName(userName,start,limit,admin,id);
     }
 
     @Override
-    public Long getAllCount(String userName) {
-        return userMapper.getAllCount(userName);
+    public Long getAllCount(String userName,String admin,Long id) {
+        return userMapper.getAllCount(userName,admin,id);
     }
 
     @Override
     public int deleteUser(Long userId) {
         return userMapper.deleteByPrimaryKey(userId);
+    }
+
+    @Override
+    public int addUser(User user) {
+        return userMapper.insertSelective(user);
+    }
+
+    @Override
+    public List<User> getUserByDepartmentId(Long departmentId, Long userId) {
+        return userMapper.getUserByDepartmentId(departmentId,userId);
+    }
+
+    @Override
+    public int updatePasswordById(String password, Long userId) {
+        return userMapper.updatePasswordById(password,userId);
     }
 }

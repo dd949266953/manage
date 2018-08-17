@@ -33,7 +33,7 @@
       phone, wxnumber, nickname, 
       positionId, departmentId, remark, 
       time, communityId)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
       #{phone,jdbcType=VARCHAR}, #{wxnumber,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
       #{positionid,jdbcType=BIGINT}, #{departmentid,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}, 
       #{time,jdbcType=DATE}, #{communityid,jdbcType=BIGINT})
@@ -163,23 +163,23 @@
   </update>
     <!--根据用户名查询当前用户 -->
     <select id="getByUserName" resultMap="BaseResultMap" parameterType="java.lang.String">
-        select  <include refid="Base_Column_List" />  from  user where  name=#{userName}
+        select  <include refid="Base_Column_List" />  from  user where  phone=#{userName}
     </select>
     <!--根据用户名查询用户角色-->
-    <select id="getRoles" parameterType="java.lang.String" resultType="java.lang.String">
+    <select id="getRoles" parameterType="java.lang.Long" resultType="java.lang.String">
       SELECT r.roleName FROM role  r
       inner join user_role ur on ur.roleId=r.id
       inner join `user` u on u.id=ur.userId
-      WHERE u.`name`=#{userName}
+      WHERE u.`id`=#{userId}
     </select>
     <!--根据用户名查询角色的权限 -->
-    <select id="getPermissions" resultType="java.lang.String" parameterType="java.lang.String">
+    <select id="getPermissions" resultType="java.lang.String" parameterType="java.lang.Long">
       SELECT p.permissionName FROM permission p
       INNER JOIN role_permission rp on rp.permissionId=p.id
       INNER JOIN role r on r.id=rp.roleId
       inner join user_role ur on ur.roleId=r.id
       inner join `user` u on u.id=ur.userId
-      WHERE u.`name`=#{userName}
+      WHERE u.`id`=#{userId}
     </select>
     <resultMap id="userList" type="com.m78.entity.User">
         <id column="id" jdbcType="BIGINT" property="id" />
@@ -198,16 +198,44 @@
 SELECT  u.id,u.`name`,u.phone,u.wxnumber,u.time,de.id as departmentID,de.`name` as departmentName,di.content as position FROM `user` u
 INNER JOIN department de on de.id=u.departmentId
 INNER JOIN dictionary_item di on di.id=u.positionId
+        where 1=1
+        and  u.id!=#{id}
 <if test="userName!=''">
-    where  u.`name` like  concat('%',#{userName},'%')
+    and  u.`name` like  concat('%',#{userName},'%')
 </if>
+      <if test="admin=='yes'">
+       and u.password is not null
+      </if>
 limit #{start},#{end}
     </select>
     <!-- 查询总数 -->
     <select id="getAllCount" resultType="java.lang.Long">
-      SELECT count(1) FROM `user`
+      SELECT count(1) FROM `user` u
+        where 1=1
+        and  u.id!=#{id}
         <if test="userName!=''">
-            where  u.`name` like  concat('%',#{userName},'%')
+           and  u.`name` like  concat('%',#{userName},'%')
         </if>
+        <if test="admin=='yes'">
+            and u.password is not null
+        </if>
+    </select>
+    <resultMap id="userByDepartmentId" type="com.m78.entity.User">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+    </resultMap>
+    <!-- 根据部门查询所有员工信息 -->
+    <select id="getUserByDepartmentId" resultMap="userByDepartmentId">
+    SELECT id,`name`,phone FROM `user`
+    WHERE departmentId=#{departmentId} and id!=#{userId} and password is null
+    </select>
+    <!-- 根据id更新密码 -->
+    <update id="updatePasswordById">
+         UPDATE `user` SET `password`=#{password} WHERE id=#{userId}
+    </update>
+    <!-- 根据id查询当前用户 -->
+    <select id="getUserById" parameterType="java.lang.Long">
+
     </select>
 </mapper>

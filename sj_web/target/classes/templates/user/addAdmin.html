@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!--
+	作者：offline
+	时间：2018-07-07
+	描述:添加管理员
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>添加管理员</title>
+    <link th:href="@{/layui/css/layui.css}" rel="stylesheet">
+    <link th:href="@{/css/back_public.css}" rel="stylesheet">
+    <style>
+        form {
+            width: 600px;
+            margin: 50px auto;
+        }
+        .layui-form-item {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+<form id="form1" class="layui-form" action="" onsubmit="return false" enctype="multipart/form-data">
+    <div class="layui-form-item">
+        <label class="layui-form-label">所属部门</label>
+        <div class="layui-input-block">
+            <select class="input" lay-filter="departmentId" name="departmentid" id="departmentId">
+            <option value=" ">请先选择部门</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">姓名</label>
+        <div class="layui-input-block">
+            <select lay-filter="name" class="input" name="name" id="name">
+
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">登录账号</label>
+        <div class="layui-input-block">
+            <input style="background-color: #f5f5f5;color: black!important;" type="text" id="phone" name="phone" lay-verify="required" autocomplete="off"
+                    class="layui-input layui-disabled" disabled/>
+        </div>
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">登录密码</label>
+        <div class="layui-input-block">
+            <input type="password" id="loginPassword" name="loginPassword" lay-verify="required" autocomplete="off"
+                   placeholder="请输入登录密码" class="layui-input"/>
+        </div>
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">确认密码</label>
+        <div class="layui-input-block">
+            <input type="password" id="password" name="passowrd" lay-verify="required" autocomplete="off"
+                   placeholder="请再次输入密码" class="layui-input"/>
+        </div>
+
+    </div>
+    <div class="layui-form-item" id="sure">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+            <button id="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+
+</form>
+<script th:src="@{/js/jquery-3.2.1.js}"></script>
+<script th:src="@{/layui/layui.js}"></script>
+<script>
+    //获取部门信息
+    $.ajax({
+        url: '../department/getAllDepartment',
+        dataType: 'json',
+        type: 'get',
+        success: function (data) {
+            $.each(data, function (i, val) {
+                $("#departmentId").append(
+                    "<option name='departmentid'  value=" + val.id + ">"
+                    + val.name + "</option>")
+            })
+            layui.form.render('select');
+        }
+    })
+
+
+
+    layui.use(['form'], function () {
+        var form = layui.form;
+        form.on('select(departmentId)', function(data){
+            $("#name option").remove();
+            //获取部门下员工姓名
+            $.ajax({
+                url: '../user/getUserByDepartmentId',
+                dataType: 'json',
+                type: 'get',
+                data:{
+                    departmentId:data.value
+                },
+                success: function (data) {
+                    names=data;
+                    $.each(data, function (i, val) {
+
+                        $("#name").append(
+                            "<option name='name'  value=" + val.id + ">"
+                            + val.name + "</option>")
+                        if(i==0){
+                          $("#phone").val(val.phone);
+                            adminId=val.id;
+                        }
+                    })
+                    if(data==''){
+                        $("#phone").val('');
+                    }
+                    layui.form.render('select');
+                }
+            })
+        });
+        var names;
+        form.on('select(name)', function(data){
+
+            var index=$("#name").val();
+            adminId=index;
+            $.each(names, function (i, val) {
+                   if(val.id==index){
+                       console.log(val.phone)
+                       $("#phone").val(val.phone);
+                   }
+            })
+        });
+        var adminId=0;
+        form.on('submit(demo1)', function (data) {
+            if($("#loginPassword").val()!=$("#password").val()){
+                   layer.msg("两次密码不相同",{icon:2})
+                return;
+            }
+            $.ajax({
+                url: '../user/updateAdminPassword',
+                type: 'get',
+                dataType: 'json',
+                data: {
+                        userId:adminId,
+                        password:$("#loginPassword").val()
+                },
+                success: function (data) {
+                    if (data == '1') {
+                        layer.msg('添加成功', {
+                            icon: 1,
+                            time: 2000,
+                            end: function () {
+                                parent.location.reload();
+                            }
+                        })
+                    } else {
+                        layer.msg("添加失败");
+                    }
+
+                }
+             })
+
+        });
+
+    });
+
+
+</script>
+</body>
+
+</html>

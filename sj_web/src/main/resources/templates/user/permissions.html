@@ -10,13 +10,13 @@
 </head>
 <body>
 <header>
-    员工列表
+    管理员列表
 </header>
 <section>
     <div class="main">
-        <button class="button noborder" onclick="add()"><i class="layui-icon btn-icon">&#xe654;</i>添加员工</button>
+        <button class="button noborder" onclick="add()"><i class="layui-icon btn-icon">&#xe654;</i>添加管理员</button>
         <div style="float: right;" class="grabble">
-            <input id="userName" type="text" placeholder="请输入员工名称" class="search-keyword"/>
+            <input id="userAdminName" type="text" placeholder="请输入员工名称" class="search-keyword"/>
             <button onclick="page()" class="noborder">
                 <i class="layui-icon search">&#xe615;</i>
             </button>
@@ -24,20 +24,23 @@
                 <i class="layui-icon search">&#xe607;</i>
             </button>
         </div>
-        <table id="userList" lay-filter="test"></table>
+        <table id="userAdminList" lay-filter="test"></table>
         <script th:src="@{/layui/layui.js}" type="text/javascript"></script>
         <script th:src="@{/js/jquery-3.2.1.js}" type="text/javascript"></script>
         <script type="text/html" id="bar">
-            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+
+            <a class="layui-btn layui-btn-xs" lay-event="edit">重置密码</a>
+            <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="ok">权限设置</a>
             <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+
         </script>
         <script>
             function add(){
                 layer.open({
                     type: 2,
-                    title:'添加员工',
+                    title:'添加管理员',
                     area: ['100%', '100%'],
-                    content: 'doAddUser'
+                    content: 'doAddAdmin'
                 })
             }
             $(function () {
@@ -50,12 +53,12 @@
                     var table = layui.table;
                     //第一个实例
                     table.render({
-                        elem: "#userList",
+                        elem: "#userAdminList",
                         loading: true,
-                        url: 'getAllUserMessage',
+                        url: '../user/getAllUserMessage',
                         where: {
-                            userName: $("#userName").val(),
-                            admin:'no'
+                            userName: $("#userAdminName").val(),
+                            admin:'yes'
                         },
                         page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
                             layout: ['limit:10', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
@@ -86,37 +89,41 @@
                         var data = obj.data; //获得当前行数据
                         var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
                         var tr = obj.tr; //获得当前行 tr 的DOM对象
+                        //重置密码
                         if (layEvent === 'edit') {
-
+                            layer.open({
+                                title: '新密码',
+                                shade: 0,
+                                offset: '150px'
+                                , content: '<input class="layui-input"   id="newPassowrd"  type="text" placeholder="请输入新的密码" />',
+                                yes: function (layero, index) {
+                                    if ($("#newPassowrd").val() == '') {
+                                        layer.msg('密码不能为空,请重新添加', {icon: 2});
+                                        return;
+                                    }
+                                    $.ajax({
+                                        url: '../user/updateAdminPassword',
+                                        dataType: 'text',
+                                        type: 'post',
+                                        data: {
+                                            userId:data.id,
+                                            password:$("#newPassowrd").val()
+                                        },
+                                        success: function (data) {
+                                            if (data === '1') {
+                                                layer.msg('更新成功', {icon: 1});
+                                                getType();
+                                                layer.close(index);
+                                            } else {
+                                                layer.msg('更新失败，请联系客服', {icon: 2});
+                                            }
+                                        }
+                                    })
+                                }
+                            });
                         }
                         if (layEvent === 'del') {
-                            layer.confirm('确定要删除吗?', {
-                                icon: 3,
-                                title: '提示',
-                                shade: '0'
-                            }, function (index) {
-                                $.ajax({
-                                    url: 'deleteUserMessage',
-                                    type: 'post',
-                                    dataType: 'json',
-                                    data: {
-                                        userId: data.id
-                                    },
-                                    success: function (data) {
-                                        if (data == 1) {
-                                            layer.msg('删除成功', {
-                                                icon: 1
-                                            });
-                                            obj.del();
-                                            layer.close(index);
-                                        } else {
-                                            layer.msg('删除失败', {
-                                                icon: 2
-                                            });
-                                        }
-                                    }
-                                })
-                            });
+                            layer.msg("功能未实现",{icon:2})
                         }
                     });
                 });
