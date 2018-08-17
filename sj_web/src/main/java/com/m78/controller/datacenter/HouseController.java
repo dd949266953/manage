@@ -160,6 +160,6 @@ public class HouseController {
     @RequestMapping("/bindHouseRelationTenement")
     @ResponseBody
     public Object bindHouseRelationTenement(HouseTentment houseTentment){
-        return null;
+        return houseService.bindHouseRelationTenement(houseTentment);
     }
 }

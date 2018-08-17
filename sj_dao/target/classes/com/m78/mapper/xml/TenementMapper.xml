@@ -368,7 +368,7 @@ WHERE c.`id`=#{communityId}
      INNER JOIN `house` h 		ON ht.`houseId`=h.`houseId`
      INNER JOIN `house_buliding` hb ON hb.`houseId`=h.`houseId`
      INNER JOIN `building` b 	ON b.id=hb.`buildingId`
-     INNER JOIN dictionary_item di ON di.id=t.state
+     INNER JOIN dictionary_item di ON di.id=ht.`relationId`
      WHERE t.id IN (
      SELECT ht.`tentmentId` FROM house_tentment ht WHERE `houseId`=
     (SELECT ht.houseId FROM house_tentment ht WHERE `tentmentId`=#{tenementId}))

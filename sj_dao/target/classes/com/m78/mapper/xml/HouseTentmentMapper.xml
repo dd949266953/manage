@@ -10,6 +10,14 @@
   <sql id="Base_Column_List">
     id, houseId, tentmentId, relationId
   </sql>
+  <!--查询住户和房屋有没有关系-->
+  <select id="getTenementAndHouseCount" resultType="java.lang.Integer">
+     SELECT COUNT(1) FROM  `house_tentment` WHERE houseId=#{houseid} AND tentmentId=#{tentmentid}
+  </select>
+  <!--修改关系 根据住户和房屋id-->
+  <update id="updateRelationByTenementIdAndHouseId">
+     UPDATE `manage`.`house_tentment` SET `relationId` =#{relationid}  WHERE houseId = #{houseid} AND tentmentId=#{tentmentid};
+  </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

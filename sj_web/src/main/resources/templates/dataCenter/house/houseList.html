@@ -105,7 +105,7 @@
                             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
                             var tr = obj.tr; //获得当前行 tr 的DOM对象
                             var communityId = data.communityId
-                        console.log(communityId)
+                            console.log(communityId)
                             //绑定住户
                             if (layEvent === 'bind') {
                                 $.post('bindTenement', {'communityId': communityId}, function (result) {
@@ -135,26 +135,25 @@
                                         var houseid = data.houseId;
                                         var tenementid = $("#tenement option:selected").val();
                                         var relationid = $("#relation option:selected").val();
-                                        console.log(tenementid)
-                                        console.log(relationid)
-                                        // $.post('insertChargeByHouseId', {
-                                        //     'houseid': houseid,
-                                        //     'charitemid': charitemid
-                                        // }, function (result) {
-                                        //     var hint = "添加成功";
-                                        //     var icon = 1;
-                                        //     if (result != 1) {
-                                        //         hint = "添加失败"
-                                        //         icon = 2;
-                                        //     }
-                                        //     layer.msg(hint, {
-                                        //         icon: icon,
-                                        //         time: 2000,
-                                        //         end: function () {
-                                        //             window.location = "/House/houseList.html";
-                                        //         }
-                                        //     })
-                                        // })
+                                        $.post('bindHouseRelationTenement', {
+                                            'houseid': houseid,
+                                            'tentmentid': tenementid,
+                                            'relationid': relationid
+                                        }, function (result) {
+                                            var hint="绑定成功";
+                                            var icon=1;
+                                            if (result!=1){
+                                                hint="绑定失败";
+                                                icon=2;
+                                            }
+                                            layer.msg(hint,{
+                                                icon: icon,
+                                                time: 2000,
+                                                end: function () {
+                                                    window.location = "/House/houseList.html";
+                                                }
+                                            })
+                                        })
                                     }
                                 });
                             }
@@ -173,7 +172,10 @@
                                     yes: function (index, layero) {
                                         var houseid = data.houseId;
                                         var charitemid = $("#charge option:selected").val();
-                                        $.post('insertChargeByHouseId', {'houseid': houseid, 'charitemid': charitemid}, function (result) {
+                                        $.post('insertChargeByHouseId', {
+                                            'houseid': houseid,
+                                            'charitemid': charitemid
+                                        }, function (result) {
                                             var hint = "添加成功";
                                             var icon = 1;
                                             if (result != 1) {

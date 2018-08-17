@@ -3,6 +3,7 @@ package com.m78.service.dataCenter;
 import com.m78.entity.DictionaryItem;
 import com.m78.entity.House;
 import com.m78.entity.HouseCharitem;
+import com.m78.entity.HouseTentment;
 import com.m78.vo.HouseVo;
 
 import java.util.List;
@@ -53,4 +54,9 @@ public interface HouseService {
      */
     int insertChargeByHouseId(HouseCharitem record);
 
+    int bindHouseRelationTenement(HouseTentment houseTentment);
+    /**
+     * 修改关系 根据住户和房屋id
+     * @return
+     */
 }
