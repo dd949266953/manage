@@ -132,4 +132,23 @@ public interface TenementMapper {
      */
     int getOpenidCount(@Param("openid")String openid);
 
+    /**
+     * 根据openid更新手机号
+     * @param phone
+     * @param openid
+     * @return
+     */
+    int updatePhoneByOpenId(@Param("phone") String phone,@Param("openId") String openid);
+
+    /**
+     * 根据openid更新
+     * @param nickname
+     * @param sex
+     * @param photo
+     * @param address
+     * @return
+     */
+    int updateInfoByOpenId(@Param("nickname") String nickname,@Param("sex") String sex
+                           ,@Param("photo") String photo,@Param("address") String address);
+
 }

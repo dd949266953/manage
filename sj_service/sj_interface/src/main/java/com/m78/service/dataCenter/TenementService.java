@@ -126,4 +126,22 @@ public interface TenementService {
      * @return
      */
     int getOpenidCount(String openid);
+
+    /**
+     * 根据openID更新手机号
+     * @param phone
+     * @param openId
+     * @return
+     */
+    int updatePhoneByOpenId(String phone,String openId);
+
+    /**
+     * 根据openid更新所有信息
+     * @param nickname
+     * @param sex
+     * @param photo
+     * @param address
+     * @return
+     */
+    int updateInfoByOpenId(String nickname, String sex,String photo,String address);
 }

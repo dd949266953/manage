@@ -379,4 +379,12 @@ WHERE c.`id`=#{communityId}
     <select id="getOpenidCount" resultType="java.lang.Integer">
         SELECT COUNT(1) FROM tenement WHERE openid=#{openid}
     </select>
+    <!-- 根据openId更新电话 -->
+    <update id="updatePhoneByOpenId">
+     update tenement set phone=#{phone} where openid=#{openId}
+    </update>
+    <!-- 根据openId更新电话 -->
+    <update id="updateInfoByOpenId">
+     update tenement set nickname=#{nickname},sex=#{sex},photo=#{photo},address=#{address} where openid=#{openId}
+    </update>
 </mapper>
