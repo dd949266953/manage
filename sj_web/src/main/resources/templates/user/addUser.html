@@ -16,6 +16,7 @@
         form {
             width: 600px;
             margin: 50px auto;
+
         }
         .layui-form-item {
             margin-bottom: 30px;
@@ -51,7 +52,7 @@
     <div class="layui-form-item">
     <label class="layui-form-label">任职时间</label>
     <div class="layui-input-inline">
-        <input type="text" class="layui-input" name="time" id="time" placeholder="yyyy-MM-dd">
+        <input type="text" class="layui-input" name="stringTime" id="stringTime" placeholder="yyyy-MM-dd">
     </div>
     </div>
     <div class="layui-form-item">
@@ -96,7 +97,7 @@
         var laydate = layui.laydate;
         //日期时间选择器
         laydate.render({
-            elem: '#time',
+            elem: '#stringTime',
             max: 0
             ,theme: '#393D49',
             done:function (value) {
@@ -161,7 +162,8 @@
                 url: 'addUserMessage',
                 type: 'get',
                 dataType: 'json',
-                data: $("#form1").serialize(),
+                data: $("#form1").serialize()
+                ,
                 success: function (data) {
                     if (data == '1') {
                         layer.msg('添加成功', {

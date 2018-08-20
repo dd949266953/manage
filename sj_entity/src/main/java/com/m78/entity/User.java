@@ -29,8 +29,8 @@ public class User implements Serializable {
     private String remark;
     @JSONField(format = "yyyy-MM-dd")
     private Date time;
-
-
+    //接收时间
+    private String stringTime;
 
     private Long communityid;
 
@@ -139,8 +139,16 @@ public class User implements Serializable {
         this.department = department;
     }
 
+    public String getStringTime() {
+        return stringTime;
+    }
+
+    public void setStringTime(String stringTime) {
+        this.stringTime = stringTime;
+    }
+
     @Override
-    public String  toString() {
+    public String toString() {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
@@ -154,6 +162,7 @@ public class User implements Serializable {
                 ", department=" + department +
                 ", remark='" + remark + '\'' +
                 ", time=" + time +
+                ", stringTime='" + stringTime + '\'' +
                 ", communityid=" + communityid +
                 '}';
     }

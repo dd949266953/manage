@@ -125,6 +125,14 @@
                         if (layEvent === 'del') {
                             layer.msg("功能未实现",{icon:2})
                         }
+                        if (layEvent === 'ok') {
+                            layer.open({
+                                type: 2,
+                                title:'员工：'+data.name,
+                                area: ['100%', '100%'],
+                                content: 'doSetPermissions/'+data.id
+                            })
+                        }
                     });
                 });
             }

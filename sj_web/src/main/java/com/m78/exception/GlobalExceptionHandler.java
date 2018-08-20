@@ -2,6 +2,8 @@ package com.m78.exception;
 
 
 import com.m78.entity.ErrorInfo;
+import org.apache.shiro.authz.UnauthorizedException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,6 +15,14 @@ import javax.servlet.http.HttpServletRequest;
  */
 @ControllerAdvice
 public class GlobalExceptionHandler {
+
+
+
+    @ExceptionHandler(value = UnauthorizedException.class)
+    public  Object unauthorizedException(){
+        ModelAndView mv = new ModelAndView("noPermission");
+        return  mv;
+    }
 
 	@ExceptionHandler(Exception.class)
 	public Object handleException(Exception e,HttpServletRequest request){

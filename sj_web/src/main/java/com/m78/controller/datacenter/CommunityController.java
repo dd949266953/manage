@@ -40,7 +40,16 @@ public class CommunityController {
      *
      * @return
      */
-    @RequestMapping(value = {"updateCommunity.html", "addCommunity.html"})
+    @RequiresPermissions("community:add")
+    @RequestMapping( "addCommunity.html")
+    public Object addCommunityView(Community community) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("dataCenter/community/addCommunity");
+        mv.addObject("community", community);
+        return mv;
+    }
+    @RequiresPermissions("community:update")
+    @RequestMapping("updateCommunity.html")
     public Object updateCommunityView(Community community) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("dataCenter/community/addCommunity");
@@ -57,6 +66,7 @@ public class CommunityController {
     /**
      * 添加小区
      */
+
     @RequestMapping("addCommunity")
     @ResponseBody
     public int insertCommunity(Community record) {
