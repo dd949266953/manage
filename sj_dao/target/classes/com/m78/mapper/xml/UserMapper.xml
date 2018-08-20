@@ -232,8 +232,20 @@ limit #{start},#{end}
     <update id="updatePasswordById">
          UPDATE `user` SET `password`=#{password} WHERE id=#{userId}
     </update>
+    <resultMap id="userInfo" type="com.m78.entity.User">
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="wxnumber" jdbcType="VARCHAR" property="wxnumber" />
+        <result column="time" jdbcType="DATE" property="time" />
+        <association property="department" javaType="com.m78.entity.Department">
+            <result column="departmentID" property="id" />
+            <result column="departmentName" property="name"/>
+        </association>
+    </resultMap>
     <!-- 根据id查询当前用户 -->
-    <select id="getUserById" parameterType="java.lang.Long">
-
+    <select id="getUserById" parameterType="java.lang.Long" resultMap="userInfo">
+     SELECT u.`name`,u.phone,u.wxnumber,u.time,d.id,d.`name` as departmentName FROM `user` u
+     INNER JOIN department d on d.id=u.departmentId
+     WHERE u.id=#{userId}
     </select>
 </mapper>

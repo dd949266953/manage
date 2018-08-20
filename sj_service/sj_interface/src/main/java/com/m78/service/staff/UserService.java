@@ -70,4 +70,11 @@ public interface UserService {
      * @return
      */
     int updatePasswordById( String password,Long userId);
+
+    /**
+     * 根据id查询当前用户
+     * @param userId
+     * @return
+     */
+    User getUserById(Long userId);
 }

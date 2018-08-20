@@ -109,5 +109,22 @@ public class UserController {
          return  userService.updatePasswordById(loginPassowrd,userId);
    }
 
+    /**
+     * 跳转个人信息
+     * @return
+     */
+    @RequestMapping("doUserInfo")
+    public  ModelAndView doUserInfo(){
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("userInfo");
+        Long id=(Long) SecurityUtils.getSubject().getPrincipal();
+        User user=userService.getUserById(id);
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String formatDate = df.format(user.getTime());
+        user.setStringTime(formatDate);
+        modelAndView.addObject("userInfo",user);
+        return  modelAndView;
+    }
+
 
 }
