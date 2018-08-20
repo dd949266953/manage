@@ -39,3 +39,4 @@ logging:
     max-history: 10
     max-size: 10MB
   path: ${user.home}/logs
+suoPing: '123'

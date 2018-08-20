@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!--
+	作者：offline
+	时间：2018-07-07
+	描述:设置权限
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>设置权限</title>
+    <link th:href="@{/layui/css/layui.css}" rel="stylesheet">
+    <style>
+        #content {
+            width: 70%;
+            margin: 50px auto;
+        }
+        .layui-table td, .layui-table th{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <form id="content" class="layui-form">
+<table class="layui-table" lay-skin="nob">
+    <colgroup>
+        <col width="150">
+        <col width="150">
+        <col width="150">
+        <col width="150">
+        <col width="150">
+    </colgroup>
+    <thead>
+    <tr>
+        <th></th>
+        <th>查看</th>
+        <th>增加</th>
+        <th>修改</th>
+        <th>删除</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>小区管理</td>
+        <td><input type="checkbox" lay-filter="community" value="1" name="xxx" lay-skin="switch"></td>
+        <td><input type="checkbox" lay-filter="community" value="2" name="xxx" lay-skin="switch"></td>
+        <td><input type="checkbox" lay-filter="community" value="3" name="xxx" lay-skin="switch"></td>
+        <td><input type="checkbox" lay-filter="community" value="4" name="xxx" lay-skin="switch"></td>
+    </tr>
+    <tr>
+        <td>楼宇管理</td>
+        <td><input type="checkbox"  name="xxx" lay-skin="switch"></td>
+        <td><input type="checkbox"  name="xxx" lay-skin="switch"></td>
+        <td><input type="checkbox"  name="xxx" lay-skin="switch"></td>
+        <td><input type="checkbox" name="xxx" lay-skin="switch"></td>
+    </tr>
+    <tr>
+        <td>房屋管理</td>
+        <td><input type="checkbox"   name="xxx" lay-skin="switch"></td>
+        <td><input type="checkbox"   name="xxx" lay-skin="switch"></td>
+        <td><input type="checkbox"   name="xxx" lay-skin="switch"></td>
+        <td><input type="checkbox"   name="xxx" lay-skin="switch"></td>
+    </tr>
+    <tr>
+        <td>车位管理</td>
+        <td><input type="checkbox"   name="xxx" lay-skin="switch"></td>
+        <td><input type="checkbox"   name="xxx" lay-skin="switch"></td>
+        <td><input type="checkbox"   name="xxx" lay-skin="switch"></td>
+        <td><input type="checkbox"   name="xxx" lay-skin="switch"></td>
+    </tr>
+    <tr>
+        <td>车辆管理</td>
+        <td><input type="checkbox"   name="xxx" lay-skin="switch"></td>
+        <td><input type="checkbox"   name="xxx" lay-skin="switch"></td>
+        <td><input type="checkbox"   name="xxx" lay-skin="switch"></td>
+        <td><input type="checkbox"   name="xxx" lay-skin="switch"></td>
+    </tr>
+    <tr>
+        <td>住户管理</td>
+        <td><input type="checkbox"   name="xxx" lay-skin="switch"></td>
+        <td><input type="checkbox"   name="xxx" lay-skin="switch"></td>
+        <td><input type="checkbox"   name="xxx" lay-skin="switch"></td>
+        <td><input type="checkbox"   name="xxx" lay-skin="switch"></td>
+    </tr>
+        <td>账单管理</td>
+        <td><input type="checkbox"   name="xxx" lay-skin="switch"></td>
+        <td><input type="checkbox"   name="xxx" lay-skin="switch"></td>
+        <td><input type="checkbox"   name="xxx" lay-skin="switch"></td>
+        <td><input type="checkbox"   name="xxx" lay-skin="switch"></td>
+    </tr>
+    <tr>
+        <td>公告管理</td>
+        <td><input type="checkbox"   name="xxx" lay-skin="switch"></td>
+        <td><input type="checkbox"   name="xxx" lay-skin="switch"></td>
+        <td><input type="checkbox"   name="xxx" lay-skin="switch"></td>
+        <td><input type="checkbox"   name="xxx" lay-skin="switch"  checked></td>
+    </tr>
+    </tbody>
+</table>
+</form>
+<script th:src="@{/js/jquery-3.2.1.js}"></script>
+<script th:src="@{/layui/layui.js}"></script>
+<script th:inline="javascript">
+    $.ajax({
+        url:"../getPermission",
+        type:'get',
+        dataType:'json',
+        data:{
+            userId:[[${adminId}]]
+        },
+        success:function (data) {
+            $.each(data,function (i ,val) {
+               $("input[value="+val+"]").attr('checked','checked');
+            })
+            layui.form.render('checkbox');
+        }
+    })
+    layui.use('form', function(){
+        var form = layui.form;
+        form.on('switch(community)', function(data){
+            layer.load(3)
+            if(data.elem.checked){
+                var  uri="../addPermission";
+            }else {
+                var  uri="../deletePermission";
+            }
+            $.ajax({
+                url:uri,
+                type:'post',
+                dataType:'json',
+                data:{
+                    userid:[[${adminId}]],
+                    permissionid:data.value
+                },
+                success:function (data) {
+                    if(data==1){
+                        layer.msg('操作成功', {
+                            icon: 1,
+                            time: 1000,
+                        })
+                    }
+                    layer.closeAll('loading');
+                }
+            })
+        });
+        //全选未实现(有bug)
+        // form.on('switch(communityAll)', function(data){
+        //     permissionId=data.value;
+        //     if($(this).parent().prevAll().children("div").hasClass("layui-form-onswitch")){
+        //         p=0;
+        //         num=0;
+        //         $(this).parent().prevAll().children("div").removeClass("layui-form-onswitch")
+        //         $(this).next("div").removeClass("layui-form-onswitch");
+        //     }else {
+        //         p=1;
+        //         num=4;
+        //         $(this).next("div").addClass("layui-form-onswitch");
+        //         $(this).parent().prevAll().children("div").addClass("layui-form-onswitch")
+        //     }
+        //     setPermission(permissionId,p)
+        // });
+
+
+    });
+</script>
+
+</body>
+
+</html>

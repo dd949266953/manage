@@ -174,11 +174,9 @@
     </select>
     <!--根据用户名查询角色的权限 -->
     <select id="getPermissions" resultType="java.lang.String" parameterType="java.lang.Long">
-      SELECT p.permissionName FROM permission p
-      INNER JOIN role_permission rp on rp.permissionId=p.id
-      INNER JOIN role r on r.id=rp.roleId
-      inner join user_role ur on ur.roleId=r.id
-      inner join `user` u on u.id=ur.userId
+     SELECT pe.permissionName FROM `user` u
+    INNER JOIN user_permission up on up.userId=u.id
+    INNER JOIN permission pe on pe.id=up.permissionId
       WHERE u.`id`=#{userId}
     </select>
     <resultMap id="userList" type="com.m78.entity.User">

@@ -82,9 +82,9 @@
                 <a style="color: #FFFFFF;text-decoration: none;" href="javascript:;">
                     <i class="iconfont icon-anniu" style="font-size: 20px; color: orange;"></i>&nbsp;0</a>
             </li>
-            <li class="layui-nav-item">
-                <a href="javascript:;" style="color: #FFFFFF;">
-                    <img src="http://m.zhengjinfan.cn/images/0.jpg" class="layui-nav-img">
+            <li  class="layui-nav-item">
+                <a id="userInfo"  href="javascript:;" style="color: #FFFFFF;">
+                    <img src="img/admin1.jpg" class="layui-nav-img">
                     <span></span>
                 </a>
             </li>
@@ -242,6 +242,16 @@
     });
     $(".kit-side-fold").click(function(){
 
+    })
+    $("#userInfo").click(function () {
+        layer.open({
+            type: 2,
+            title:'个人信息',
+            anim: 3,
+            shade:0.1,
+            area: ['400px', '50%'],
+            content: 'doUserInfo'
+        })
     })
 </script>
 </html>

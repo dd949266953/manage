@@ -6,9 +6,11 @@ import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSource
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -19,6 +21,7 @@ import java.util.Map;
 @Configuration
 public class MyShiroConfig {
 
+
     /**
      * ShiroFilterFactoryBean 处理拦截资源文件问题。
      * 注意：单独一个ShiroFilterFactoryBean配置是或报错的，因为在初始化ShiroFilterFactoryBean的时候需要注入：SecurityManager
@@ -26,10 +29,10 @@ public class MyShiroConfig {
      * 3、部分过滤器可指定参数，如perms，roles
      */
 
-    //将自己的验证方式加入容器
+
+        //将自己的验证方式加入容器
     @Bean
     public ShiroRealm shiroRealm() {
-        //加密
         ShiroRealm shiroRealm = new ShiroRealm();
         return shiroRealm;
     }
@@ -63,13 +66,10 @@ public class MyShiroConfig {
         shiroFilterFactoryBean.setLoginUrl("/doLogin");
         // 登录成功后要跳转的链接
         shiroFilterFactoryBean.setSuccessUrl("/doIndex");
-        // 未授权界面;
-        shiroFilterFactoryBean.setUnauthorizedUrl("/nopermission");
         // 拦截器.
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
         // 配置不会被拦截的链接 顺序判断
         filterChainDefinitionMap.put("/login", "anon");
-        filterChainDefinitionMap.put("/noPermission", "anon");
         filterChainDefinitionMap.put("/css/**", "anon");
         filterChainDefinitionMap.put("/build/**", "anon");
         filterChainDefinitionMap.put("/img/**", "anon");

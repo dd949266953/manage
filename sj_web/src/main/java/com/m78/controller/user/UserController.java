@@ -12,6 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -71,8 +74,16 @@ public class UserController {
      * @return
      */
     @GetMapping("addUserMessage")
-   public  int addUser(@Valid User user, BindingResult bindingResult){
-        System.out.println(user.toString());
+   public  int addUser(@Valid User user,BindingResult result){
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date times=null;
+        try {
+           times =sdf.parse(user.getStringTime());
+        }catch (ParseException e) {
+            e.printStackTrace();
+        }
+         user.setTime(times);
         return  userService.addUser(user);
    }
 

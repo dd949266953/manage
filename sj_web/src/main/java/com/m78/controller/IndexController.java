@@ -8,6 +8,7 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -88,5 +89,17 @@ public class IndexController {
     public  Object doNoPerssion(){
        return "noPermission";
     }
+
+    /**
+     * 跳转个人信息
+     * @return
+     */
+    @RequestMapping("doUserInfo")
+    public  ModelAndView doUserInfo(){
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("userInfo");
+        return  modelAndView;
+    }
+
 
 }
