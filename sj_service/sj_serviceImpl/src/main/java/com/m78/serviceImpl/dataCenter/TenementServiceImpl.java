@@ -171,8 +171,8 @@ public class TenementServiceImpl implements TenementService {
     }
 
     @Override
-    public int updateInfoByOpenId(String nickname, String sex, String photo, String address) {
-        return tenementMapper.updateInfoByOpenId(nickname,sex,photo,address);
+    public int updateInfoByOpenId(String nickname, String sex, String photo, String address,String openId) {
+        return tenementMapper.updateInfoByOpenId(nickname,sex,photo,address,openId);
     }
 }
 

@@ -143,5 +143,5 @@ public interface TenementService {
      * @param address
      * @return
      */
-    int updateInfoByOpenId(String nickname, String sex,String photo,String address);
+    int updateInfoByOpenId(String nickname, String sex,String photo,String address,String openId);
 }

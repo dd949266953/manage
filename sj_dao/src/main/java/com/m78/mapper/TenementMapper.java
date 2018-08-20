@@ -149,6 +149,6 @@ public interface TenementMapper {
      * @return
      */
     int updateInfoByOpenId(@Param("nickname") String nickname,@Param("sex") String sex
-                           ,@Param("photo") String photo,@Param("address") String address);
+                           ,@Param("photo") String photo,@Param("address") String address,@Param("openId") String openId);
 
 }
