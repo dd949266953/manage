@@ -120,4 +120,10 @@ public interface TenementService {
      * @return
      */
     List<DictionaryItem>getRelation();
+
+    /**
+     * 查看用户是否认证过
+     * @return
+     */
+    int getOpenidCount(String openid);
 }

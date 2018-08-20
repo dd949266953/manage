@@ -49,5 +49,8 @@ public class Tenement implements Serializable {
 
     private DictionaryItem dictionaryItem;
 
+    private String photo;
+
+    private String openid;
 
 }

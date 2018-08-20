@@ -234,8 +234,8 @@ limit #{start},#{end}
     <update id="updatePasswordById">
          UPDATE `user` SET `password`=#{password} WHERE id=#{userId}
     </update>
-    <!-- 根据id查询当前用户 -->
-    <select id="getUserById" parameterType="java.lang.Long">
+    <!--&lt;!&ndash; 根据id查询当前用户 &ndash;&gt;-->
+    <!--<select id="getUserById" parameterType="java.lang.Long">-->
 
-    </select>
+    <!--</select>-->
 </mapper>

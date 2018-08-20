@@ -20,6 +20,8 @@
         <result column="idCard" jdbcType="VARCHAR" property="idcard"/>
         <result column="birthday" jdbcType="DATE" property="birthday"/>
         <result column="ownerNumber" jdbcType="BIGINT" property="ownernumber"/>
+        <result column="photo" jdbcType="VARCHAR" property="photo"/>
+        <result column="openid" jdbcType="VARCHAR" property="openid"/>
         <association property="community" javaType="com.m78.entity.Community">
             <result column="communityName" property="name" jdbcType="VARCHAR"/>
         </association>
@@ -372,5 +374,9 @@ WHERE c.`id`=#{communityId}
      WHERE t.id IN (
      SELECT ht.`tentmentId` FROM house_tentment ht WHERE `houseId`=
     (SELECT ht.houseId FROM house_tentment ht WHERE `tentmentId`=#{tenementId}))
+    </select>
+    <!--查询用户是否认证过-->
+    <select id="getOpenidCount" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM tenement WHERE openid=#{openid}
     </select>
 </mapper>
