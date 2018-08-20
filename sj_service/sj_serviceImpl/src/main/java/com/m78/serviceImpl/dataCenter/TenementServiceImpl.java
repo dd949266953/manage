@@ -61,7 +61,6 @@ public class TenementServiceImpl implements TenementService {
 
     @Override
     public Integer updateByPrimaryKeySelective(Tenement tenement) {
-        System.out.println(tenement.getId());
         return tenementMapper.updateByPrimaryKeySelective(tenement);
     }
 
@@ -164,6 +163,16 @@ public class TenementServiceImpl implements TenementService {
     @Override
     public int getOpenidCount(String openid) {
         return tenementMapper.getOpenidCount(openid);
+    }
+
+    @Override
+    public int updatePhoneByOpenId(String phone, String openId) {
+        return tenementMapper.updatePhoneByOpenId(phone,openId);
+    }
+
+    @Override
+    public int updateInfoByOpenId(String nickname, String sex, String photo, String address,String openId) {
+        return tenementMapper.updateInfoByOpenId(nickname,sex,photo,address,openId);
     }
 }
 

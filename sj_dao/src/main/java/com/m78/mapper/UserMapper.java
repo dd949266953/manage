@@ -70,5 +70,5 @@ public interface UserMapper {
 //     * @param userId
 //     * @return
 //     */
-//     User getUserById(@Param("userId") Long userId);
+       User getUserById(@Param("userId") Long userId);
 }

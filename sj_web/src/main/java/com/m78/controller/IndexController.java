@@ -90,16 +90,7 @@ public class IndexController {
        return "noPermission";
     }
 
-    /**
-     * 跳转个人信息
-     * @return
-     */
-    @RequestMapping("doUserInfo")
-    public  ModelAndView doUserInfo(){
-        ModelAndView modelAndView=new ModelAndView();
-        modelAndView.setViewName("userInfo");
-        return  modelAndView;
-    }
+
 
 
 }
