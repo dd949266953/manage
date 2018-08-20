@@ -82,9 +82,10 @@
                 <a style="color: #FFFFFF;text-decoration: none;" href="javascript:;">
                     <i class="iconfont icon-anniu" style="font-size: 20px; color: orange;"></i>&nbsp;0</a>
             </li>
-            <li class="layui-nav-item">
-                <a href="javascript:;" style="color: #FFFFFF;">
-                    <img src="http://m.zhengjinfan.cn/images/0.jpg" class="layui-nav-img"> Van
+            <li  class="layui-nav-item">
+                <a id="userInfo"  href="javascript:;" style="color: #FFFFFF;">
+                    <img src="img/admin1.jpg" class="layui-nav-img">
+                    <span></span>
                 </a>
             </li>
         </ul>
@@ -96,7 +97,7 @@
             <div class="kit-side-fold"><i class="fa fa-navicon" aria-hidden="true"></i></div>
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul id="nav-left" class="layui-nav layui-nav-tree " lay-filter="" kit-navbar>
-                <li class="layui-nav-item">
+                <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;"><span>数据中心</span></a>
                     <dl class="layui-nav-child" style="margin-bottom: 0px;">
                         <dd>
@@ -151,6 +152,23 @@
                         </dd>
                         <dd>
                             <a href="javascript:;" data-url="message/doMessage" data-icon="" data-title="短信通知" kit-target data-id='14'><span>短信通知</span></a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="" href="javascript:;"><span>员工管理</span></a>
+                    <dl class="layui-nav-child" style="margin-bottom: 0px;">
+                        <dd>
+                            <a href="javascript:;" data-url="" data-icon="" data-title="部门组织" kit-target data-id='15'><span>部门信息</span></a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;" data-url="user/doUserList" data-icon="" data-title="通讯录" kit-target data-id='16'><span>通讯录</span></a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;" data-url="permission/doPermission" data-icon="" data-title="权限操作" kit-target data-id='17'><span>权限操作</span></a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;" data-url="" data-icon="" data-title="外部人员" kit-target data-id='18'><span>外部人员</span></a>
                         </dd>
                     </dl>
                 </li>
@@ -224,6 +242,16 @@
     });
     $(".kit-side-fold").click(function(){
 
+    })
+    $("#userInfo").click(function () {
+        layer.open({
+            type: 2,
+            title:'个人信息',
+            anim: 3,
+            shade:0.1,
+            area: ['400px', '50%'],
+            content: 'doUserInfo'
+        })
     })
 </script>
 </html>
