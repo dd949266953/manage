@@ -2,7 +2,6 @@ package com.m78.mapper;
 
 import com.m78.entity.User;
 import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 import java.util.Set;
 
@@ -66,10 +65,10 @@ public interface UserMapper {
      */
      int updatePasswordById(@Param("password") String password,@Param("userId") Long userId);
 
-    /**
-     * 根据id查询用户
-     * @param userId
-     * @return
-     */
-     User getUserById(@Param("userId") Long userId);
+//    /**
+//     * 根据id查询用户
+//     * @param userId
+//     * @return
+//     */
+//     User getUserById(@Param("userId") Long userId);
 }

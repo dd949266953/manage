@@ -126,4 +126,10 @@ public interface TenementMapper {
      */
     List<Tenement>getTenementByCommunity(@Param("communityId")Long communityId);
 
+    /**
+     * 查看用户是否认证过
+     * @return
+     */
+    int getOpenidCount(@Param("openid")String openid);
+
 }

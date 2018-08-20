@@ -160,4 +160,11 @@ public class TenementServiceImpl implements TenementService {
     public List<DictionaryItem> getRelation() {
         return dictionaryItemMapper.getRelation();
     }
+
+    @Override
+    public int getOpenidCount(String openid) {
+        return tenementMapper.getOpenidCount(openid);
+    }
 }
+
+

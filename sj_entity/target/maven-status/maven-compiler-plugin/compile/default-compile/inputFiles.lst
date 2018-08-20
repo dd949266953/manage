@@ -15,6 +15,7 @@ E:\manage\sj_entity\src\main\java\com\m78\entity\Advertisingtype.java
 E:\manage\sj_entity\src\main\java\com\m78\entity\Life.java
 E:\manage\sj_entity\src\main\java\com\m78\entity\AdvertisingCommunity.java
 E:\manage\sj_entity\src\main\java\com\m78\entity\Staffnotice.java
+E:\manage\sj_entity\src\main\java\com\m78\entity\User.java
 E:\manage\sj_entity\src\main\java\com\m78\entity\Talk.java
 E:\manage\sj_entity\src\main\java\com\m78\vo\BuildingVo.java
 E:\manage\sj_entity\src\main\java\com\m78\entity\VoteTentment.java
@@ -63,4 +64,3 @@ E:\manage\sj_entity\src\main\java\com\m78\entity\ActivityTentment.java
 E:\manage\sj_entity\src\main\java\com\m78\entity\DictionaryItem.java
 E:\manage\sj_entity\src\main\java\com\m78\entity\Message.java
 E:\manage\sj_entity\src\main\java\com\m78\entity\CarportCharitem.java
-E:\manage\sj_entity\src\main\java\com\m78\entity\Admin.java
