@@ -35,6 +35,7 @@ public class TalkServiceImpl implements TalkService {
     }
 
     @Override
+<<<<<<< HEAD
     public List<TalkVo> findAllTalk(Long tenementId) {
         return mapper.findAllTalk(tenementId);
     }
@@ -42,5 +43,9 @@ public class TalkServiceImpl implements TalkService {
     @Override
     public int insert(Talk record) {
         return mapper.insert(record);
+=======
+    public int updateTalkState(Long stateId, Long talkId) {
+        return mapper.updateTalkState(stateId,talkId);
+>>>>>>> 2de4c8a367422cc585aaab51948e47e70c67a479
     }
 }

@@ -32,7 +32,17 @@ public interface TalkService {
      */
     int deleteTalkById(Long talkId);
 
+<<<<<<< HEAD
     List<TalkVo> findAllTalk(Long tenementId);
 
     int insert(Talk record);
+=======
+    /**
+     * 更新工单状态
+     * @param stateId  状态id
+     * @param talkId   工单id
+     * @return
+     */
+    int updateTalkState(Long stateId,Long talkId);
+>>>>>>> 2de4c8a367422cc585aaab51948e47e70c67a479
 }

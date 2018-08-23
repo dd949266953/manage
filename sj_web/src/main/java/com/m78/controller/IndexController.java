@@ -91,6 +91,16 @@ public class IndexController {
     }
 
 
+    /**
+     * 跳转首页
+     * @return
+     */
+    @RequestMapping("/housePage")
+    public  Object doHousePage(){
+        return "housePage";
+    }
+
+
 
 
 }

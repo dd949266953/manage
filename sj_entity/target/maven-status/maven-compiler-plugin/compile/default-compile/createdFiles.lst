@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 com\m78\entity\CommunityNotice.class
 com\m78\entity\HouseCharitem.class
 com\m78\entity\ActivityCommunity.class
@@ -66,3 +68,4 @@ com\m78\entity\BillTentment.class
 com\m78\entity\Message.class
 com\m78\entity\TenementCar.class
 com\m78\entity\Car.class
+>>>>>>> e2b1befba335a1afe62914c44918ce490538f81b

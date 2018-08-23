@@ -54,6 +54,18 @@ public class Tenement implements Serializable {
     private String photo;
 
     private String openid;
+<<<<<<< HEAD
+
+   private  String communityname;
+
+    private  String buildingname;
+
+    private  String unitNumber;
+
+    private  String fool;
+    private Long houseId;
+
+=======
     public Tenement(){
 
     }
@@ -74,4 +86,5 @@ public class Tenement implements Serializable {
         this.birthday = birthday;
         this.ownernumber = ownernumber;
     }
+>>>>>>> e2b1befba335a1afe62914c44918ce490538f81b
 }

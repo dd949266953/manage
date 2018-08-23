@@ -23,6 +23,10 @@ public interface TalkMapper {
     //获取工单总数
     Long getAllTalkCount(@Param("name") String name);
 
+<<<<<<< HEAD
     List<TalkVo> findAllTalk(@Param("tenementId")Long tenementId);
 
+=======
+    int updateTalkState(@Param("stateId")Long stateId ,@Param("talkId") Long talkId);
+>>>>>>> 2de4c8a367422cc585aaab51948e47e70c67a479
 }

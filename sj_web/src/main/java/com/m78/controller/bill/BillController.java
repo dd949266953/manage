@@ -269,14 +269,14 @@ public class BillController {
      * 导入账单
      * @return
      */
-    @RequestMapping("importBill.json")
+    @RequestMapping("importBill")
     @ResponseBody
     public  Object importBill(MultipartHttpServletRequest request, @RequestParam("communityId") Long communityId){
         Workbook workbook = null;
         int num=0;
         try {
             // 获取Ecle对象
-            workbook = Workbook.getWorkbook(new File(""));
+            workbook = Workbook.getWorkbook(new File("E:/wxq.xls"));
             // 获取选项卡对象 第0个选项卡
             Sheet sheet = workbook.getSheet(0);
 

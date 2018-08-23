@@ -43,6 +43,7 @@
             AND ta.title LIKE CONCAT ('%',#{name},'%')  OR  te.`name`  LIKE CONCAT ('%',#{name},'%')
         </if>
     </select>
+<<<<<<< HEAD
   <!--查找所有工单 -->
   <select id="findAllTalk" resultType="com.m78.vo.TalkVo">
    SELECT t.`id`,t.`title`,t.`tentmentId` AS tenementId,te.`name` AS tenementName,di.`id` AS stateId,di.`content` AS state,t.`time`,dit.`id` AS typeId,dit.`content` AS TYPE,t.`pictures` FROM `talk` t
@@ -52,6 +53,12 @@ INNER JOIN `tenement` te ON te.`id`=t.`tentmentId`
 where te.id=#{tenementId}
   </select>
 
+=======
+    <!-- 更新工单状态 -->
+    <update id="updateTalkState">
+    update talk set state=#{stateId} where id=#{talkId}
+    </update>
+>>>>>>> 2de4c8a367422cc585aaab51948e47e70c67a479
   <sql id="Base_Column_List" >
     id, title, tentmentId, state, time, type, pictures
   </sql>
