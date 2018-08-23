@@ -144,4 +144,6 @@ public class CommunityController {
     public Object getIdNameAddressByName(int page, int limit, String name) {
         return DataTable.bindTableUtil(0,communityService.getCommunityCountByName(name),communityService.getIdNameAddressByName(page,limit,name));
     }
+
+
 }

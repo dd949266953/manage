@@ -2,8 +2,11 @@ package com.m78.serviceImpl.dataCenter;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.m78.entity.DictionaryItem;
+import com.m78.entity.HouseTentment;
 import com.m78.entity.Tenement;
+import com.m78.form.TenementForm;
 import com.m78.mapper.DictionaryItemMapper;
+import com.m78.mapper.HouseTentmentMapper;
 import com.m78.mapper.TenementMapper;
 import com.m78.service.dataCenter.TenementService;
 import com.m78.vo.TenementVo;
@@ -20,6 +23,9 @@ public class TenementServiceImpl implements TenementService {
 
     @Autowired
     private TenementMapper tenementMapper;
+
+    @Autowired
+    private HouseTentmentMapper houseTentmentMapper;
 
     @Autowired
     private DictionaryItemMapper dictionaryItemMapper;
@@ -171,8 +177,55 @@ public class TenementServiceImpl implements TenementService {
     }
 
     @Override
-    public int updateInfoByOpenId(String nickname, String sex, String photo, String address,String openId) {
-        return tenementMapper.updateInfoByOpenId(nickname,sex,photo,address,openId);
+    public int updateInfoByPhone(String phone, String nickname, String sex, String photo, String address, String openId) {
+        return tenementMapper.updateInfoByPhone(phone,nickname,sex,photo,address,openId);
+    }
+
+    @Override
+    public int addOpenId(String openId) {
+        return tenementMapper.addOpenId(openId);
+    }
+
+    @Override
+    public Tenement getDetailTenementByOpenId(String openId) {
+        return tenementMapper.getDetailTenementByOpenId(openId);
+    }
+
+    @Override
+    public Tenement getDetailTenementByPhone(String phone) {
+        return tenementMapper.getDetailTenementByPhone(phone);
+    }
+
+    @Override
+    public int insertSelective(TenementForm record) {
+        int num=0;
+        Tenement tenement=new Tenement(record.getName(),record.getPhone(),record.getRelation(),record.getQqnumber(),record.getWxnumber(),record.getUrgencyman(),record.getUrgencymanphone(),record.getSex(),record.getNation(),record.getRemark(),record.getCommunity(),record.getIdcard(),record.getBirthday(),record.getOwnernumber());
+        int tenementResult=tenementMapper.insertSelective(tenement);
+        Long id=tenement.getId();
+        HouseTentment houseTentment=new HouseTentment();
+        houseTentment.setTentmentid(id);
+        houseTentment.setRelationid(record.getRelation());
+        houseTentment.setHouseid(record.getHousenumber());
+        int houseResult=houseTentmentMapper.insertSelective(houseTentment);
+        if (tenementResult==1&&houseResult==1){
+            num=1;
+        }
+        return num;
+    }
+
+    @Override
+    public int getHouseCountByOpenid(String openId) {
+        return tenementMapper.getHouseCountByOpenid(openId);
+    }
+
+    @Override
+    public int getCarCountByOpenid(String openId) {
+        return tenementMapper.getCarCountByOpenid(openId);
+    }
+
+    @Override
+    public int getCarportCountByOpenid(String openId) {
+        return tenementMapper.getCarportCountByOpenid(openId);
     }
 }
 

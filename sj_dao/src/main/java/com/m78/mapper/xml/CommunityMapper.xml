@@ -174,4 +174,5 @@
       backgroundImage = #{backgroundimage,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
 </mapper>

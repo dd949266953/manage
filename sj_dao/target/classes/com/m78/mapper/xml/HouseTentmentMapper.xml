@@ -37,9 +37,6 @@
   <insert id="insertSelective" parameterType="com.m78.entity.HouseTentment">
     insert into house_tentment
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
       <if test="houseid != null">
         houseId,
       </if>
@@ -51,9 +48,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="houseid != null">
         #{houseid,jdbcType=BIGINT},
       </if>

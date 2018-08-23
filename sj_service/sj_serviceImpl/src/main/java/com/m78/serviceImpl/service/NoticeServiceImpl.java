@@ -71,4 +71,9 @@ NoticeServiceImpl implements NoticeService {
         }
         return num;
     }
+
+    @Override
+    public List<Notice> findAllNotice() {
+        return noticeMapper.findAllNotice();
+    }
 }

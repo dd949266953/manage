@@ -35,6 +35,11 @@
       and `houseNo` LIKE CONCAT ('%',#{houseName },'%')
     </if>
   </select>
+  <!--根据单元查询房屋-->
+  <select id="getHouseByUnit" resultType="com.m78.entity.House">
+    SELECT h.`houseId`,h.`fool`FROM house h
+ WHERE unitNumber=#{unitNumber}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select
     <include refid="Base_Column_List" />

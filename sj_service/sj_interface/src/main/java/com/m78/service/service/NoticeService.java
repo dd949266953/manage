@@ -51,4 +51,6 @@ public interface NoticeService {
      * @return
      */
     int addNotice_Community(Long noticeId,Long [] communityId);
+
+    List<Notice> findAllNotice();
 }

@@ -21,9 +21,11 @@
         <result column="birthday" jdbcType="DATE" property="birthday"/>
         <result column="ownerNumber" jdbcType="BIGINT" property="ownernumber"/>
         <result column="photo" jdbcType="VARCHAR" property="photo"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
         <result column="openid" jdbcType="VARCHAR" property="openid"/>
         <association property="community" javaType="com.m78.entity.Community">
             <result column="communityName" property="name" jdbcType="VARCHAR"/>
+            <result column="logo" property="logo" jdbcType="VARCHAR"></result>
         </association>
         <association property="dictionaryItem" javaType="com.m78.entity.DictionaryItem">
             <result column="content" property="content" jdbcType="VARCHAR"/>
@@ -31,7 +33,7 @@
     </resultMap>
     <sql id="Base_Column_List">
     id, name, nickname,phone, integrals, registrationDate, state, qqNumber, WxNumber, urgencyMan,
-    urgencyManPhone, sex, nation, remark, communityId, idCard, birthday, ownerNumber
+    urgencyManPhone, sex, nation, remark, communityId, idCard, birthday, ownerNumber,nickname,photo,address,openid
   </sql>
     <sql id="Base_TenementView">
     tenementId,communityId,communityName,buildingId,buildingName,houseId,unitNumber,fool,tenementName,phone,relation
@@ -147,12 +149,10 @@ WHERE c.`id`=#{communityId}
       #{remark,jdbcType=VARCHAR}, #{communityid,jdbcType=BIGINT}, #{idcard,jdbcType=VARCHAR}, 
       #{birthday,jdbcType=DATE}, #{ownernumber,jdbcType=BIGINT})
   </insert>
-    <insert id="insertSelective" parameterType="com.m78.entity.Tenement">
+    <insert id="insertSelective" parameterType="com.m78.entity.Tenement" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into tenement
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
+
             <if test="name != null">
                 name,
             </if>
@@ -203,9 +203,6 @@ WHERE c.`id`=#{communityId}
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=BIGINT},
-            </if>
             <if test="name != null">
                 #{name,jdbcType=VARCHAR},
             </if>
@@ -379,12 +376,46 @@ WHERE c.`id`=#{communityId}
     <select id="getOpenidCount" resultType="java.lang.Integer">
         SELECT COUNT(1) FROM tenement WHERE openid=#{openid}
     </select>
+    <!--保存用户openid-->
+    <insert id="addOpenId" parameterType="java.lang.String">
+        INSERT INTO `manage`.`tenement` (`openid`) VALUES (#{openId});
+    </insert>
     <!-- 根据openId更新电话 -->
     <update id="updatePhoneByOpenId">
      update tenement set phone=#{phone} where openid=#{openId}
     </update>
-    <!-- 根据openId更新电话 -->
-    <update id="updateInfoByOpenId">
-     update tenement set nickname=#{nickname},sex=#{sex},photo=#{photo},address=#{address} where openid=#{openId}
+    <!-- 根据电话更新 openid -->
+    <update id="updateInfoByPhone">
+     UPDATE tenement SET nickname=#{nickname},sex=#{sex},photo=#{photo},address=#{address},openid=#{openId} where phone=#{phone}
     </update>
+    <!--根据openid查询所有信息-->
+    <select id="getDetailTenementByOpenId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT t.*,c.name AS communityName,c.logo  FROM tenement t
+INNER JOIN community c ON c.id=t.communityId
+ WHERE openid=#{openId}
+    </select>
+    <!--根据手机查询所有信息-->
+    <select id="getDetailTenementByPhone" parameterType="java.lang.String" resultMap="BaseResultMap">
+       SELECT t.*,c.name AS communityName,c.logo  FROM tenement t
+INNER JOIN community c ON c.id=t.communityId
+      WHERE phone=#{phone}
+    </select>
+    <!--根据openid查询该用户有几间房屋-->
+    <select id="getHouseCountByOpenid"  resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM tenement t
+INNER JOIN `house_tentment` ht ON t.`id`=ht.`tentmentId`
+WHERE t.`openid`=#{openid}
+    </select>
+    <!--根据openid查询该用户有几辆车-->
+    <select id="getCarCountByOpenid"  resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM tenement t
+INNER JOIN `tenement_car` hc ON t.`id`=hc.`tenementId`
+WHERE t.`openid`=#{openid}
+    </select>
+    <!--根据openid查询该用户有几个车位-->
+    <select id="getCarportCountByOpenid"  resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM tenement t
+INNER JOIN `tenement_carport` tc ON t.`id`=tc.`tentmentId`
+WHERE t.`openid`=#{openid}
+    </select>
 </mapper>

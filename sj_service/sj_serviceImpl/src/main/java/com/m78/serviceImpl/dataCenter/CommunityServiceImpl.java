@@ -47,6 +47,8 @@ public class CommunityServiceImpl implements CommunityService {
      */
     @Override
     public List<Community> getCommunityIdAndName() {
+
+        System.out.println("=================================================");
         return communityMapper.getCommunityIdAndName();
     }
     /**

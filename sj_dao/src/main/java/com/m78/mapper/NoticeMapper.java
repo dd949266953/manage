@@ -22,4 +22,6 @@ public interface NoticeMapper {
                               @Param("end") int end);
     //获取总条数
     Long getAllNoticeCount(@Param("noticeName") String noticeName);
+
+    List<Notice> findAllNotice();
 }

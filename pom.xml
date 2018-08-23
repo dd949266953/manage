@@ -14,6 +14,7 @@
         <module>sj_dao</module>
         <module>sj_web</module>
         <module>util</module>
+        <module>wx</module>
     </modules>
 
     <parent>

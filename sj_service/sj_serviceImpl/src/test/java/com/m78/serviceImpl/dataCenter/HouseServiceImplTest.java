@@ -1,6 +1,7 @@
 package com.m78.serviceImpl.dataCenter;
 
 import com.m78.entity.HouseTentment;
+import com.m78.mapper.HouseMapper;
 import com.m78.mapper.HouseTentmentMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +14,8 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class HouseServiceImplTest {
-
+    @Autowired
+    private HouseMapper houseMapper;
     @Autowired
     private HouseTentmentMapper houseTentmentMapper;
 
@@ -24,5 +26,10 @@ public class HouseServiceImplTest {
         houseTentment.setTentmentid(Long.valueOf(1));
         houseTentment.setRelationid(Long.valueOf(48));
         System.out.println(houseTentmentMapper.insertSelective(houseTentment));
+    }
+
+    @Test
+    public void getHouseByUnit() {
+        System.out.println(houseMapper.getHouseByUnit(Long.valueOf(1)));
     }
 }

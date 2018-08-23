@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!--
+	作者：offline
+	时间：2018-07-07
+	描述:个人信息
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>个人信息</title>
+    <link th:href="@{/layui/css/layui.css}" rel="stylesheet">
+    <style>
+        .label{
+            width:100%;
+            margin-top: 15px;
+            font-size: 22px;
+            color:  rgb(77,177,81);
+        }
+        .title{
+            margin-left: 95px;
+        }
+    </style>
+
+</head>
+<body>
+    <div style="width: 100%;text-align: center;margin-top: 15px;margin-bottom: 30px">
+        <img src="img/admin1.jpg" width="100px" style="border-radius: 50%;box-shadow: 0 0 30px #44576b;" />
+    </div>
+    <div class="label">
+        <label class="title">姓 名：</label>
+        <label></label>
+    </div>
+    <div class="label">
+        <label class="title" >电 话：</label>
+        <label></label>
+    </div>
+    <div class="label">
+        <label class="title" >微 信：</label>
+        <label></label>
+    </div>
+    <div class="label">
+        <label class="title" >部 门：</label>
+        <label></label>
+    </div>
+    <div class="label">
+        <label class="title" >任 期：</label>
+        <label></label>
+    </div>
+    <div  style="text-align: center;margin-top: 20px">
+    <button id="doLogin" class="layui-btn ">注销</button>
+    <button id="exit" class="layui-btn layui-btn-danger ">退出</button>
+    </div>
+<script th:src="@{/js/jquery-3.2.1.js}"></script>
+<script th:src="@{/layui/layui.js}"></script>
+<script>
+
+</script>
+</body>
+
+</html>

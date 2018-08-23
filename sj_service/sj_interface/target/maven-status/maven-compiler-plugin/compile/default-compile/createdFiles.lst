@@ -1,9 +1,28 @@
+<<<<<<< HEAD
 com\m78\service\dataCenter\CarportService.class
 com\m78\service\service\NoticeService.class
 com\m78\service\service\TalkService.class
 com\m78\service\service\NoticeTypeService.class
+=======
+com\m78\service\staff\DepartmentService.class
+com\m78\service\bill\ChargenNameService.class
+com\m78\service\dataCenter\CarService.class
+com\m78\service\dataCenter\CarportService.class
+com\m78\service\service\LifeOptionService.class
+com\m78\service\service\NoticeService.class
+com\m78\service\service\TalkService.class
+com\m78\service\staff\SetPermissionService.class
+com\m78\service\service\NoticeTypeService.class
+com\m78\service\dataCenter\CommunityService.class
+com\m78\service\service\LifeService.class
+>>>>>>> e2b1befba335a1afe62914c44918ce490538f81b
 com\m78\service\dataCenter\BuildingService.class
 com\m78\service\dataCenter\TenementService.class
 com\m78\service\service\MessageService.class
 com\m78\service\staff\UserService.class
+<<<<<<< HEAD
+=======
+com\m78\service\bill\ChargeItemService.class
+com\m78\service\bill\BillService.class
+>>>>>>> e2b1befba335a1afe62914c44918ce490538f81b
 com\m78\service\dataCenter\HouseService.class

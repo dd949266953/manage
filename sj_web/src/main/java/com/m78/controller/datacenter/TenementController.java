@@ -2,15 +2,21 @@ package com.m78.controller.datacenter;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.m78.entity.Tenement;
+import com.m78.form.TenementForm;
 import com.m78.service.dataCenter.*;
 import com.m78.util.DataTable;
 import com.m78.vo.TenementVo;
+import lombok.experimental.var;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.lang.reflect.Method;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -23,6 +29,11 @@ public class TenementController {
     @Reference(version = "1.0.0")
     private CommunityService communityService;
 
+    @Reference(version = "1.0.0")
+    private BuildingService buildingService;
+
+    @Reference(version = "1.0.0")
+    private HouseService houseService;
     /**
      * 住户列表界面
      *
@@ -54,9 +65,9 @@ public class TenementController {
     public Object updateTenementView(@RequestParam(value = "tenementId", required = false) Long tenementId, Tenement tenement) {
         ModelAndView mv = new ModelAndView();
         //小区列表
-        System.out.println(tenementId);
         mv.addObject("tenementId", tenementId);
         mv.addObject("communityList", communityService.getCommunityIdAndName());
+        mv.addObject("relation",tenementService.getRelation());
         if (tenementId == null) {
             //添加
             mv.addObject("tenement", tenement);
@@ -161,6 +172,40 @@ public class TenementController {
         return list;
     }
 
+    @RequestMapping("/getBuildingIdAndNameByCommunityId")
+    @ResponseBody
+    public Object getBuildingIdAndNameByCommunityId(Long communityId) {
+        return buildingService.getBuildingIdAndNameByCommunityId(communityId);
+    }
 
+    /**
+     * 查询单元总数根据楼宇id
+     */
+    @RequestMapping("/getUnitTotalByBuildingId")
+    @ResponseBody
+    public Long getUnitTotalByBuildingId(Long buildingId) {
+        return buildingService.getUnitTotalByBuildingId(buildingId);
+    }
+
+
+    /**
+     * 查询单元查询住户
+     */
+    @RequestMapping("/getHouseByUnit")
+    @ResponseBody
+    public Object getHouseByUnit(Long unitNumber) {
+        return houseService.getHouseByUnit(unitNumber);
+    }
+
+    /**
+     * 添加住户
+     */
+    @RequestMapping("/insertSelective")
+    @ResponseBody
+    public Object insertSelective(TenementForm tenementForm) throws ParseException {
+//        BeanUtils.copyProperties(tenementForm,tenement);
+
+        return tenementService.insertSelective(tenementForm);
+    }
 
 }

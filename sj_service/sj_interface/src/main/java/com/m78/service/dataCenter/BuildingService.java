@@ -61,5 +61,10 @@ public interface BuildingService {
      */
     Long getBuildingPliesById(Long buildingId);
 
-
+    /**
+     * 根据小区id查询所有楼宇
+     * @param communityId
+     * @return
+     */
+    List<Building>getBuildingByCommunityId(Long communityId);
 }
