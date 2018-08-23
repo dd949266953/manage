@@ -55,8 +55,11 @@ public interface HouseService {
     int insertChargeByHouseId(HouseCharitem record);
 
     int bindHouseRelationTenement(HouseTentment houseTentment);
+
     /**
-     * 修改关系 根据住户和房屋id
+     * 根据单元查询房屋
+     * @param unitNumber
      * @return
      */
+    List<House>getHouseByUnit(Long unitNumber);
 }

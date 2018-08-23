@@ -2,6 +2,7 @@ package com.m78.service.dataCenter;
 
 import com.m78.entity.DictionaryItem;
 import com.m78.entity.Tenement;
+import com.m78.form.TenementForm;
 import com.m78.vo.TenementVo;
 
 import java.util.List;
@@ -135,13 +136,38 @@ public interface TenementService {
      */
     int updatePhoneByOpenId(String phone,String openId);
 
+    int insertSelective(TenementForm record);
+
     /**
-     * 根据openid更新所有信息
+     * 根据phone更新所有信息
      * @param nickname
      * @param sex
      * @param photo
      * @param address
      * @return
      */
-    int updateInfoByOpenId(String nickname, String sex,String photo,String address,String openId);
+    int updateInfoByPhone(String phone, String nickname, String sex, String photo, String address, String openId);
+
+    /**
+     * 保存用户openid
+     * @param openId
+     * @return
+     */
+    int addOpenId(String openId);
+
+    /**
+     * 根据openid查询住户详情
+     * @return
+     */
+    Tenement getDetailTenementByOpenId(String openId);
+
+    /**
+     * 根据phone查询住户详情
+     * @return
+     */
+    Tenement getDetailTenementByPhone(String phone);
+
+    int getHouseCountByOpenid(String openId);
+    int getCarCountByOpenid(String openId);
+    int getCarportCountByOpenid(String openId);
 }

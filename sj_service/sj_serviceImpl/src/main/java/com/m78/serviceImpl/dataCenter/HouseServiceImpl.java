@@ -93,4 +93,9 @@ public class HouseServiceImpl implements HouseService {
         }
         return result;
     }
+
+    @Override
+    public List<House> getHouseByUnit(Long unitNumber) {
+        return houseMapper.getHouseByUnit(unitNumber);
+    }
 }

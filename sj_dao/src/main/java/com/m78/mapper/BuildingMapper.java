@@ -58,4 +58,11 @@ public interface BuildingMapper {
      * @return
      */
     Long getBuildingPliesById(@Param("buildingId")Long buildingId);
+
+    /**
+     * 根据小区id查询所有楼宇
+     * @param communityId
+     * @return
+     */
+    List<Building>getBuildingByCommunityId(@Param("communityId") Long communityId);
 }

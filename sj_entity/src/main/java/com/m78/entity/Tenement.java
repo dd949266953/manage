@@ -49,8 +49,29 @@ public class Tenement implements Serializable {
 
     private DictionaryItem dictionaryItem;
 
+    private  String address;
+
     private String photo;
 
     private String openid;
+    public Tenement(){
 
+    }
+
+    public Tenement(String name, String phone, Long state, Long qqnumber, String wxnumber, String urgencyman, String urgencymanphone, String sex, String nation, String remark, Long communityid, String idcard, Date birthday, Long ownernumber) {
+        this.name = name;
+        this.phone = phone;
+        this.state = state;
+        this.qqnumber = qqnumber;
+        this.wxnumber = wxnumber;
+        this.urgencyman = urgencyman;
+        this.urgencymanphone = urgencymanphone;
+        this.sex = sex;
+        this.nation = nation;
+        this.remark = remark;
+        this.communityid = communityid;
+        this.idcard = idcard;
+        this.birthday = birthday;
+        this.ownernumber = ownernumber;
+    }
 }

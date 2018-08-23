@@ -131,4 +131,9 @@ public class BuildingServiceImpl implements BuildingService {
     public Long getBuildingPliesById(Long buildingId) {
         return buildingMapper.getBuildingPliesById(buildingId);
     }
+
+    @Override
+    public List<Building> getBuildingByCommunityId(Long communityId) {
+        return buildingMapper.getBuildingByCommunityId(communityId);
+    }
 }

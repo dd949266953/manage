@@ -3,6 +3,7 @@ com\m78\entity\HouseCharitem.class
 com\m78\entity\ActivityCommunity.class
 com\m78\entity\RolePermission.class
 com\m78\entity\Staffnotice.class
+com\m78\form\TenementForm.class
 com\m78\entity\ActivityTentment.class
 com\m78\entity\Tenement.class
 com\m78\entity\DicionaryType.class

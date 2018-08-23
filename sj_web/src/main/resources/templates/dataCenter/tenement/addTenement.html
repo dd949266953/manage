@@ -16,7 +16,8 @@
         .layui-form-select dl {
             max-height: 190px !important;
         }
-        .layui-form-item .layui-input-inline{
+
+        .layui-form-item .layui-input-inline {
             width: inherit !important;
         }
     </style>
@@ -48,8 +49,8 @@
                             <select name="unit" lay-filter="unit">
                             </select>
                         </div>
-                        <div class="layui-input-inline row layui-form" id="house" lay-filter="unit">
-                            <select name="house" lay-filter="house">
+                        <div class="layui-input-inline row layui-form" id="housenumber" lay-filter="housenumber">
+                            <select name="housenumber" lay-filter="housenumber">
                             </select>
                         </div>
                     </div>
@@ -57,17 +58,10 @@
             </div>
             <div class="layui-form-item form-item">
                 <label class="layui-form-label row lable">
-                    <span>*</span>所在楼层 :</label>
-                <div class="layui-input-block row row-div layui-form" id="pliesTotal" lay-filter="pliesTotal" onclick="getPliesTotal()">
-                    <select name="pliesTotal" lay-filter="pliesTotal">
-                    </select>
-                </div>
-            </div>
-            <div class="layui-form-item form-item">
-                <label class="layui-form-label row lable">
                     <span>*</span>住户姓名 :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="name" lay-verify="title" autocomplete="off" th:value="*{name}" placeholder="请输入住户姓名"
+                    <input type="text" name="name" lay-verify="title" autocomplete="off" th:value="*{name}"
+                           placeholder="请输入住户姓名"
                            class="layui-input input short-div">
                 </div>
             </div>
@@ -75,7 +69,8 @@
                 <label class="layui-form-label row lable">
                     <span>*</span>联系方式 :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="phone" lay-verify="title" autocomplete="off" th:value="*{phone}" placeholder="请输入住户联系方式"
+                    <input type="text" name="phone" lay-verify="title" autocomplete="off" th:value="*{phone}"
+                           placeholder="请输入住户联系方式"
                            class="layui-input input short-div">
                 </div>
             </div>
@@ -83,29 +78,35 @@
                 <label class="layui-form-label row lable">
                     <span>*</span>身份 :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="state" lay-verify="title" autocomplete="off" th:value="*{state}" placeholder="请输入身份"
-                           class="layui-input input short-div">
+                    <div class="layui-input-inline row layui-form" id="relation" lay-filter="relation">
+                        <select name="relation" lay-filter="relation">
+                            <option value="0">请选择住户关系</option>
+                            <option th:each="r:${relation}" th:value="${r.id}" th:text="${r.content}"></option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div class="layui-form-item form-item">
                 <label class="layui-form-label row lable">
                     QQ :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="qqnumber" lay-verify="title" autocomplete="off" th:value="*{qqnumber}" placeholder="请输入住户QQ" class="layui-input input short-div"/>
+                    <input type="text" name="qqnumber" lay-verify="title" autocomplete="off" th:value="*{qqnumber}"
+                           placeholder="请输入住户QQ" class="layui-input input short-div"/>
                 </div>
             </div>
             <div class="layui-form-item form-item">
                 <label class="layui-form-label row lable">
                     <span>*</span>微信号 :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="wxnumber" lay-verify="title" autocomplete="off" th:value="*{wxnumber}"  placeholder="请输入微信号"
+                    <input type="text" name="wxnumber" lay-verify="title" autocomplete="off" th:value="*{wxnumber}"
+                           placeholder="请输入微信号"
                            class="layui-input input short-div"/>
                 </div>
             </div>
             <div class="layui-form-item form-item">
                 <label class="layui-form-label row lable">
                     <span>*</span>性别 :</label>
-                <div class="layui-input-block row row-div layui-form" id="sex"  lay-filter="pliesTotal">
+                <div class="layui-input-block row row-div layui-form" id="sex" lay-filter="pliesTotal">
                     <select name="sex" lay-filter="pliesTotal">
                         <option value="男">男</option>
                         <option value="女">女</option>
@@ -116,7 +117,8 @@
                 <label class="layui-form-label row lable">
                     <span>*</span>民族 :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="nation" lay-verify="title" autocomplete="off" th:value="*{nation}"  placeholder="请输入住户的民族"
+                    <input type="text" name="nation" lay-verify="title" autocomplete="off" th:value="*{nation}"
+                           placeholder="请输入住户的民族"
                            class="layui-input input short-div">
                 </div>
             </div>
@@ -125,7 +127,8 @@
                 <label class="layui-form-label row lable">
                     <span>*</span>身份证号 :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="idcard" lay-verify="title" autocomplete="off" th:value="*{idcard}" placeholder="请输入身份证号"
+                    <input type="text" name="idcard" lay-verify="title" autocomplete="off" th:value="*{idcard}"
+                           placeholder="请输入身份证号"
                            class="layui-input input short-div">
                 </div>
             </div>
@@ -133,14 +136,17 @@
                 <label class="layui-form-label row lable">
                     出生日期 :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="registrationdate" id="date1" lay-verify="title" th:value="*{birthday}" autocomplete="off" placeholder="请输入住户的出生日期" class="layui-input short-div">
+                    <input type="text" name="birthday   " id="date1" lay-verify="title"
+                           th:value="${#dates.format(tenement.birthday,'yyyy-MM-dd')}" autocomplete="off"
+                           placeholder="请输入住户的出生日期" class="layui-input short-div">
                 </div>
             </div>
             <div class="layui-form-item form-item">
                 <label class="layui-form-label row lable">
                     <span>*</span>卡号 :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="ownernumber" lay-verify="title" autocomplete="off" th:value="*{ownernumber}"  placeholder="请输入业主卡号"
+                    <input type="text" name="ownernumber" lay-verify="title" autocomplete="off"
+                           th:value="*{ownernumber}" placeholder="请输入业主卡号"
                            class="layui-input input short-div">
                 </div>
             </div>
@@ -149,7 +155,8 @@
                 <label class="layui-form-label row lable">
                     <span>*</span>紧急联系人 :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="urgencyman" lay-verify="title" autocomplete="off" th:value="*{urgencyman}"   placeholder="请输入紧急联系人"
+                    <input type="text" name="urgencyman" lay-verify="title" autocomplete="off" th:value="*{urgencyman}"
+                           placeholder="请输入紧急联系人"
                            class="layui-input input short-div">
                 </div>
             </div>
@@ -157,7 +164,8 @@
                 <label class="layui-form-label row lable">
                     <span>*</span>紧急联系人方式 :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="urgencymanphone" lay-verify="title" autocomplete="off" th:value="*{urgencymanphone}"   placeholder="请输入紧急联系人方式"
+                    <input type="text" name="urgencymanphone" lay-verify="title" autocomplete="off"
+                           th:value="*{urgencymanphone}" placeholder="请输入紧急联系人方式"
                            class="layui-input input short-div">
                 </div>
             </div>
@@ -165,25 +173,27 @@
                 <label class="layui-form-label row lable">
                     备注 :</label>
                 <div class="layui-input-block row row-div">
-                    <input type="text" name="remark" lay-verify="title" autocomplete="off" th:value="*{remark}"   placeholder="请输入备注"
+                    <input type="text" name="remark" lay-verify="title" autocomplete="off" th:value="*{remark}"
+                           placeholder="请输入备注"
                            class="layui-input input short-div">
                 </div>
             </div>
-            <div class="buttondiv">
-                <div class="button-item"></div>
-                <div class="button-item">
-                    <button class="layui-btn layui-btn-normal layui-btn-radius  save">保存</button>
-                    <button class="layui-btn layui-btn-normal layui-btn-radius ">返回</button>
-                </div>
-            </div>
         </form>
+        <div class="buttondiv">
+            <div class="button-item"></div>
+            <div class="button-item">
+                <button class="layui-btn layui-btn-normal layui-btn-radius  save" onclick="addTenement()">保存
+                </button>
+                <button class="layui-btn layui-btn-normal layui-btn-radius ">返回</button>
+            </div>
+        </div>
     </div>
 </section>
 <footer>
     Copyright 2013-2018 weixiaoqu.com 成都云联峰创科技有限公司旗下产品
 </footer>
 <script>
-    layui.use(['form','laydate'], function () {
+    layui.use(['form', 'laydate'], function () {
         var form = layui.form;
         var laydate = layui.laydate;
 
@@ -196,6 +206,7 @@
         //监听小区下拉框
         form.on('select(community)', function (data) {
             $("#unit dl").hide();
+            $("#housenumber dl").hide();
             var select = $("select[name='building']");
             select.children().remove();
             $.post('getBuildingIdAndNameByCommunityId', {'communityId': data.value}, function (buildingList) {
@@ -212,40 +223,55 @@
         //监听楼宇下拉框
         form.on('select(building)', function (data) {
             var select = $("select[name='unit']");
+            $("#housenumber dl").hide();
             select.children().remove();
             $.post('getUnitTotalByBuildingId', {'buildingId': data.value}, function (unitTotal) {
                 for (var i = 1; i <= unitTotal; i++) {
-                    var option = '<option>' + i + '单元</option>';
+                    var option = '<option value="'+i+'">' + i + '单元</option>';
                     select.append(option);
                 }
                 form.render('select', 'unit');
                 $("#unit dl").show();
             })
-            buildingId=data.value;
+            buildingId = data.value;
             buildingName = $(data.elem).find("option:selected").text();
         });
         //监听单元下拉框
         form.on('select(unit)', function (data) {
+            var select = $("select[name='housenumber']");
+            select.children().remove();
+            $.post('getHouseByUnit', {'unitNumber':data.value }, function (houseList) {
+                $.each(houseList, function (i, v) {
+                    var option = '<option value="' + v.houseid + '">' + v.fool + '</option>';
+                    select.append(option);
+                })
+                form.render('select', 'housenumber');
+                $("#housenumber dl").show();
+            })
             unitName = data.value;
-            var address = communityName + "/" + buildingName + "/" + unitName;
+        });
+        //监听房号下拉框
+        form.on('select(housenumber)', function (data) {
+            var housenumber = $(data.elem).find("option:selected").text();
+            var address = communityName + "/" + buildingName + "/" + unitName + "/" + housenumber;
             $("input[name='address']").val(address);
             $("#community dl").hide();
             $("#building dl").hide();
             $("#unit dl").hide();
-        });
-        form.on('select(pliesTotal)', function(data){
-            $("#pliesTotal dl").hide();
+            $("#housenumber dl").hide();
+            select_on_off = true;
         });
     })
     //下拉框开关
     var select_on_off = false;
+
     function getCommunity() {
-        $("#pliesTotal dl").hide();
         //判断是否需要显示
         if (select_on_off) {
-            $("#community dl").hide();
-            $("#building dl").hide();
-            $("#unit dl").hide();
+            $("#community dl").show();
+            $("#building dl").show();
+            $("#unit dl").show();
+            $("#housenumber dl").show();
         } else {
             var address = $("input[name='address']").val();
             //判断是否需要回显
@@ -254,38 +280,21 @@
                 $("#community>select option[value='" + cbu[0] + "']").attr("selected", "selected");
                 $("#building>select option[value='" + cbu[0] + "']").attr("selected", "selected");
                 $("#unit>select option[value='" + cbu[0] + "']").attr("selected", "selected");
-                $("#community dl").show();
-                $("#building dl").show();
-                $("#unit dl").show();
+                $("#housenumber>select option[value='" + cbu[0] + "']").attr("selected", "selected");
+                $("#community dl").hide();
+                $("#building dl").hide();
+                $("#unit dl").hide();
+                $("#housenumber dl").hide();
             } else {
                 $("#community dl").show();
             }
         }
         select_on_off = !select_on_off;
     }
-    //选中的楼宇id
-    var buildingId=0;
-    function getPliesTotal(){
-        layui.use(['form'], function () {
-            var form = layui.form;
-            $.post('getBuildingPliesById',{'buildingId':buildingId},function (plies) {
-                var address = $("input[name='address']").val();
-                if(address==""){
-                    $("#pliesTotal dl").hide();
-                    layer.msg("请先选择小区/楼宇/单元",{
-                        icon: 6,
-                    })
-                }else{
-                    var select=$("select[name='pliesTotal']");
-                    select.children().remove();
-                    for (var i = 1; i <=plies ; i++) {
-                        var option = '<option>' + i + '</option>';
-                        select.append(option);
-                    }
-                    form.render('select','pliesTotal');
-                    $("#pliesTotal dl").show();
-                }
-            })
+
+    function addTenement() {
+        $.post('insertSelective', $("form").serialize(),function (data) {
+            console.log(data);
         })
     }
 </script>

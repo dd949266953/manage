@@ -27,6 +27,13 @@ public interface HouseMapper {
     int updateByPrimaryKey(House record);
 
     /**
+     * 根据单元查询房屋
+     * @param unitNumber
+     * @return
+     */
+    List<House>getHouseByUnit(@Param("unitNumber") Long unitNumber);
+
+    /**
      * 查询所有房屋
      *
      * @return

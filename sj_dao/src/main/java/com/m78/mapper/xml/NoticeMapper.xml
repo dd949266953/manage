@@ -45,6 +45,11 @@
   <sql id="Base_Column_List">
     id, noticeName, type, time, level, content, image, contentType, parentNotice
   </sql>
+  <select id="findAllNotice" resultType="com.m78.entity.Notice">
+    select
+    <include refid="Base_Column_List"/>
+    from notice
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
