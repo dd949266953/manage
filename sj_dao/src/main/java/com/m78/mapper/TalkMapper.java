@@ -1,6 +1,7 @@
 package com.m78.mapper;
 
 import com.m78.entity.Talk;
+import com.m78.vo.TalkVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -21,4 +22,7 @@ public interface TalkMapper {
     List<Talk> getAllTalk(@Param("name") String name,@Param("start") int start,@Param("end") int end);
     //获取工单总数
     Long getAllTalkCount(@Param("name") String name);
+
+    List<TalkVo> findAllTalk(@Param("tenementId")Long tenementId);
+
 }

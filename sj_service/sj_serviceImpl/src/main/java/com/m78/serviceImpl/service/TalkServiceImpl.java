@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.m78.entity.Talk;
 import com.m78.mapper.TalkMapper;
 import com.m78.service.service.TalkService;
+import com.m78.vo.TalkVo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -31,5 +32,15 @@ public class TalkServiceImpl implements TalkService {
     @Override
     public int deleteTalkById(Long talkId) {
         return mapper.deleteByPrimaryKey(talkId);
+    }
+
+    @Override
+    public List<TalkVo> findAllTalk(Long tenementId) {
+        return mapper.findAllTalk(tenementId);
+    }
+
+    @Override
+    public int insert(Talk record) {
+        return mapper.insert(record);
     }
 }

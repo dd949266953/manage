@@ -1,6 +1,7 @@
 package com.m78.service.service;
 
 import com.m78.entity.Talk;
+import com.m78.vo.TalkVo;
 
 import java.util.List;
 
@@ -30,4 +31,8 @@ public interface TalkService {
      * @return
      */
     int deleteTalkById(Long talkId);
+
+    List<TalkVo> findAllTalk(Long tenementId);
+
+    int insert(Talk record);
 }

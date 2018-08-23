@@ -43,6 +43,15 @@
             AND ta.title LIKE CONCAT ('%',#{name},'%')  OR  te.`name`  LIKE CONCAT ('%',#{name},'%')
         </if>
     </select>
+  <!--查找所有工单 -->
+  <select id="findAllTalk" resultType="com.m78.vo.TalkVo">
+   SELECT t.`id`,t.`title`,t.`tentmentId` AS tenementId,te.`name` AS tenementName,di.`id` AS stateId,di.`content` AS state,t.`time`,dit.`id` AS typeId,dit.`content` AS TYPE,t.`pictures` FROM `talk` t
+INNER JOIN dictionary_item di ON di.`id`=t.`state`
+INNER JOIN dictionary_item dit ON dit.`id`=t.`type`
+INNER JOIN `tenement` te ON te.`id`=t.`tentmentId`
+where te.id=#{tenementId}
+  </select>
+
   <sql id="Base_Column_List" >
     id, title, tentmentId, state, time, type, pictures
   </sql>
@@ -57,12 +66,8 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.m78.entity.Talk" >
-    insert into talk (id, title, tentmentId, 
-      state, time, type, 
-      pictures)
-    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{tentmentid,jdbcType=BIGINT}, 
-      #{state,jdbcType=BIGINT}, #{time,jdbcType=TIMESTAMP}, #{type,jdbcType=BIGINT}, 
-      #{pictures,jdbcType=VARCHAR})
+    insert into talk (title, tentmentId, type)
+    values ( #{title,jdbcType=VARCHAR}, #{tentmentid,jdbcType=BIGINT},#{type,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.m78.entity.Talk" >
     insert into talk
