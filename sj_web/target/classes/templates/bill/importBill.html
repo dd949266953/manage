@@ -13,7 +13,7 @@
 	</head>
 
 	<body>
-		<form id="form1" class="layui-form" action="" onsubmit="return false">
+		<form id="form1" class="layui-form" action=""  onsubmit="return false" enctype="multipart/form-data"> >
 
 			<div class="layui-form-item">
 				<label class="layui-form-label">小 区 ：</label>
@@ -47,12 +47,9 @@
                 dataType:'json',
                 success:function(data){
                     $.each(data, function(i, val) {
-
                             $("#community").append(
                                 "<option   value="+val.id+">"
                                 + val.name + "</option>")
-
-
                     })
                     layui.form.render('select');
                 }
@@ -67,13 +64,16 @@
     });
        function uploadFile() {
            var uri=$("#load_xls").val();
+           var path1 = uri.lastIndexOf("\\");
+           var name = uri.substring(path1+1);
+           $("#txt1").val(name);
            var i=uri.lastIndexOf(".");
            var extionname=uri.substring(i+1,uri.length);
            if (extionname!= "xls"){
                layer.msg("请选择格式正确的Excel文件！！！",{icon: 2});
                return;
            }
-           $("#load").after('<span style="color: #0fb478; padding-left: 15px">'+my+'</span>');
+           $("#load").after('<span style="color: #0fb478; padding-left: 15px">'+name+'</span>');
       }
 
                 layui.use('form', function() {
@@ -84,21 +84,21 @@
                             layer.msg("请选择要上传的文件", {icon: 2});
                             return;
                         }
+                        alert(11)
+                        $.ajax({
+                            url:'importBill',
+                            type:'post',
+                            dataType:'json',
+                            data:$("#form1").serialize(),
+                            success:function(data){
+                                if(data=='1'){
+                                    parent.location.reload();
+                                }else{
+                                    layer.msg("错误");
+                                }
 
-                        // $.ajax({
-                        //     url:'addCharItem',
-                        //     type:'get',
-                        //     dataType:'json',
-                        //     data:$("#form1").serialize(),
-                        //     success:function(data){
-                        //         if(data=='1'){
-                        //             parent.location.reload();
-                        //         }else{
-                        //             layer.msg("错误");
-                        //         }
-                        //
-                        //     }
-                        // })
+                            }
+                        })
 
                     })
 

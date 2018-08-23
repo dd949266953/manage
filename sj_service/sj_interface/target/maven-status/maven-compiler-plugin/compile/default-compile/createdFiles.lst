@@ -1,0 +1,9 @@
+com\m78\service\dataCenter\CarportService.class
+com\m78\service\service\NoticeService.class
+com\m78\service\service\TalkService.class
+com\m78\service\service\NoticeTypeService.class
+com\m78\service\dataCenter\BuildingService.class
+com\m78\service\dataCenter\TenementService.class
+com\m78\service\service\MessageService.class
+com\m78\service\staff\UserService.class
+com\m78\service\dataCenter\HouseService.class

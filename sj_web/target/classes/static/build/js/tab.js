@@ -7,7 +7,7 @@ layui.define(["jquery", "element", "nprogress"], function(i) {
 		n = function() {
 			this.config = {
 				elem: void 0,
-				mainUrl: "notice.html"
+				mainUrl: "housePage"
 			}, this.v = "1.0.2"
 		};
 	(n.fn = n.prototype).set = function(i) {

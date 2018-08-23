@@ -140,9 +140,9 @@
                 elem: '#table',
                 loading: true,
                 limit: 4,
-                url: '../Tenement/getDetailAddressByName.json',
+                url: '../Tenement/getDetailAddressByName',
                 where: {
-                    name: $("#tentmentName").val()
+                    tenementName: $("#tentmentName").val()
                 },
                 cols: [
                     [
@@ -150,30 +150,22 @@
                         align: 'center',
                         title: '小区',
                         unresize: 'true',
-                        templet: function (d) {
-                            return d.community.name
-                        }
+                        field:'communityname'
                     }, {
                         align: 'center',
                         title: '楼宇',
                         unresize: 'true',
-                        templet: function (d) {
-                            return d.building.name
-                        }
+                        field:'buildingname'
                     }, {
                         align: 'center',
                         title: '单元',
                         unresize: 'true',
-                        templet: function (d) {
-                            return d.house.unitnumber
-                        }
+                        field:'unitNumber'
                     }, {
                         align: 'center',
                         title: '房号',
                         unresize: 'true',
-                        templet: function (d) {
-                            return d.house.fool
-                        }
+                        field:'fool'
                     }, {
                         field: 'name',
                         align: 'center',
@@ -187,8 +179,8 @@
             })
             table.on('checkbox(table)', function (obj) {
                 checkStatus = table.checkStatus('table');
-                communityId = obj.data.community.id;
-                houseId = obj.data.house.houseid;
+                communityId = obj.data.communityid;
+                houseId = obj.data.houseId;
 
             });
         })

@@ -79,11 +79,11 @@ WHERE c.`id`=#{communityId}
     <!--住户住址详情-->
     <resultMap id="tenementDetailAddress" type="com.m78.entity.Tenement">
         <id column="id" jdbcType="BIGINT" property="id"/>
-        <result column="name" jdbcType="VARCHAR" property="name"/>
-        <association property="community" javaType="com.m78.entity.Community">
-            <result column="communityid" property="id"/>
-            <result column="communityname" jdbcType="VARCHAR" property="name"></result>
-        </association>
+        <result column="tenementname" jdbcType="VARCHAR" property="name"/>
+        <result column="communityname" jdbcType="VARCHAR" property="communityname"/>
+        <result column="buildingname" jdbcType="VARCHAR" property="buildingname"/>
+        <result column="unitNumber" jdbcType="VARCHAR" property="unitNumber"/>
+        <result column="fool" jdbcType="VARCHAR" property="fool"/>
     </resultMap>
     <!--根据住户姓名获取住户详细住址-->
     <select id="getDetailAddressByName" resultMap="tenementDetailAddress">

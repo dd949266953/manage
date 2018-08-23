@@ -21,4 +21,6 @@ public interface TalkMapper {
     List<Talk> getAllTalk(@Param("name") String name,@Param("start") int start,@Param("end") int end);
     //获取工单总数
     Long getAllTalkCount(@Param("name") String name);
+
+    int updateTalkState(@Param("stateId")Long stateId ,@Param("talkId") Long talkId);
 }

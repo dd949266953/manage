@@ -32,4 +32,9 @@ public class TalkServiceImpl implements TalkService {
     public int deleteTalkById(Long talkId) {
         return mapper.deleteByPrimaryKey(talkId);
     }
+
+    @Override
+    public int updateTalkState(Long stateId, Long talkId) {
+        return mapper.updateTalkState(stateId,talkId);
+    }
 }

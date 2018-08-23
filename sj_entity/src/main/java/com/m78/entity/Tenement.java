@@ -53,4 +53,13 @@ public class Tenement implements Serializable {
 
     private String openid;
 
+   private  String communityname;
+
+    private  String buildingname;
+
+    private  String unitNumber;
+
+    private  String fool;
+    private Long houseId;
+
 }

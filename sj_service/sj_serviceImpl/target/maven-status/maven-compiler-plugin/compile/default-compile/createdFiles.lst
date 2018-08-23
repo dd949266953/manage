@@ -10,6 +10,7 @@ com\m78\serviceImpl\service\NoticeTypeServiceImpl.class
 com\m78\serviceImpl\staff\UserServiceImpl.class
 com\m78\serviceImpl\service\NoticeServiceImpl.class
 com\m78\Start.class
+com\m78\serviceImpl\staff\SetPermissionServiceImpl.class
 com\m78\serviceImpl\dataCenter\TenementServiceImpl.class
 com\m78\serviceImpl\bill\ChargenName.class
 com\m78\serviceImpl\bill\BillServiceImpl.class

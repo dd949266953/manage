@@ -30,4 +30,12 @@ public interface TalkService {
      * @return
      */
     int deleteTalkById(Long talkId);
+
+    /**
+     * 更新工单状态
+     * @param stateId  状态id
+     * @param talkId   工单id
+     * @return
+     */
+    int updateTalkState(Long stateId,Long talkId);
 }

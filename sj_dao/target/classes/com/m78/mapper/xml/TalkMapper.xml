@@ -43,6 +43,10 @@
             AND ta.title LIKE CONCAT ('%',#{name},'%')  OR  te.`name`  LIKE CONCAT ('%',#{name},'%')
         </if>
     </select>
+    <!-- 更新工单状态 -->
+    <update id="updateTalkState">
+    update talk set state=#{stateId} where id=#{talkId}
+    </update>
   <sql id="Base_Column_List" >
     id, title, tentmentId, state, time, type, pictures
   </sql>
